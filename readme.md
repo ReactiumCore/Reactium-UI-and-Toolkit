@@ -113,7 +113,7 @@ Reactium.Hook.register('plugin-ready', () => {
 
 > Using the **RTK.Element** component wraps the Toolkit UI around your element, adding the toolbar and sidebar as window chrome.
 
-## Toolkit: Documentation
+### Toolkit: Documentation
 
 You can add markdown style documentation to any Toolkit element by using the **RTK.Markdown** component and a .md file:
 
@@ -141,7 +141,7 @@ const MyElement = () => {
     );
 };
 ```
-## Toolkit: Publish
+### Toolkit: Publish
 Navigate to the Toolkit plugin source directory and run the publish command:
 
 ```
