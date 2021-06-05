@@ -74,6 +74,19 @@ The zone value is a slugified version of the **url** value excluding the **/tool
 
 In cases where the url is a sub-page like: **/toolkit/my-link/sub-page** the zone would be `my-link-sub-page`.
 
+To create a sub-link, specify the group value as the registered ID of another link:
+
+```
+...
+Reactium.Toolkit.Sidebar.register('my-link-sub-page', {
+    order: 1,
+    children: 'My Link Sub Page'
+    component: MenuLink,
+    url: '/toolkit/my-link/sub-page',
+    group: 'my-link',
+});
+```
+
 ### Toolkit: Element
 
 You can create an element by running the following command:
