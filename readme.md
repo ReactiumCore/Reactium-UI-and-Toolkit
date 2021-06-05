@@ -1,4 +1,4 @@
-Use this codebase to make changes to the Reactium UI, Toolkit and Toolkit Demo components.
+Use this codebase to make changes to the [Reactium UI](#reactium-ui), [Toolkit](#toolkit) and Toolkit Demo components.
 
 ## Reactium UI
 
@@ -38,7 +38,7 @@ Make updates to the Toolkit plugin in the **~/reactium_modules/@atomic-reactor/t
 
 ### Toolkit: Sidebar
 
-You can add a sidebar element by running the following command:
+You can create a sidebar element by running the following command:
 
 ```
 $ arcli toolkit sidebar
@@ -50,6 +50,8 @@ You can also manually create a sidebar element:
 
 ```
 // reactium-hooks.js
+
+import Reactium from 'reactium-core/sdk';
 
 Reactium.Hook.register('plugin-ready', () => {
     if (!Reactium.Toolkit) return;
@@ -65,6 +67,8 @@ Reactium.Hook.register('plugin-ready', () => {
 });
 ```
 
+> **Note:** The `order` value sets the index position of the sidebar element.
+
 A new element will be added to the sidebar as well as the **/toolkit/my-link** route with a component zone of `my-link`.
 
 The zone value is a slugified version of the **url** value excluding the **/toolkit** prefix.
@@ -72,3 +76,29 @@ The zone value is a slugified version of the **url** value excluding the **/tool
 In cases where the url is a sub-page like: **/toolkit/my-link/sub-page** the zone would be `my-link-sub-page`.  
 
 ### Toolkit: Element
+
+You can create an element by running the following command:
+
+```
+$ arcli toolkit element
+```
+
+You can also manually create an element:
+
+```
+// reactium-hooks.js
+
+import Reactium from 'reactium-core/sdk';
+
+const MyElement = () => ('Hello World');
+
+Reactium.Hook.register('plugin-ready', () => {
+    if (!Reactium.Toolkit) return;
+
+    Reactium.Toolkit.Elements.register('my-element', {
+        zone: 'my-link',
+        component: MyElement,
+        order: Reactium.Enums.priority.low,
+    });
+});
+```
