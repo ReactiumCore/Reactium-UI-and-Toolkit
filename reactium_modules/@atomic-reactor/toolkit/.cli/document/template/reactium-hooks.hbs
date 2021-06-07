@@ -1,0 +1,32 @@
+import Document from '.';
+import Reactium{{#if sidebar}}, { __ }{{/if}} from 'reactium-core/sdk';
+
+Reactium.Hook.register('plugin-ready', () => {
+    {{#if sidebar}}
+    const MenuLink = Reactium.Component.get('RTKMENULINK');
+
+    // Sidebar Link
+    Reactium.Toolkit.Sidebar.register('{{id}}', {
+        order: {{order}},
+        component: MenuLink,
+        children: __('{{label}}'),
+        'aria-label': __('{{label}}'),
+        {{#if url}}url: '{{url}}',{{/if}}
+        {{#if group}}group: '{{group}}',{{~/if}}
+    });{{/if}}
+
+    // Document
+    {{#if zone}}
+    Reactium.Toolkit.Elements.register('{{zone}}', {
+        order: 0,
+        zone: '{{zone}}',
+        component: Document,
+    });
+    {{else}}
+    Reactium.Toolkit.Elements.register('{{id}}-document', {
+        order: 0,
+        zone: '{{#if group}}{{group}}-{{/if}}{{id}}',
+        component: Document,
+    });
+    {{/if}}
+});

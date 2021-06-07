@@ -1,0 +1,15 @@
+import Reactium, { __ } from 'reactium-core/sdk';
+
+Reactium.Hook.register('plugin-ready', () => {
+    const MenuLink = Reactium.Component.get('RTKMENULINK');
+
+    // Sidebar Item: {{label}}
+    Reactium.Toolkit.Sidebar.register('{{id}}', {
+        order: {{order}},
+        component: MenuLink,
+        children: __('{{label}}'),
+        'aria-label': __('{{label}}'),
+        {{#if url}}url: '{{url}}',{{/if}}
+        {{#if group}}group: '{{group}}',{{~/if}}
+    });
+});

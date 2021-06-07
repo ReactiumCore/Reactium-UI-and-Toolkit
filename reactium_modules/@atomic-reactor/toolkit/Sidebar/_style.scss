@@ -1,0 +1,265 @@
+$rtk-sidebar-offset: 28px !default;
+
+.rtk-sidebar {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &-wrapper {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+    }
+
+    &-brand {
+        width: 100%;
+        height: $rtk-toolbar-height;
+    }
+
+    &-menu {
+        width: 100%;
+        height: calc(100vh - #{$rtk-toolbar-height});
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        &-list > div:first-child {
+            padding: $rtk-sidebar-offset 0;
+        }
+
+        &-sub {
+            display: none;
+            z-index: 1;
+            padding: 16px 0;
+
+            &:empty {
+                display: none;
+            }
+        }
+
+        &-item {
+            position: relative;
+            width: 100%;
+        }
+
+        &-item-heading {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            font-family: $rtk-font-sans-light;
+            padding: 4px 12px 4px $rtk-sidebar-offset;
+            position: sticky;
+            min-height: 42px;
+            width: 100%;
+            left: 0;
+            top: calc(-#{$rtk-sidebar-offset} - 1px);
+            background-color: $rtk-sidebar-link-bg-color;
+            z-index: 5;
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+            align-items: center;
+            color: $rtk-sidebar-heading-text-color;
+            border-left: 4px solid transparent;
+
+            > span {
+                flex-grow: 1;
+            }
+
+            button {
+                width: 40px;
+                height: 32px;
+                padding: 0;
+                opacity: 0.25;
+                transition: opacity 0.2s ease-in-out;
+
+                svg {
+                    width: 16px;
+                    height: 16px;
+                    transition: transform 5s ease-in-out;
+                }
+            }
+
+            &.toggle {
+                user-select: none;
+                cursor: pointer;
+
+                button {
+                    pointer-events: none;
+                }
+            }
+
+            &.active,
+            &:hover {
+                color: $rtk-accent-color;
+                border-left: 4px solid $rtk-sidebar-border-color;
+
+                button {
+                    opacity: 1;
+
+                    svg {
+                        fill: $rtk-accent-color;
+                    }
+                }
+            }
+
+            &.active {
+                margin-top: -1px;
+                font-weight: 500;
+                font-family: $rtk-font-sans;
+                //border-left: 4px solid $rtk-accent-color;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    left: -4px;
+                    top: 0;
+                    width: 4px;
+                    height: 100%;
+                    background-color: $rtk-accent-color;
+                }
+            }
+
+            &.active,
+            &.expanded {
+                background-color: $rtk-sidebar-heading-bg-color;
+                border-bottom: 1px solid $rtk-sidebar-border-color;
+                border-top: 1px solid $rtk-sidebar-border-color;
+
+                button {
+                    opacity: 1;
+                }
+            }
+
+            &.expanded {
+                button > svg {
+                    transition: transform 0.2s ease-in-out;
+                    transform: rotate(45deg);
+                }
+            }
+
+            &.expanded + .rtk-sidebar-menu-sub {
+                display: block;
+                border-bottom: 1px solid $rtk-sidebar-border-color;
+            }
+        }
+
+        &-item-link {
+            z-index: 1;
+            width: 100%;
+            min-height: 40px;
+            text-decoration: none;
+            padding: 8px 12px 8px calc(#{$rtk-sidebar-offset} * 2);
+            color: $rtk-sidebar-link-text-color;
+            background-color: $rtk-sidebar-link-bg-color;
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+            align-items: center;
+            font-size: 12px;
+            position: relative;
+            font-family: $rtk-font-sans;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: calc(#{$rtk-sidebar-offset} + 9px);
+                top: 0;
+                transform: translateX(-50%);
+                width: 1px;
+                height: 100%;
+                background-color: $rtk-sidebar-border-color;
+                z-index: 2;
+            }
+
+            &:hover,
+            &.active {
+                color: $rtk-accent-color;
+            }
+
+            &.active:before {
+                background-color: lighten($rtk-accent-color, 35%);
+            }
+
+            &.active:after {
+                z-index: 3;
+                content: '';
+                position: absolute;
+                left: calc(#{$rtk-sidebar-offset} + 9px);
+                top: 50%;
+                width: 7.5px;
+                height: 7.5px;
+                transform: translate(-50%, -50%);
+                border-radius: 100%;
+                border: 2px solid $rtk-accent-color;
+                background-color: $rtk-sidebar-border-color;
+            }
+        }
+    }
+
+    &.collapsed {
+        width: 0;
+        display: none;
+    }
+
+    &.right {
+        order: 10;
+    }
+}
+
+.rtk-brand {
+    width: 100%;
+    height: $rtk-toolbar-height;
+    background-color: $rtk-toolbar-bg-color;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 12px;
+    border-bottom: 1px solid $rtk-toolbar-border-color;
+
+    &,
+    * {
+        font-family: $rtk-font-sans;
+    }
+
+    .rtk-logo-link {
+        padding: 10px 12px 10px 10px;
+        display: block;
+    }
+
+    &-meta {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    &-name {
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+        color: $rtk-brand-name-text-color;
+    }
+
+    &-info {
+        color: $rtk-brand-info-text-color;
+        font-size: 11px;
+        margin-top: 2px;
+    }
+}
+
+.right {
+    .rtk-brand {
+        flex-direction: row-reverse;
+
+        &-meta {
+            flex-grow: 0;
+            text-align: right;
+        }
+    }
+}

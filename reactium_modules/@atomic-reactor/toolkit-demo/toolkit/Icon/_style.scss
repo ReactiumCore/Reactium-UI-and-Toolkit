@@ -1,0 +1,141 @@
+.rtk-search-form {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+
+    > *:not(:last-child) {
+        margin-right: 8px;
+        margin-bottom: 8px;
+        max-height: 42px;
+    }
+
+    .rtk-btn-color-select {
+        border-radius: 2px;
+        min-width: 40px;
+        height: 42px;
+
+        &-picker {
+            min-width: 40px;
+            margin-top: 2px;
+
+            @include breakpoint(md) {
+                margin-top: 0;
+            }
+
+            &-list {
+                padding: 4px;
+                button {
+                    width: 100%;
+                    border-radius: 2px;
+                    height: 24px;
+                }
+            }
+        }
+
+        @include breakpoint(xs-only) {
+            &-selected {
+                width: 100%;
+
+                span {
+                    border-radius: 2px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        @include breakpoint(sm-only) {
+            &-selected {
+                width: 100%;
+
+                span {
+                    border-radius: 2px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .search {
+        position: relative;
+        flex-shrink: 1;
+        width: 100%;
+        margin-right: 0;
+
+        @include breakpoint(md) {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        [name='search'] {
+            padding-left: 30px;
+            min-width: 0;
+        }
+
+        [name='search'] + .ar-icon {
+            top: 50%;
+            margin-top: -1px;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            transform: translate(50%, -50%);
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.rtk-icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+
+    &-load {
+        flex-grow: 1;
+    }
+}
+
+.rtk-icon-btn {
+    color: $rtk-color-gray;
+    margin: 0 0 10px 10px;
+    width: calc(50% - 10px);
+    padding: 20px 0;
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid $rtk-color-grey;
+    background-color: $rtk-color-white;
+
+    @include breakpoint(sm) {
+        width: calc(25% - 10px);
+    }
+
+    @include breakpoint(md) {
+        width: calc(20% - 10px);
+    }
+
+    @include breakpoint(lg) {
+        width: calc(14.2857143% - 10px);
+    }
+
+    &:hover,
+    &:focus {
+        opacity: .5;
+    }
+
+    &-label {
+        color: $rtk-color-gray;
+        text-align: center;
+        width: 100%;
+        padding: 10px 10px 0 10px;
+        font-size: 11px;
+    }
+}

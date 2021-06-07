@@ -1,0 +1,106 @@
+$rtk-hh-xs: 35vw !default;
+$rtk-hh-md: 35vw !default;
+$rtk-sh-xs: calc(100vh - #{$rtk-hh-xs}) !default;
+$rtk-sh-md: calc(100vh - #{$rtk-hh-md}) !default;
+
+.rtk-hero {
+    width: 100%;
+    min-height: 100vh;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &-bg {
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: absolute;
+        background-color: #eef5fb;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-image: url('/assets/images/hero.jpg');
+        z-index: 1;
+
+        @include rtk-breakpoint(xs) {
+            height: $rtk-hh-xs;
+            background-size: auto $rtk-hh-xs;
+        }
+
+        @include rtk-breakpoint(md) {
+            height: $rtk-hh-md;
+            background-size: auto $rtk-hh-md;
+        }
+    }
+
+    &-logo {
+        width: 100%;
+        z-index: 10;
+        position: relative;
+
+        @include rtk-breakpoint(xs) {
+            height: $rtk-hh-xs;
+        }
+
+        @include rtk-breakpoint(md) {
+            height: $rtk-hh-md;
+        }
+
+        img {
+            width: 13vw;
+            height: 13vw;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &-lockup {
+            width: 40%;
+            padding: 5vw;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-shadow: 0 1px 1px rgba($color-white, .5);
+            line-height: 2;
+
+            &,
+            * {
+                color: $color-blue;
+                font-size: 2.5vw;
+                font-weight: bold;
+            }
+
+            h2 {
+                margin-top: 2.5vw;
+            }
+        }
+    }
+
+    &-slide {
+        position: relative;
+        z-index: 10;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: $color-white;
+        box-shadow: 0 0 5px 5px rgba($color-black, 0.02);
+        padding: 40px;
+        min-height: 200px;
+
+        @include rtk-breakpoint(xs) {
+            height: $rtk-sh-xs;
+            background-size: auto $rtk-sh-xs;
+        }
+
+        @include rtk-breakpoint(md) {
+            height: $rtk-sh-md;
+            background-size: auto $rtk-sh-md;
+        }
+
+        @include rtk-breakpoint(lg) {
+            align-items: center;
+        }
+    }
+}

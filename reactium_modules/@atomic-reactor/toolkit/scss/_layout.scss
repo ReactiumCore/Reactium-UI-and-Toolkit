@@ -1,0 +1,44 @@
+html {
+    width: 100vw;
+    &,
+    * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1;
+    }
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: $rtk-font-body;
+
+    &::before {
+        display: block;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    &::after {
+        display: block;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
+
+.rtk {
+    display: flex;
+    width: 100vw;
+
+    svg {
+        flex-shrink: 0;
+    }
+}

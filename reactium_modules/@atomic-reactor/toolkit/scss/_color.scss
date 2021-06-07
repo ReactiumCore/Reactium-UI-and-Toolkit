@@ -1,0 +1,60 @@
+$rtk-color-black: #000000 !default;
+$rtk-color-blue: #4f82ba !default;
+$rtk-color-han: #4E66BA !default;
+$rtk-color-alice: #E6E9EF !default;
+$rtk-color-slate-gray: #63798D !default;
+$rtk-color-gray: #666666 !default;
+$rtk-color-gray-dark: #333333 !default;
+$rtk-color-green: #292 !default;
+$rtk-color-grey: #eeeeee !default;
+$rtk-color-grey-light: #fdfdfd !default;
+$rtk-color-orange: #ff7f50 !default;
+$rtk-color-red: #ee0000 !default;
+$rtk-color-white: #ffffff !default;
+
+$rtk-accent-color: $rtk-color-blue !default;
+
+$rtk-brand-info-text-color: $rtk-color-gray !default;
+$rtk-brand-name-text-color: $rtk-color-black !default;
+
+$rtk-content-bg-color: $rtk-color-grey-light !default;
+$rtk-content-box-shadow: 0 0 5px 2px rgba($rtk-color-black, 0.035) !default;
+$rtk-content-text-color: $rtk-color-gray !default;
+
+$rtk-sidebar-border-color: darken($rtk-color-grey-light, 2%) !default;
+$rtk-sidebar-link-bg-color: $rtk-color-white !default;
+$rtk-sidebar-link-text-color: $rtk-color-gray !default;
+$rtk-sidebar-heading-bg-color: darken($rtk-color-white, 0.5%) !default;
+$rtk-sidebar-heading-text-color: $rtk-color-gray-dark !default;
+
+$rtk-toolbar-border-color: $rtk-color-grey !default;
+$rtk-toolbar-bg-color: $rtk-color-white !default;
+
+$rtk-code-border-color: $rtk-toolbar-border-color !default;
+$rtk-code-gutter-bg-color: $rtk-toolbar-bg-color !default;
+$rtk-code-linenumber-color: $rtk-color-gray !default;
+$rtk-code-text-color: $rtk-color-gray !default;
+$rtk-code-cursor: $rtk-accent-color !default;
+$rtk-code-quote: $rtk-color-green !default;
+$rtk-code-negative: $rtk-color-red !default;
+$rtk-code-keyword: $rtk-accent-color !default;
+$rtk-code-atom: darken($rtk-accent-color, 20%) !default;
+$rtk-code-number: $rtk-color-green !default;
+$rtk-code-def: darken($rtk-accent-color, 20%) !default;
+$rtk-code-var-1: lighten($rtk-accent-color, 5%) !default;
+$rtk-code-var-2: lighten($rtk-accent-color, 20%) !default;
+$rtk-code-var-3: $rtk-color-green !default;
+$rtk-code-comment: $rtk-color-gray !default;
+$rtk-code-string-1: $rtk-color-green !default;
+$rtk-code-string-2: $rtk-color-gray-dark !default;
+$rtk-code-operator: darken($rtk-color-green, 5%) !default;
+$rtk-code-builtin: $rtk-accent-color !default;
+$rtk-code-meta: $rtk-color-gray !default;
+$rtk-code-bracket: $rtk-color-green !default;
+$rtk-code-tag: $rtk-color-han !default;
+$rtk-code-attribute: $rtk-color-han !default;
+$rtk-code-hr: $rtk-color-gray !default;
+$rtk-code-link: $rtk-color-han !default;
+$rtk-code-error: $rtk-color-red !default;
+$rtk-code-active: $rtk-color-alice !default;
+$rtk-code-fold-marker: $rtk-color-green !default;

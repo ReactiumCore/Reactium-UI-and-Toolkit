@@ -1,0 +1,57 @@
+.rtk-markdown {
+    &-link {
+        color: $rtk-color-blue;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &-table {
+        width: 100%;
+        margin: 24px 0;
+        background-color: $rtk-color-white;
+        border: 1px solid $rtk-color-grey;
+
+        th,
+        td {
+            padding: 10px;
+            font-size: 14px;
+            background-color: $rtk-color-white;
+            border-bottom: 1px solid $rtk-color-grey;
+        }
+
+        th {
+            border-top: 1px solid $rtk-color-grey;
+            font-size: 14px;
+        }
+
+        td {
+            vertical-align: top;
+            line-height: 1.3;
+        }
+
+        tr:nth-child(odd) {
+            td {
+                background-color: $rtk-color-grey-light;
+            }
+        }
+
+        kbd {
+            font-weight: bold;
+        }
+    }
+
+    &-heading {
+        margin-bottom: 24px;
+        &:not(:first-child) {
+            margin-top: 48px;
+        }
+    }
+}
+
+h3.rtk-markdown-heading {
+    font-weight: bold;
+}
+h4.rtk-markdown-heading {
+    font-weight: bold;
+    color: $rtk-color-blue;
+}

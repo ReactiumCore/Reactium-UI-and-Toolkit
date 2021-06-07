@@ -1,0 +1,67 @@
+$color-black: #000000 !default;
+$color-gray-dark: #333333 !default;
+$color-gray: #999999 !default;
+$color-grey: #eeeeee !default;
+$color-grey-light: #f7f7f7 !default;
+$color-white: #ffffff !default;
+$color-white-dark: #fdfdfd !default;
+$color-yellow: #f4f19c !default;
+$color-orange: #e69840 !default;
+$color-pink: #d877a0 !default;
+$color-red: #e09797 !default;
+$color-red-dark: darken($color-red, 20%) !default;
+$color-purple: #7a7cef !default;
+$color-blue: #4f82ba !default;
+$color-green: #659a3f !default;
+$color-green-light: #b2bb50 !default;
+
+$primary: $color-blue !default;
+$secondary: $color-gray-dark !default;
+$tertiary: $color-black !default;
+$danger: $color-red !default;
+$info: $color-purple !default;
+$success: $color-green !default;
+$warning: $color-orange !default;
+$default: $color-gray !default;
+$error: $color-red-dark !default;
+
+$color: (
+'black': $color-black,
+'gray-dark': $color-gray-dark,
+'gray': $color-gray,
+'grey': $color-grey,
+'grey-light': $color-grey-light,
+'white': $color-white,
+'white-dark': $color-white-dark,
+'yellow': $color-yellow,
+'orange': $color-orange,
+'pink': $color-pink,
+'red': $color-red,
+'red-dark': $color-red-dark,
+'purple': $color-purple,
+'blue': $color-blue,
+'green': $color-green,
+'green-light': $color-green-light,
+'primary': $primary,
+'secondary': $secondary,
+'tertiary': $tertiary,
+'danger': $danger,
+'info': $info,
+'success': $success,
+'warning': $warning,
+'default': $default,
+'error': $error
+) !default;
+
+@each $clr-name, $clr-code in $color {
+    .#{$clr-name} {
+        color: $clr-code;
+        fill: $clr-code;
+    }
+}
+
+@each $clr-name, $clr-code in $color {
+    .bg-#{$clr-name} {
+        background-color: $clr-code;
+    }
+}

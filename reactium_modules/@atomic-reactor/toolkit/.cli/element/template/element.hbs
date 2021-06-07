@@ -1,0 +1,69 @@
+{{#unless editor}}
+import React from 'react';
+import { __, useHookComponent } from 'reactium-core/sdk';
+
+export default () => {
+    const { Element } = useHookComponent('RTK');
+
+    return (
+        <Element title={__('{{name}}')}>
+            {{name}} Element
+        </Element>
+    );
+};
+
+{{else}}
+import React, { useEffect } from 'react';
+
+import Reactium, {
+    __,
+    useDerivedState,
+    useHookComponent,
+    useRefs,
+} from 'reactium-core/sdk';
+
+
+const jsx = `
+    <div>
+        Code
+    </div>
+`;
+
+export default () => {
+    const pref = 'rtk.{{id}}';
+
+    const refs = useRefs();
+    const { CodeEditor, Element, ComponentDemo } = useHookComponent('RTK');
+
+    const loadedState = Reactium.Toolkit.parseAttributes(
+        Reactium.Prefs.get(pref, {}),
+    );
+
+    const [state, update] = useDerivedState({
+        ...loadedState,
+    });
+
+    const setState = newState => {
+        if (unMounted()) return;
+        update(newState);
+    };
+
+    const unMounted = () => !refs.get('container');
+
+    useEffect(() => {
+        Reactium.Prefs.set(pref, state);
+    }, [Object.values(state)]);
+
+    return (
+        <Element title={__('{{name}}')} ref={elm => refs.set('container', elm)}>
+            <ComponentDemo
+                id='{{id}}'
+                className='{{id}}-demo'
+                demo={<div>Demo</div>}
+                inspector={<div>Inspector</div>}
+                editor={<CodeEditor value={jsx} setState={setState} />}
+            />
+        </Element>
+    );
+};
+{{/unless}}

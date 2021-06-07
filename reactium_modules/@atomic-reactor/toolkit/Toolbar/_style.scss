@@ -1,0 +1,56 @@
+body[data-expand='true'],
+body[data-expanded='true'] {
+    .rtk-toolbar {
+        &-title {
+            @include rtk-breakpoint(xs-only) {
+                display: none;
+            }
+        }
+    }
+}
+
+.rtk-toolbar {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: $rtk-toolbar-height;
+    z-index: $rtk-toolbar-z;
+    background-color: $rtk-toolbar-bg-color;
+    border-bottom: 1px solid $rtk-toolbar-border-color;
+
+    &-title {
+        font-size: 14px;
+
+        @include rtk-breakpoint(lg) {
+            font-size: 18px;
+        }
+    }
+
+    .form-group > select {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    &-left,
+    &-right,
+    &-center {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &-right {
+        justify-content: flex-end;
+    }
+
+    &-center {
+        flex-grow: 0;
+    }
+}
