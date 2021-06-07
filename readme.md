@@ -170,10 +170,40 @@ $ arcli publish
 
 ## Toolkit Components
 
--   CodeEditor
+-   [Code](#Code)
 -   [ComponentDemo](#componentdemo)
--   Element
--   Markdown
+-   [Element](#element)
+-   [Markdown](#markdown)
+
+### Code
+
+The **Code** component can be used to display code examples.
+
+![Code editor component](https://i.imgur.com/2YPY7lS.png)
+
+**Properties**
+
+| Property  | Type     | Description         |
+| --------- | -------- | :------------------ |
+| **value** | `String` | The code to display |
+
+**Example**
+
+```
+import React from 'react';
+import { useHookComponent } from 'reactium-core/sdk';
+
+const MyCode = () => {
+    const { Code, Element } = useHookComponent('RTK');
+
+    return (
+        <Element title='Code'>
+            <Code value='some code here' />
+        </Element>
+    );
+};
+
+```
 
 ### ComponentDemo
 
@@ -189,6 +219,8 @@ When creating elements you can make use of the **ComponentDemo** component which
 | **Editor**    | `Node`   | The component to display in the code editor zone                 |
 | **Inspector** | `Node`   | The component to display in the inspector zone                   |
 | **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
+
+**Example**
 
 ```
 import React from 'react';
@@ -229,13 +261,42 @@ The **Element** component wraps the Toolkit UI around your element, adding the t
 
 **Properties**
 
-| Property       | Type      | Description                                                               |
-| -------------- | --------- | :------------------------------------------------------------------------ |
-| **children**   | `Node`    | Component to render in the content zone                                   |
-| **className**  | `String`  | CSS class name to apply to the container div                              |
-| **fullscreen** | `Boolean` | When set to `true` the title and toolbar are hidden. **Default:** `false` |
-| **title**      | `Node`    | The title component or text                                               |
-| **toolbar**    | `Node`    | The toolbar component                                                     |
+| Property       | Type      | Description                                                                   |
+| -------------- | --------- | :---------------------------------------------------------------------------- |
+| **children**   | `Node`    | Component to render in the content zone                                       |
+| **className**  | `String`  | CSS class name to apply to the container div                                  |
+| **fullscreen** | `Boolean` | When set to `true` the title and toolbar are hidden<br />**Default:** `false` |
+| **title**      | `Node`    | The title component or text                                                   |
+| **toolbar**    | `Node`    | The toolbar component                                                         |
+
+> Any additional props are passed to the container div
+
+### Markdown
+
+The Markdown component is used to render a markdown file or text.
+
+**Properties**
+
+| Property  | Type     | Description                    |
+| --------- | -------- | :----------------------------- |
+| **value** | `String` | The markdown content to render |
+
+**Example**
+
+```
+import readme from './readme.md';
+import { useHookComponent } from 'reactium-core/sdk';
+
+const MyDocument = () => {
+    const { Element, Markdown } = useHookComponent('RTK');
+
+    return (
+        <Element title='Documentation'>
+            <Markdown value={readme} />
+        </Element>
+    );
+};
+```
 
 ## Toolkit Demo
 

@@ -7,8 +7,9 @@ const CodeEditor = ({ setState, tagName, value }) => {
     const { Code } = useHookComponent('RTK');
     const { Button, Icon } = useHookComponent('ReactiumUI');
 
-    const apply = e => {
-        const { value } = e;
+    const apply = () => {
+        const editor = refs.get('code');
+        const value = editor.value;
 
         let attributes;
 

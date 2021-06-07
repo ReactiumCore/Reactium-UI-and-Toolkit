@@ -19,7 +19,7 @@ const Ico = props => {
     const ico = op.get(props, 'icon');
     const { Icon } = useHookComponent('ReactiumUI');
 
-    if (!ico) return null;
+    if (!ico || !Icon) return null;
 
     if (_.isString(ico)) {
         if (Icon) {

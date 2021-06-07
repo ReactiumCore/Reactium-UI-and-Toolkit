@@ -93,6 +93,8 @@ let Icon = ({ name, value, ...props }, ref) => {
 
     const _onChange = newValue => {
         state.value = newValue || state.get('value');
+        if (newValue) state.set('value', state.value, true);
+
         const onChange = state.get('onChange');
         const evt = new ComponentEvent('change', {});
         const syn = new ComponentEvent(`change-${Date.now()}`, {});
@@ -109,9 +111,11 @@ let Icon = ({ name, value, ...props }, ref) => {
         state.element = elm;
     }, [refs.get('element')]);
 
+    useEffect(_onChange, [state.get('value')]);
+
     useEffect(() => {
-        _onChange(state.get('value'));
-    }, [state.get('value')]);
+        if (state.get('controlled') === true) state.set('value', value || name);
+    }, [name, value]);
 
     // External interface
     useImperativeHandle(ref, () => state);
