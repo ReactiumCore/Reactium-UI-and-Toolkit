@@ -170,12 +170,13 @@ $ arcli publish
 
 ## Toolkit Components
 
-- [ComponentDemo](#componentdemo)
-- Element
-- CodeEditor
-- Markdown
+-   CodeEditor
+-   [ComponentDemo](#componentdemo)
+-   Element
+-   Markdown
 
 ### ComponentDemo
+
 When creating elements you can make use of the **ComponentDemo** component which creates a UI with a demo, attribute inspector, and code editor.
 
 ![ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
@@ -219,6 +220,22 @@ const UsageExample = () => {
 ```
 
 > See the [Alert/Usage](https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/blob/master/reactium_modules/%40atomic-reactor/toolkit-demo/toolkit/Alert/Usage/index.js) component for an advanced usage example.
+
+### Element
+
+The **Element** component wraps the Toolkit UI around your element, adding the toolbar and sidebar as window chrome.
+
+![Element component](https://i.imgur.com/qeUW3q8.png)
+
+**Properties**
+
+| Property       | Type      | Description                                                               |
+| -------------- | --------- | :------------------------------------------------------------------------ |
+| **children**   | `Node`    | Component to render in the content zone                                   |
+| **className**  | `String`  | CSS class name to apply to the container div                              |
+| **fullscreen** | `Boolean` | When set to `true` the title and toolbar are hidden. **Default:** `false` |
+| **title**      | `Node`    | The title component or text                                               |
+| **toolbar**    | `Node`    | The toolbar component                                                     |
 
 ## Toolkit Demo
 
