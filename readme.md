@@ -181,7 +181,7 @@ You should create elements for the toolkit demo in the **~/reactium_modules/@ato
 
 When creating elements you can make use of the `ComponentDemo` component which creates a UI with a demo, attribute inspector, and code editor.
 
-[ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
+![ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
 
 #### ComponentDemo Properties
 
@@ -191,3 +191,5 @@ When creating elements you can make use of the `ComponentDemo` component which c
 | **Editor**    | `Node`   | The component to display in the code editor zone                 |
 | **Inspector** | `Node`   | The component to display in the inspector zone                   |
 | **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
+
+> See the [Alert/Usage](https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/blob/master/reactium_modules/%40atomic-reactor/toolkit-demo/toolkit/Alert/Usage/index.js) component for an example.
