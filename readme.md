@@ -168,28 +168,64 @@ $ arcli publish
 
 > Before you publish be sure to update the plugin's package.json with any dependencies
 
+## Toolkit Components
+
+- [ComponentDemo](#componentdemo)
+- Element
+- CodeEditor
+- Markdown
+
+### ComponentDemo
+When creating elements you can make use of the **ComponentDemo** component which creates a UI with a demo, attribute inspector, and code editor.
+
+![ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
+
+**Properties**
+
+| Property      | Type     | Description                                                      |
+| ------------- | -------- | :--------------------------------------------------------------- |
+| **Demo**      | `Node`   | The component to display in the component demo zone              |
+| **Editor**    | `Node`   | The component to display in the code editor zone                 |
+| **Inspector** | `Node`   | The component to display in the inspector zone                   |
+| **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
+
+```
+import React from 'react';
+import { useHookComponent } from 'reactium-core/sdk';
+
+const Demo = () => ('The Demo');
+const Editor = () => ('The Editor');
+const Inspector = () => ('The Inspector');
+
+const UsageExample = () => {
+    const { Element, ComponentDemo } = useHookComponent('RTK');
+
+    const defaultValue = {
+        some: 'params',
+        for: 'the demo',
+    };
+
+    return (
+        <Element title='Usage'>
+            <ComponentDemo
+                Demo={Demo}
+                Editor={Editor}
+                value={defaultValue}
+                Inspector={Inspector}
+            />
+        </Element>
+    );
+};
+```
+
+> See the [Alert/Usage](https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/blob/master/reactium_modules/%40atomic-reactor/toolkit-demo/toolkit/Alert/Usage/index.js) component for an advanced usage example.
+
 ## Toolkit Demo
 
-The Toolkit Demo showcases and documents the Reactium UI components.
-Make updates to the Toolkit Demo plugin in the **~/reactium_modules/@atomic-reactor/toolkit-demo** directory.
+The Toolkit Demo showcases and documents the Reactium UI components. Make updates to the Toolkit Demo plugin in the **~/reactium_modules/@atomic-reactor/toolkit-demo** directory.
 
 ### Creating Elements
 
 You should create elements for the toolkit demo in the **~/reactium_modules/@atomic-reactor/toolkit-demo/toolkit** directory.
 
 > See [Toolkit: Element](#toolkit-element) for creating elements.
-
-When creating elements you can make use of the `ComponentDemo` component which creates a UI with a demo, attribute inspector, and code editor.
-
-![ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
-
-#### ComponentDemo Properties
-
-| Property      | Type     | Description                                                      |
-| ------------- | -------- | ---------------------------------------------------------------- |
-| **Demo**      | `Node`   | The component to display in the component demo zone              |
-| **Editor**    | `Node`   | The component to display in the code editor zone                 |
-| **Inspector** | `Node`   | The component to display in the inspector zone                   |
-| **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
-
-> See the [Alert/Usage](https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/blob/master/reactium_modules/%40atomic-reactor/toolkit-demo/toolkit/Alert/Usage/index.js) component for an example.
