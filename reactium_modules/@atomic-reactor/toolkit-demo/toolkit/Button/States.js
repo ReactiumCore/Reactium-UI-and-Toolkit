@@ -25,18 +25,24 @@ export default () => {
         />
     );
 
-    const ButtonRender = ({ className, color, ...props }) => (
-        <div className='col-xs-6 col-sm-3'>
-            <div className='px-xs-12 px-sm-4 pb-xs-24 text-center'>
-                <Button readOnly {...props} color={color} className={className}>
-                    {color}
-                </Button>
-                <div className='rtk-meta-info pt-xs-8'>
-                    <span>&nbsp;</span>
+    const ButtonRender = ({ className, color, ...props }) => {
+        console.log(props, color);
+        return (
+            <div className='col-xs-6 col-sm-3'>
+                <div className='px-xs-12 px-sm-4 pb-xs-24 text-center'>
+                    <Button
+                        readOnly
+                        {...props}
+                        color={color}
+                        className={className}
+                    />
+                    <div className='rtk-meta-info pt-xs-8'>
+                        <span>&nbsp;</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    };
 
     useEffect(() => {
         const colorPref = Reactium.Prefs.get(pref, Button.COLOR.PRIMARY);

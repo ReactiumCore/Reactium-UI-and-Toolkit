@@ -103,7 +103,7 @@ let Button = ({ children, ...props }, ref) => {
                     {...propsFromState()}
                     className={_cn()}
                     tabIndex={-1}
-                    children={state.get('children')}
+                    children={children}
                     ref={elm => refs.set('element', elm)}
                 />
             );

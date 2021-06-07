@@ -11,10 +11,12 @@ import { Logo } from './Logo';
 import { Toolkit } from './index';
 import Markdown from './Markdown';
 import Brand from './Sidebar/Brand';
-import { Code, CodeCopy } from './Code';
 import Element from './Content/Element';
+import ColorSelect from './ColorSelect';
 import Reactium from 'reactium-core/sdk';
 import MenuLink from './Sidebar/MenuLink';
+import ComponentDemo from './ComponentDemo';
+import { Code, CodeCopy, CodeEditor } from './Code';
 import { MenuToggle, ToolbarTitle } from './Toolbar';
 
 Reactium.Toolkit = Reactium.Toolkit || SDK;
@@ -28,6 +30,9 @@ Reactium.Plugin.register('ReactiumToolkit').then(() => {
     Reactium.Component.register('RTK', {
         Brand,
         Code,
+        CodeEditor,
+        ColorSelect,
+        ComponentDemo,
         Element,
         Icon,
         Logo,

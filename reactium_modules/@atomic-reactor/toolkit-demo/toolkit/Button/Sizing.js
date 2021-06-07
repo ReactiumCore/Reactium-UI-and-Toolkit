@@ -47,9 +47,8 @@ export default () => {
                     {...props}
                     size={size}
                     color={color}
-                    onClick={() => copy(cname)}>
-                    {color}
-                </Button>
+                    onClick={() => copy(cname)}
+                />
                 <div className='rtk-meta-info pt-xs-8'>.{cname}</div>
             </div>
         );

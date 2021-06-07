@@ -7,22 +7,26 @@ const buttonProps = ({ style = {} }) => {
         {
             style,
             css: 'btn-%color',
+            children: 'Button',
         },
         {
             style,
             outline: true,
             css: 'btn-%color-outline',
+            children: 'Button',
         },
         {
             style,
             css: 'btn-%color-pill',
             appearance: Button.APPEARANCE.PILL,
+            children: 'Button',
         },
         {
             style,
             outline: true,
             css: 'btn-%color-outline-pill',
             appearance: Button.APPEARANCE.PILL,
+            children: 'Button',
         },
     ];
 };

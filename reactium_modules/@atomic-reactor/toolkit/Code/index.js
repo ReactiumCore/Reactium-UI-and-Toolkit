@@ -14,6 +14,7 @@ import cn from 'classnames';
 import op from 'object-path';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
+import CodeEditor from './CodeEditor';
 import ReactDOMServer from 'react-dom/server';
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 
@@ -220,4 +221,4 @@ const CodeCopy = ({ value }) => {
     );
 };
 
-export { Code, Code as default, CodeCopy };
+export { Code, Code as default, CodeCopy, CodeEditor };

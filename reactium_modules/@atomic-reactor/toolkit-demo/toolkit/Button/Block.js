@@ -48,10 +48,9 @@ export default () => {
                     {...props}
                     size={size}
                     color={color}
-                    style={{maxWidth: 320 }}
-                    onClick={() => copy(cname)}>
-                    {color}
-                </Button>
+                    style={{ maxWidth: 320 }}
+                    onClick={() => copy(cname)}
+                />
                 <div className='rtk-meta-info pt-xs-8'>.{cname}</div>
             </div>
         );
