@@ -1,4 +1,4 @@
-Use this codebase to make changes to the [Reactium UI](#reactium-ui), [Toolkit](#toolkit) and Toolkit Demo components.
+Use this codebase to make changes to the [Reactium UI](#reactium-ui), [Toolkit](#toolkit) and [Toolkit Demo](#toolkit-demo) plugins.
 
 ## Reactium UI
 
@@ -131,6 +131,7 @@ Reactium.Hook.register('plugin-ready', () => {
 You can add markdown style documentation to any Toolkit element by using the **RTK.Markdown** component and a .md file:
 
 #### some-readme.md
+
 ```
 ## MyElement
 
@@ -138,6 +139,7 @@ Enter some valid markdown syntax here
 ```
 
 #### MyElement.js
+
 ```
 import React from 'react';
 import Reactium, { useHookComponent } from 'reactium-core/sdk';
@@ -154,7 +156,9 @@ const MyElement = () => {
     );
 };
 ```
+
 ### Toolkit: Publish
+
 Navigate to the Toolkit plugin source directory and run the publish command:
 
 ```
@@ -163,3 +167,27 @@ $ arcli publish
 ```
 
 > Before you publish be sure to update the plugin's package.json with any dependencies
+
+## Toolkit Demo
+
+The Toolkit Demo showcases and documents the Reactium UI components.
+Make updates to the Toolkit Demo plugin in the **~/reactium_modules/@atomic-reactor/toolkit-demo** directory.
+
+### Creating Elements
+
+You should create elements for the toolkit demo in the **~/reactium_modules/@atomic-reactor/toolkit-demo/toolkit** directory.
+
+> See [Toolkit: Element](#toolkit-element) for creating elements.
+
+When creating elements you can make use of the `ComponentDemo` component which creates a UI with a demo, attribute inspector, and code editor.
+
+[ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
+
+#### ComponentDemo Properties
+
+| Property      | Type     | Description                                                      |
+| ------------- | -------- | ---------------------------------------------------------------- |
+| **Demo**      | `Node`   | The component to display in the component demo zone              |
+| **Editor**    | `Node`   | The component to display in the code editor zone                 |
+| **Inspector** | `Node`   | The component to display in the inspector zone                   |
+| **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
