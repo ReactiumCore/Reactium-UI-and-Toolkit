@@ -1,7 +1,7 @@
+import gsap from 'gsap';
 import cn from 'classnames';
 import op from 'object-path';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { TweenMax, Power2 } from 'gsap/umd/TweenMax';
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 
 import Reactium, {
@@ -32,7 +32,7 @@ let Sidebar = (props, ref) => {
     const refs = useRefs();
 
     const [state, update] = useDerivedState({
-        ease: Power2.easeInOut,
+        ease: 'power2.inOut',
         speed: 0.25,
         tween: null,
         width: op.get(config, 'sidebar.width', 320),
@@ -69,9 +69,10 @@ let Sidebar = (props, ref) => {
             cont.style.overflow = 'hidden';
             cont.classList.remove('collapsed');
 
-            TweenMax.to(cont, state.speed, {
+            gsap.to(cont, {
                 width: 0,
                 ease: state.ease,
+                duration: state.speed,
                 onComplete: () => {
                     if (unMounted()) resolve(false);
 
@@ -97,9 +98,10 @@ let Sidebar = (props, ref) => {
             cont.style.overflow = 'hidden';
             cont.classList.remove('collapsed');
 
-            TweenMax.to(cont, state.speed, {
+            gsap.to(cont, {
                 width: state.width,
                 ease: state.ease,
+                duration: state.speed,
                 onComplete: () => {
                     if (unMounted()) resolve(false);
 

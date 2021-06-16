@@ -7,6 +7,7 @@ Make updates to the Reactium UI plugin in the **~/reactium_modules/@atomic-react
 If you're adding or deleting a component to Reactium UI, be sure to update the **~/reactium_modules/@atomic-reactor/reactium-ui/enums.js** `MANIFEST` object then run the following command:
 
 ```
+$ cd /path/to/reactium_modules/@atomic-reactor/reactium-ui
 $ arcli rui-manifest
 ```
 

@@ -7,16 +7,9 @@ const inquirer = require('inquirer');
 
 const normalize = (...args) => path.normalize(path.join(...args));
 
-const dir = (...args) =>
-    normalize(
-        process.cwd(),
-        'reactium_modules',
-        '@atomic-reactor',
-        'reactium-ui',
-        ...args,
-    );
+const dir = (...args) => normalize(process.cwd(), ...args);
 
-const ENUMS = require(dir('enums.js'));
+const ENUMS = require('../../../enums.js');
 
 const prefix = ' > ';
 
@@ -52,8 +45,10 @@ const manifest = async () => {
         return obj;
     }, {});
 
-    const M = JSON.stringify(MANIFEST, null, 4);
+    const M = JSON.stringify(MANIFEST, null, 2);
     const F = dir('manifest.json');
+
+    console.log(F);
 
     // Remove directories & write new manifest
     await Promise.all(

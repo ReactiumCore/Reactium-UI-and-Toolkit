@@ -72,6 +72,10 @@ const ENUMS = {
             from: './X',
             named: '{ X, Check }',
             required: true,
+        },
+        portal: {
+            from: './Portal',
+            named: '{ Portal }',
         }
     }
 };
