@@ -1,10 +1,10 @@
-$dt-font-weight: 400;
-$headings-margin-bottom: 0;
-$label-margin-bottom: 0;
-$line-height-base: 1;
-$paragraph-margin-bottom: 15px;
-$table-caption-color: inherit;
-$table-cell-padding: 10px;
+$dt-font-weight: 400 !default;
+$headings-margin-bottom: 0 !default;
+$label-margin-bottom: 0 !default;
+$line-height-base: 1 !default;
+$paragraph-margin-bottom: 15px !default;
+$table-caption-color: inherit !default;
+$table-cell-padding: 10px !default;
 
 $fonts: (
 'opensans': 'Helvetica, Arial, sans-serif',
@@ -12,10 +12,10 @@ $fonts: (
 'cardo': "'Times New Roman', Gotham, serif",
 'serif': "'Times New Roman', Gotham, serif",
 'mono': "'Courier New', Courier, monospace",
-);
+) !default;
 
 // Grid
-$grid-columns: 12; // Set number of columns in the grid
+$grid-columns: 12 !default; // Set number of columns in the grid
 
 // smallest to largest
 $breakpoints-max: (
@@ -24,37 +24,37 @@ $breakpoints-max: (
 'md': 1280,
 'lg': 1440,
 'xl': 1920,
-);
+) !default;
 
-$xs-max: '#{map-get($breakpoints-max, 'xs')}px'; // Set xs breakpoint's max width
-$sm-max: '#{map-get($breakpoints-max, 'sm')}px'; // Set sm breakpoint's max width
-$md-max: '#{map-get($breakpoints-max, 'md')}px'; // Set md breakpoint's max width
-$lg-max: '#{map-get($breakpoints-max, 'xl')}px'; // Set lg breakpoint's max width
+$xs-max: '#{map-get($breakpoints-max, 'xs')}px' !default; // Set xs breakpoint's max width
+$sm-max: '#{map-get($breakpoints-max, 'sm')}px' !default; // Set sm breakpoint's max width
+$md-max: '#{map-get($breakpoints-max, 'md')}px' !default; // Set md breakpoint's max width
+$lg-max: '#{map-get($breakpoints-max, 'xl')}px' !default; // Set lg breakpoint's max width
 
-$gutter: 0;
+$gutter: 0 !default;
 
-$sm-start: '#{map-get($breakpoints-max, 'xs') + 1}px'; // Set sm breakpoint's min width
-$md-start: '#{map-get($breakpoints-max, 'sm') + 1}px'; // Set md breakpoint's min width
-$lg-start: '#{map-get($breakpoints-max, 'md') + 1}px'; // Set lg breakpoint's min width
-$xl-start: '#{map-get($breakpoints-max, 'xl') + 1}px'; // Set xl breakpoint's min width
+$sm-start: '#{map-get($breakpoints-max, 'xs') + 1}px' !default; // Set sm breakpoint's min width
+$md-start: '#{map-get($breakpoints-max, 'sm') + 1}px' !default; // Set md breakpoint's min width
+$lg-start: '#{map-get($breakpoints-max, 'md') + 1}px' !default; // Set lg breakpoint's min width
+$xl-start: '#{map-get($breakpoints-max, 'xl') + 1}px' !default; // Set xl breakpoint's min width
 
-$content-well-max-width: 'none'; // Set the max-width of the content well
+$content-well-max-width: 'none' !default; // Set the max-width of the content well
 
 // Breakpoints
 // Create breakpoint range statements to be used in media queries
-$breakpoint-xs-up: 'only screen';
-$breakpoint-xs-only: 'only screen and (max-width: #{$xs-max})'; // 0 -> xs-max range
-$breakpoint-sm-up: 'only screen and (min-width: #{$sm-start})'; // sm-start -> up range
-$breakpoint-sm-only: 'only screen and (min-width: #{$sm-start}) and (max-width: #{$sm-max})'; // sm-start -> sm-max range
-$breakpoint-md-up: 'only screen and (min-width: #{$md-start})'; // md-start -> up range
-$breakpoint-md-only: 'only screen and (min-width: #{$md-start}) and (max-width: #{$md-max})'; // md-start -> md-max range
-$breakpoint-lg-up: 'only screen and (min-width: #{$lg-start})'; // lg-start -> up range
-$breakpoint-lg-only: 'only screen and (min-width: #{$lg-start}) and (max-width: #{$lg-max})'; // lg-start -> lg-max range
-$breakpoint-xl-up: 'only screen and (min-width: #{$xl-start})'; // xl-start -> up range
+$breakpoint-xs-up: 'only screen' !default;
+$breakpoint-xs-only: 'only screen and (max-width: #{$xs-max})' !default; // 0 -> xs-max range
+$breakpoint-sm-up: 'only screen and (min-width: #{$sm-start})' !default; // sm-start -> up range
+$breakpoint-sm-only: 'only screen and (min-width: #{$sm-start}) and (max-width: #{$sm-max})' !default; // sm-start -> sm-max range
+$breakpoint-md-up: 'only screen and (min-width: #{$md-start})' !default; // md-start -> up range
+$breakpoint-md-only: 'only screen and (min-width: #{$md-start}) and (max-width: #{$md-max})' !default; // md-start -> md-max range
+$breakpoint-lg-up: 'only screen and (min-width: #{$lg-start})' !default; // lg-start -> up range
+$breakpoint-lg-only: 'only screen and (min-width: #{$lg-start}) and (max-width: #{$lg-max})' !default; // lg-start -> lg-max range
+$breakpoint-xl-up: 'only screen and (min-width: #{$xl-start})' !default; // xl-start -> up range
 
-$breakpoint-sm-down: 'only screen and (max-width: #{$sm-max})'; // sm -> down
-$breakpoint-md-down: 'only screen and (max-width: #{$md-max})'; // md -> down
-$breakpoint-lg-down: 'only screen and (max-width: #{$lg-max})'; // lg -> down
+$breakpoint-sm-down: 'only screen and (max-width: #{$sm-max})' !default; // sm -> down
+$breakpoint-md-down: 'only screen and (max-width: #{$md-max})' !default; // md -> down
+$breakpoint-lg-down: 'only screen and (max-width: #{$lg-max})' !default; // lg -> down
 
 $breakpoints-all: (
 $breakpoint-xs-only,
@@ -65,13 +65,13 @@ $breakpoint-md-only,
 $breakpoint-lg-up,
 $breakpoint-lg-only,
 $breakpoint-xl-up
-);
+) !default;
 $breakpoint-ups: (
 $breakpoint-sm-up,
 $breakpoint-md-up,
 $breakpoint-lg-up,
 $breakpoint-xl-up
-);
+) !default;
 $breakpoint-all-prefixes: (
 'xs',
 'xs-only',
@@ -82,8 +82,8 @@ $breakpoint-all-prefixes: (
 'lg',
 'lg-only',
 'xl'
-);
-$breakpoint-up-prefixes: ('xs', 'sm', 'md', 'lg', 'xl');
+) !default;
+$breakpoint-up-prefixes: ('xs', 'sm', 'md', 'lg', 'xl') !default;
 
 $breakpoints: (
 'xs': $breakpoint-xs-up,
@@ -98,7 +98,7 @@ $breakpoints: (
 'lg-only': $breakpoint-lg-only,
 'lg-down': $breakpoint-lg-down,
 'xl': $breakpoint-xl-up,
-);
+) !default;
 
 $headings: (
 'h1': (
@@ -131,39 +131,39 @@ $headings: (
     0.67rem,
     400,
 ),
-);
+) !default;
 
-$font-family-base: #{map-get($fonts, sans-serif)};
-$font-size-base: 16px;
-$font-weight-base: 400;
-$font-family-monospace: #{map-get($fonts, mono)};
-$text-alignment: ('left', 'right', 'center', 'justify');
+$font-family-base: #{map-get($fonts, sans-serif)} !default;
+$font-size-base: 16px !default;
+$font-weight-base: 400 !default;
+$font-family-monospace: #{map-get($fonts, mono)} !default;
+$text-alignment: ('left', 'right', 'center', 'justify') !default;
 
-$color-black: #000000;
-$color-gray-dark: #333333;
-$color-gray: #999999;
-$color-grey: #eeeeee;
-$color-grey-light: #f7f7f7;
-$color-white: #ffffff;
-$color-white-dark: #fdfdfd;
-$color-yellow: #f4f19c;
-$color-orange: #e69840;
-$color-pink: #d877a0;
-$color-red: #e09797;
-$color-purple: #7a7cef;
-$color-blue: #4f82ba;
-$color-green: #659a3f;
-$color-green-light: #b2bb50;
+$color-black: #000000 !default;
+$color-gray-dark: #333333 !default;
+$color-gray: #999999 !default;
+$color-grey: #eeeeee !default;
+$color-grey-light: #f7f7f7 !default;
+$color-white: #ffffff !default;
+$color-white-dark: #fdfdfd !default;
+$color-yellow: #f4f19c !default;
+$color-orange: #e69840 !default;
+$color-pink: #d877a0 !default;
+$color-red: #e09797 !default;
+$color-purple: #7a7cef !default;
+$color-blue: #4f82ba !default;
+$color-green: #659a3f !default;
+$color-green-light: #b2bb50 !default;
 
-$primary: $color-blue;
-$secondary: $color-gray-dark;
-$tertiary: $color-black;
-$danger: $color-red;
-$info: $color-purple;
-$success: $color-green;
-$warning: $color-orange;
-$default: $color-gray;
-$error: darken($color-red, 20%);
+$primary: $color-blue !default;
+$secondary: $color-gray-dark !default;
+$tertiary: $color-black !default;
+$danger: $color-red !default;
+$info: $color-purple !default;
+$success: $color-green !default;
+$warning: $color-orange !default;
+$default: $color-gray !default;
+$error: darken($color-red, 20%) !default;
 
 $color: (
 'black': $color-black,
@@ -190,10 +190,10 @@ $color: (
 'warning': $warning,
 'default': $default,
 'error': $error,
-);
+) !default;
 
-$button-font-family: Arial, sans-serif;
-$button-font-weight: 400;
+$button-font-family: Arial, sans-serif !default;
+$button-font-weight: 400 !default;
 
 // color-left, color-right, color, text-shadow
 $buttons: (
@@ -257,7 +257,7 @@ $buttons: (
     $color-white,
     rgba($color-white, 0),
 ),
-);
+) !default;
 
 // font-size, paddingTop, paddingRight, paddingBottom, paddingLeft
 $button-sizes: (
@@ -289,26 +289,26 @@ $button-sizes: (
     16px,
     80px,
 ),
-);
+) !default;
 
-$ar-alert-color: $color-gray-dark;
-$ar-alert-color-background: $color-white;
-$ar-alert-color-border: $color-gray;
-$ar-alert-color-dismiss: $color-gray;
-$ar-alert-color-icon: $color-gray;
-$ar-alert-shadow: 0 0 3px 1px rgba($color-black, 0.05);
-$ar-alert-shadow-focus: 0 0 0 4px rgba(lighten(nth($color-gray, 1), 25%), 0.25);
-$ar-alert-size-border: 4px;
+$ar-alert-color: $color-gray-dark !default;
+$ar-alert-color-background: $color-white !default;
+$ar-alert-color-border: $color-gray !default;
+$ar-alert-color-dismiss: $color-gray !default;
+$ar-alert-color-icon: $color-gray !default;
+$ar-alert-shadow: 0 0 3px 1px rgba($color-black, 0.05) !default;
+$ar-alert-shadow-focus: 0 0 0 4px rgba(lighten(nth($color-gray, 1), 25%), 0.25) !default;
+$ar-alert-size-border: 4px !default;
 
-$ar-toggle-bg-color: $color-grey;
-$ar-toggle-bg-active-color: $primary;
-$ar-toggle-handle-color: $color-white;
+$ar-toggle-bg-color: $color-grey !default;
+$ar-toggle-bg-active-color: $primary !default;
+$ar-toggle-handle-color: $color-white !default;
 
-$ar-icon-color: currentColor;
+$ar-icon-color: currentColor !default;
 
-$input-color-focus: $primary;
-$input-color-border: $color-grey;
-$input-color-error: $error;
-$input-radius: 2px;
-$select-arrow: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPgo8cGF0aCBmaWxsPSIjNjY2NjY1IiBkPSJNNS4yOTMgOS43MDdsNiA2YzAuMzkxIDAuMzkxIDEuMDI0IDAuMzkxIDEuNDE0IDBsNi02YzAuMzkxLTAuMzkxIDAuMzkxLTEuMDI0IDAtMS40MTRzLTEuMDI0LTAuMzkxLTEuNDE0IDBsLTUuMjkzIDUuMjkzLTUuMjkzLTUuMjkzYy0wLjM5MS0wLjM5MS0xLjAyNC0wLjM5MS0xLjQxNCAwcy0wLjM5MSAxLjAyNCAwIDEuNDE0eiI+PC9wYXRoPgo8L3N2Zz4K');
-$select-color-bg: $color-white;
+$input-color-focus: $primary !default;
+$input-color-border: $color-grey !default;
+$input-color-error: $error !default;
+$input-radius: 2px !default;
+$select-arrow: url('data:image/svg+xml !default;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPgo8cGF0aCBmaWxsPSIjNjY2NjY1IiBkPSJNNS4yOTMgOS43MDdsNiA2YzAuMzkxIDAuMzkxIDEuMDI0IDAuMzkxIDEuNDE0IDBsNi02YzAuMzkxLTAuMzkxIDAuMzkxLTEuMDI0IDAtMS40MTRzLTEuMDI0LTAuMzkxLTEuNDE0IDBsLTUuMjkzIDUuMjkzLTUuMjkzLTUuMjkzYy0wLjM5MS0wLjM5MS0xLjAyNC0wLjM5MS0xLjQxNCAwcy0wLjM5MSAxLjAyNCAwIDEuNDE0eiI+PC9wYXRoPgo8L3N2Zz4K') !default;
+$select-color-bg: $color-white !default;

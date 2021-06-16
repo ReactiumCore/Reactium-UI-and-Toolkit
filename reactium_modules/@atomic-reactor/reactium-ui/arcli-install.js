@@ -1,6 +1,7 @@
 const cwd = process.cwd();
 const path = require('path');
 const _ = require('underscore');
+const ENUMS = require('./enums');
 const hbs = require('handlebars');
 
 const { fs, op, prefix } = arcli;
@@ -132,6 +133,8 @@ module.exports = spinner => {
             console.log('');
         },
         generator: async () => {
+            if (inject === false) return;
+
             let scss = [];
             let components = [];
 

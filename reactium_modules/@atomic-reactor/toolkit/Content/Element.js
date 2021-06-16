@@ -9,7 +9,7 @@ const propTypes = {
     className: PropTypes.string,
     fullscreen: PropTypes.bool,
     title: PropTypes.node,
-    toolbar: PropTypes.node,
+    toolbar: PropTypes.any,
     xs: PropTypes.number,
     sm: PropTypes.number,
     md: PropTypes.number,

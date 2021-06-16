@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { forwardRef, useEffect, useImperativeHandle } from 'react';
 import {
     ComponentEvent,
-    useEventHandle,
     useHookComponent,
     useSyncState,
 } from 'reactium-core/sdk';

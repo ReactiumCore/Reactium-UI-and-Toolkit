@@ -1,4 +1,6 @@
 // Grid
+@use "sass:math";
+
 $rtk-grid-columns: 12 !default; // Set number of columns in the grid
 
 // smallest to largest
@@ -201,8 +203,8 @@ $rtk-breakpoints: (
         @if $rtk-col-number > $rtk-grid-columns or $rtk-col-number == 0 {
             @warn "Column number must be greater than 0 and less than or equal to total number of columns in the grid (#{$rtk-grid-columns})";
         } @else {
-            flex-basis: 100% / $rtk-grid-columns * $rtk-col-number;
-            max-width: 100% / $rtk-grid-columns * $rtk-col-number;
+            flex-basis: math.div(100%, $rtk-grid-columns) * $rtk-col-number;
+            max-width: math.div(100%, $rtk-grid-columns) * $rtk-col-number;
             padding: $rtk-gutter;
         }
         // If no col number is passed then arg is set to "auto" by default
@@ -254,7 +256,7 @@ $rtk-breakpoints: (
     } @else if $rtk-offset-number > $rtk-grid-columns {
         @warn "Column offset number must be greater than 0 and less than or equal to total number of columns in the grid (#{$rtk-grid-columns})";
     } @else {
-        margin-left: 100% / $rtk-grid-columns * $rtk-offset-number;
+        margin-left: math.div(100%, $rtk-grid-columns) * $rtk-offset-number;
     }
 } // Condition to run inside of the col-offset mixin * not for developer use *
 
@@ -602,13 +604,13 @@ $rtk-breakpoints: (
     }
     @for $rtk-i from 1 through $rtk-grid-columns {
         .rtk-col-#{$rtk-thisPrefix}-#{$rtk-i} {
-            flex-basis: 100% / $rtk-grid-columns * $rtk-i;
-            max-width: 100% / $rtk-grid-columns * $rtk-i;
+            flex-basis: math.div(100%, $rtk-grid-columns) * $rtk-i;
+            max-width: math.div(100%, $rtk-grid-columns) * $rtk-i;
             padding: $rtk-gutter;
         }
 
         .rtk-col-#{$rtk-thisPrefix}-offset-#{$rtk-i} {
-            margin-left: 100% / $rtk-grid-columns * $rtk-i;
+            margin-left: math.div(100%, $rtk-grid-columns) * $rtk-i;
         }
     }
 
