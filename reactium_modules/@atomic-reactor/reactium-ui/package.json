@@ -1,8 +1,11 @@
 {
   "name": "@atomic-reactor/reactium-ui",
-  "version": "3.0.7",
+  "version": "3.0.10",
   "main": "index.js",
   "author": "Reactium LLC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "dropzone": "^5.5.1",
     "camelcase": "^5.3.1",
