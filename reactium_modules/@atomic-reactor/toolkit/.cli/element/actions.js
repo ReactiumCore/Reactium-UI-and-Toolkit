@@ -1,6 +1,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
+const cc = require('camelcase');
 const _ = require('underscore');
 const op = require('object-path');
 const { codeFormat } = require('../utils');
@@ -36,6 +37,18 @@ module.exports = ({ Spinner }) => {
                 content: template({ file: 'element.hbs', context: params }),
                 directory: params.directory,
                 file: 'index.js',
+            });
+        },
+        domain: ({ params }) => {
+            const context = {
+                ...params,
+                name: cc(`toolkit-element-${params.id}`, { pascalCase: true }),
+            };
+
+            write({
+                content: template({ file: 'domain.hbs', context }),
+                directory: params.directory,
+                file: 'domain.js',
             });
         },
         document: ({ params }) => {

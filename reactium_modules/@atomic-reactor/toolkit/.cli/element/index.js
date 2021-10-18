@@ -6,6 +6,7 @@
 const cwd = process.cwd();
 const path = require('path');
 const chalk = require('chalk');
+const cc = require('camelcase');
 const _ = require('underscore');
 const op = require('object-path');
 const GENERATOR = require('./generator');
@@ -134,7 +135,7 @@ PROMPT.ID = async params => {
 PROMPT.DIR = async params => {
     if (op.get(params, 'directory')) return;
 
-    let { directory } = await inquirer.prompt([
+    const inputs = [
         {
             prefix,
             excludePath,
@@ -144,11 +145,21 @@ PROMPT.DIR = async params => {
             type: 'fuzzypath',
             message: 'Directory:',
             itemType: 'directory',
-            rootPath: resolve(cwd)
+            rootPath: resolve(cwd),
         },
-    ]);
+    ];
 
-    directory = resolve(directory, directoryName(params.name));
+    let { directory } = await inquirer.prompt(inputs);
+
+    // directory = resolve(directory, directoryName(params.name));
+
+    while (String(directory).length < 1) {
+        const inq = await inquirer.prompt(inputs);
+        directory = op.get(inq, 'directory');
+        // directory = resolve(directory, directoryName(params.name));
+    }
+
+    directory = normalize(directory, cc(params.id, { pascalCase: true }));
 
     mergeParams(params, { directory });
 };
