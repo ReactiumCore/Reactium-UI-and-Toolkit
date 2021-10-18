@@ -20,10 +20,10 @@ export const List = () => {
     const Icon = useHookComponent('ReactiumUI/Icon');
     const { ColorSelect, Element, Markdown } = useHookComponent('RTK');
 
-    const [page, setPage] = useState(Reactium.Prefs.get(`${pref}.page`, 1));
+    const [page, setPage] = useState(Reactium.Prefs.get(`${pref}.page`, 2));
 
     const state = useSyncState({
-        page: 1,
+        page: 2,
         color: Reactium.Prefs.get(`${pref}.color`, 'default'),
         iconSet: Reactium.Prefs.get(
             `${pref}.set`,
@@ -80,7 +80,7 @@ export const List = () => {
     const setIcons = useCallback(iconSet => {
         Reactium.Prefs.set(`${pref}.set`, iconSet);
         state.set('iconSet', iconSet);
-        setPage(1);
+        setPage(2);
     }, []);
 
     const setSize = useCallback(size => {
