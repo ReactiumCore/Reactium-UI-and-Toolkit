@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import _ from 'underscore';
 import op from 'object-path';
 import deps from 'dependencies';
+import 'externals';
 
 /**
  * -----------------------------------------------------------------------------
@@ -20,18 +21,24 @@ export const App = async () => {
     console.log('Loading Core SDK');
     const {
         default: Reactium,
-        useHookComponent,
+        hookableComponent,
         isBrowserWindow,
+        Zone,
     } = await import('reactium-core/sdk');
 
     console.log('Initializing Application Hooks');
 
     await deps().loadAll('allHooks');
 
-    const hookableComponent = name => props => {
-        const Component = useHookComponent(name);
-        return <Component {...props} />;
-    };
+    /**
+     * @api {Hook} sdk-init sdk-init
+     * @apiName sdk-init
+     * @apiDescription Called after reactium-hooks.js DDD artifacts are loaded, to allow
+     * the Reactium SDK singleton to be extended before the init hook.
+     * @apiGroup Hooks
+     */
+    Reactium.Hook.runSync('sdk-init', Reactium);
+    await Reactium.Hook.run('sdk-init', Reactium);
 
     const context = {};
 
@@ -53,8 +60,6 @@ export const App = async () => {
      * @apiGroup Hooks
      */
     await Reactium.Hook.run('dependencies-load');
-
-    Reactium.ServiceWorker.init();
 
     /**
      * @api {Hook} zone-defaults zone-defaults
@@ -190,7 +195,9 @@ export const App = async () => {
 
             ReactDOM[ssr ? 'hydrate' : 'render'](
                 <Provider store={store}>
+                    <Zone zone='reactium-provider' />
                     <Router history={Reactium.Routing.history} />
+                    <Zone zone='reactium-provider-after' />
                 </Provider>,
                 appElement,
             );
@@ -209,10 +216,5 @@ export const App = async () => {
 };
 
 export const AppError = async error => {
-    // const RedBox = require('redbox-react');
-    // const { appElement } = await Reactium.Hook.run('app-bindpoint');
-    //
-    // if (appElement) {
-    //     ReactDOM.render(<RedBox error={error} />, appElement);
-    // }
+    console.error(error);
 };

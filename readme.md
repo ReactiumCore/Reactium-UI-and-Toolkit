@@ -1,310 +1,64 @@
-Use this codebase to make changes to the [Reactium UI](#reactium-ui), [Toolkit](#toolkit) and [Toolkit Demo](#toolkit-demo) plugins.
+![](https://image.ibb.co/ee2WaG/atomic_reactor.png)
 
-## Reactium UI
+# Reactium
 
-Make updates to the Reactium UI plugin in the **~/reactium_modules/@atomic-reactor/reactium-ui** directory.
+An opinionated framework for creating React + Redux apps.
 
-If you're adding or deleting a component to Reactium UI, be sure to update the **~/reactium_modules/@atomic-reactor/reactium-ui/enums.js** `MANIFEST` object then run the following command:
+[Reactium documentation](https://docs.reactium.io/)
 
-```
-$ cd /path/to/reactium_modules/@atomic-reactor/reactium-ui
-$ arcli rui-manifest
-```
+## Quick Start
 
-This will generate a new **~/reactium_modules/@atomic-reactor/reactium-ui/index.js**.
-
-### Reactium UI: Manifest
-
-The **manifest.json** file is used to generate a new **index.js** file. We do this to control the bundle size of Reactium UI.
-
-In cases where you may want a slimmer version of Reactium UI, you can edit the bundle using `arcli rui-manifest` and selecting which portions to omit.
-
-> **DO NOT** directly edit the **manifest.json** or the **index.js** file. Doing so could cause for your changes to be overwritten when someone else runs the `arcli rui-manifest` command.
-
-### Reactium UI: Publish
-
-Navigate to the Reactium UI plugin source directory and run the publish command:
+To run in **front-end only** (no server side rendering) development mode from your project directory for local development:
 
 ```
-$ cd /reactium_modules/@atomic-reactor/reactium-ui
-$ arcli publish
+$ npm install
+$ npm run local
 ```
 
-> Before you publish be sure to update the plugin's package.json with any dependencies
-
-## Toolkit
-
-Make updates to the Toolkit plugin in the **~/reactium_modules/@atomic-reactor/toolkit** directory.
-
-### Toolkit: Sidebar
-
-You can create a sidebar element by running the following command:
+To run in **server side rendering** development mode from your project directory for local development:
 
 ```
-$ arcli toolkit sidebar
+$ npm install
+$ npm run local:ssr
 ```
 
-This will generate the boiler plate code for a sidebar element.
+## The Approach
 
-You can also manually create a sidebar element:
+Reactium follows Domain Drive Design (DDD) and aims to ease the creation of complex applications by connecting the related pieces of the software into an ever-evolving model.
 
-```
-// reactium-hooks.js
+DDD focuses on three core principles:
 
-import Reactium from 'reactium-core/sdk';
+-   Focus on the core domain and domain logic.
+-   Base complex designs on models of the domain.
+-   Constantly collaborate with domain experts, in order to improve the application model and resolve any emerging domain-related issues.
 
-Reactium.Hook.register('plugin-ready', () => {
-    if (!Reactium.Toolkit) return;
+### Advantages of Domain Driven Design
 
-    const { MenuLink } = Reactium.Component.get('RTK');
+-   **Eases Communication:** With an early emphasis on establishing a common and ubiquitous language related to the domain model of the project, teams will often find communication throughout the entire development life cycle to be much easier. Typically, DDD will require less technical jargon when discussing aspects of the application, since the ubiquitous language established early on will likely define simpler terms to refer to those more technical aspects.
+-   **Improves Flexibility:** Since DDD is based around modularity, nearly everything within the domain model will be based on an object and will, therefore, be quite encapsulated. This allows for various components, or even the entire system as a whole, to be altered and improved on a regular, continuous basis.
+-   **Emphasizes Domain Over Interface:** Since DDD is the practice of building around the concepts of domain and what the domain experts within the project advise, DDD will often produce applications that are accurately suited for and representative of the domain at hand, as opposed to those applications which emphasize the UI/UX first and foremost. While an obvious balance is required, the focus on domain means that a DDD approach can produce a product that resonates well with the audience associated with that domain.
+-   **Encourages Iterative Practices:** DDD practices strongly rely on constant iteration and continuous integration in order to build a malleable project that can adjust itself when necessary. Some organizations may have trouble with these practices, particularly if their past experience is largely tied to less-flexible development models, such as the waterfall model or the like.
 
-    Reactium.Toolkit.Sidebar.register('my-link', {
-        order: 1,
-        children: 'My Link'
-        component: MenuLink,
-        url: '/toolkit/my-link',
-    });
-});
-```
+## Styling
 
-> Using the RTK.MenuLink component wraps your sidebar element in a stylized container. If the sidebar element is a group heading, it will have the menu toggle button applied.
+Reactium takes the approach of **NOT** bundling CSS in JS.
 
-A new element will be added to the sidebar as well as the **/toolkit/my-link** route with a component zone of `my-link`.
+There are a many reasons why, but the most important ones to us are:
 
-The zone value is a slugified version of the **url** value excluding the **/toolkit** prefix.
+-   Traditional styling allows you to declare which style wins very clearly and easily.
+-   Bundling the styles as a separate file allow for easy holistic replacement.
+-   Easy delivery of the styles to a CDN or other resource management tool.
+-   Faster Webpack compilation.
 
-In cases where the url is a sub-page like: **/toolkit/my-link/sub-page** the zone would be `my-link-sub-page`.
+## Reactium Features
 
-To create a sub-link, specify the group value as the registered ID of another link:
+-   **Fast Local Development Workflow:** Javascript tooling is hard, laborious, and annoying. We've spent a lot of time working through dozens of _"what if..."_ scenarios to deliver a minimal pain dev workflow!
+-   **Built-in Design System:** No need to have a separate design system like Pattern Lab or Storybook. [Learn more](https://github.com/Atomic-Reactor/Reactium/blob/master/markdown/design-system.md).
+-   **Robust Command Line Interface:** Reactium heavily relies on boiler-plated code to normalize and ease the dev workflow. Creating a component or a design system element can be done with the stroke of a few keys. No need to memorize all the commands either, you can use `--flags` or follow prompts. You can even customize the CLI by replacing or creating your own commands. [Learn more](https://www.npmjs.com/package/@atomic-reactor/cli).
+-   **Easy Deployment:** Reactium creates a Node server for both front-end and server side rendering making it easy to deploy to the host of your choice. We even have a docker setup included for you dev-opers.
+-   **Single Page App or Isolated Component Development:** Build anything from a full website to a single component and package for distribution.
+-   **Built-in Redux Support:** Learning Redux can be hard. Sure you might have the basics down but building an application with it can quickly escalate to frustration and nightmares. Our simple Redux pattern makes it super easy to build stateful applications. Learn more about [Redux](https://redux.js.org/).
+-   **Built-in React Router Support**: Build routed websites in a single application with no additional setup. Learn more about [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+-   **Plugin Architecture**: Dynamic composition where there's no need to hard code `import` statements through out your codebase. Simply identify "zones" where components can be injected. [Learn more](https://github.com/Atomic-Reactor/Reactium/blob/master/markdown/plugins.md).
 
-```
-...
-Reactium.Toolkit.Sidebar.register('my-link-sub-page', {
-    order: 1,
-    children: 'My Link Sub Page'
-    component: MenuLink,
-    url: '/toolkit/my-link/sub-page',
-    group: 'my-link',
-});
-```
-
-### Toolkit: Element
-
-You can create an element by running the following command:
-
-```
-$ arcli toolkit element
-```
-
-You can also manually create an element:
-
-```
-// reactium-hooks.js
-
-import React from 'react';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
-
-const MyElement = () => {
-    const { Element } = useHookComponent('RTK');
-
-    return (
-        <Element title='Icon'>
-            Hello World!
-        </Element>
-    );
-};
-
-Reactium.Hook.register('plugin-ready', () => {
-    if (!Reactium.Toolkit) return;
-
-    Reactium.Toolkit.Elements.register('my-element', {
-        zone: 'my-link',
-        component: MyElement,
-        order: Reactium.Enums.priority.low,
-    });
-});
-```
-
-> Using the **RTK.Element** component wraps the Toolkit UI around your element, adding the toolbar and sidebar as window chrome.
-
-### Toolkit: Documentation
-
-You can add markdown style documentation to any Toolkit element by using the **RTK.Markdown** component and a .md file:
-
-#### some-readme.md
-
-```
-## MyElement
-
-Enter some valid markdown syntax here
-```
-
-#### MyElement.js
-
-```
-import React from 'react';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
-import readme from './some-readme.md';
-
-const MyElement = () => {
-    const { Element, Markdown } = useHookComponent('RTK');
-
-    return (
-        <Element title='My Element'>
-            Hello World!
-            <Markdown value={readme} />
-        </Element>
-    );
-};
-```
-
-### Toolkit: Publish
-
-Navigate to the Toolkit plugin source directory and run the publish command:
-
-```
-$ cd /reactium_modules/@atomic-reactor/toolkit
-$ arcli publish
-```
-
-> Before you publish be sure to update the plugin's package.json with any dependencies
-
-## Toolkit Components
-
--   [Code](#Code)
--   [ComponentDemo](#componentdemo)
--   [Element](#element)
--   [Markdown](#markdown)
-
-### Code
-
-The **Code** component can be used to display code examples.
-
-![Code editor component](https://i.imgur.com/2YPY7lS.png)
-
-**Properties**
-
-| Property  | Type     | Description         |
-| --------- | -------- | :------------------ |
-| **value** | `String` | The code to display |
-
-**Example**
-
-```
-import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
-
-const MyCode = () => {
-    const { Code, Element } = useHookComponent('RTK');
-
-    return (
-        <Element title='Code'>
-            <Code value='some code here' />
-        </Element>
-    );
-};
-
-```
-
-### ComponentDemo
-
-When creating elements you can make use of the **ComponentDemo** component which creates a UI with a demo, attribute inspector, and code editor.
-
-![ComponentDemo Screenshot](https://i.imgur.com/mkUZYJ1.png)
-
-**Properties**
-
-| Property      | Type     | Description                                                      |
-| ------------- | -------- | :--------------------------------------------------------------- |
-| **Demo**      | `Node`   | The component to display in the component demo zone              |
-| **Editor**    | `Node`   | The component to display in the code editor zone                 |
-| **Inspector** | `Node`   | The component to display in the inspector zone                   |
-| **value**     | `Object` | The attributes to assign to the component, inspector, and editor |
-
-**Example**
-
-```
-import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
-
-const Demo = () => ('The Demo');
-const Editor = () => ('The Editor');
-const Inspector = () => ('The Inspector');
-
-const UsageExample = () => {
-    const { Element, ComponentDemo } = useHookComponent('RTK');
-
-    const defaultValue = {
-        some: 'params',
-        for: 'the demo',
-    };
-
-    return (
-        <Element title='Usage'>
-            <ComponentDemo
-                Demo={Demo}
-                Editor={Editor}
-                value={defaultValue}
-                Inspector={Inspector}
-            />
-        </Element>
-    );
-};
-```
-
-> See the [Alert/Usage](https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/blob/master/reactium_modules/%40atomic-reactor/toolkit-demo/toolkit/Alert/Usage/index.js) component for an advanced usage example.
-
-### Element
-
-The **Element** component wraps the Toolkit UI around your element, adding the toolbar and sidebar as window chrome.
-
-![Element component](https://i.imgur.com/qeUW3q8.png)
-
-**Properties**
-
-| Property       | Type      | Description                                                                   |
-| -------------- | --------- | :---------------------------------------------------------------------------- |
-| **children**   | `Node`    | Component to render in the content zone                                       |
-| **className**  | `String`  | CSS class name to apply to the container div                                  |
-| **fullscreen** | `Boolean` | When set to `true` the title and toolbar are hidden<br />**Default:** `false` |
-| **title**      | `Node`    | The title component or text                                                   |
-| **toolbar**    | `Node`    | The toolbar component                                                         |
-
-> Any additional props are passed to the container div
-
-### Markdown
-
-The Markdown component is used to render a markdown file or text.
-
-**Properties**
-
-| Property  | Type     | Description                    |
-| --------- | -------- | :----------------------------- |
-| **value** | `String` | The markdown content to render |
-
-**Example**
-
-```
-import readme from './readme.md';
-import { useHookComponent } from 'reactium-core/sdk';
-
-const MyDocument = () => {
-    const { Element, Markdown } = useHookComponent('RTK');
-
-    return (
-        <Element title='Documentation'>
-            <Markdown value={readme} />
-        </Element>
-    );
-};
-```
-
-## Toolkit Demo
-
-The Toolkit Demo showcases and documents the Reactium UI components. Make updates to the Toolkit Demo plugin in the **~/reactium_modules/@atomic-reactor/toolkit-demo** directory.
-
-### Creating Elements
-
-You should create elements for the toolkit demo in the **~/reactium_modules/@atomic-reactor/toolkit-demo/toolkit** directory.
-
-> See [Toolkit: Element](#toolkit-element) for creating elements.
+[More documentation](https://github.com/Atomic-Reactor/Reactium/tree/master/markdown).

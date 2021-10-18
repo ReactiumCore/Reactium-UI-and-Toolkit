@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const globby = require('globby');
+const globby = require('./globby-patch');
 const rootPath = path.resolve(__dirname, '..');
 
 const defaultConfig = {
@@ -20,37 +20,31 @@ const defaultConfig = {
         browsersync: 3000,
         proxy: 3030,
     },
+    serverRetries: 4,
+    serverRetryDelay: 2000,
     open: true,
-    cssPreProcessor: 'sass',
     watch: {
         js: ['src/app/**/*', 'reactium_modules/**/*'],
         markup: ['src/**/*.html', 'src/**/*.css', 'reactium_modules/**/*.css'],
         colors: ['src/**/*/colors.json'],
         pluginAssets: ['src/app/**/plugin-assets.json'],
         restartWatches: [
-            'src/**/assets/style/*.less',
             'src/**/assets/style/*.scss',
-            'src/**/assets/style/*.sass',
-            '!src/**/assets/style/_*.less',
             '!src/**/assets/style/_*.scss',
-            '!src/**/assets/style/_*.sass',
         ],
         style: [
-            'src/**/*.less',
             'src/**/*.scss',
-            'src/**/*.sass',
-            '.core/**/*.less',
             '.core/**/*.scss',
-            '.core/**/*.sass',
-            '!{src/**/assets/style/*.less}',
+            'reactium_modules/**/*.scss',
             '!{src/**/assets/style/*.scss}',
-            '!{src/**/assets/style/*.sass}',
+            '!{reactium_modules/**/assets/style/*.scss}',
         ],
         assets: [
             'src/**/assets/**/*',
             'src/assets/**/*',
-            '!{src/**/*/assets/style,src/**/*/assets/style/**}',
-            '!{src/**/*/assets/js,src/**/*/assets/js/**}',
+            'reactium_modules/**/assets/**/*',
+            '!{src/**/*/assets/style,src/**/*/assets/style/**,reactium_modules/**/assets/style/**}',
+            '!{src/**/*/assets/js,src/**/*/assets/js/**,reactium_modules/**/assets/js/**}',
             '!{src/assets/style,src/assets/style/**}',
             '!{src/assets/js,src/assets/js/**}',
         ],
@@ -67,15 +61,22 @@ const defaultConfig = {
         style: [
             'src/**/*.scss',
             '.core/**/*.scss',
+            'reactium_modules/**/*.scss',
             '!{src/**/_*.scss}',
             '!{.core/**/_*.scss}',
+            '!{reactium_modules/**/_*.scss}',
+        ],
+        styleDDD: [
+            'src/**/*/_reactium-style.scss',
+            'reactium_modules/**/*/_reactium-style.scss',
         ],
         assets: [
             '.core/assets/**/*',
             'src/**/assets/**/*',
+            'reactium_modules/**/assets/**/*',
             'src/assets/**/*',
-            '!{src/**/*/assets/style,src/**/*/assets/style/**}',
-            '!{src/**/*/assets/js,src/**/*/assets/js/**}',
+            '!{src/**/*/assets/style,src/**/*/assets/style/**,reactium_modules/**/assets/style/**}',
+            '!{src/**/*/assets/js,src/**/*/assets/js/**,reactium_modules/**/assets/js/**}',
             '!{src/assets/style,src/assets/style/**}',
             '!{src/assets/js,src/assets/js/**}',
         ],
@@ -89,6 +90,9 @@ const defaultConfig = {
         appdir: path.resolve(__dirname, 'src/app'),
         rootdir: path.resolve(__dirname),
         manifest: path.normalize(`${rootPath}/src/manifest.js`),
+        externalsManifest: path.normalize(
+            `${rootPath}/.tmp/externals-manifest.js`,
+        ),
         reactiumModules: path.normalize(`${rootPath}/reactium_modules`),
     },
     dest: {
@@ -102,6 +106,7 @@ const defaultConfig = {
         build: 'build/src',
         buildCore: 'build/core',
         colors: 'src/assets/style/_scss/_colors.scss',
+        modulesPartial: 'src/assets/style/_scss/_reactium-modules.scss',
         startPath: '/',
     },
     umd: {

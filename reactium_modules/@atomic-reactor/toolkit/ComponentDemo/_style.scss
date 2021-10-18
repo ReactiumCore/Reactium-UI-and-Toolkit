@@ -1,3 +1,4 @@
+$primary: $rtk-color-blue !default;
 $rtk-component-brk: lg !default;
 $rtk-component-height: calc(100vh - #{$rtk-toolbar-height}) !default;
 
@@ -86,7 +87,7 @@ $rtk-component-height: calc(100vh - #{$rtk-toolbar-height}) !default;
         &:not(:last-child) {
             margin-bottom: 10px;
         }
-        
+
         select:not([multiple]) {
             padding-top: 6px;
             padding-bottom: 6px;
