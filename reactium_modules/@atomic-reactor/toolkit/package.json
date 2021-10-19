@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/#readme",
   "reactium": {
-    "version": "3.3.0"
+    "version": "4.1.4"
   },
   "dependencies": {
     "camelcase": "^6.2.0",

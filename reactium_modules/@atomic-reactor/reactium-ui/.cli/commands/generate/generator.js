@@ -76,7 +76,7 @@ const injector = async () => {
     let components = [];
 
     const indexFile = dir('index.js');
-    const styleFile = dir('_reactium_style.scss');
+    const styleFile = dir('_reactium-style.scss');
 
     const MANIFEST = require(dir('manifest.json'));
 
@@ -110,7 +110,7 @@ const injector = async () => {
     console.log(
         chalk.green(' ✔ '),
         chalk.cyan('Generated'),
-        chalk.magenta('_reactium_style.scss'),
+        chalk.magenta('_reactium-style.scss'),
     );
 };
 
