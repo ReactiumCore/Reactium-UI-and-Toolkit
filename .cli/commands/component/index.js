@@ -3,6 +3,7 @@
  * Imports
  * -----------------------------------------------------------------------------
  */
+
 const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
@@ -206,6 +207,10 @@ const CONFORM = ({ input, props }) => {
                         : val;
                 break;
 
+            case 'inject':
+                output[key] = formatImport(val, props);
+                break;
+
             default:
                 output[key] = val;
                 break;
@@ -236,18 +241,29 @@ const CONFORM = ({ input, props }) => {
     // Set the style import statement
     if (output.stylesheet === true) {
         const stylesheetFile = path.normalize(
-            path.join(output.destination, '_reactium-style.scss'),
+            path.join(output.destination, '_style.scss'),
+        );
+
+        const importString = output.inject.map(filepath =>
+            path
+                .relative(filepath, stylesheetFile)
+                .replace(/^\..\//, '')
+                .replace('_style.scss', 'style'),
         );
 
         output.stylesheet = {
-            filename: '_reactium-style.scss',
+            filename: '_style.scss',
             filepath: stylesheetFile,
             destination: output.destination,
             name: 'style',
             ext: '.scss',
             overwrite: '',
+            inject: Array.from(output.inject),
+            importString: importString,
         };
     }
+
+    delete output.inject;
 
     return output;
 };
@@ -277,7 +293,10 @@ const SCHEMA = ({ props }) => {
     const { config, cwd, prompt } = props;
 
     const types = op.get(config, 'reactium.types', []);
+    types.push('rui');
+
     const typeSelections = types
+        .map(type => (type === 'rui' ? 'reactium ui' : type))
         .map((type, index) => {
             return `\n\t    ${chalk.cyan(`${index + 1}.`)} ${chalk.white(
                 type,
@@ -355,6 +374,31 @@ const SCHEMA = ({ props }) => {
                 },
                 ask: () => overwritable(prompt),
             },
+            required: {
+                pattern: /^y|n|Y|N/,
+                default: 'N',
+                description: `${chalk.white('Required?')} ${chalk.cyan(
+                    '(Y/N):',
+                )}`,
+                required: true,
+                ask: () =>
+                    Boolean(
+                        prompt.override['type'] === 'rui' ||
+                            prompt.history('type').value === 'rui',
+                    ),
+                before: val => {
+                    return String(val).toUpperCase() === 'Y';
+                },
+            },
+            order: {
+                default: 100,
+                description: chalk.white('Order:'),
+                ask: () =>
+                    Boolean(
+                        prompt.override['type'] === 'rui' ||
+                            prompt.history('type').value === 'rui',
+                    ),
+            },
             route: {
                 description: chalk.white('Route:'),
                 ask: () => overwritable(prompt),
@@ -395,6 +439,25 @@ const SCHEMA = ({ props }) => {
                 ask: () => overwritable(prompt),
                 before: val => {
                     return String(val).toUpperCase() === 'Y';
+                },
+            },
+            inject: {
+                pattern: /[0-9\s]/,
+                description: `${chalk.white(
+                    'Import stylesheet to:',
+                )} ${styles}\n    ${chalk.white('Select:')}`,
+                required: true,
+                message: 'Select a number or list of numbers. Example: 1 2 3',
+                ask: () => {
+                    try {
+                        return (
+                            prompt.override['stylesheet'] ||
+                            (prompt.history('stylesheet').value &&
+                                overwritable(prompt))
+                        );
+                    } catch (err) {
+                        return false;
+                    }
                 },
             },
             services: {
@@ -564,6 +627,10 @@ const ACTION = ({ opt, props }) => {
             }),
         );
 
+        if (params.type === 'rui') {
+            params.plugin = true;
+        }
+
         CONFIRM({ props, params })
             .then(async () => {
                 console.log('');
@@ -610,6 +677,11 @@ const COMMAND = ({ program, props }) => {
         .option('--services [services]', 'Include services.js file.')
         .option('--zone [zone]', 'Include zone.js file.')
         .option('--stylesheet [stylesheet]', 'Include style.scss file.')
+        .option(
+            '--required [required]',
+            'Specify if the component is required in Reactium UI',
+        )
+        .option('--order [order]', 'Specify if the Reactium UI import order')
         .on('--help', HELP);
 };
 

@@ -7,7 +7,14 @@ const inquirer = require('inquirer');
 
 const normalize = (...args) => path.normalize(path.join(...args));
 
-const dir = (...args) => normalize(process.cwd(), ...args);
+const dir = (...args) =>
+    normalize(
+        process.cwd(),
+        'reactium_modules',
+        '@atomic-reactor',
+        'reactium-ui',
+        ...args,
+    );
 
 const ENUMS = require('../../../enums.js');
 
@@ -48,8 +55,6 @@ const manifest = async () => {
     const M = JSON.stringify(MANIFEST, null, 2);
     const F = dir('manifest.json');
 
-    console.log(F);
-
     // Remove directories & write new manifest
     await Promise.all(
         _.flatten([
@@ -71,7 +76,7 @@ const injector = async () => {
     let components = [];
 
     const indexFile = dir('index.js');
-    const styleFile = dir('_style.scss');
+    const styleFile = dir('_reactium_style.scss');
 
     const MANIFEST = require(dir('manifest.json'));
 
@@ -105,7 +110,7 @@ const injector = async () => {
     console.log(
         chalk.green(' ✔ '),
         chalk.cyan('Generated'),
-        chalk.magenta('_style.scss'),
+        chalk.magenta('_reactium_style.scss'),
     );
 };
 

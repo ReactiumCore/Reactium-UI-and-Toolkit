@@ -1,21 +1,8 @@
 const ENUMS = {
     MANIFEST: {
-        theme: {
-            order: -1,
-            required: true,
-            styles: ['./Base/theme'],
-        },
-        reboot: {
-            order: 0,
-            required: true,
-            styles: ['./Base/reboot'],
-        },
-        hooks: {
-            order: -2,
-            named: '*',
-            required: true,
-            from: './hooks',
-        },
+        theme: { order: -1, required: true, styles: ['./Base/theme'] },
+        reboot: { order: 0, required: true, styles: ['./Base/reboot'] },
+        hooks: { order: -2, named: '*', required: true, from: './hooks' },
         colors: {
             order: 1,
             required: true,
@@ -23,26 +10,15 @@ const ENUMS = {
             styles: ['./Colors/style'],
             named: '{ ColorNames, ColorValidate, Colors }',
         },
-        grid: {
-            order: 2,
-            styles: ['./Grid/style'],
-        },
+        grid: { order: 2, styles: ['./Grid/style'] },
         breakpoint: {
             order: 10,
             from: './Breakpoint',
             styles: ['./Breakpoint/style'],
             named: '{ Breakpoint, getBreakpoints }',
         },
-        text: {
-            order: 100,
-            from: './Text',
-            styles: ['./Text/style'],
-        },
-        form: {
-            order: 100,
-            from: 'Form',
-            styles: ['./Form/style'],
-        },
+        text: { order: 100, from: './Text', styles: ['./Text/style'] },
+        form: { order: 100, from: 'Form', styles: ['./Form/style'] },
         button: {
             order: 100,
             from: './Button',
@@ -68,16 +44,9 @@ const ENUMS = {
             named: '{ Toggle }',
             styles: ['./Toggle/style'],
         },
-        X: {
-            from: './X',
-            named: '{ X, Check }',
-            required: true,
-        },
-        portal: {
-            from: './Portal',
-            named: '{ Portal }',
-        }
-    }
+        X: { from: './X', named: '{ X, Check }', required: true },
+        portal: { from: './Portal', named: '{ Portal }' },
+    },
 };
 
 module.exports = ENUMS;

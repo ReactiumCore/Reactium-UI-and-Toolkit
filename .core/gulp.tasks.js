@@ -540,6 +540,14 @@ $assets: (
     };
 
     const dddStylesPartial = done => {
+        const SassPartialRegistry = ReactiumGulp.Utils.registryFactory(
+            'SassPartialRegistry',
+            'id',
+            ReactiumGulp.Utils.Registry.MODES.CLEAN,
+        );
+
+        ReactiumGulp.Hook.runSync('ddd-styles-partial', SassPartialRegistry);
+
         const stylePartials = globby
             .sync(config.src.styleDDD)
             .map(partial => {
@@ -552,7 +560,39 @@ $assets: (
                     path.resolve(rootPath, partial),
                 );
             })
-            .map(partial => partial.replace(/\.scss$/, ''));
+            .map(partial => partial.replace(/\.scss$/, ''))
+            .sort((a, b) => {
+                const aMatch =
+                    SassPartialRegistry.list.find(({ pattern }) =>
+                        pattern.test(a),
+                    ) || {};
+                const bMatch =
+                    SassPartialRegistry.list.find(({ pattern }) =>
+                        pattern.test(b),
+                    ) || {};
+
+                const aOrder = op.get(
+                    aMatch,
+                    'order',
+                    ReactiumGulp.Enums.style.ORGANISMS,
+                );
+                const bOrder = op.get(
+                    bMatch,
+                    'order',
+                    ReactiumGulp.Enums.style.ORGANISMS,
+                );
+
+                if (aOrder > bOrder) return 1;
+                else if (bOrder > aOrder) return -1;
+                return 0;
+            })
+            .filter(partial => {
+                const match =
+                    SassPartialRegistry.list.find(({ pattern }) =>
+                        pattern.test(partial),
+                    ) || {};
+                return !match || op.get(match, 'exclude', false) !== true;
+            });
 
         const template = handlebars.compile(`
 // WARNING: Do not directly edit this file !!!!
@@ -649,6 +689,7 @@ $assets: (
         gulp.watch(config.watch.colors, gulp.task('styles:colors'));
         gulp.watch(config.watch.pluginAssets, gulp.task('styles:pluginAssets'));
         gulp.watch(config.watch.style, gulp.task('styles:compile'));
+        gulp.watch(config.src.styleDDD, gulp.task('styles:partials'));
         gulpwatch(config.watch.markup, watcher);
         gulpwatch(config.watch.assets, watcher);
         const scriptWatcher = gulp.watch(
