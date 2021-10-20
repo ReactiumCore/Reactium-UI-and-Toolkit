@@ -128,24 +128,29 @@ PROMPT.NAME = async params => {
 PROMPT.DIR = async params => {
     if (op.get(params, 'directory')) return;
 
-    let { directory } = await inquirer.prompt([
+    const inputs = [
         {
             prefix,
             excludePath,
             depthLimit: 10,
             type: 'fuzzypath',
             name: 'directory',
-            suggestOnly: true,
             message: 'Directory:',
             itemType: 'directory',
-            rootPath: resolve(cwd),
-            default: resolve(cwd, 'src', 'app', 'components', 'Toolkit'),
+            rootPath: normalize(cwd),
             validate: (val, answers) =>
                 VALIDATE.REQUIRED('directory', val, answers),
         },
-    ]);
+    ];
 
-    directory = resolve(directory, directoryName(params.name));
+    let directory = '';
+
+    while (String(directory).length < 1) {
+        const inq = await inquirer.prompt(inputs);
+        directory = op.get(inq, 'directory');
+    }
+
+    directory = normalize(directory, directoryName(params.name));
 
     mergeParams(params, { directory });
 };

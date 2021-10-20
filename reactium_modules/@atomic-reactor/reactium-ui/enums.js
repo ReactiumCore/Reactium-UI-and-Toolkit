@@ -44,7 +44,7 @@ const ENUMS = {
             named: '{ Toggle }',
             styles: ['./Toggle/style'],
         },
-        X: { from: './X', named: '{ X, Check }', required: true },
+        x: { from: './X', named: '{ X, Check }', required: true },
         portal: { from: './Portal', named: '{ Portal }' },
     },
 };

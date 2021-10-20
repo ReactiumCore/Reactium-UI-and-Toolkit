@@ -140,23 +140,19 @@ PROMPT.DIR = async params => {
             prefix,
             excludePath,
             depthLimit: 10,
-            suggestOnly: true,
             name: 'directory',
             type: 'fuzzypath',
             message: 'Directory:',
             itemType: 'directory',
-            rootPath: resolve(cwd),
+            rootPath: normalize(cwd),
         },
     ];
 
-    let { directory } = await inquirer.prompt(inputs);
-
-    // directory = resolve(directory, directoryName(params.name));
+    let directory = '';
 
     while (String(directory).length < 1) {
         const inq = await inquirer.prompt(inputs);
         directory = op.get(inq, 'directory');
-        // directory = resolve(directory, directoryName(params.name));
     }
 
     directory = normalize(directory, cc(params.id, { pascalCase: true }));

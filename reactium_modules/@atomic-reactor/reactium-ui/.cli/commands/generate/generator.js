@@ -1,11 +1,30 @@
-const path = require('path');
-const chalk = require('chalk');
-const fs = require('fs-extra');
-const _ = require('underscore');
 const hbs = require('handlebars');
-const inquirer = require('inquirer');
 
-const normalize = (...args) => path.normalize(path.join(...args));
+const cwd = process.cwd();
+const { inquirer } = arcli.props;
+const { _, chalk, fs, normalizePath, op, path, prefix } = arcli;
+
+let ENUMS = require(arcli.normalizePath(
+    cwd,
+    'reactium_modules',
+    '@atomic-reactor',
+    'reactium-ui',
+    'enums.js',
+));
+
+ENUMS.MANIFEST = Object.entries(ENUMS.MANIFEST).reduce((obj, [key, val]) => {
+    const k = String(key).toLowerCase(key);
+    obj[k] = val;
+    return obj;
+}, {});
+
+const normalize = normalizePath;
+const pkgPath = normalize(cwd, 'package.json');
+const pkg = require(pkgPath);
+const config = op.get(pkg, 'reactium.reactium-ui', { excludes: [] }) || {
+    excludes: [],
+};
+op.set(pkg, 'reactium.reactium-ui', config);
 
 const dir = (...args) =>
     normalize(
@@ -16,78 +35,90 @@ const dir = (...args) =>
         ...args,
     );
 
-const ENUMS = require('../../../enums.js');
+const manifest = async (params, spinner) => {
+    let { excludes, unattended } = params;
 
-const prefix = ' > ';
+    if (spinner && (spinner.isSpinning || unattended === true)) {
+        spinner.stop();
+    }
 
-const manifest = async () => {
-    const choices = _.chain(
-        Object.entries(ENUMS.MANIFEST).map(([value, obj]) => {
-            if (obj.required === true) return;
-            if (typeof obj.from === 'undefined') return;
+    let del = [];
 
-            const name = String(obj.from).replace(/\.\//g, '');
-            return { name, value, short: name };
-        }),
-    )
-        .sortBy('from')
+    Object.keys(ENUMS.MANIFEST).forEach(key => {
+        if (!excludes.includes(key)) return;
+        const obj = ENUMS.MANIFEST[key];
+
+        let { from, styles = [] } = obj;
+
+        styles = _.isString(styles) ? [styles] : styles;
+        styles = styles.map(i =>
+            String(i).endsWith('.scss') ? i : String(`${i}.scss`),
+        );
+
+        del.push(
+            _.chain([from, styles])
+                .flatten()
+                .uniq()
+                .compact()
+                .value()
+                .reverse(),
+        );
+
+        delete ENUMS.MANIFEST[key];
+    });
+
+    del = _.chain(del)
+        .flatten()
         .compact()
-        .value();
+        .value()
+        .map(i => dir(i));
 
-    const { excludes = [] } = await inquirer.prompt([
-        {
-            prefix,
-            choices,
-            name: 'excludes',
-            type: 'checkbox',
-            message: 'Exclude Components:',
-        },
-    ]);
+    del.sort().reverse();
 
-    const MANIFEST = Object.keys(ENUMS.MANIFEST).reduce((obj, key) => {
-        if (!excludes.includes(key)) {
-            obj[key] = ENUMS.MANIFEST[key];
-        }
-
-        return obj;
-    }, {});
-
-    const M = JSON.stringify(MANIFEST, null, 2);
-    const F = dir('manifest.json');
-
-    // Remove directories & write new manifest
-    await Promise.all(
-        _.flatten([
-            excludes.map(item => fs.remove(dir(item))),
-            fs.writeFile(F, M),
-        ]),
+    // Update package.json manifest
+    op.set(pkg, 'reactium.reactium-ui.manifest', ENUMS.MANIFEST);
+    fs.writeFileSync(
+        normalize(cwd, 'package.json'),
+        JSON.stringify(pkg, null, 2),
     );
+
+    // Remove files
+    if (pkg.name !== '@atomic-reactor/reactium-ui-toolkit') {
+        del.map(p => fs.removeSync(p));
+    }
 
     console.log('');
     console.log(
         chalk.green(' ✔ '),
         chalk.cyan('Generated'),
-        chalk.magenta('manifest.js'),
+        chalk.magenta('Reactium UI manifest'),
     );
 };
 
-const injector = async () => {
+const injector = async params => {
     let scss = [];
     let components = [];
 
     const indexFile = dir('index.js');
     const styleFile = dir('_reactium-style.scss');
 
-    const MANIFEST = require(dir('manifest.json'));
-
-    _.sortBy(Object.values(MANIFEST), 'order').forEach(
+    _.sortBy(Object.values(ENUMS.MANIFEST), 'order').forEach(
         ({ from, named, styles = [] }) => {
-            if (named && from) {
+            if (named && from && fs.existsSync(dir(from))) {
                 components.push(`export ${named} from '${from}';`);
             }
 
-            styles = typeof styles === 'string' ? [styles] : styles;
-            styles.forEach(style => scss.push(`@import '${style}';`));
+            styles = !_.isArray(styles) ? [styles] : styles;
+            styles.forEach(style => {
+                const farr = style.split('/');
+                farr.shift();
+
+                const fname = farr.pop();
+                const fpath = dir(...farr, `_${fname}.scss`);
+
+                if (!fs.existsSync(fpath)) return;
+                scss.push(`@import '${style}';`);
+            });
         },
     );
 
@@ -95,7 +126,11 @@ const injector = async () => {
     components = components.sort().join('\n');
 
     // create the handlebars templates
-    const tmp = hbs.compile('// Reactium UI\n{{{components}}}')({ components });
+    const tmp = hbs.compile(
+        '// Generated by arcli rui-manifest\n// DO NOT DIRECTLY EDIT THIS FILE\n{{{components}}}',
+    )({
+        components,
+    });
 
     await Promise.all([
         fs.writeFile(indexFile, tmp),
@@ -105,18 +140,18 @@ const injector = async () => {
     console.log(
         chalk.green(' ✔ '),
         chalk.cyan('Generated'),
-        chalk.magenta('index.js'),
+        chalk.magenta('Reactium UI index.js'),
     );
     console.log(
         chalk.green(' ✔ '),
         chalk.cyan('Generated'),
-        chalk.magenta('_reactium-style.scss'),
+        chalk.magenta('Reactium UI _reactium-style.scss'),
     );
 };
 
-const generator = async () => {
-    await manifest();
-    await injector();
+const generator = async ({ params }) => {
+    await manifest(params);
+    await injector(params);
     console.log('');
 };
 
