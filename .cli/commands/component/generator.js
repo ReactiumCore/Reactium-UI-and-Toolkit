@@ -44,21 +44,6 @@ module.exports = ({ params, props }) => {
         }
     });
 
-    if (op.get(params, 'stylesheet', false)) {
-        try {
-            const styleActions = require('../style/actions')(spinner);
-            delete styleActions.backup;
-
-            actions['stylesheet'] = ({ action, params, props }) =>
-                ActionSequence({
-                    actions: styleActions,
-                    options: { params: params.stylesheet, props },
-                });
-        } catch (err) {
-            return Promise.reject(err);
-        }
-    }
-
     if (op.get(params, 'zone', false)) {
         try {
             const zoneActions = require('../plugin/component/actions')(spinner);
@@ -123,7 +108,9 @@ module.exports = ({ params, props }) => {
         options: { params, props },
     })
         .then(success => {
-            spinner.succeed('all actions complete!');
+            const actionType =
+                params.overwrite === true ? 'Recreated' : 'Created';
+            spinner.succeed(`${actionType} ${params.name} component!`);
             return success;
         })
         .catch(error => {

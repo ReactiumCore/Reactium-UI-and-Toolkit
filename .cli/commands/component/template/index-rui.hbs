@@ -15,13 +15,13 @@ const {{name}} = forwardRef((props, ref) => {
     });
 
     const dispatch = (type, data = {}) => {
-        let evt = new Component(type, data);
+        let evt = new ComponentEvent(type, data);
         state.dispatchEvent(evt);
 
         const on = cc(`on-${type}`);
         const handler = op.get(props, on);
         if (typeof handler === 'function') {
-            evt = new Component(on, data);
+            evt = new ComponentEvent(on, data);
             state.addEventListener(on, handler);
             state.dispatchEvent(evt);
             state.removeEventListener(on, handler);

@@ -19,10 +19,6 @@ const pad = require(`${mod}/lib/pad`);
 
 const { error, message } = require(`${mod}/lib/messenger`);
 
-const { formatImport, topLevelStyles } = require(path.normalize(
-    process.cwd() + '/.core/.cli/commands/reactium/style',
-));
-
 const formatDestination = (val, props) => {
     const { cwd } = props;
 
@@ -39,6 +35,16 @@ const formatDestination = (val, props) => {
     val = String(val).replace(
         /^\/common-ui\/|^common-ui\/|^common-ui$/i,
         `${cwd}/src/app/components/common-ui/`,
+    );
+
+    val = String(val).replace(
+        /^\/modules\/|^modules\/|^modules$/i,
+        `${cwd}/reactium_modules/`,
+    );
+
+    val = String(val).replace(
+        /^\/rui\/|^rui\/|^rui/i,
+        `${cwd}/reactium_modules/@atomic-reactor/reactium-ui`,
     );
 
     return path.normalize(val);
@@ -238,31 +244,6 @@ const CONFORM = ({ input, props }) => {
         output.destination = path.join(output.destination, output.name);
     }
 
-    // Set the style import statement
-    if (output.stylesheet === true) {
-        const stylesheetFile = path.normalize(
-            path.join(output.destination, '_style.scss'),
-        );
-
-        const importString = output.inject.map(filepath =>
-            path
-                .relative(filepath, stylesheetFile)
-                .replace(/^\..\//, '')
-                .replace('_style.scss', 'style'),
-        );
-
-        output.stylesheet = {
-            filename: '_style.scss',
-            filepath: stylesheetFile,
-            destination: output.destination,
-            name: 'style',
-            ext: '.scss',
-            overwrite: '',
-            inject: Array.from(output.inject),
-            importString: importString,
-        };
-    }
-
     delete output.inject;
 
     return output;
@@ -306,16 +287,6 @@ const SCHEMA = ({ props }) => {
 
     const defaultDirectory = path.normalize('components/');
 
-    const styleList = topLevelStyles({ props });
-    const styleLen = String(styleList.length).length;
-    const styles = styleList
-        .map((file, index) => {
-            index += 1;
-            let i = chalk.cyan(pad(index, styleLen) + '.');
-            return `\n\t    ${i} ${chalk.white(file)}`;
-        })
-        .join('');
-
     return {
         properties: {
             name: {
@@ -323,11 +294,44 @@ const SCHEMA = ({ props }) => {
                 message: ' Component name is required',
                 description: chalk.white('Component Name:'),
             },
+            type: {
+                required: true,
+                message: ` Select the component type: ${types.join(' | ')}`,
+                description: `${chalk.white(
+                    'Type:',
+                )} ${typeSelections}\n    ${chalk.white('Select:')}`,
+                before: val => {
+                    if (!isNaN(val)) {
+                        val = Number(String(val)) - 1;
+                        if (val >= types.length || val < 0) {
+                            return 'class';
+                        } else {
+                            const t = types[val];
+                            if (t === 'rui') {
+                                prompt.override['destination'] = '/rui/';
+                            }
+                            return t;
+                        }
+                    }
+                },
+                ask: () => overwritable(prompt),
+            },
             destination: {
                 description: chalk.white('Destination:'),
                 default: defaultDirectory,
                 required: true,
                 message: ' Input component destination',
+                ask: () => {
+                    if (
+                        prompt.override['type'] !== 'rui' &&
+                        prompt.history('type') !== 'rui'
+                    ) {
+                        if (!prompt.override['destination']) {
+                            return true;
+                        }
+                    }
+                    return false;
+                },
             },
             overwrite: {
                 required: true,
@@ -344,7 +348,7 @@ const SCHEMA = ({ props }) => {
                         let dest =
                             prompt.override['destination'] ||
                             prompt.history('destination').value;
-                        dest = path.join(dest, dir);
+                        dest = path.normalize(path.join(dest, dir));
                         dest = formatDestination(dest, props);
 
                         return fs.existsSync(dest);
@@ -355,24 +359,6 @@ const SCHEMA = ({ props }) => {
                 before: val => {
                     return String(val).toUpperCase() === 'Y';
                 },
-            },
-            type: {
-                required: true,
-                message: ` Select the component type: ${types.join(' | ')}`,
-                description: `${chalk.white(
-                    'Type:',
-                )} ${typeSelections}\n    ${chalk.white('Select:')}`,
-                before: val => {
-                    if (!isNaN(val)) {
-                        val = Number(String(val)) - 1;
-                        if (val >= types.length || val < 0) {
-                            return 'class';
-                        } else {
-                            return types[val];
-                        }
-                    }
-                },
-                ask: () => overwritable(prompt),
             },
             required: {
                 pattern: /^y|n|Y|N/,
@@ -439,25 +425,6 @@ const SCHEMA = ({ props }) => {
                 ask: () => overwritable(prompt),
                 before: val => {
                     return String(val).toUpperCase() === 'Y';
-                },
-            },
-            inject: {
-                pattern: /[0-9\s]/,
-                description: `${chalk.white(
-                    'Import stylesheet to:',
-                )} ${styles}\n    ${chalk.white('Select:')}`,
-                required: true,
-                message: 'Select a number or list of numbers. Example: 1 2 3',
-                ask: () => {
-                    try {
-                        return (
-                            prompt.override['stylesheet'] ||
-                            (prompt.history('stylesheet').value &&
-                                overwritable(prompt))
-                        );
-                    } catch (err) {
-                        return false;
-                    }
                 },
             },
             services: {
@@ -566,6 +533,8 @@ const SCHEMA = ({ props }) => {
  * @since 2.0.0
  */
 const ACTION = ({ opt, props }) => {
+    console.log('');
+
     const { cwd, prompt } = props;
 
     const ovr = {};
@@ -639,8 +608,9 @@ const ACTION = ({ opt, props }) => {
             })
             .then(() => prompt.stop())
             .catch(err => {
-                prompt.stop();
+                console.log(err);
                 message(CANCELED);
+                process.exit();
             });
     });
 };
@@ -676,7 +646,7 @@ const COMMAND = ({ program, props }) => {
         .option('--route [route]', 'Include route.js file.')
         .option('--services [services]', 'Include services.js file.')
         .option('--zone [zone]', 'Include zone.js file.')
-        .option('--stylesheet [stylesheet]', 'Include style.scss file.')
+        .option('-s, --stylesheet [stylesheet]', 'Include _style.scss file.')
         .option(
             '--required [required]',
             'Specify if the component is required in Reactium UI',

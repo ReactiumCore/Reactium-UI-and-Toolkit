@@ -12,7 +12,7 @@ You should now be running the Toolkit loaded with the most recent Reactium UI an
 
 ## Creating Reactium UI Components
 
-Running the `arcli component` command will run an augmented version of the default command where the new component will be added to the Reactium UI **enums.js** MANIFEST object used to generate the **reactium.reactium-ui.manifest** object in the project root **package.json** file.
+Running the `arcli component` command will run an augmented version of the default command where the new component will be added to the Reactium UI **enums.js** _MANIFEST_ object used to generate the **reactium.reactium-ui.manifest** object in the project root **package.json** file.
 
 > When prompted for the component type, select **Reactium UI**
 
@@ -44,7 +44,7 @@ $ npm run publish:ui
 $ npm run publish:toolkit
 ```
 
-### Publshing Toolkit Demo
+### Publishing Toolkit Demo
 
 ```
 $ npm run publish:demo

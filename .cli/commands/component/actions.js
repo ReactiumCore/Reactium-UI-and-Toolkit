@@ -14,15 +14,17 @@ module.exports = spinner => {
         }
     };
 
+    const isFile = path => fs.existsSync(path);
+
     const generate = ({ action, params, props, templateFile, fileName }) => {
         const { cwd } = props;
-        const { destination, command, name, overwrite } = params;
+        const { destination, command, name, oname, overwrite } = params;
 
         const filepath = path.normalize(path.join(destination, fileName));
 
-        const actionType = overwrite === true ? 'overwritting' : 'creating';
+        const actionType = overwrite === true ? 'Overwritting' : 'Creating';
 
-        message(`${actionType} command ${command} ${chalk.cyan(name)}...`);
+        message(`${actionType} ${oname || name} ${chalk.cyan(fileName)}...`);
 
         fs.ensureDirSync(path.normalize(destination));
 
@@ -32,31 +34,26 @@ module.exports = spinner => {
         );
         const content = handlebars(fs.readFileSync(template, 'utf-8'))(params);
 
-        return new Promise((resolve, reject) => {
-            fs.writeFile(filepath, content, error => {
-                if (error) {
-                    reject(error.Error);
-                } else {
-                    resolve({ action, status: 200 });
-                }
-            });
-        });
+        fs.writeFileSync(filepath, content);
+
+        return new Promise(resolve =>
+            setTimeout(() => resolve({ action, status: 200 }), 1000),
+        );
     };
 
     return {
+        init: args => {
+            args.params.overwrite = isFile(args.params.destination);
+        },
         create: ({ action, params, props }) => {
-            const { destination, name } = params;
+            const { destination, name, overwrite } = params;
+            const actionType = overwrite === true ? 'Overwritting' : 'Creating';
 
-            message(`creating ${chalk.cyan('name')}...`);
+            message(`${actionType} ${chalk.cyan(name)}...`);
 
             return new Promise((resolve, reject) => {
-                fs.ensureDir(destination, error => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve({ action, status: 200 });
-                    }
-                });
+                fs.ensureDir(destination);
+                setTimeout(() => resolve({ action, status: 200 }), 2000);
             });
         },
 
@@ -151,6 +148,7 @@ module.exports = spinner => {
                 action,
                 params: {
                     ...params,
+                    oname: params.name,
                     name:
                         params.type === 'rui'
                             ? `RUI${params.name}`
@@ -170,13 +168,25 @@ module.exports = spinner => {
                 fileName: 'reactium-hooks.js',
             }),
 
+        style: ({ action, params, props }) => {
+            if (!params.stylesheet) return;
+
+            return generate({
+                action,
+                params,
+                props,
+                templateFile: 'style',
+                fileName: '_style.scss',
+            });
+        },
+
         ruiENUMS: ({ params, props }) => {
             if (params.type !== 'rui') return;
 
-            let { ID, name, order, required, style } = params;
-            const { cwd, destination } = props;
+            message('Updating Reactium UI manifest...');
 
-            message('updating reactium-ui manifest');
+            let { ID, name, order, required, stylesheet } = params;
+            const { cwd } = props;
 
             ID = String(ID).toLowerCase();
             order = Number(order);
@@ -196,8 +206,8 @@ module.exports = spinner => {
                 named: `{ ${name} }`,
             };
 
-            if (style === true) {
-                obj.styles = `['./${name}/style']`;
+            if (stylesheet === true) {
+                obj.styles = [`./${name}/style`];
             }
 
             const enums = require(enumsPath);
@@ -219,14 +229,16 @@ module.exports = spinner => {
             );
 
             fs.writeFileSync(enumsPath, enumsTemp);
+
+            return new Promise(resolve => setTimeout(() => resolve(), 1000));
         },
 
         ruiMANIFEST: async ({ params, props }) => {
             if (params.type !== 'rui') return;
 
-            spinner.stop();
-            await arcli.runCommand('arcli', ['rui-manifest']);
-            spinner.start();
+            if (spinner && spinner.isSpinning) spinner.stop();
+            await arcli.runCommand('arcli', ['rui-manifest', '-u']);
+            if (spinner) spinner.start();
         },
     };
 };
