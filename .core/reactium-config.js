@@ -4,7 +4,7 @@ const globby = require('./globby-patch');
 const rootPath = path.resolve(__dirname, '..');
 const gulpConfig = require('./gulp.config');
 
-const version = '4.1.4';
+const version = '4.1.6';
 
 const defaultLibraryExternals = {
     axios: {
@@ -154,7 +154,7 @@ const defaultManifestConfig = {
         ],
         searchParams: {
             extensions: /\.(js|json)$/,
-            exclude: [/.ds_store/i, /.core/i, /.cli\//i, /src\/assets/],
+            exclude: [/\.ds_store/i, /\.core/i, /\.cli\//i, /src\/assets/],
         },
     },
 };

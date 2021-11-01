@@ -1491,6 +1491,49 @@ define({ "api": [
   },
   {
     "type": "ReactHook",
+    "url": "useRegisterSyncHandle(id,cb,deps)",
+    "title": "useRegisterSyncHandle()",
+    "description": "<p>React hook to create a new imperative handle reference, similar to <code>useRegisterHandle()</code> except that it returns a sync state object (see useSyncState) and will cause rerenders in the controlled component.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Mixed",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Array of properties, or <code>.</code> separated object path. e.g. ['path','to','handle'] or 'path.to.handle'. Identifies the full path to an imperative handle.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Mixed",
+            "optional": false,
+            "field": "initial",
+            "description": "<p>value of the state handle.</p>"
+          }
+        ]
+      }
+    },
+    "name": "useRegisterSyncHandle",
+    "group": "ReactHook",
+    "examples": [
+      {
+        "title": "Counter.js",
+        "content": "import React, { useState } from 'react';\nimport { useRegisterSyncHandle } from 'reactium-core/sdk';\n\nconst Counter = ({id = 1}) => {\n    const state = useRegisterSyncHandle('counter', {\n        foo: {\n            count: Number(id)\n        },\n    });\n\n    state.extend('incrementCount', () => {\n        state.set('foo.count', state.get('foo.count', id) + 1);\n    });\n\n    return (\n        <div>\n            <h1>Counter {id}</h1>\n            Count: {state.get('foo.count', id)}\n        </div>\n    );\n};\n\nexport default Counter;",
+        "type": "json"
+      },
+      {
+        "title": "CounterControl.js",
+        "content": "import React from 'react';\nimport { useSelectHandle } from 'reactium-core/sdk';\n\nconst noop = () => {};\nconst CounterControl = () => {\n    const { handle, count } = useSelectHandle('counter', 'foo.count', 1);\n\n    // set state for Counter, as well as cause this component to rerender\n\n    return (\n        <div>\n            <h1>CounterControl</h1>\n            <button onClick={handle.incrementCount}>\n              Increment Counter ({count})\n            </button>\n        </div>\n    );\n};\n\nexport default CounterControl;",
+        "type": "json"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/sync-handle.js",
+    "groupTitle": "ReactHook"
+  },
+  {
+    "type": "ReactHook",
     "url": "useRoles(search)",
     "title": "useRoles()",
     "description": "<p>React hook to get roles object. If search is provided, will retrieve a specific role.</p>",
@@ -1511,6 +1554,44 @@ define({ "api": [
     "group": "ReactHook",
     "version": "0.0.0",
     "filename": ".core/sdk/named-exports/roles.js",
+    "groupTitle": "ReactHook"
+  },
+  {
+    "type": "ReactHook",
+    "url": "useSelectHandle(id,cb,deps)",
+    "title": "useSelectHandle()",
+    "description": "<p>React hook to subscribe to updates to state on an imperative handle created by useRegisterSyncHandle. See useRegisterSyncHandle for full example.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Mixed",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Array of properties, or <code>.</code> separated object path. e.g. ['path','to','handle'] or 'path.to.handle'. Identifies the full path to an imperative handle.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String|Array|Function",
+            "optional": false,
+            "field": "selector",
+            "description": "<p>object path string or array, or selector function passed the sync state object (see useSyncState); returns seleted state</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Mixed",
+            "optional": true,
+            "field": "default",
+            "description": "<p>default selected value (if selector is String or Array)</p>"
+          }
+        ]
+      }
+    },
+    "name": "useSelectHandle",
+    "group": "ReactHook",
+    "version": "0.0.0",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/sync-handle.js",
     "groupTitle": "ReactHook"
   },
   {
@@ -1729,7 +1810,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/Zone.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/Zone.js",
     "groupTitle": "ReactHook"
   },
   {
@@ -1740,7 +1821,7 @@ define({ "api": [
     "name": "Cache",
     "group": "Reactium.Cache",
     "description": "<p>Cache allows you to easily store application data in memory.</p>",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1771,7 +1852,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1802,7 +1883,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1840,7 +1921,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1851,7 +1932,7 @@ define({ "api": [
     "group": "Reactium.Cache",
     "name": "Cache.keys",
     "description": "<p>Returns an array of the cached keys.</p>",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1862,7 +1943,7 @@ define({ "api": [
     "group": "Reactium.Cache",
     "name": "Cache.memsize",
     "description": "<p>Returns the number of entries taking up space in the cache.</p>",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1893,7 +1974,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1945,7 +2026,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1956,7 +2037,7 @@ define({ "api": [
     "group": "Reactium.Cache",
     "name": "Cache.size",
     "description": "<p>Returns the current number of entries in the cache.</p>",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -1994,7 +2075,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/cache/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/cache/index.js",
     "groupTitle": "Reactium.Cache"
   },
   {
@@ -2044,7 +2125,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/component/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/component/index.js",
     "groupTitle": "Reactium.Component"
   },
   {
@@ -2085,7 +2166,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2096,7 +2177,7 @@ define({ "api": [
     "name": "Handle.list",
     "group": "Reactium.Handle",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2142,7 +2223,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2173,7 +2254,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2197,7 +2278,7 @@ define({ "api": [
     "name": "Handle.unregister",
     "group": "Reactium.Handle",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2208,7 +2289,7 @@ define({ "api": [
     "description": "<p>Similar concept to an imperative handle created when using <code>React.forwardRef()</code> and the <code>useImperativeHandle()</code> React hook. Reactium provides the <code>Reactium.Handle</code> object to manage references created in your components to allow imperative control of your component from outside the component. This is used when you wish to change the internal state of your component from outside using a technique other than changing the component <code>props</code> (i.e. declarative control).</p> <p>This technique makes use of references created with <code>React.createRef()</code> or the <code>useRef()</code> hook for functional components. The developer can then assign the <code>current</code> property of this reference to be an object containing methods or callbacks (i.e. methods that can invoke <code>this.setState()</code> or the update callback returned by <code>useState()</code> hook) that will cause the state of the component to change (and rerender).</p> <p>By registering this &quot;handle reference&quot; on the <code>Reactium.Handle</code> singleton, other distant components can exercise imperative control over your component.</p> <p>For developers that prefer the use of React hooks, Reactium provides two hooks for your use: <code>useRegisterHandle()</code> and <code>useHandle()</code> to register and use these handles respectively.</p>",
     "group": "Reactium.Handle",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/handle/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/handle/index.js",
     "groupTitle": "Reactium.Handle"
   },
   {
@@ -2240,7 +2321,7 @@ define({ "api": [
     },
     "group": "Reactium.Hook",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2251,7 +2332,7 @@ define({ "api": [
     "description": "<p>Register a hook callback.</p>",
     "group": "Reactium.Hook",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2304,7 +2385,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2357,7 +2438,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2401,7 +2482,7 @@ define({ "api": [
     },
     "group": "Reactium.Hook",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2445,7 +2526,7 @@ define({ "api": [
     },
     "group": "Reactium.Hook",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2469,7 +2550,7 @@ define({ "api": [
     },
     "group": "Reactium.Hook",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/hook/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/hook/index.js",
     "groupTitle": "Reactium.Hook"
   },
   {
@@ -2500,7 +2581,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/plugin/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/plugin/index.js",
     "groupTitle": "Reactium.Plugin"
   },
   {
@@ -2511,7 +2592,7 @@ define({ "api": [
     "name": "Plugin.list",
     "description": "<p>Return the list of registered plugins.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/plugin/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/plugin/index.js",
     "groupTitle": "Reactium.Plugin"
   },
   {
@@ -2550,7 +2631,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/plugin/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/plugin/index.js",
     "groupTitle": "Reactium.Plugin"
   },
   {
@@ -2581,7 +2662,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/plugin/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/plugin/index.js",
     "groupTitle": "Reactium.Plugin"
   },
   {
@@ -2612,7 +2693,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/prefs/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/prefs/index.js",
     "groupTitle": "Reactium.Prefs"
   },
   {
@@ -2650,7 +2731,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/prefs/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/prefs/index.js",
     "groupTitle": "Reactium.Prefs"
   },
   {
@@ -2688,7 +2769,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/prefs/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/prefs/index.js",
     "groupTitle": "Reactium.Prefs"
   },
   {
@@ -2699,7 +2780,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task",
     "description": "<p>Pulse Task object that performs the heavy lifting for the Pulse API.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2710,7 +2791,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.ID",
     "description": "<p>[read-only] The unique ID of the task. Returns: <code>String</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2721,7 +2802,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.attempt",
     "description": "<p>[read-only] The current attempt for the active task. Returns: <code>Number</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2732,7 +2813,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.attempt",
     "description": "<p>The current attempt for the active task. Returns: <code>Number</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2743,7 +2824,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.attempts",
     "description": "<p>The number of times a task will retry before it fails. Default: <code>-1</code>. You can set this value after the task has started.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2754,7 +2835,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.autostart",
     "description": "<p>[read-only] If the task autastarted upon creation. Default: <code>true</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2765,7 +2846,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.complete",
     "description": "<p>[read-only] Relevant only when the <code>repeat</code> property is higher than 1. Returns: <code>Boolean</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2776,7 +2857,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.count",
     "description": "<p>[read-only] The current number of times the task has succeeded. Returns: <code>Number</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2787,7 +2868,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.error",
     "description": "<p>[read-only] The current error message if applicable. Returns: <code>string</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2798,7 +2879,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.failed",
     "description": "<p>[read-only] Expresses if the current task has reached the maximum attempts. Returns: <code>Boolean</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2809,7 +2890,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.now",
     "description": "<p>Force run the task without waiting for it's delay. If the task is running this is a <code>noop</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2820,7 +2901,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.progress",
     "description": "<p>[read-only] The current amount of the repeat that has been completed. Relevant only when <code>repeat</code> is higher than 1. Returns: <code>0-1</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2831,7 +2912,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.repeat",
     "description": "<p>The current number of times to run the task. Returns: <code>Number</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2842,7 +2923,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.retry",
     "description": "<p>Force a retry of the task. Useful for when you want to manually handle retries within your callback function.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2853,7 +2934,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.start",
     "description": "<p>Start the task. Useful for when you want manually start a task in your callback function.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2871,7 +2952,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2882,7 +2963,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.stop",
     "description": "<p>Stop the task</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2893,7 +2974,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.timer",
     "description": "<p>[read-only] The reference to the current setTimeout. This value will change for each task run. Returns: <code>Number</code>.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse.Task"
   },
   {
@@ -2924,7 +3005,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3013,7 +3094,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3044,7 +3125,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3062,7 +3143,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3093,7 +3174,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3111,7 +3192,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3142,7 +3223,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3153,7 +3234,7 @@ define({ "api": [
     "name": "Reactium.Pulse",
     "description": "<p>Simple interface for creating long or short polls.</p> <h3>Motivation</h3> <p>Often is the case where you find yourself sprinkling <code>setTimeout</code> or <code>setInterval</code> all over your code and before you know it, you have so many or rewrite the same structures over and over with a slight twist here and there. The Pulse API is designed to lighten the load on those situations and give a clean interface to easily create and manage polls.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3164,7 +3245,7 @@ define({ "api": [
     "name": "Reactium.Pulse.Task.reset",
     "description": "<p>Resets the task's attempt count and run count. Useful for catastrophic failures in your callback function.</p>",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/pulse/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/pulse/index.js",
     "groupTitle": "Reactium.Pulse"
   },
   {
@@ -3313,7 +3394,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3338,7 +3419,7 @@ define({ "api": [
         ]
       }
     },
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3349,7 +3430,7 @@ define({ "api": [
     "group": "Reactium.Utils",
     "name": "Utils.breakpoints",
     "description": "<p>Get breakpoints from browser body:after psuedo element or <code>Utils.BREAKPOINTS_DEFAULT</code> if unset or node.</p> <table> <thead> <tr> <th>Breakpoint</th> <th>Range</th> </tr> </thead> <tbody> <tr> <td>xs</td> <td>0 - 640</td> </tr> <tr> <td>sm</td> <td>641 - 990</td> </tr> <tr> <td>md</td> <td>991 - 1280</td> </tr> <tr> <td>lg</td> <td>1281 - 1440</td> </tr> <tr> <td>xl</td> <td>1600+</td> </tr> </tbody> </table>",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3380,7 +3461,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3411,7 +3492,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3434,7 +3515,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3497,7 +3578,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3528,7 +3609,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3559,7 +3640,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3590,7 +3671,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/index.js",
     "groupTitle": "Reactium.Utils"
   },
   {
@@ -3636,7 +3717,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3682,7 +3763,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3728,7 +3809,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3783,7 +3864,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3814,7 +3895,7 @@ define({ "api": [
     },
     "group": "Reactium.Zone",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3846,7 +3927,7 @@ define({ "api": [
     },
     "group": "Reactium.Zone",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3877,7 +3958,7 @@ define({ "api": [
     },
     "group": "Reactium.Zone",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3901,7 +3982,7 @@ define({ "api": [
     },
     "group": "Reactium.Zone",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3932,7 +4013,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3963,7 +4044,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -3981,7 +4062,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -4019,7 +4100,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -4050,7 +4131,7 @@ define({ "api": [
     },
     "group": "Reactium.Zone",
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/index.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
   },
   {
@@ -4262,7 +4343,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/utils/registry.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/utils/registry.js",
     "groupTitle": "Reactium"
   },
   {
@@ -4318,7 +4399,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/zone/Zone.js",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/Zone.js",
     "groupTitle": "Registered_Component"
   },
   {
