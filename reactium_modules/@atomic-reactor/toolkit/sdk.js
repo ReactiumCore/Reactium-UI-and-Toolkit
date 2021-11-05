@@ -10,7 +10,7 @@ import copy from 'copy-to-clipboard';
 import prettier from 'prettier/standalone';
 import parserHtml from 'prettier/parser-html';
 import parserbabel from 'prettier/parser-babylon';
-import Reactium, { __, useDerivedState } from 'reactium-core/sdk';
+import Reactium, { __, useDerivedState, useSyncState } from 'reactium-core/sdk';
 
 let defaultConfig = {
     brand: __('Reactium'),
@@ -370,27 +370,28 @@ class SDK {
                 return Elements.sort(order).filter(filter);
             };
 
-            const [state, setState] = useDerivedState({ data: [] });
+            const state = useSyncState({ data: [] });
+            state.extend('setData', data => state.set('data', data));
 
-            const isEqual = newData => _.isEqual(state.data, newData);
+            const isEqual = newData => _.isEqual(state.get('data'), newData);
 
             const setData = newData => {
                 if (isEqual(newData)) return;
-                setState({ data: newData });
+                state.set('data', newData);
             };
 
             useEffect(() => {
-                setData(fetch());
+                state.setData(fetch());
             }, [zone, order]);
 
             useEffect(() => {
                 const unsub = Elements.subscribe(() => {
-                    setData(fetch());
+                    state.setData(fetch());
                 });
                 return unsub;
             }, []);
 
-            return [state.data, setData];
+            return [state.get('data'), state.setData];
         };
     }
 

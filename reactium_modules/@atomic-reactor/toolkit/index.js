@@ -1,14 +1,13 @@
 import _ from 'underscore';
-import op from 'object-path';
+// import op from 'object-path';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useImperativeHandle, useEffect } from 'react';
+import React from 'react';
 
 import Reactium, {
     ComponentEvent,
-    useDerivedState,
-    useEventHandle,
+    useRegisterSyncHandle,
+    useEventEffect,
     useRefs,
-    useStatus,
 } from 'reactium-core/sdk';
 
 import Sidebar from './Sidebar';
@@ -19,7 +18,7 @@ import Content from './Content';
  * Hook Component: Toolkit
  * -----------------------------------------------------------------------------
  */
-let Toolkit = ({ state: initialState, ...props }, ref) => {
+const Toolkit = ({ state: initialState, ...props }) => {
     const ENUMS = Reactium.Toolkit.ENUMS;
 
     // -------------------------------------------------------------------------
@@ -28,25 +27,22 @@ let Toolkit = ({ state: initialState, ...props }, ref) => {
     const refs = useRefs();
 
     // -------------------------------------------------------------------------
-    // State
+    // Handle
     // -------------------------------------------------------------------------
-    const [state, update] = useDerivedState(initialState);
-    const setState = newState => {
-        if (unMounted()) return;
-        update(newState);
-    };
 
-    // -------------------------------------------------------------------------
-    // Status
-    // -------------------------------------------------------------------------
-    const [status, setStatus, isStatus] = useStatus(ENUMS.STATUS.PENDING);
+    const handle = useRegisterSyncHandle('Toolkit', {
+        ...initialState,
+        props,
+        status: ENUMS.STATUS.PENDING,
+    });
 
     // -------------------------------------------------------------------------
     // Internal Interface
     // -------------------------------------------------------------------------
     const cx = Reactium.Toolkit.cx;
+    handle.extend('cx', cx);
 
-    const dispatch = async (eventType, event = {}) => {
+    handle.extend('dispatch', async (eventType, event = {}) => {
         if (unMounted()) return;
 
         eventType = String(eventType).toLowerCase();
@@ -56,9 +52,23 @@ let Toolkit = ({ state: initialState, ...props }, ref) => {
         handle.dispatchEvent(evt);
         Reactium.Hook.run(`rtk-${eventType}`, evt, handle);
         await Reactium.Hook.runSync(`rtk-${eventType}`, evt, handle);
-    };
+    });
 
-    const initialize = async () => {
+    const dispatch = handle.dispatch;
+
+    // -------------------------------------------------------------------------
+    // Status
+    // -------------------------------------------------------------------------
+    handle.extend('setStatus', status => {
+        handle.set('status', status);
+        dispatch('status', { status: handle.get('status') });
+    });
+    handle.extend('isStatus', status => handle.get('status') === status);
+
+    const isStatus = handle.setStatus;
+    const setStatus = handle.isStatus;
+
+    handle.extend('initialize', async () => {
         // SET STATUS TO INITIALIZING
         setStatus(ENUMS.STATUS.INITIALIZING, true);
 
@@ -66,50 +76,27 @@ let Toolkit = ({ state: initialState, ...props }, ref) => {
 
         // SET STATUS TO INITIALIZED WHEN COMPLETE
         _.defer(() => setStatus(ENUMS.STATUS.INITIALIZED, true));
-    };
-
-    const unMounted = () => !refs.get('container');
-
-    // -------------------------------------------------------------------------
-    // Handle
-    // -------------------------------------------------------------------------
-    const _handle = () => ({
-        cx,
-        dispatch,
-        isStatus,
-        props,
-        setState,
-        setStatus,
-        state,
-        status,
-        unMounted,
     });
-    const [handle, setHandle] = useEventHandle(_handle());
-    const updateHandle = () => {
-        let newHandle = { ...handle };
+    const initialize = handle.initialize;
 
-        Object.entries(_handle()).forEach(([key, val]) =>
-            op.set(newHandle, key, val),
-        );
-
-        setHandle(newHandle);
-    };
-
-    useImperativeHandle(ref, () => handle, [handle]);
+    handle.extend('unMounted', () => !refs.get('container'));
+    const unMounted = handle.unMounted;
 
     // -------------------------------------------------------------------------
     // Side effects
     // -------------------------------------------------------------------------
     // Status change
-    useEffect(() => {
-        dispatch('status', { status });
-
-        if (isStatus(ENUMS.STATUS.PENDING)) {
-            initialize();
-        }
-
-        updateHandle();
-    }, [status]);
+    useEventEffect(
+        handle,
+        {
+            status: ({ status }) => {
+                if (isStatus(ENUMS.STATUS.PENDING)) {
+                    initialize();
+                }
+            },
+        },
+        [],
+    );
 
     return (
         <main ref={elm => refs.set('container', elm)} className={cx()}>
@@ -118,8 +105,6 @@ let Toolkit = ({ state: initialState, ...props }, ref) => {
         </main>
     );
 };
-
-Toolkit = forwardRef(Toolkit);
 
 Toolkit.propTypes = {
     state: PropTypes.object,
