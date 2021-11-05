@@ -30,6 +30,7 @@ const Toolkit = ({ state: initialState, ...props }) => {
     const handle = useRegisterSyncHandle('Toolkit', {
         ...initialState,
         props,
+        refs,
         status: ENUMS.STATUS.PENDING,
     });
 
