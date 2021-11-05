@@ -1,12 +1,10 @@
 import _ from 'underscore';
-// import op from 'object-path';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Reactium, {
     ComponentEvent,
     useRegisterSyncHandle,
-    useEventEffect,
     useRefs,
 } from 'reactium-core/sdk';
 
@@ -29,7 +27,6 @@ const Toolkit = ({ state: initialState, ...props }) => {
     // -------------------------------------------------------------------------
     // Handle
     // -------------------------------------------------------------------------
-
     const handle = useRegisterSyncHandle('Toolkit', {
         ...initialState,
         props,
@@ -39,11 +36,10 @@ const Toolkit = ({ state: initialState, ...props }) => {
     // -------------------------------------------------------------------------
     // Internal Interface
     // -------------------------------------------------------------------------
-    const cx = Reactium.Toolkit.cx;
-    handle.extend('cx', cx);
+    handle.extend('cx', Reactium.Toolkit.cx);
 
     handle.extend('dispatch', async (eventType, event = {}) => {
-        if (unMounted()) return;
+        if (handle.unMounted()) return;
 
         eventType = String(eventType).toLowerCase();
 
@@ -54,52 +50,35 @@ const Toolkit = ({ state: initialState, ...props }) => {
         await Reactium.Hook.runSync(`rtk-${eventType}`, evt, handle);
     });
 
-    const dispatch = handle.dispatch;
-
     // -------------------------------------------------------------------------
     // Status
     // -------------------------------------------------------------------------
     handle.extend('setStatus', status => {
         handle.set('status', status);
-        dispatch('status', { status: handle.get('status') });
+        handle.dispatch('status', { status: handle.get('status') });
     });
-    handle.extend('isStatus', status => handle.get('status') === status);
 
-    const isStatus = handle.setStatus;
-    const setStatus = handle.isStatus;
+    handle.extend('isStatus', status => {
+        const current = handle.get('status');
+        const statuses = _.flatten([status]);
+        return statuses.includes(current);
+    });
 
-    handle.extend('initialize', async () => {
+    handle.extend('initialize', () => {
+        if (!handle.isStatus(ENUMS.STATUS.PENDING)) return;
         // SET STATUS TO INITIALIZING
-        setStatus(ENUMS.STATUS.INITIALIZING, true);
-
-        // DO YOUR INITIALIZATION HERE
-
-        // SET STATUS TO INITIALIZED WHEN COMPLETE
-        _.defer(() => setStatus(ENUMS.STATUS.INITIALIZED, true));
+        _.defer(() => handle.setStatus(ENUMS.STATUS.INITIALIZING));
     });
-    const initialize = handle.initialize;
 
     handle.extend('unMounted', () => !refs.get('container'));
-    const unMounted = handle.unMounted;
 
     // -------------------------------------------------------------------------
     // Side effects
     // -------------------------------------------------------------------------
-    // Status change
-    useEventEffect(
-        handle,
-        {
-            status: ({ status }) => {
-                if (isStatus(ENUMS.STATUS.PENDING)) {
-                    initialize();
-                }
-            },
-        },
-        [],
-    );
+    useEffect(handle.initialize, [handle.get('status')]);
 
     return (
-        <main ref={elm => refs.set('container', elm)} className={cx()}>
+        <main ref={elm => refs.set('container', elm)} className={handle.cx()}>
             <Sidebar />
             <Content />
         </main>

@@ -373,13 +373,6 @@ class SDK {
             const state = useSyncState({ data: [] });
             state.extend('setData', data => state.set('data', data));
 
-            const isEqual = newData => _.isEqual(state.get('data'), newData);
-
-            const setData = newData => {
-                if (isEqual(newData)) return;
-                state.set('data', newData);
-            };
-
             useEffect(() => {
                 state.setData(fetch());
             }, [zone, order]);
