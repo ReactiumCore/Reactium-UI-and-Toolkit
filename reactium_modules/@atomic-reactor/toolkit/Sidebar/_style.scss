@@ -42,6 +42,28 @@ $rtk-sidebar-offset: 28px !default;
             &:empty {
                 display: none;
             }
+
+            &-2,
+            &-3 {
+                display: block;
+                padding: 0;
+
+                .rtk-sidebar-menu-item-link > span {
+                    padding-left: 8px;
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        width: 20px;
+                        height: 1px;
+                        position: absolute;
+                        left: -20px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: $rtk-sidebar-border-color;
+                    }
+                }
+            }
         }
 
         &-item {

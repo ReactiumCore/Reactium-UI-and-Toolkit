@@ -36,7 +36,8 @@ SDK.codeFormat = (str, options = {}) => {
     return code;
 };
 
-SDK.directoryName = str => camelcase(SDK.slug(str), { pascalCase: true });
+SDK.directoryName = str =>
+    str ? camelcase(SDK.slug(str), { pascalCase: true }) : str;
 
 SDK.excludePath = p => {
     if (p.startsWith(SDK.resolve(cwd, 'src'))) {
@@ -69,9 +70,9 @@ SDK.hasLiveEditor = () =>
             cwd,
             'reactium_modules',
             '@atomic-reactor',
-            'toolkit-demo',
-            'utils',
-            'ComponentDemo.js',
+            'toolkit',
+            'ComponentDemo',
+            'index.js',
         ),
     );
 
@@ -108,5 +109,27 @@ SDK.normalize = (...args) => path.normalize(path.join(...args));
 SDK.resolve = (...args) => path.resolve(SDK.normalize(...args));
 
 SDK.slug = str => slugify(str, { lower: true });
+
+SDK.sidebarGroups = () => {
+    const output = [];
+    const { globby } = arcli;
+    const normalize = (...args) => path.posix.join(...args);
+
+    // get domain.js files
+    const glob = [normalize(cwd, '**', 'domain.js')];
+    globby(glob).forEach(filePath => {
+        const domain = require(filePath);
+        if (!!op.get(domain, 'reactiumToolkit.group')) {
+            const value = op.get(domain, 'reactiumToolkit.group.id');
+            const name = op.get(domain, 'reactiumToolkit.group.label');
+            if (value && name) output.push({ name, value });
+        }
+    });
+
+    return _.flatten([
+        [{ name: 'None', value: null, checked: true }],
+        _.sortBy(output, 'name'),
+    ]);
+};
 
 module.exports = SDK;

@@ -5,6 +5,7 @@ export default {
     component: Toolkit,
     path: [
         '/toolkit/search/:search',
+        '/toolkit/:group/:slug/:sub',
         '/toolkit/:group/:slug',
         '/toolkit/:group',
         '/toolkit',

@@ -3,13 +3,12 @@
  * Imports
  * -----------------------------------------------------------------------------
  */
-const cwd = process.cwd();
-const path = require('path');
-const chalk = require('chalk');
 const cc = require('camelcase');
-const _ = require('underscore');
-const op = require('object-path');
 const GENERATOR = require('./generator');
+
+const { _, chalk, fs, globby, op, path, prefix, props } = arcli;
+const { cwd, inquirer } = arcli.props;
+
 const mod = path.dirname(require.main.filename);
 const { error, message } = require(`${mod}/lib/messenger`);
 
@@ -21,15 +20,11 @@ const {
     mergeParams,
     normalize,
     resolve,
+    sidebarGroups,
     slug,
 } = require('../utils');
 
 const isLiveEditor = hasLiveEditor();
-const { arcli, Hook } = global;
-const prefix = arcli.prefix;
-const props = arcli.props;
-
-const { inquirer } = props;
 
 const NAME = 'toolkit <element>';
 
@@ -87,20 +82,18 @@ VALIDATE.REQUIRED = (key, val) =>
 
 FILTER.FORMAT = (key, val) => CONFORM({ [key]: val })[key];
 
-FILTER.URL = (val, params, answers = {}) =>
+FILTER.URL = (val, answers = {}) =>
     val === true
         ? _.compact([
               '/toolkit',
-              op.get(params, 'group', op.get(answers, 'group')),
-              op.get(params, 'id'),
+              op.get(answers, 'group'),
+              op.get(answers, 'id'),
           ]).join('/')
         : null;
 
 PROMPT.ID = async params => {
-    const questions = [];
-
-    if (!op.get(params, 'id')) {
-        const { id } = await inquirer.prompt([
+    const { id } = await inquirer.prompt(
+        [
             {
                 prefix,
                 name: 'id',
@@ -109,70 +102,74 @@ PROMPT.ID = async params => {
                 filter: val => FILTER.FORMAT('id', val),
                 valiate: val => VALIDATE.REQUIRED('id', val),
             },
-        ]);
+        ],
+        params,
+    );
 
-        mergeParams(params, CONFORM({ id }));
-    }
+    params.id = id;
 
-    if (!op.get(params, 'name')) {
-        questions.push({
-            prefix,
-            name: 'name',
-            type: 'input',
-            message: 'Element Name:',
-            default: directoryName(params.id),
-            filter: val => FILTER.FORMAT('name', val),
-            validate: val => VALIDATE.REQUIRED('name', val),
-        });
-    }
+    const { name } = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'name',
+                type: 'input',
+                message: 'Element Name:',
+                default: directoryName(params.id),
+                filter: val => FILTER.FORMAT('name', val),
+                validate: val => VALIDATE.REQUIRED('name', val),
+            },
+        ],
+        params,
+    );
 
-    if (questions.length > 0) {
-        const answers = await inquirer.prompt(questions);
-        mergeParams(params, CONFORM(answers));
-    }
+    params.name = name;
 };
 
 PROMPT.DIR = async params => {
-    if (op.get(params, 'directory')) return;
+    const { directory } = await inquirer.prompt(
+        [
+            {
+                prefix,
+                excludePath,
+                depthLimit: 10,
+                name: 'directory',
+                type: 'fuzzypath',
+                message: 'Directory:',
+                itemType: 'directory',
+                rootPath: normalize(cwd),
+            },
+        ],
+        params,
+    );
 
-    const inputs = [
-        {
-            prefix,
-            excludePath,
-            depthLimit: 10,
-            name: 'directory',
-            type: 'fuzzypath',
-            message: 'Directory:',
-            itemType: 'directory',
-            rootPath: normalize(cwd),
-        },
-    ];
+    const domainFilePath = normalize(directory, 'domain.js');
+    const domain = fs.existsSync(domainFilePath) ? require(domainFilePath) : {};
 
-    let directory = '';
+    params.group = op.get(domain, 'reactiumToolkit.group.id');
 
-    while (String(directory).length < 1) {
-        const inq = await inquirer.prompt(inputs);
-        directory = op.get(inq, 'directory');
-    }
-
-    directory = normalize(directory, cc(params.id, { pascalCase: true }));
-
-    mergeParams(params, { directory });
+    params.directory = normalize(
+        directory,
+        cc(params.id, { pascalCase: true }),
+    );
 };
 
 PROMPT.OVERWRITE = async params => {
-    if (!op.get(params, 'overwrite') && !isEmpty(params.directory)) {
-        const { overwrite } = await inquirer.prompt([
-            {
-                prefix,
-                default: false,
-                type: 'confirm',
-                name: 'overwrite',
-                message:
-                    chalk.magenta('The selected directory is not empty!') +
-                    '\n\t  Overwrite?:',
-            },
-        ]);
+    if (!isEmpty(params.directory) && !params.overwrite) {
+        message(chalk.magenta('The selected directory is not empty!'));
+
+        const { overwrite } = await inquirer.prompt(
+            [
+                {
+                    prefix,
+                    default: false,
+                    type: 'confirm',
+                    name: 'overwrite',
+                    message: 'Overwrite?',
+                },
+            ],
+            params,
+        );
 
         if (overwrite !== true) {
             message(CANCELED);
@@ -181,118 +178,92 @@ PROMPT.OVERWRITE = async params => {
     }
 };
 
-PROMPT.HOOK = async params => {
-    const questions = [];
-
-    if (!op.get(params.sidebar)) {
-        questions.push({
-            prefix,
-            name: 'sidebar',
-            type: 'confirm',
-            message: 'Sidebar?:',
-        });
-    }
-
-    if (questions.length > 0) {
-        const answers = await inquirer.prompt(questions);
-        mergeParams(params, CONFORM(answers));
-    }
-};
-
 PROMPT.SIDEBAR = async params => {
-    if (!op.get(params, 'sidebar')) return;
+    const inq = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'label',
+                type: 'input',
+                default: params.name,
+                message: 'Sidebar Label:',
+            },
+            {
+                prefix,
+                name: 'group',
+                type: 'list',
+                message: 'Sidebar Parent:',
+                choices: sidebarGroups(),
+                default: params.group,
+                askAnswered: true,
+                when: answers => !!answers.label,
+            },
+            {
+                prefix,
+                default: 100,
+                name: 'order',
+                type: 'number',
+                message: 'Sidebar Order:',
+                when: answers => !!answers.label,
+            },
+        ],
+        params,
+    );
 
-    const questions = [];
-
-    if (!op.get(params.label)) {
-        questions.push({
-            prefix,
-            name: 'label',
-            type: 'input',
-            default: params.name,
-            message: 'Sidebar Label:',
-            validate: (val, answers) =>
-                VALIDATE.REQUIRED('label', val, answers),
-        });
-    }
-
-    if (!op.get(params.url)) {
-        questions.push({
-            prefix,
-            name: 'url',
-            type: 'confirm',
-            message: 'Sidebar URL?:',
-        });
-    }
-
-    if (!op.get(params.order)) {
-        questions.push({
-            prefix,
-            default: 100,
-            name: 'order',
-            type: 'number',
-            message: 'Sidebar Order:',
-        });
-    }
-
-    if (!op.get(params.group)) {
-        questions.push({
-            prefix,
-            name: 'group',
-            type: 'input',
-            suffix: ' (optional):',
-            message: 'Sidebar Parent ID',
-            filter: val => FILTER.FORMAT('group', val),
-        });
-    }
-
-    if (questions.length > 0) {
-        const answers = await inquirer.prompt(questions);
-
-        if (op.get(answers, 'url') === true) {
-            answers.url = FILTER.URL(answers.url, params, answers);
-        }
-
-        mergeParams(params, CONFORM(answers));
-    }
+    mergeParams(params, CONFORM(inq));
 };
 
 PROMPT.DOC = async params => {
-    const questions = [];
+    const { doc, docLabel, docOrder } = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'doc',
+                default: true,
+                type: 'confirm',
+                message: 'Documentation?',
+            },
+            {
+                prefix,
+                type: 'inupt',
+                name: 'docLabel',
+                default: `${params.label} Documentation`,
+                message: 'Documentation Label:',
+                when: ({ doc }) => doc === true,
+            },
+            {
+                prefix,
+                default: 100,
+                type: 'number',
+                name: 'docOrder',
+                message: 'Documentation Order:',
+                when: ({ doc }) => doc === true,
+            },
+        ],
+        params,
+    );
 
-    if (!op.get(params, 'doc') && !op.get(params, 'group')) {
-        questions.push({
-            prefix,
-            name: 'doc',
-            default: true,
-            type: 'confirm',
-            message: 'Documentation?:',
-        });
-    }
-
-    if (questions.length > 0) {
-        const answers = await inquirer.prompt(questions);
-        mergeParams(params, CONFORM(answers));
-    }
+    params.doc = doc;
+    params.docLabel = docLabel;
+    params.docOrder = docOrder;
 };
 
 PROMPT.EDITOR = async params => {
-    const questions = [];
+    const { editor } = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'editor',
+                default: false,
+                type: 'confirm',
+                message: 'Live Editor?',
+                when: () => isLiveEditor,
+            },
+        ],
+        params,
+    );
 
-    if (!op.get(params, 'editor') && isLiveEditor) {
-        questions.push({
-            prefix,
-            name: 'editor',
-            default: false,
-            type: 'confirm',
-            message: 'Live Editor?:',
-        });
-    }
-
-    if (questions.length > 0) {
-        const answers = await inquirer.prompt(questions);
-        mergeParams(params, CONFORM(answers));
-    }
+    params.editor = editor;
 };
 
 PROMPT.PREFLIGHT = async params => {
@@ -319,17 +290,17 @@ PROMPT.PREFLIGHT = async params => {
     let confirm;
 
     if (!isDebug) {
-        const answers = await inquirer.prompt([
+        const inq = await inquirer.prompt([
             {
                 prefix,
                 name: 'confirm',
                 type: 'confirm',
-                message: 'Proceed?:',
+                message: 'Proceed?',
                 default: false,
             },
         ]);
 
-        confirm = op.get(answers, 'confirm');
+        confirm = op.get(inq, 'confirm');
     }
 
     if (confirm !== true) {
@@ -345,8 +316,6 @@ PROMPT.PREFLIGHT = async params => {
 const ACTION = async (action, initialParams) => {
     console.log('');
 
-    //props.command = action;
-
     // 0.0 - prep params that came from flags
     let params = CONFORM(initialParams);
 
@@ -358,9 +327,6 @@ const ACTION = async (action, initialParams) => {
 
     // 3.0 - Check directory
     await PROMPT.OVERWRITE(params);
-
-    // 4.0 - Hook
-    await PROMPT.HOOK(params);
 
     // 5.0 - Sidebar
     await PROMPT.SIDEBAR(params);
@@ -387,7 +353,7 @@ const FLAGS_TO_PARAMS = opt =>
         let val = opt[key];
         val = typeof val === 'function' ? undefined : val;
 
-        if (val) obj[key] = val;
+        if (val) op.set(obj, key, val);
 
         return obj;
     }, {});
@@ -400,11 +366,12 @@ const FLAGS = () => {
         'id',
         'sidebar',
         'group',
-        'url',
         'label',
         'order',
         'debug',
         'doc',
+        'docLabel',
+        'docOrder',
         'editor',
     ];
     Hook.runSync('toolkit-element-flags', flags);
@@ -421,14 +388,15 @@ const COMMAND = ({ program, ...args }) =>
         .option('-d, --directory [directory]', 'The path to create the element')
         .option('-i, --id [id]', 'The unique id of the element')
         .option('-s, --sidebar [sidebar]', 'Include sidebar item')
-        .option('-g, --group [group]', 'The sidebar item group')
-        .option('-l, --label [label]', 'The sidebar item label')
-        .option('-u, --url [url]', 'The sidebar item url')
-        .option('-o, --order [order]', 'The sidebar item order')
+        .option('-g, --group [group]', 'Sidebar group')
+        .option('-l, --label [label]', 'Sidebar label')
+        .option('-o, --order [order]', 'Sidebar order')
         .option('-e, --editor [editor]', 'Create as Live Editor element')
         .option('-D, --debug [debug]', 'Debug mode')
         .option('-O, --overwrite [overwrite]', 'Overwrite existing element')
         .option('--doc [doc]', 'Add documentation element')
+        .option('--docLabel [docLabel]', 'Documentation sidebar label')
+        .option('--docOrder [docOrder]', 'Documentation sidebar order')
         .on('--help', HELP);
 
 module.exports = {

@@ -15,13 +15,13 @@ module.exports = ({ Spinner }) => {
     };
 
     const template = ({ file, context }) => {
-        const tmp = path.normalize(`${__dirname}/template/${file}`);
+        const tmp = arcli.normalizePath(__dirname, 'template', file);
         const content = handlebars(fs.readFileSync(tmp, 'utf-8'))(context);
         return codeFormat(content);
     };
 
     const write = ({ content, directory, file }) => {
-        file = path.normalize(path.join(directory, file));
+        file = arcli.normalizePath(directory, file);
         fs.ensureFileSync(file);
         fs.writeFileSync(file, content);
     };
@@ -51,47 +51,51 @@ module.exports = ({ Spinner }) => {
                 file: 'domain.js',
             });
         },
+        sidebar: ({ params }) => {
+            if (!op.get(params, 'label')) return;
+            const actions = require('../sidebar/actions')({ Spinner });
+            const id = _.compact([params.group, params.id]).join('-');
+
+            const p = {
+                ...params,
+                id,
+                type: 'link',
+                url: `/toolkit/${id.split('-').join('/')}`,
+            };
+
+            Object.keys(actions).forEach((key, i) =>
+                actions[key]({ params: p }),
+            );
+        },
         document: ({ params }) => {
             if (!op.get(params, 'doc')) return;
 
-            const { directory, id } = params;
+            const { directory } = params;
+
+            const group = _.compact([params.group, params.id]).join('-');
+            const id = _.compact([group, 'docs']).join('-');
 
             const actions = require('../document/actions')({ Spinner });
 
             const args = {
                 params: {
                     ...params,
-                    group: id,
-                    id: `${id}-doc`,
-                    zone: `${id}-doc`,
-                    label: 'Documentation',
-                    url: `/toolkit/${id}/doc`,
-                    order: 'Reactium.Enums.priority.lowest',
-                    directory: path.normalize(
-                        path.join(directory, 'Documentation'),
-                    ),
-                },
-            };
-
-            Object.keys(actions).forEach((key, i) => actions[key](args));
-        },
-        sidebar: ({ params }) => {
-            if (!op.get(params, 'sidebar')) return;
-
-            const { directory } = params;
-
-            const actions = require('../sidebar/actions')({ Spinner });
-
-            const args = {
-                params: {
-                    ...params,
-                    directory: path.normalize(path.join(directory, 'Sidebar')),
+                    id,
+                    group,
+                    zone: id,
+                    order: params.docOrder || 100,
+                    label: params.docLabel || 'Documentation',
+                    url: `/toolkit/${id.split('-').join('/')}`,
+                    directory: arcli.normalizePath(directory, 'Documentation'),
                 },
             };
 
             Object.keys(actions).forEach((key, i) => actions[key](args));
         },
         hooks: ({ params }) => {
+            const { id, group } = params;
+            params.zone = !!group ? `${group}-${id}` : id;
+
             write({
                 content: template({
                     file: 'reactium-hooks.hbs',

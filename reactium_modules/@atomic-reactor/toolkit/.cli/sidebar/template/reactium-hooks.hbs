@@ -9,7 +9,7 @@ Reactium.Hook.register('plugin-ready', () => {
         component: MenuLink,
         children: __('{{label}}'),
         'aria-label': __('{{label}}'),
-        {{#if url}}url: '{{url}}',{{/if}}
+        {{#if url}}url: '{{url}}',{{~/if}}
         {{#if group}}group: '{{group}}',{{~/if}}
     });
 });

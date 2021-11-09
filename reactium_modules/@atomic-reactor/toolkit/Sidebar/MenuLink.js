@@ -60,6 +60,8 @@ const MenuLink = initialProps => {
     });
 
     const isActiveHeading = () => {
+        if (params.group === id) return true;
+
         const url = location.pathname;
         const urls = _.pluck(related, 'url');
         return urls.includes(url);
@@ -88,10 +90,11 @@ const MenuLink = initialProps => {
             </button>
         ) : null;
 
+    const depth = _.compact(String(id).split('-')).length;
+
     useEffect(() => {
         if (shouldExpand()) setExpanded(true);
     }, [params]);
-
 
     return (
         <div className={className} style={{ minWidth: width }}>
@@ -138,7 +141,11 @@ const MenuLink = initialProps => {
                 </div>
             )}
             {related.length > 0 && (
-                <div className={cx('sidebar-menu-sub')}>
+                <div
+                    className={cx(
+                        'sidebar-menu-sub',
+                        `sidebar-menu-sub-${depth}`,
+                    )}>
                     {related.map(
                         ({ component: Component = MenuLink, ...item }) => (
                             <Component

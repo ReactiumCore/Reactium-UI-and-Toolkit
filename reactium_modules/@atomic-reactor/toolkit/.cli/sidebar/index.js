@@ -4,12 +4,12 @@
  * -----------------------------------------------------------------------------
  */
 
-const cwd = process.cwd();
-const path = require('path');
-const chalk = require('chalk');
-const _ = require('underscore');
-const op = require('object-path');
+const { _, chalk, fs, op, path, prefix, props } = arcli;
+const { cwd, inquirer } = arcli.props;
+
+const cc = require('camelcase');
 const GENERATOR = require('./generator');
+
 const mod = path.dirname(require.main.filename);
 const { error, message } = require(`${mod}/lib/messenger`);
 
@@ -21,13 +21,8 @@ const {
     normalize,
     resolve,
     slug,
+    sidebarGroups,
 } = require('../utils');
-
-const { arcli, Hook } = global;
-const prefix = arcli.prefix;
-const props = arcli.props;
-
-const { inquirer } = props;
 
 const NAME = 'toolkit <sidebar>';
 
@@ -52,13 +47,8 @@ const CONFORM = params => {
         switch (key) {
             case 'id':
             case 'group':
-                obj[key] = slug(val);
-                break;
-
-            case 'url':
-                val = val === true ? FILTER.URL(val, params) : val;
                 if (val) {
-                    obj[key] = val;
+                    obj[key] = slug(val);
                 }
                 break;
 
@@ -81,94 +71,50 @@ VALIDATE.REQUIRED = (key, val) =>
 
 FILTER.FORMAT = (key, val) => CONFORM({ [key]: val })[key];
 
-FILTER.URL = (val, params, answers = {}) =>
-    val === true
-        ? _.compact([
-              '/toolkit',
-              op.get(params, 'group', op.get(answers, 'group')),
-              op.get(params, 'id'),
-          ]).join('/')
-        : null;
-
-PROMPT.TYPE = async params => {
-    if (op.get(params, 'type')) return;
-
-    const answers = await inquirer.prompt([
-        {
-            prefix,
-            type: 'list',
-            name: 'type',
-            message: 'Type:',
-            choices: [
-                {
-                    name: 'Child Link',
-                    value: 'link',
-                    short: 'Child Link',
-                    checked: true,
-                },
-                { name: 'Top-Level', value: 'group', short: 'Top-Level' },
-            ],
-        },
-    ]);
-
-    mergeParams(params, answers);
-};
-
 PROMPT.DIR = async params => {
-    if (op.get(params, 'directory')) return;
+    const inq = await inquirer.prompt(
+        [
+            {
+                prefix,
+                excludePath,
+                depthLimit: 10,
+                type: 'fuzzypath',
+                name: 'directory',
+                message: 'Directory:',
+                itemType: 'directory',
+                rootPath: normalize(cwd),
+                validate: (val, answers) =>
+                    VALIDATE.REQUIRED('directory', val, answers),
+            },
+        ],
+        params,
+    );
 
-    const inputs = [
-        {
-            prefix,
-            excludePath,
-            depthLimit: 10,
-            type: 'fuzzypath',
-            name: 'directory',
-            message: 'Directory:',
-            itemType: 'directory',
-            rootPath: normalize(cwd),
-            validate: (val, answers) =>
-                VALIDATE.REQUIRED('directory', val, answers),
-        },
-    ];
+    mergeParams(params, CONFORM(inq));
 
-    let directory = '';
+    const domainFilePath = normalize(params.directory, 'domain.js');
+    const domain = fs.existsSync(domainFilePath) ? require(domainFilePath) : {};
 
-    while (String(directory).length < 1) {
-        const inq = await inquirer.prompt(inputs);
-        directory = op.get(inq, 'directory');
-    }
-
-    const parts = [directory];
-
-    if (params.group) {
-        parts.push(directoryName(params.group));
-    }
-
-    if (params.id) {
-        parts.push(directoryName(params.id));
-    }
-
-    directory = normalize(...parts);
-
-    mergeParams(params, { directory });
+    params.group = op.get(domain, 'reactiumToolkit.group.id');
+    params.directory = normalize(params.directory);
 };
 
 PROMPT.OVERWRITE = async params => {
-    if (!op.get(params, 'overwrite') && !isEmpty(params.directory)) {
-        const { overwrite } = await inquirer.prompt([
-            {
-                prefix,
-                default: false,
-                type: 'confirm',
-                name: 'overwrite',
-                message:
-                    chalk.magenta('The selected directory is not empty!') +
-                    '\n\t  ' +
-                    chalk.cyan(params.directory) +
-                    '\n\t  Overwrite?:',
-            },
-        ]);
+    if (!isEmpty(params.directory) && !params.overwrite) {
+        message(chalk.magenta('The selected directory is not empty!'));
+
+        const { overwrite } = await inquirer.prompt(
+            [
+                {
+                    prefix,
+                    default: false,
+                    type: 'confirm',
+                    name: 'overwrite',
+                    message: 'Overwrite?',
+                },
+            ],
+            params,
+        );
 
         if (overwrite !== true) {
             message(CANCELED);
@@ -177,93 +123,71 @@ PROMPT.OVERWRITE = async params => {
     }
 };
 
-PROMPT.LINK = async params => {
-    if (op.get(params, 'type') !== 'link') return;
+PROMPT.SIDEBAR = async params => {
+    const inq = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'id',
+                type: 'input',
+                message: 'Sidebar ID:',
+            },
+            {
+                prefix,
+                name: 'label',
+                type: 'input',
+                default: params.name,
+                message: 'Sidebar Label:',
+            },
+            {
+                prefix,
+                name: 'group',
+                type: 'list',
+                message: 'Sidebar Parent:',
+                choices: sidebarGroups(),
+                default: params.group,
+                askAnswered: true,
+            },
+            {
+                prefix,
+                default: 100,
+                name: 'order',
+                type: 'number',
+                message: 'Sidebar Order:',
+            },
+        ],
+        params,
+    );
 
-    const questions = [];
+    mergeParams(params, CONFORM(inq));
 
-    if (!op.get(params, 'group')) {
-        questions.push({
-            prefix,
-            name: 'group',
-            type: 'input',
-            message: 'Parent ID:',
-            filter: val => FILTER.FORMAT('group', val),
-            valiate: val => VALIDATE.REQUIRED('id', val),
-        });
+    const { url } = await inquirer.prompt(
+        [
+            {
+                prefix,
+                name: 'url',
+                type: 'input',
+                message: 'Sidebar URL:',
+                default: _.compact(['/toolkit', params.group, params.id]).join(
+                    '/',
+                ),
+            },
+        ],
+        params,
+    );
+
+    if (String(url).length > 0) {
+        params.url = url;
     }
 
-    if (!op.get(params, 'id')) {
-        questions.push({
-            prefix,
-            name: 'id',
-            type: 'input',
-            message: 'Link ID:',
-            filter: val => FILTER.FORMAT('id', val),
-            valiate: val => VALIDATE.REQUIRED('id', val),
-        });
-    }
-
-    const answers = await inquirer.prompt(questions);
-
-    mergeParams(params, CONFORM(answers));
-};
-
-PROMPT.GROUP = async params => {
-    const questions = [];
-
-    if (!op.get(params, 'id')) {
-        questions.push({
-            prefix,
-            name: 'id',
-            type: 'input',
-            message: 'ID:',
-            valiate: val => VALIDATE.REQUIRED('id', val),
-            filter: value => FILTER.FORMAT('id', value),
-        });
-    }
-
-    if (!op.get(params, 'label')) {
-        questions.push({
-            prefix,
-            name: 'label',
-            type: 'input',
-            message: 'Label:',
-            valiate: val => VALIDATE.REQUIRED('label', val),
-        });
-    }
-
-    if (!op.get(params, 'url')) {
-        questions.push({
-            prefix,
-            name: 'url',
-            type: 'confirm',
-            message: 'URL?:',
-        });
-    }
-
-    if (!op.get(params.order)) {
-        questions.push({
-            prefix,
-            default: 100,
-            name: 'order',
-            type: 'number',
-            message: 'Order:',
-        });
-    }
-
-    const answers = await inquirer.prompt(questions);
-
-    if (op.get(answers, 'url') === true) {
-        answers.url = FILTER.URL(answers.url, params);
-    }
-
-    mergeParams(params, CONFORM(answers));
+    params.directory = !params.group
+        ? normalize(params.directory, directoryName(params.id), 'Sidebar')
+        : normalize(params.directory, 'Sidebar');
 };
 
 PROMPT.PREFLIGHT = async params => {
     // Transform the preflight object instead of the params object
-    const preflight = CONFORM({ ...params });
+    const preflight = { ...params };
     delete preflight.debug;
 
     const isDebug = op.get(params, 'debug', false);
@@ -286,15 +210,18 @@ PROMPT.PREFLIGHT = async params => {
     let confirm;
 
     if (!isDebug) {
-        const answers = await inquirer.prompt([
-            {
-                prefix,
-                name: 'confirm',
-                type: 'confirm',
-                message: 'Proceed?:',
-                default: false,
-            },
-        ]);
+        const answers = await inquirer.prompt(
+            [
+                {
+                    prefix,
+                    name: 'confirm',
+                    type: 'confirm',
+                    message: 'Proceed?:',
+                    default: false,
+                },
+            ],
+            params,
+        );
 
         confirm = op.get(answers, 'confirm');
     }
@@ -317,25 +244,21 @@ const ACTION = async (action, initialParams) => {
     // 0.0 - prep params that came from flags
     let params = CONFORM(initialParams);
 
-    // 1.0 - Get Type of menu link
-    await PROMPT.TYPE(params);
-
-    // 2.0.1 - Link
-    await PROMPT.LINK(params);
-
-    // 2.0.2 - Group
-    await PROMPT.GROUP(params);
-
-    // 3.0 - Get Directory
+    // 1.0 - Get Directory
     await PROMPT.DIR(params);
 
-    // 4.0 - Check directory
+    // 2.0 - Get id & group
+    await PROMPT.SIDEBAR(params);
+
+    // 3.0 - Check directory
     await PROMPT.OVERWRITE(params);
 
-    // 5.0 - Preflight
-    await PROMPT.PREFLIGHT(params);
+    // 4.0 - Preflight
+    params.id = _.compact([params.group, params.id]).join('-');
 
-    // 6.0 - Execute actions
+    await PROMPT.PREFLIGHT(CONFORM(params));
+
+    // 5.0 - Execute actions
     if (op.get(params, 'debug') !== true) {
         await GENERATOR({ arcli: global, params, props });
     }
@@ -364,6 +287,7 @@ const FLAGS = () => {
         'label',
         'order',
         'debug',
+        'type',
     ];
     Hook.runSync('toolkit-sidebar-flags', flags);
     return flags;
@@ -384,6 +308,7 @@ const COMMAND = ({ program, ...args }) =>
         .option('-l, --label [label]', 'The sidebar link label')
         .option('-u, --url [url]', 'The sidebar link url')
         .option('-o, --order [order]', 'The sidebar link order')
+        .option('-t, --type [type]', 'The sidebar link type')
         .option('-D, --debug [debug]', 'Debug mode')
         .option(
             '-O, --overwrite [overwrite]',

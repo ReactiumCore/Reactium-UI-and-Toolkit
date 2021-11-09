@@ -427,13 +427,13 @@ class SDK {
 
         if (String(pathname).startsWith('/toolbar/search')) return 'search';
 
-        const { group, slug } = op.get(
+        const { group, slug, sub } = op.get(
             Reactium.Routing.currentRoute,
             'params',
             {},
         );
 
-        const zone = !group ? ['overview'] : _.compact([group, slug]);
+        const zone = !group ? ['overview'] : _.compact([group, slug, sub]);
 
         return slugify(zone.join('-'), { lower: true });
     }

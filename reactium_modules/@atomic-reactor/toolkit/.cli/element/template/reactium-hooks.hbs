@@ -4,7 +4,7 @@ import Reactium from 'reactium-core/sdk';
 Reactium.Hook.register('plugin-ready', () => {
     // Element {{name}}
     Reactium.Toolkit.Elements.register('{{id}}-element', {
-        zone: '{{id}}',
+        zone: '{{zone}}',
         component: Element,
         order: Reactium.Enums.priority.low,
     });

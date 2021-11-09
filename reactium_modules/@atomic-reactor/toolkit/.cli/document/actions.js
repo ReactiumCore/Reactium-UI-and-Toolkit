@@ -55,5 +55,12 @@ module.exports = ({ Spinner }) => {
                 file: 'reactium-hooks.js',
             });
         },
+        sidebar: ({ params }) => {
+            if (!op.get(params, 'label')) return;
+            const actions = require('../sidebar/actions')({ Spinner });
+            params.id = _.compact([params.group, params.id, 'doc']).join('-');
+
+            Object.keys(actions).forEach((key, i) => actions[key]({ params }));
+        },
     };
 };
