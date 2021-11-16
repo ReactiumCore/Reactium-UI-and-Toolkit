@@ -53,7 +53,11 @@ const CONFORM = params => {
 
             case 'id':
             case 'group':
-                obj[key] = val ? slug(val) : val;
+                if (String(val).length > 0) {
+                    obj[key] = val ? slug(val) : val;
+                } else {
+                    obj[key] = '';
+                }
                 break;
 
             case 'url':
@@ -77,8 +81,14 @@ const CONFORM = params => {
     }, {});
 };
 
-VALIDATE.REQUIRED = (key, val) =>
-    !val ? `${chalk.magenta(key)} is required` : true;
+VALIDATE.REQUIRED = (key, val, msg) =>
+    _.chain([val])
+        .flatten()
+        .compact()
+        .isEmpty()
+        .value()
+        ? msg || `${chalk.magenta(key)} is required`
+        : true;
 
 FILTER.FORMAT = (key, val) => CONFORM({ [key]: val })[key];
 
@@ -100,7 +110,8 @@ PROMPT.ID = async params => {
                 type: 'input',
                 message: 'Element ID:',
                 filter: val => FILTER.FORMAT('id', val),
-                valiate: val => VALIDATE.REQUIRED('id', val),
+                validate: val =>
+                    VALIDATE.REQUIRED('id', val, 'Element ID is required'),
             },
         ],
         params,
@@ -117,7 +128,8 @@ PROMPT.ID = async params => {
                 message: 'Element Name:',
                 default: directoryName(params.id),
                 filter: val => FILTER.FORMAT('name', val),
-                validate: val => VALIDATE.REQUIRED('name', val),
+                validate: val =>
+                    VALIDATE.REQUIRED('name', val, 'Element name is required'),
             },
         ],
         params,
@@ -322,8 +334,12 @@ const ACTION = async (action, initialParams) => {
     // 1.0 - Get name
     await PROMPT.ID(params);
 
+    process.exit();
+
     // 2.0 - Get Directory
-    await PROMPT.DIR(params);
+    while (!params.directory) {
+        await PROMPT.DIR(params);
+    }
 
     // 3.0 - Check directory
     await PROMPT.OVERWRITE(params);
