@@ -334,8 +334,6 @@ const ACTION = async (action, initialParams) => {
     // 1.0 - Get name
     await PROMPT.ID(params);
 
-    process.exit();
-
     // 2.0 - Get Directory
     while (!params.directory) {
         await PROMPT.DIR(params);
