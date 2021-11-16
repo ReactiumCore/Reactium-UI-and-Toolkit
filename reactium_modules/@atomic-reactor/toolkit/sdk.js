@@ -12,15 +12,17 @@ import parserHtml from 'prettier/parser-html';
 import parserbabel from 'prettier/parser-babylon';
 import Reactium, { __, useDerivedState, useSyncState } from 'reactium-core/sdk';
 
-let defaultConfig = {
+const pkgConfig = op.get(pkg, 'reactium.toolkit', {});
+const defaultConfig = {
     brand: __('Reactium'),
     info: String(__('Toolkit version %ver')).replace('%ver', pkg.version),
     titlebar: __('Reactium'),
     sidebar: {
-        collapsed: Reactium.Prefs.get('rtk.sidebar.collapsed', true),
-        position: Reactium.Prefs.get('rtk.sidebar.position', 'left'),
-        width: Reactium.Prefs.get('rtk.sidebar.width', 320),
+        collapsed: false,
+        position: 'left',
+        width: 320,
     },
+    ...pkgConfig,
 };
 
 const prettierOptions = {
@@ -39,6 +41,15 @@ const sorter = (list, id, key = 'order') => {
     let results = _.sortBy(list, key);
     Reactium.Hook.runSync(hook, results, key);
     return results;
+};
+
+const useLocation = () => {
+    const location =
+        op.get(Reactium, 'Routing.currentRoute.location') ||
+        op.get(window, 'location');
+    const params = op.get(Reactium, 'Routing.currentRoute.params', {});
+
+    return { location, params };
 };
 
 const cx = Reactium.Utils.cxFactory('rtk');
@@ -170,17 +181,17 @@ class SDK {
     }
 
     get setConfig() {
-        let _config = JSON.parse(JSON.stringify(this.__config));
+        let _config = this.config;
 
         return (...args) => {
-            if (!_.isObject(args[0])) {
+            if (_.isObject(args[0])) {
+                _config = { ..._config, ...args[0] };
+            } else {
                 if (args.length < 1) return _config;
 
                 const key = args[0];
                 const val = args[1];
                 op.set(_config, key, val);
-            } else {
-                _config = { ..._config, ...args[0] };
             }
 
             this.__config = _config;
@@ -423,15 +434,12 @@ class SDK {
     }
 
     get zone() {
-        const { pathname } = Reactium.Routing.currentRoute.location;
+        const { location, params } = useLocation();
+
+        const { pathname } = location;
+        const { group, slug, sub } = params;
 
         if (String(pathname).startsWith('/toolbar/search')) return 'search';
-
-        const { group, slug, sub } = op.get(
-            Reactium.Routing.currentRoute,
-            'params',
-            {},
-        );
 
         const zone = !group ? ['overview'] : _.compact([group, slug, sub]);
 

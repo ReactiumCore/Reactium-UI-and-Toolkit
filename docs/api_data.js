@@ -339,8 +339,8 @@ define({ "api": [
             "group": "stylesheet",
             "type": "String",
             "optional": true,
-            "field": "path",
-            "description": "<p>the src of the javascript</p>"
+            "field": "href",
+            "description": "<p>the src of the stylesheet or resource</p>"
           },
           {
             "group": "stylesheet",
@@ -348,7 +348,7 @@ define({ "api": [
             "optional": true,
             "field": "order",
             "defaultValue": "0",
-            "description": "<p>loading order of script</p>"
+            "description": "<p>loading order of stylesheet or resource</p>"
           },
           {
             "group": "stylesheet",
@@ -406,7 +406,7 @@ define({ "api": [
     "examples": [
       {
         "title": "reactium-boot.js",
-        "content": "ReactiumBoot.Hook.register('Server.AppStyleSheets', async (req, AppStyleSheets) => {\n    AppStyleSheets.register('my-stylesheet', {\n        path: '/assets/css/some-additional.css'\n    });\n\n    AppStyleSheets.register('my-csn-script', {\n        path: 'https://cdn.example.com/cdn.loaded.css'\n        order: 1, // scripts will be ordered by this\n    });\n});",
+        "content": "ReactiumBoot.Hook.register('Server.AppStyleSheets', async (req, AppStyleSheets) => {\n    AppStyleSheets.register('my-stylesheet', {\n        href: '/assets/css/some-additional.css'\n    });\n\n    AppStyleSheets.register('my-csn-script', {\n        href: 'https://cdn.example.com/cdn.loaded.css'\n        order: 1, // scripts will be ordered by this\n    });\n});",
         "type": "json"
       }
     ],
@@ -655,6 +655,17 @@ define({ "api": [
   },
   {
     "type": "Hook",
+    "url": "app-context-provider",
+    "title": "app-context-provider",
+    "name": "app-context-provider",
+    "description": "<p>Called after app-bindpoint to define any React context providers, using the <a href=\"#api-Reactium-Reactium.AppContext\">Reactium.AppContext</a> registry.</p>",
+    "group": "Hooks",
+    "version": "0.0.0",
+    "filename": ".core/app/index.js",
+    "groupTitle": "Hooks"
+  },
+  {
+    "type": "Hook",
     "url": "app-ready",
     "title": "app-ready",
     "description": "<p>The final hook run after the front-end application has bee bound or hydrated. After this point, the all hooks are runtime hooks.</p>",
@@ -673,17 +684,6 @@ define({ "api": [
         ]
       }
     },
-    "version": "0.0.0",
-    "filename": ".core/app/index.js",
-    "groupTitle": "Hooks"
-  },
-  {
-    "type": "Hook",
-    "url": "app-redux-provider",
-    "title": "app-redux-provider",
-    "name": "app-redux-provider",
-    "description": "<p>Called after app-bindpoint to define the registered Redux Provider component (i.e. <code>Reactium.Component.register('ReduxProvider'...)</code>) for all bind points and the SPA. async only - used in front-end application only</p>",
-    "group": "Hooks",
     "version": "0.0.0",
     "filename": ".core/app/index.js",
     "groupTitle": "Hooks"
@@ -881,7 +881,7 @@ define({ "api": [
     },
     "group": "Hooks",
     "version": "0.0.0",
-    "filename": ".core/app/index.js",
+    "filename": ".core/app/reactium-hooks.js",
     "groupTitle": "Hooks"
   },
   {
@@ -1686,6 +1686,30 @@ define({ "api": [
     "description": "<p>Synchronously set a status value that can be checked within a function scope without updating the state of the component. Useful when doing asynchronous activities and the next activity depends on a status of some sort from the previous activity.</p> <p>Returns [status:String, setStatus:Function, isStatus:Function, getStatus:Function]</p> <h3>status</h3> <p>The current asynchronous status value. (is accurate once per render)</p> <h3>setStatus(status:String, forceRender:Boolean = false)</h3> <p>Set the status value. If forceRender is true, a rerender will be triggered. <em><strong>Beware:</strong></em> forceRender may have unintended consequence and should be used in last status before re-rendering situations only.</p> <h3>isStatus(statuses:Array)</h3> <p>Check if the current status matches the statuses passed.</p> <h3>getStatus()</h3> <p>Get the synchrounous value of the status. This can matter if you need to set and check the value in the same render cycle.</p>",
     "version": "0.0.0",
     "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/useStatus.js",
+    "groupTitle": "ReactHook"
+  },
+  {
+    "type": "ReactHook",
+    "url": "useSyncHandle(id,cb,deps)",
+    "title": "useSyncHandle()",
+    "description": "<p>React hook to subscribe to updates for a registered sync handle.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Mixed",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Array of properties, or <code>.</code> separated object path. e.g. ['path','to','handle'] or 'path.to.handle'. Identifies the full path to an imperative handle.</p>"
+          }
+        ]
+      }
+    },
+    "name": "useSyncHandle",
+    "group": "ReactHook",
+    "version": "0.0.0",
+    "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/named-exports/sync-handle.js",
     "groupTitle": "ReactHook"
   },
   {
@@ -4166,6 +4190,76 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "node_modules/@atomic-reactor/reactium-sdk-core/lib/sdks/zone/index.js",
     "groupTitle": "Reactium.Zone"
+  },
+  {
+    "type": "Object",
+    "url": "Reactium.AppContext",
+    "title": "Reactium.AppContext",
+    "group": "Reactium",
+    "name": "Reactium.AppContext",
+    "description": "<p>A Registry used for top-level React wrapping context provider, such as Redux or Theme. See <a href=\"#api-Reactium-Registry\">Registry</a> for full details on Registry methods / properties. Use this to register a React context provider, as well as any properties that are passed to the context.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Getter",
+            "optional": false,
+            "field": "list",
+            "description": "<p>get list of most recent (or highest order) registered objects, filtering out unregistered or banned objects.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Method",
+            "optional": false,
+            "field": "register",
+            "description": "<p><code>reg.register(id,data)</code> pass an identifier and a data object to register the object. The identifier will be added if it is not already registered (but protected) and not banned.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Method",
+            "optional": false,
+            "field": "unregister",
+            "description": "<p><code>reg.unregister(id)</code> pass an identifier to unregister an object. When in HISTORY mode (default), previous registration will be retained, but the object will not be listed. In CLEAN mode, the previous registrations will be removed, unless protected.</p>"
+          }
+        ],
+        "register": [
+          {
+            "group": "register",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the id of the data object to be registered</p>"
+          },
+          {
+            "group": "register",
+            "type": "Provider",
+            "optional": false,
+            "field": "data",
+            "description": "<p>the object to be registered</p>"
+          }
+        ],
+        "Provider": [
+          {
+            "group": "Provider",
+            "type": "ContextProvider",
+            "optional": false,
+            "field": "provider",
+            "description": "<p>the context provider. This provider must be a React component that will render children.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "reactium-hooks.js",
+        "content": "// Example of Registering Material UI Theme\nimport Reactium from 'reactium-core/sdk';\nimport { createTheme, ThemeProvider } from '@mui/material/styles';\nimport { purple } from '@mui/material/colors';\n\n(async () => {\n    await Reactium.Plugin.register('MUI-Theme');\n\n    await Reactium.Hook.register('app-context-provider', async () => {\n        const theme = createTheme({\n            palette: {\n                primary: {\n                    // Purple and green play nicely together.\n                    main: purple[500],\n                },\n                secondary: {\n                    // This is green.A700 as hex.\n                    main: '#11cb5f',\n                },\n            },\n        });\n\n        Reactium.AppContext.register('ThemeProvider', {\n            // provider required\n            provider: ThemeProvider,\n\n            // remainder are optional props passed to your provider, in this case the theme\n            theme,\n        });\n    })\n})();",
+        "type": "json"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": ".core/sdk/named-exports/app-context.js",
+    "groupTitle": "Reactium"
   },
   {
     "type": "Object",

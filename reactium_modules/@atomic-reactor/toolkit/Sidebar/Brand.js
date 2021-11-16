@@ -1,15 +1,17 @@
 import React from 'react';
 import _ from 'underscore';
+import op from 'object-path';
 import Reactium, { useHookComponent } from 'reactium-core/sdk';
 
 const Brand = () => {
     const Logo = useHookComponent('RTKLOGO');
 
     const { cx, config } = Reactium.Toolkit;
-    const { width = 320 } = config.sidebar;
+    let minWidth = op.get(config, 'sidebar.width', 320);
+    minWidth = minWidth === 't' ? 320 : minWidth;
 
     return (
-        <div className={cx('brand')} style={{ minidth: width }}>
+        <div className={cx('brand')} style={{ minWidth }}>
             <Logo />
             {(config.brand || config.info) && (
                 <div className={cx('brand-meta')}>

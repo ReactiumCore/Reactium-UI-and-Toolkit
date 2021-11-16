@@ -19,15 +19,11 @@ import Reactium, {
  * -----------------------------------------------------------------------------
  */
 let Sidebar = (props, ref) => {
-    const pref = 'rtk.sidebar.collapsed';
-
     const { config, cx } = Reactium.Toolkit;
 
-    const pos = op.get(
-        config,
-        'sidebar.position',
-        Reactium.Toolkit.Sidebar.position.left,
-    );
+    const pref = 'rtk.sidebar.collapsed';
+
+    const pos = op.get(config, 'sidebar.position', 'left');
 
     const refs = useRefs();
 
@@ -240,8 +236,10 @@ const NavLinks = ({ width }) => {
     const { cx, useLinks } = Reactium.Toolkit;
     const [list] = useLinks();
 
+    const maxWidth = width;
+
     return (
-        <div style={{ maxWidth: width }} className={cx('sidebar-menu')}>
+        <div style={{ maxWidth }} className={cx('sidebar-menu')}>
             <Scrollbars className={cx('sidebar-menu-list')}>
                 {list.map(({ component: Component, ...item }) => (
                     <Component key={item.id} {...item} />
