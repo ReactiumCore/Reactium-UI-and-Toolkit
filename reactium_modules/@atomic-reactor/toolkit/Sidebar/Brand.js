@@ -7,8 +7,7 @@ const Brand = () => {
     const Logo = useHookComponent('RTKLOGO');
 
     const { cx, config } = Reactium.Toolkit;
-    let minWidth = op.get(config, 'sidebar.width', 320);
-    minWidth = minWidth === 't' ? 320 : minWidth;
+    const minWidth = op.get(config, 'sidebar.width', 320);
 
     return (
         <div className={cx('brand')} style={{ minWidth }}>
