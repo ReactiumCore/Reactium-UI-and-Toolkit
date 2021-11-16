@@ -65,8 +65,14 @@ const CONFORM = params => {
     }, {});
 };
 
-VALIDATE.REQUIRED = (key, val) =>
-    !val ? `${chalk.magenta(key)} is required` : true;
+VALIDATE.REQUIRED = (key, val, msg) =>
+    _.chain([val])
+        .flatten()
+        .compact()
+        .isEmpty()
+        .value()
+        ? msg || `${chalk.magenta(key)} is required`
+        : true;
 
 FILTER.FORMAT = (key, val) => CONFORM({ [key]: val })[key];
 
