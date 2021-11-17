@@ -13,10 +13,8 @@ export default () => {
             <div className={cx('hero')}>
                 <div className={cx('hero-bg')} />
                 <div className={cx('hero-logo')}>
-                    <img src='/assets/images/logo.svg' />
                     <div className={cx('hero-logo-lockup')}>
-                        <h1>{__('Build Awesomeness With Reactium UI')}</h1>
-                        <h2>{__('Believe it!')}</h2>
+                        <h1>{__('Build Awesomeness With Reactium Toolkit')}</h1>
                     </div>
                 </div>
                 <div className={cx('hero-slide')}>

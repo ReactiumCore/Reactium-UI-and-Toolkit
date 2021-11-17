@@ -1,8 +1,10 @@
 import Overview from '.';
-import Reactium from 'reactium-core/sdk';
+import Reactium, { __ } from 'reactium-core/sdk';
 
-Reactium.Plugin.register('ToolkitDemoOverview').then(() => {
+(async () => {
     if (!Reactium.Toolkit) return;
+
+    await Reactium.Plugin.register('ToolkitDemoOverview');
 
     Reactium.Hook.register(
         'plugin-ready',
@@ -13,8 +15,8 @@ Reactium.Plugin.register('ToolkitDemoOverview').then(() => {
                 exact: true,
                 url: '/toolkit',
                 component: MenuLink,
-                children: 'Overview',
-                'aria-label': 'Overview',
+                children: __('Toolkit Overview'),
+                'aria-label': __('Toolkit Overview'),
                 order: Reactium.Enums.priority.highest,
             });
 
@@ -27,4 +29,4 @@ Reactium.Plugin.register('ToolkitDemoOverview').then(() => {
         },
         Reactium.Enums.priority.highest,
     );
-});
+})();

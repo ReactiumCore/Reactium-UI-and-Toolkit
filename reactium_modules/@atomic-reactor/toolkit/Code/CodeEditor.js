@@ -4,7 +4,7 @@ import Reactium, { useHookComponent, useRefs } from 'reactium-core/sdk';
 
 const CodeEditor = ({ setState, tagName, value }) => {
     const refs = useRefs();
-    const { Code } = useHookComponent('RTK');
+    const Code = useHookComponent('RTK/Code');
     const { Button, Icon } = useHookComponent('ReactiumUI');
 
     const apply = () => {

@@ -335,9 +335,7 @@ const ACTION = async (action, initialParams) => {
     await PROMPT.ID(params);
 
     // 2.0 - Get Directory
-    while (!params.directory) {
-        await PROMPT.DIR(params);
-    }
+    await PROMPT.DIR(params);
 
     // 3.0 - Check directory
     await PROMPT.OVERWRITE(params);

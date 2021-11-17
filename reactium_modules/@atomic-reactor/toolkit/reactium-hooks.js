@@ -21,25 +21,30 @@ import { MenuToggle, ToolbarTitle } from './Toolbar';
 
 Reactium.Toolkit = Reactium.Toolkit || SDK;
 
-Reactium.Plugin.register('ReactiumToolkit').then(() => {
-    Reactium.Component.register('Code', Code);
-    Reactium.Component.register('RTKLOGO', Logo);
-    Reactium.Component.register('RTKBRAND', Brand);
-    Reactium.Component.register('RTKMENULINK', MenuLink);
+const RTKComponents = {
+    Brand,
+    Code,
+    CodeEditor,
+    ColorSelect,
+    ComponentDemo,
+    Element,
+    Icon,
+    Logo,
+    Markdown,
+    MenuLink,
+    Toolkit,
+    ToolbarTitle,
+};
 
-    Reactium.Component.register('RTK', {
-        Brand,
-        Code,
-        CodeEditor,
-        ColorSelect,
-        ComponentDemo,
-        Element,
-        Icon,
-        Logo,
-        Markdown,
-        MenuLink,
-        Toolkit,
-        ToolbarTitle,
+Reactium.Plugin.register('ReactiumToolkit').then(() => {
+    Reactium.Component.register('RTK', RTKComponents);
+
+    Object.entries(RTKComponents).forEach(([name, component]) => {
+        Reactium.Component.register(
+            String(`RTK${name}`).toUpperCase(),
+            component,
+        );
+        Reactium.Component.register(`RTK/${name}`, component);
     });
 
     Reactium.Hook.register(

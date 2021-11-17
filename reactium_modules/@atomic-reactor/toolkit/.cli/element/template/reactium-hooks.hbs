@@ -1,11 +1,15 @@
 import Element from '.';
 import Reactium from 'reactium-core/sdk';
 
-Reactium.Hook.register('plugin-ready', () => {
-    // Element {{name}}
-    Reactium.Toolkit.Elements.register('{{id}}-element', {
-        zone: '{{zone}}',
-        component: Element,
-        order: Reactium.Enums.priority.low,
+(async () => {
+    if (!Reactium.Tookit) return;
+
+    Reactium.Hook.register('plugin-ready', () => {
+        // Element {{name}}
+        Reactium.Toolkit.Elements.register('{{id}}-element', {
+            zone: '{{zone}}',
+            component: Element,
+            order: Reactium.Enums.priority.low,
+        });
     });
-});
+})();
