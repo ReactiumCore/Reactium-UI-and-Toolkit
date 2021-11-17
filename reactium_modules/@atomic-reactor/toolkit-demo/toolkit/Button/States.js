@@ -26,7 +26,6 @@ export default () => {
     );
 
     const ButtonRender = ({ className, color, ...props }) => {
-        console.log(props, color);
         return (
             <div className='col-xs-6 col-sm-3'>
                 <div className='px-xs-12 px-sm-4 pb-xs-24 text-center'>

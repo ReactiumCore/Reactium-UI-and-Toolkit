@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'underscore';
 import op from 'object-path';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
+import Reactium, { useHandle, useHookComponent } from 'reactium-core/sdk';
 
 const Brand = () => {
+    const Sidebar = useHandle('RTKSidebar');
+
     const Logo = useHookComponent('RTKLOGO');
+
+    const [visible, setVisible] = useState(false);
 
     const { cx, config } = Reactium.Toolkit;
     const minWidth = op.get(config, 'sidebar.width', 320);
 
-    return (
+    const hide = () => setVisible(false);
+    const show = () => setVisible(true);
+
+    useEffect(() => {
+        if (!Sidebar) return;
+        setVisible(Sidebar.expanded);
+
+        Sidebar.addEventListener('rtk-before-expanded', show);
+        Sidebar.addEventListener('rtk-collapsed', hide);
+
+        return () => {
+            Sidebar.removeEventListener('rtk-before-expanded', show);
+            Sidebar.removeEventListener('rtk-collapsed', hide);
+        };
+    }, [Sidebar]);
+
+    return !visible ? null : (
         <div className={cx('brand')} style={{ minWidth }}>
             <Logo />
             {(config.brand || config.info) && (

@@ -2,9 +2,10 @@ import Document from '.';
 import Reactium{{#if sidebar}}, { __ }{{/if}} from 'reactium-core/sdk';
 
 (async () => {
-    if (!Reactium.Tookit) return;
-    
+
     Reactium.Hook.register('plugin-ready', () => {
+        if (!Reactium.Toolkit) return;
+        
         {{#if sidebar}}
         const MenuLink = Reactium.Component.get('RTKMENULINK');
 

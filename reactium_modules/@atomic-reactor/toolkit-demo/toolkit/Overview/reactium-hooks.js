@@ -2,13 +2,13 @@ import Overview from '.';
 import Reactium, { __ } from 'reactium-core/sdk';
 
 (async () => {
-    if (!Reactium.Toolkit) return;
-
     await Reactium.Plugin.register('ToolkitDemoOverview');
 
     Reactium.Hook.register(
         'plugin-ready',
         () => {
+            if (!Reactium.Toolkit) return;
+
             const MenuLink = Reactium.Component.get('RTKMENULINK');
 
             Reactium.Toolkit.Sidebar.register('overview', {

@@ -5,7 +5,6 @@
  */
 
 import SDK from './sdk';
-import op from 'object-path';
 import { Icon } from './Icon';
 import { Logo } from './Logo';
 import { Toolkit } from './index';
@@ -89,17 +88,4 @@ Reactium.Plugin.register('ReactiumToolkit').then(() => {
         },
         Reactium.Enums.priority.highest,
     );
-
-    // Config from Prefs
-    // TODO uncomment this after we figure out a fix for Reactium.Prefs.
-
-    // Reactium.Hook.registerSync('rtk-config', config => {
-    //     const collapsed = Reactium.Prefs.get('rtk.sidebar.collapsed', false);
-    //     const position = Reactium.Prefs.get('rtk.sidebar.position', 'left');
-    //     const width = Reactium.Prefs.get('rtk.sidebar.width', 320);
-    //
-    //     if (collapsed !== 't') op.set(config, 'sidebar.collapsed', collapsed);
-    //     if (position !== 't') op.set(config, 'sidebar.position', position);
-    //     if (width !== 't') op.set(config, 'sidebar.width', width);
-    // });
 });

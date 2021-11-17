@@ -1,9 +1,9 @@
 import Reactium, { __ } from 'reactium-core/sdk';
 
 (async () => {
-    if (!Reactium.Toolkit) return;
-    
     Reactium.Hook.register('plugin-ready', () => {
+        if (!Reactium.Toolkit) return;
+        
         const MenuLink = Reactium.Component.get('RTKMENULINK');
 
         // Sidebar Item: {{label}}

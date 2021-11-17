@@ -2,9 +2,9 @@ import Element from '.';
 import Reactium from 'reactium-core/sdk';
 
 (async () => {
-    if (!Reactium.Tookit) return;
-
     Reactium.Hook.register('plugin-ready', () => {
+        if (!Reactium.Toolkit) return;
+        
         // Element {{name}}
         Reactium.Toolkit.Elements.register('{{id}}-element', {
             zone: '{{zone}}',

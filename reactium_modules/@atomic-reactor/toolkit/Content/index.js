@@ -8,7 +8,7 @@ import Reactium, { useHandle, useStatus } from 'reactium-core/sdk';
  * -----------------------------------------------------------------------------
  */
 const Content = () => {
-    const { config, cx, zone, useElements, ENUMS } = Reactium.Toolkit;
+    const { cx, zone, useElements, ENUMS } = Reactium.Toolkit;
 
     const Sidebar = useHandle('RTKSidebar');
 
@@ -20,11 +20,12 @@ const Content = () => {
 
     const onResize = ({ width }) => setWidth(`calc(100vw - ${width})`);
 
-    const onScroll = e => {
+    const onScroll = async e => {
         if (e.target.scrollLeft > 0 && Sidebar.expanded) {
             if (!isStatus(ENUMS.STATUS.READY)) return;
             setStatus(ENUMS.STATUS.BUSY, true);
-            Sidebar.collapse().then(() => setStatus(ENUMS.STATUS.READY, true));
+            await Sidebar.collapse();
+            setStatus(ENUMS.STATUS.READY, true);
         }
     };
 
@@ -32,7 +33,7 @@ const Content = () => {
         if (!Sidebar) return;
 
         if (Sidebar.expanded) {
-            setWidth(`calc(100vw - ${config.sidebar.width}px)`);
+            setWidth(`calc(100vw - ${Sidebar.width}px)`);
         } else {
             setWidth('100vw');
         }
@@ -42,14 +43,20 @@ const Content = () => {
         return () => {
             Sidebar.removeEventListener('resize', onResize);
         };
-    }, [Sidebar]);
+    }, [Sidebar, Sidebar.expanded, Sidebar.width]);
+
+    const style = {
+        maxWidth: width,
+        minWidth: width,
+        overflow: isStatus(ENUMS.STATUS.BUSY) ? 'hidden' : null,
+    };
 
     return !width ? null : (
         <div className={cx('content')}>
             <Toolbar />
             <div
                 data-zone={zone}
-                style={{ maxWidth: width, minWidth: width }}
+                style={style}
                 onScroll={onScroll}
                 className={cx('content-zone', `content-zone-${zone}`)}>
                 <div className={cx('content-zone-scroll')}>
