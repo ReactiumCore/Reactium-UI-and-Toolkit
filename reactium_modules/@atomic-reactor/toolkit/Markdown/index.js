@@ -8,7 +8,7 @@ import Reactium from 'reactium-core/sdk';
 const components = () =>
     Reactium.Component.list.reduce((obj, item) => {
         const { component, id } = item;
-        op.set(obj, id, component);
+        op.set(obj, String(id).replace(/RTK\//gi, ''), component);
         return obj;
     }, {});
 
@@ -34,9 +34,9 @@ const parser = value => {
     html = String(html)
         .replace(
             /<pre><code>(.*?)<\/code><\/pre>/gms,
-            '<Code className=\'block\' readOnly value={`$1`} />',
+            "<Code className='block' readOnly value={`$1`} />",
         )
-        .replace(/&#39;/g, '\'')
+        .replace(/&#39;/g, "'")
         .replace(/&gt;/g, '>')
         .replace(/&lt;/g, '<')
         .replace(/\<h(\d) /g, '<h$1 className="rtk-markdown-heading"')

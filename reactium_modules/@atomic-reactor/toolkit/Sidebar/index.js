@@ -2,12 +2,7 @@ import gsap from 'gsap';
 import cn from 'classnames';
 import op from 'object-path';
 import { Scrollbars } from 'react-custom-scrollbars';
-import React, {
-    forwardRef,
-    useEffect,
-    useImperativeHandle,
-    useState,
-} from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 
 import Reactium, {
     ComponentEvent,
@@ -26,24 +21,15 @@ let Sidebar = (props, ref) => {
 
     const pref = 'rtk.sidebar.collapsed';
 
-    const [pos, setPos] = useState(op.get(config, 'sidebar.position', 'left'));
-
     const refs = useRefs();
 
-    // const [state, update] = useDerivedState({
-    //     ease: 'power2.inOut',
-    //     speed: 0.25,
-    //     tween: null,
-    //     width: op.get(config, 'sidebar.width', 320),
-    //     expanded: !op.get(config, 'sidebar.collapsed', false),
-    //     collapsed: op.get(config, 'sidebar.collapsed', false),
-    // });
-
     const state = useRegisterSyncHandle('RTKSidebar', {
+        refs,
         ease: 'power2.inOut',
         speed: 0.25,
         tween: null,
         width: op.get(config, 'sidebar.width', 320),
+        position: op.get(config, 'sidebar.position', 'left'),
         expanded: !op.get(config, 'sidebar.collapsed', false),
         collapsed: op.get(config, 'sidebar.collapsed', false),
     });
@@ -148,14 +134,12 @@ let Sidebar = (props, ref) => {
         const position = Reactium.Prefs.get('rtk.sidebar.position', 'left');
         const width = Reactium.Prefs.get('rtk.sidebar.width', 320);
 
-        if (collapsed !== 't' && width !== 't' && position !== 't') {
-            if (state.get('collapsed') !== collapsed) {
-                setState({ collapsed: collapsed, expanded: !collapsed, width });
-            }
-            if (pos !== position) {
-                setPos(position);
-            }
-        }
+        setState({
+            collapsed: collapsed,
+            expanded: !collapsed,
+            width,
+            position,
+        });
     };
 
     useEffect(() => {
@@ -215,20 +199,9 @@ let Sidebar = (props, ref) => {
 
     useImperativeHandle(ref, () => state, []);
 
-    // useRegisterHandle('RTKSidebar', () => state);
     // -------------------------------------------------------------------------
     // External Interface
     // -------------------------------------------------------------------------
-    // const _state = () => ({
-    //     collapse,
-    //     collapsed: state.collapsed,
-    //     expand,
-    //     expanded: !state.collapsed,
-    //     setWidth: width => setState({ width }),
-    //     toggle,
-    //     width: state.width,
-    // });
-
     state.extend('collapse', collapse);
     state.extend('expand', expand);
     state.extend('setWidth', width => setState({ width }));
@@ -246,8 +219,8 @@ let Sidebar = (props, ref) => {
             }}
             className={cn({
                 collapsed: state.get('collapsed'),
+                [state.get('position')]: true,
                 [cx('sidebar')]: true,
-                [pos]: true,
             })}>
             <div
                 className={cx('sidebar-wrapper')}
