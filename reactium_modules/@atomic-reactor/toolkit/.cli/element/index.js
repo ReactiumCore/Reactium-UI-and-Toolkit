@@ -191,6 +191,7 @@ PROMPT.OVERWRITE = async params => {
 };
 
 PROMPT.SIDEBAR = async params => {
+    const groups = sidebarGroups();
     const inq = await inquirer.prompt(
         [
             {
@@ -205,10 +206,10 @@ PROMPT.SIDEBAR = async params => {
                 name: 'group',
                 type: 'list',
                 message: 'Sidebar Parent:',
-                choices: sidebarGroups(),
+                choices: groups,
                 default: params.group,
                 askAnswered: true,
-                when: answers => !!answers.label,
+                when: answers => groups.length > 0 && !!answers.label,
             },
             {
                 prefix,

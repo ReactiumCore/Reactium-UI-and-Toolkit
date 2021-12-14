@@ -110,6 +110,14 @@ SDK.resolve = (...args) => path.resolve(SDK.normalize(...args));
 
 SDK.slug = str => slugify(str, { lower: true });
 
+const reqF = modulePath => {
+    try {
+        return require(modulePath);
+    } catch (e) {
+        return {};
+    }
+};
+
 SDK.sidebarGroups = () => {
     const output = [];
     const { globby } = arcli;
@@ -118,7 +126,7 @@ SDK.sidebarGroups = () => {
     // get domain.js files
     const glob = [normalize(cwd, '**', 'domain.js')];
     globby(glob).forEach(filePath => {
-        const domain = require(filePath);
+        const domain = reqF(filePath);
         if (!!op.get(domain, 'reactiumToolkit.group')) {
             const value = op.get(domain, 'reactiumToolkit.group.id');
             const name = op.get(domain, 'reactiumToolkit.group.label');
@@ -126,10 +134,12 @@ SDK.sidebarGroups = () => {
         }
     });
 
-    return _.flatten([
-        [{ name: 'None', value: null, checked: true }],
-        _.sortBy(output, 'name'),
-    ]);
+    return output.length > 0
+        ? _.flatten([
+              [{ name: 'None', value: null, checked: true }],
+              _.sortBy(output, 'name'),
+          ])
+        : [];
 };
 
 module.exports = SDK;
