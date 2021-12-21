@@ -121,8 +121,10 @@ const useSyntheticEvents = ({ selected = [], state }, deps) => {
         }
     };
 
-    const prune = element =>
+    const prune = element => {
+        if (!element) return;
         events.forEach(type => element.removeEventListener(type, dispatch));
+    };
 
     useEffect(() => {
         if (init) return;
