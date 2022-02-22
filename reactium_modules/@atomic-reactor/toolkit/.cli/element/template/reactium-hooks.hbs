@@ -1,8 +1,8 @@
-import Element from '.';
 import Reactium from 'reactium-core/sdk';
 
 (async () => {
-    Reactium.Hook.register('plugin-ready', () => {
+    Reactium.Hook.register('plugin-ready', async () => {
+        const { default: Element } = await import('.');
         if (!Reactium.Toolkit) return;
         
         // Element {{name}}
