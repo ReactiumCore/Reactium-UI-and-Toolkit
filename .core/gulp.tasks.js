@@ -23,7 +23,6 @@ const regenManifest = require('./manifest/manifest-tools');
 const umdWebpackGenerator = require('./umd.webpack.config');
 const rootPath = path.resolve(__dirname, '..');
 const { fork, spawn, execSync } = require('child_process');
-const workbox = require('workbox-build');
 const { File, FileReader } = require('file-api');
 const handlebars = require('handlebars');
 const { resolve } = require('path');
@@ -116,8 +115,29 @@ const reactium = (gulp, config, webpackConfig) => {
         console.log(`File ${e.event}: ${displaySrc} -> ${displayDest}`);
     };
 
+    const _opnWrapperMonkeyPatch = open =>
+        function(url, name, bs) {
+            const app = op.get(
+                process.env,
+                'BROWERSYNC_OPEN_BROWSER',
+                'chrome',
+            );
+            let browser = open.apps.chrome;
+            if (app in open.apps) browser = open.apps[app];
+
+            open(url, { app: { name: browser } }).catch(function(error) {
+                bs.events.emit('browser:error');
+            });
+        };
+
     const serve = ({ open } = { open: config.open }) => done => {
         const proxy = `localhost:${config.port.proxy}`;
+
+        // monkey-path opnWrapper for linux support
+        const open = require('open');
+        const utils = require('browser-sync/dist/utils');
+        utils.opnWrapper = _opnWrapperMonkeyPatch(open);
+
         axios.get(`http://${proxy}`).then(() => {
             browserSync({
                 notify: false,
@@ -428,34 +448,8 @@ const reactium = (gulp, config, webpackConfig) => {
         done();
     };
 
-    const serviceWorker = () => {
-        let method = 'generateSW';
-        let swConfig = {
-            ...config.sw,
-        };
-
-        if (!fs.existsSync(config.umd.defaultWorker)) {
-            console.log('Skipping service worker generation.');
-            return Promise.resolve();
-        }
-
-        method = 'injectManifest';
-        swConfig.swSrc = config.umd.defaultWorker;
-        delete swConfig.clientsClaim;
-        delete swConfig.skipWaiting;
-
-        return workbox[method](swConfig)
-            .then(({ warnings }) => {
-                // In case there are any warnings from workbox-build, log them.
-                for (const warning of warnings) {
-                    console.warn(warning);
-                }
-                console.log('Service worker generation completed.');
-            })
-            .catch(error => {
-                console.warn('Service worker generation failed:', error);
-            });
-    };
+    // Stub serviceWorker task. Implementation moved to @atomic-reactor/reactium-service-worker plugin
+    const serviceWorker = () => Promise.resolve();
 
     const ssg = gulp.series(task('ssg:flush'), task('ssg:warm'));
 
@@ -678,12 +672,36 @@ $assets: (
                     return partial.replace('reactium_modules/', '+');
                 }
 
-                return path.relative(
-                    path.dirname(config.dest.modulesPartial),
-                    path.resolve(rootPath, partial),
-                );
+                return path
+                    .relative(
+                        path.dirname(config.dest.modulesPartial),
+                        path.resolve(rootPath, partial),
+                    )
+                    .split(/[\\\/]/g)
+                    .join(path.posix.sep);
             })
             .map(partial => partial.replace(/\.scss$/, ''))
+            // sort by directory basename
+            .sort((a, b) => {
+                const aBase = path
+                    .basename(path.dirname(a))
+                    .toLocaleLowerCase();
+                const bBase = path
+                    .basename(path.dirname(b))
+                    .toLocaleLowerCase();
+                if (aBase > bBase) return 1;
+                if (aBase < bBase) return -1;
+                return 0;
+            })
+            // sort by file basename
+            .sort((a, b) => {
+                const aBase = path.basename(a).toLocaleLowerCase();
+                const bBase = path.basename(b).toLocaleLowerCase();
+                if (aBase > bBase) return 1;
+                if (aBase < bBase) return -1;
+                return 0;
+            })
+            // sort by priority
             .sort((a, b) => {
                 const aMatch =
                     SassPartialRegistry.list.find(({ pattern }) =>
