@@ -104,6 +104,11 @@ class Routing {
                         op.get(updates, 'previous.match.route.id', false)
                     );
                 })
+                .filter(
+                    ([id]) =>
+                        Handle.get(id) &&
+                        op.get(Handle.get(id), 'persistHandle', false) !== true,
+                )
                 .forEach(([id]) => {
                     Handle.unregister(id);
                 });
@@ -114,17 +119,26 @@ class Routing {
                 op.get(updates, 'active.match.route.loadState'),
             );
 
+            const handleId = op.get(
+                updates,
+                'active.match.route.component.handleId',
+                op.get(updates, 'active.match.route.handleId', uuid()),
+            );
+
             if (typeof loadState === 'function') {
                 try {
-                    const handleId = op.get(
+                    const persistHandle = op.get(
                         updates,
-                        'active.match.route.component.handleId',
-                        op.get(updates, 'active.match.route.handleId', uuid()),
+                        'active.match.route.persistHandle',
+                        false,
                     );
-                    Handle.register(handleId, {
-                        routeId: op.get(updates, 'active.match.route.id'),
-                        current: new ReactiumSyncState({}),
-                    });
+                    if (!persistHandle || !Handle.get(handleId)) {
+                        Handle.register(handleId, {
+                            routeId: op.get(updates, 'active.match.route.id'),
+                            persistHandle,
+                            current: new ReactiumSyncState({}),
+                        });
+                    }
 
                     const route = op.get(updates, 'active.match.route', {});
 
@@ -133,8 +147,8 @@ class Routing {
                     if (route.component)
                         op.set(route, 'component.handleId', handleId);
 
-                    const params = op.get(updates, 'active.match.params', {});
-                    const search = op.get(updates, 'active.match.search', {});
+                    const params = op.get(updates, 'active.params', {});
+                    const search = op.get(updates, 'active.search', {});
                     const content = await loadState({ route, params, search });
                     const handle = op.get(Handle.handles, [
                         handleId,
