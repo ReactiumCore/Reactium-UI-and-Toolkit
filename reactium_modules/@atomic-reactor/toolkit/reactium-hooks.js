@@ -35,7 +35,8 @@ const RTKComponents = {
     ToolbarTitle,
 };
 
-Reactium.Plugin.register('ReactiumToolkit').then(() => {
+(async () => {
+    Reactium.Plugin.register('ReactiumToolkit');
     Reactium.Component.register('RTK', RTKComponents);
 
     Object.entries(RTKComponents).forEach(([name, component]) => {
@@ -88,4 +89,4 @@ Reactium.Plugin.register('ReactiumToolkit').then(() => {
         },
         Reactium.Enums.priority.highest,
     );
-});
+})();

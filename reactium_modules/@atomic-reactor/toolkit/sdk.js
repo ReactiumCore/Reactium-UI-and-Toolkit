@@ -381,7 +381,7 @@ class SDK {
                 return Elements.sort(order).filter(filter);
             };
 
-            const state = useSyncState({ data: [] });
+            const state = useSyncState({ data: fetch() });
             state.extend('setData', data => state.set('data', data));
 
             useEffect(() => {

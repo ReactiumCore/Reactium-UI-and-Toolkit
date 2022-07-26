@@ -116,6 +116,8 @@ const reqF = modulePath => {
     } catch (e) {
         return {};
     }
+
+    return {};
 };
 
 SDK.sidebarGroups = () => {

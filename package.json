@@ -1,6 +1,6 @@
 {
   "name": "@atomic-reactor/reactium-ui-toolkit",
-  "version": "3.0.12",
+  "version": "1.0.39",
   "main": "index.js",
   "author": "Reactium LLC",
   "private": true,
