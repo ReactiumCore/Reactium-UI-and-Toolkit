@@ -41,4 +41,19 @@ body {
     svg {
         flex-shrink: 0;
     }
+
+    &-left-column {
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &-right-column {
+        flex-grow: 1;
+        height: 100vh;
+        overflow: hidden;
+        z-index: 10;
+        box-shadow: $rtk-content-box-shadow;
+    }
 }

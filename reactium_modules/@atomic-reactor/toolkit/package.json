@@ -1,6 +1,6 @@
 {
     "name": "@atomic-reactor/toolkit",
-    "version": "1.0.39",
+    "version": "0.0.1",
     "description": "Reactium based component library and design system.",
     "main": "index.js",
     "scripts": {
@@ -19,13 +19,6 @@
         "url": "https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/issues"
     },
     "homepage": "https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/#readme",
-    "actinium": {
-        "version": "3.6.6"
-    },
-    "reactium": {
-        "version": "4.1.4",
-        "ui": {}
-    },
     "dependencies": {
         "camelcase": "^6.2.0",
         "classnames": "^2.2.6",
@@ -44,5 +37,12 @@
         "react-jsx-parser": "1.28.1",
         "slugify": "^1.4.5",
         "underscore": "*"
+    },
+    "actinium": {
+        "version": "3.6.6"
+    },
+    "reactium": {
+        "version": "4.1.4",
+        "ui": {}
     }
 }

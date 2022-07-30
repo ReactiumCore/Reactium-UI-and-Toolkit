@@ -26,7 +26,7 @@ let Sidebar = (props, ref) => {
     const state = useRegisterSyncHandle('RTKSidebar', {
         refs,
         ease: 'power2.inOut',
-        speed: 0.25,
+        speed: 0.125,
         tween: null,
         width: op.get(config, 'sidebar.width', 320),
         position: op.get(config, 'sidebar.position', 'left'),
@@ -52,69 +52,77 @@ let Sidebar = (props, ref) => {
         Reactium.Toolkit.notify(eventType, { target: state, ...event });
     };
 
-    const collapse = () =>
-        new Promise(resolve => {
-            dispatch('collapse');
-            const cont = refs.get('container');
+    const collapse = () => {
+        const tween =
+            state.get('tween') ||
+            new Promise(resolve => {
+                dispatch('collapse');
 
-            cont.style.minWidth = 0;
-            cont.style.display = 'block';
-            cont.style.overflow = 'hidden';
-            cont.classList.remove('collapsed');
+                const elms = [refs.get('container'), refs.get('placeholder')];
 
-            dispatch('before-collapse');
+                dispatch('before-collapse');
 
-            gsap.to(cont, {
-                width: 0,
-                ease: state.get('ease'),
-                duration: state.get('speed'),
-                onComplete: () => {
-                    if (unMounted()) resolve(false);
+                gsap.to(elms, {
+                    width: 0,
+                    ease: state.get('ease'),
+                    duration: state.get('speed'),
+                    onComplete: () => {
+                        if (unMounted()) resolve(false);
 
-                    cont.removeAttribute('style');
-                    Reactium.Prefs.set(pref, true);
-                    setState({ expanded: false, collapsed: true, tween: null });
+                        Reactium.Prefs.set(pref, true);
+                        setState({
+                            expanded: false,
+                            collapsed: true,
+                            tween: null,
+                        });
 
-                    resolve(true);
-                },
-                onUpdate: () => dispatch('resize', { width: cont.style.width }),
+                        resolve(true);
+                    },
+                    onUpdate: () =>
+                        dispatch('resize', { width: elms[0].style.width }),
+                });
             });
-        });
 
-    const expand = () =>
-        new Promise(resolve => {
-            dispatch('expand');
-            document.body.setAttribute('data-expand', true);
+        state.set({ tween });
 
-            const cont = refs.get('container');
-            const w = `${state.get('width')}px`;
+        return tween;
+    };
 
-            cont.style.maxWidth = w;
-            cont.style.minWidth = 0;
-            cont.style.display = 'block';
-            cont.style.overflow = 'hidden';
-            cont.classList.remove('collapsed');
+    const expand = () => {
+        const tween =
+            state.get('tween') ||
+            new Promise(resolve => {
+                dispatch('expand');
+                document.body.setAttribute('data-expand', true);
 
-            dispatch('before-expand');
+                const elms = [refs.get('container'), refs.get('placeholder')];
 
-            gsap.to(cont, {
-                width: state.get('width'),
-                ease: state.get('ease'),
-                duration: state.get('speed'),
-                onComplete: () => {
-                    if (unMounted()) resolve(false);
+                dispatch('before-expand');
 
-                    cont.removeAttribute('style');
-                    cont.style.maxWidth = w;
-                    cont.style.minWidth = w;
-                    Reactium.Prefs.set(pref, false);
-                    setState({ expanded: true, collapsed: false, tween: null });
+                gsap.to(elms, {
+                    width: state.get('width'),
+                    ease: state.get('ease'),
+                    duration: state.get('speed'),
+                    onComplete: () => {
+                        if (unMounted()) resolve(false);
 
-                    resolve();
-                },
-                onUpdate: () => dispatch('resize', { width: cont.style.width }),
+                        Reactium.Prefs.set(pref, false);
+                        setState({
+                            expanded: true,
+                            collapsed: false,
+                            tween: null,
+                        });
+
+                        resolve();
+                    },
+                    onUpdate: () =>
+                        dispatch('resize', { width: elms[0].style.width }),
+                });
             });
-        });
+
+        state.set({ tween });
+        return tween;
+    };
 
     const toggle = () => {
         const tween = state.get('tween')
@@ -210,27 +218,37 @@ let Sidebar = (props, ref) => {
     state.expanded = state.get('expanded');
     state.width = state.get('width');
 
+    const style = { width: state.collapsed ? 0 : state.get('width') };
+
     return (
-        <nav
-            ref={elm => refs.set('container', elm)}
-            style={{
-                maxWidth: state.get('width'),
-                minWidth: state.get('width'),
-            }}
-            className={cn({
-                collapsed: state.get('collapsed'),
-                [state.get('position')]: true,
-                [cx('sidebar')]: true,
-            })}>
-            <div
-                className={cx('sidebar-wrapper')}
-                style={{ maxWidth: state.get('width') }}>
-                <div className={cx('sidebar-brand')}>
-                    <Zone zone='sidebar-brand' />
+        <>
+            <nav
+                style={style}
+                ref={elm => refs.set('container', elm)}
+                className={cn({
+                    collapsed: state.get('collapsed'),
+                    [state.get('position')]: true,
+                    [cx('sidebar')]: true,
+                })}>
+                <div
+                    className={cx('sidebar-wrapper')}
+                    style={{ maxWidth: state.get('width') }}>
+                    <div className={cx('sidebar-brand')}>
+                        <Zone zone='sidebar-brand' />
+                    </div>
+                    <NavLinks width={state.get('width')} />
                 </div>
-                <NavLinks width={state.get('width')} />
-            </div>
-        </nav>
+            </nav>
+            <div
+                style={style}
+                ref={elm => refs.set('placeholder', elm)}
+                className={cn({
+                    collapsed: state.get('collapsed'),
+                    [state.get('position')]: true,
+                    [cx('sidebar-placeholder')]: true,
+                })}
+            />
+        </>
     );
 };
 

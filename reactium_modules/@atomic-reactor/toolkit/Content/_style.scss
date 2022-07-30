@@ -5,20 +5,42 @@
     position: relative;
     color: $rtk-content-text-color;
     background-color: $rtk-content-bg-color;
-    box-shadow: $rtk-content-box-shadow;
-    z-index: 100;
-    display: block;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     &-zone {
-        @extend .rtk-row;
-        overflow-x: auto;
+        display: block;
         width: 100%;
-        min-height: calc(100vh - #{$rtk-toolbar-height});
+        height: calc(100vh - #{$rtk-toolbar-height});
+        overflow: auto;
+        flex-grow: 1;
+    }
 
-        &-scroll {
-            width: 100%;
-            min-width: 100vw;
-            overflow-x: hidden;
+    &-sidebar-toggle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 100vh;
+        z-index: 100;
+        user-select: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:after {
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 16px;
+            content: '';
+            z-index: 101;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border-left: 1px solid darken($rtk-sidebar-border-color, 10%);
+            border-right: 1px solid darken($rtk-sidebar-border-color, 10%);
         }
     }
 }
@@ -29,16 +51,5 @@
 
     @include rtk-breakpoint(md) {
         font-size: 11px;
-    }
-}
-
-body[data-fullscreen] {
-    .rtk-content-zone {
-        padding: 0;
-        min-height: 100vh;
-    }
-
-    .rtk-element {
-        margin: 0;
     }
 }

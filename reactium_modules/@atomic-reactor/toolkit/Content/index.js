@@ -1,6 +1,6 @@
 import Toolbar from '../Toolbar';
 import React, { useEffect, useState } from 'react';
-import Reactium, { useHandle, useStatus } from 'reactium-core/sdk';
+import Reactium, { useHandle, useRefs } from 'reactium-core/sdk';
 
 /**
  * -----------------------------------------------------------------------------
@@ -8,13 +8,11 @@ import Reactium, { useHandle, useStatus } from 'reactium-core/sdk';
  * -----------------------------------------------------------------------------
  */
 const Content = () => {
-    const { cx, zone, useElements, ENUMS } = Reactium.Toolkit;
+    const refs = useRefs();
+
+    const { cx, zone, useElements } = Reactium.Toolkit;
 
     const Sidebar = useHandle('RTKSidebar');
-
-    const [, setStatus, isStatus] = useStatus(ENUMS.STATUS.READY);
-
-    const [width, setWidth] = useState();
 
     const [route, setRoute] = useState(
         Reactium.Routing.currentRoute.location.pathname,
@@ -23,17 +21,14 @@ const Content = () => {
     const [elements] = useElements({ zone });
 
     const style = {
-        maxWidth: width,
-        minWidth: width,
-        overflow: isStatus(ENUMS.STATUS.BUSY) ? 'hidden' : null,
+        width: '100vw',
+        overflowX: 'hidden',
     };
 
     const scrollTop = () => {
-        if (!window) return;
-        window.scrollTo(0, 0);
+        const elm = refs.get('zone');
+        if (elm) elm.scroll(0, 0);
     };
-
-    const onResize = ({ width }) => setWidth(`calc(100vw - ${width})`);
 
     const onRouteChange = () => {
         const newRoute = Reactium.Routing.currentRoute.location.pathname;
@@ -42,51 +37,39 @@ const Content = () => {
         setRoute(newRoute);
     };
 
-    const onScroll = async e => {
+    const onScroll = e => {
         if (e.target.scrollLeft > 0 && Sidebar.expanded) {
-            if (!isStatus(ENUMS.STATUS.READY)) return;
-            setStatus(ENUMS.STATUS.BUSY, true);
-            await Sidebar.collapse();
-            setStatus(ENUMS.STATUS.READY, true);
+            Sidebar.collapse();
         }
     };
 
-    const onSidebarChange = () => {
-        if (!Sidebar) return;
+    const onToggle = () => Sidebar.expand();
 
-        if (Sidebar.expanded) {
-            setWidth(`calc(100vw - ${Sidebar.width}px)`);
-        } else {
-            setWidth('100vw');
-        }
-
-        Sidebar.addEventListener('resize', onResize);
-
-        return () => {
-            Sidebar.removeEventListener('resize', onResize);
-        };
-    };
-
-    useEffect(onSidebarChange, [Sidebar, Sidebar.expanded, Sidebar.width]);
+    const onCollapse = () => Sidebar.collapse();
 
     useEffect(onRouteChange, [Reactium.Routing.currentRoute.location.pathname]);
 
     useEffect(scrollTop, [route]);
 
-    return !width ? null : (
+    return (
         <div className={cx('content')}>
             <Toolbar />
             <div
-                style={style}
                 data-zone={zone}
                 onScroll={onScroll}
+                ref={elm => refs.set('zone', elm)}
                 className={cx('content-zone', `content-zone-${zone}`)}>
-                <div className={cx('content-zone-scroll')}>
+                <div style={style}>
                     {elements.map(({ component: Component, id }) => (
                         <Component key={`${zone}-element-${id}`} />
                     ))}
                 </div>
             </div>
+            <div
+                onMouseEnter={onToggle}
+                onMouseDown={onCollapse}
+                className={cx('content-sidebar-toggle')}
+            />
         </div>
     );
 };

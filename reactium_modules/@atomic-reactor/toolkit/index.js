@@ -80,8 +80,12 @@ const Toolkit = ({ state: initialState, ...props }) => {
 
     return (
         <main ref={elm => refs.set('container', elm)} className={handle.cx()}>
-            <Sidebar />
-            <Content />
+            <div className={handle.cx('left-column')}>
+                <Sidebar />
+            </div>
+            <div className={handle.cx('right-column')}>
+                <Content />
+            </div>
         </main>
     );
 };
