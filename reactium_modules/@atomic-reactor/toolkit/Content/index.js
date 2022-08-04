@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import Toolbar from '../Toolbar';
 import React, { useEffect, useState } from 'react';
 import Reactium, { useHandle, useRefs } from 'reactium-core/sdk';
@@ -37,15 +38,9 @@ const Content = () => {
         setRoute(newRoute);
     };
 
-    const onScroll = e => {
-        if (e.target.scrollLeft > 0 && Sidebar.expanded) {
-            Sidebar.collapse();
-        }
-    };
+    const _onToggle = () => Sidebar.toggle();
 
-    const onToggle = () => Sidebar.expand();
-
-    const onCollapse = () => Sidebar.collapse();
+    const onToggle = _.throttle(_onToggle, 125);
 
     useEffect(onRouteChange, [Reactium.Routing.currentRoute.location.pathname]);
 
@@ -56,7 +51,6 @@ const Content = () => {
             <Toolbar />
             <div
                 data-zone={zone}
-                onScroll={onScroll}
                 ref={elm => refs.set('zone', elm)}
                 className={cx('content-zone', `content-zone-${zone}`)}>
                 <div style={style}>
@@ -67,7 +61,6 @@ const Content = () => {
             </div>
             <div
                 onMouseEnter={onToggle}
-                onMouseDown={onCollapse}
                 className={cx('content-sidebar-toggle')}
             />
         </div>
