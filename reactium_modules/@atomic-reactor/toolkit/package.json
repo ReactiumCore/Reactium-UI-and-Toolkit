@@ -7,7 +7,7 @@
     "ui": {}
   },
   "name": "@atomic-reactor/toolkit",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "description": "Reactium based component library and design system.",
   "main": "index.js",
   "scripts": {
