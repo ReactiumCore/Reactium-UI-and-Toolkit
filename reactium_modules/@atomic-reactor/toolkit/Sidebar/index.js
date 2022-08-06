@@ -224,6 +224,7 @@ let Sidebar = (props, ref) => {
         <>
             <nav
                 style={style}
+                onMouseLeave={collapse}
                 ref={elm => refs.set('container', elm)}
                 className={cn({
                     collapsed: state.get('collapsed'),

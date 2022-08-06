@@ -38,9 +38,7 @@ const Content = () => {
         setRoute(newRoute);
     };
 
-    const _onToggle = () => Sidebar.toggle();
-
-    const onToggle = _.throttle(_onToggle, 125);
+    const expand = () => Sidebar.expand();
 
     useEffect(onRouteChange, [Reactium.Routing.currentRoute.location.pathname]);
 
@@ -60,7 +58,7 @@ const Content = () => {
                 </div>
             </div>
             <div
-                onMouseEnter={onToggle}
+                onMouseEnter={expand}
                 className={cx('content-sidebar-toggle')}
             />
         </div>
