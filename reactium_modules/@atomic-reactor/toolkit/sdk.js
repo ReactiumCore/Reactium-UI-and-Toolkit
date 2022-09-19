@@ -152,6 +152,18 @@ class SDK {
         }
     }
 
+    get extend() {
+        return (key, func) => {
+            if (op.get(this[key])) {
+                console.warn(`Overwriting Reactium.Toolkit.${key}`);
+            }
+
+            this[key] = func;
+
+            return this;
+        };
+    }
+
     get ENUMS() {
         let _enums = { ...ENUMS };
         Reactium.Hook.runSync('rtk-enums', _enums);

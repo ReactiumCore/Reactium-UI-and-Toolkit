@@ -1,13 +1,23 @@
 {{#unless editor}}
 import React from 'react';
-import { __, useHookComponent } from 'reactium-core/sdk';
+{{#if doc}}import readme from './readme.md';{{/if}}
+import { useHookComponent } from 'reactium-core/sdk';
+
+const crumbs = [
+    { children: 'Parent', url: '/'},
+    { children: '{{name}}' },
+];
 
 export default () => {
-    const { Element } = useHookComponent('RTK');
+    const { Breadcrumbs, Element{{#if doc}}, Markdown{{/if}} } = useHookComponent('RTK');
 
     return (
-        <Element title={__('{{name}}')}>
+        <Element title={<Breadcrumbs links={crumbs} />}>
+            {{#if doc}}
+            <Markdown value={readme} />
+            {{else}}
             {{name}} Element
+            {{/if}}
         </Element>
     );
 };

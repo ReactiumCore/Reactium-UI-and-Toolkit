@@ -8,6 +8,7 @@ import SDK from './sdk';
 import { Icon } from './Icon';
 import { Logo } from './Logo';
 import { Toolkit } from './index';
+import Breadcrumbs from './Breacrumbs';
 import Markdown from './Markdown';
 import Brand from './Sidebar/Brand';
 import Element from './Content/Element';
@@ -22,6 +23,7 @@ Reactium.Toolkit = Reactium.Toolkit || SDK;
 
 const RTKComponents = {
     Brand,
+    Breadcrumbs,
     Code,
     CodeEditor,
     ColorSelect,

@@ -1,6 +1,7 @@
 .rtk-content {
     flex-grow: 1;
     flex-shrink: 1;
+    min-width: 100vw;
     min-height: 100vh;
     position: relative;
     color: $rtk-content-text-color;

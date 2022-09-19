@@ -1,0 +1,12 @@
+.rtk-toolbar-crumbs,
+.rtk-toolbar-title {
+    display: flex;
+    align-items: center;
+
+    &,
+    * {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+}

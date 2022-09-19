@@ -6,7 +6,7 @@
 const cc = require('camelcase');
 const GENERATOR = require('./generator');
 
-const { _, chalk, fs, globby, op, path, prefix, props } = arcli;
+const { _, chalk, fs, op, path, prefix, props } = arcli;
 const { cwd, inquirer } = arcli.props;
 
 const mod = path.dirname(require.main.filename);
@@ -235,22 +235,6 @@ PROMPT.DOC = async params => {
                 default: true,
                 type: 'confirm',
                 message: 'Documentation?',
-            },
-            {
-                prefix,
-                type: 'inupt',
-                name: 'docLabel',
-                default: `${params.label} Documentation`,
-                message: 'Documentation Label:',
-                when: ({ doc }) => doc === true,
-            },
-            {
-                prefix,
-                default: 100,
-                type: 'number',
-                name: 'docOrder',
-                message: 'Documentation Order:',
-                when: ({ doc }) => doc === true,
             },
         ],
         params,

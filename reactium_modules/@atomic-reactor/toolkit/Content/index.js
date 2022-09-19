@@ -21,11 +21,6 @@ const Content = () => {
 
     const [elements] = useElements({ zone });
 
-    const style = {
-        width: '100vw',
-        overflowX: 'hidden',
-    };
-
     const scrollTop = () => {
         const elm = refs.get('zone');
         if (elm) elm.scroll(0, 0);
@@ -51,11 +46,9 @@ const Content = () => {
                 data-zone={zone}
                 ref={elm => refs.set('zone', elm)}
                 className={cx('content-zone', `content-zone-${zone}`)}>
-                <div style={style}>
-                    {elements.map(({ component: Component, id }) => (
-                        <Component key={`${zone}-element-${id}`} />
-                    ))}
-                </div>
+                {elements.map(({ component: Component, id }) => (
+                    <Component key={`${zone}-element-${id}`} />
+                ))}
             </div>
             <div
                 onMouseEnter={expand}

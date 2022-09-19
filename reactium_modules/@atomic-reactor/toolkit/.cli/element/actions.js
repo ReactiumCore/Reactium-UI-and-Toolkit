@@ -72,25 +72,27 @@ module.exports = ({ Spinner }) => {
 
             const { directory } = params;
 
-            const group = _.compact([params.group, params.id]).join('-');
-            const id = _.compact([group, 'docs']).join('-');
+            fs.ensureFileSync(arcli.normalizePath(directory, 'readme.md'));
 
-            const actions = require('../document/actions')({ Spinner });
+            // const group = _.compact([params.group, params.id]).join('-');
+            // const id = _.compact([group, 'docs']).join('-');
 
-            const args = {
-                params: {
-                    ...params,
-                    id,
-                    group,
-                    zone: id,
-                    order: params.docOrder || 100,
-                    label: params.docLabel || 'Documentation',
-                    url: `/toolkit/${id.split('-').join('/')}`,
-                    directory: arcli.normalizePath(directory, 'Documentation'),
-                },
-            };
+            // const actions = require('../document/actions')({ Spinner });
 
-            Object.keys(actions).forEach((key, i) => actions[key](args));
+            // const args = {
+            //     params: {
+            //         ...params,
+            //         id,
+            //         group,
+            //         zone: id,
+            //         order: params.docOrder || 100,
+            //         label: params.docLabel || 'Documentation',
+            //         url: `/toolkit/${id.split('-').join('/')}`,
+            //         directory: arcli.normalizePath(directory, 'Documentation'),
+            //     },
+            // };
+
+            // Object.keys(actions).forEach((key, i) => actions[key](args));
         },
         hooks: ({ params }) => {
             const { id, group } = params;
