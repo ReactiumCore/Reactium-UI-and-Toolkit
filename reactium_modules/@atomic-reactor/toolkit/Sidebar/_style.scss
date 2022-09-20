@@ -139,6 +139,7 @@ $rtk-sidebar-offset: 28px !default;
                 margin-top: -1px;
                 font-weight: 500;
                 font-family: $rtk-font-sans;
+
                 //border-left: 4px solid $rtk-accent-color;
                 &:after {
                     content: '';
@@ -191,6 +192,21 @@ $rtk-sidebar-offset: 28px !default;
             position: relative;
             font-family: $rtk-font-sans;
 
+            > span {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    width: 16px;
+                    height: 1px;
+                    position: absolute;
+                    left: -20px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background-color: $rtk-sidebar-border-color;
+                }
+            }
+
             &:before {
                 content: '';
                 position: absolute;
@@ -206,6 +222,21 @@ $rtk-sidebar-offset: 28px !default;
             &:hover,
             &.active {
                 color: $rtk-accent-color;
+
+                > span {
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        width: 16px;
+                        height: 1px;
+                        position: absolute;
+                        left: -20px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: $rtk-sidebar-border-color;
+                    }
+                }
             }
 
             &.active:before {
