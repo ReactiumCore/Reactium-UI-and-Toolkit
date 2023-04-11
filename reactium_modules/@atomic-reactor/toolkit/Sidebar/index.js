@@ -228,7 +228,7 @@ let Sidebar = (props, ref) => {
                 ref={elm => refs.set('container', elm)}
                 className={cn({
                     collapsed: state.get('collapsed'),
-                    [state.get('position')]: true,
+                    [cx(state.get('position'))]: true,
                     [cx('sidebar')]: true,
                 })}>
                 <div
@@ -245,7 +245,7 @@ let Sidebar = (props, ref) => {
                 ref={elm => refs.set('placeholder', elm)}
                 className={cn({
                     collapsed: state.get('collapsed'),
-                    [state.get('position')]: true,
+                    [cx(state.get('position'))]: true,
                     [cx('sidebar-placeholder')]: true,
                 })}
             />
