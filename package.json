@@ -7,7 +7,6 @@
     "heroku-prebuild": "npx reactium install",
     "local": "gulp local",
     "clean": "gulp clean",
-    "precommit": "lint-staged",
     "start": "node src/index.mjs",
     "build": "cross-env NODE_ENV=production gulp"
   },

@@ -1,13 +1,13 @@
 {
   "actinium": {
-    "version": "3.6.6"
+    "version": "5.0.0"
   },
   "reactium": {
-    "version": "4.1.4",
+    "version": "5.0.0",
     "ui": {}
   },
   "name": "@atomic-reactor/toolkit",
-  "version": "1.0.48",
+  "version": "5.0.1",
   "description": "Reactium based component library and design system.",
   "main": "index.js",
   "scripts": {
