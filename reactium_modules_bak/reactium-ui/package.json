@@ -1,0 +1,48 @@
+{
+  "name": "@atomic-reactor/reactium-ui",
+  "version": "3.0.16",
+  "main": "index.js",
+  "author": "Reactium LLC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dropzone": "^5.5.1",
+    "camelcase": "^5.3.1",
+    "classnames": "^2.2.6",
+    "gsap": "^3.7.0",
+    "lunr": "^2.3.6",
+    "moment": "^2.27.0",
+    "object-path": "^0.11.4",
+    "react-beautiful-dnd": "^11.0.3",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-toastify": "^5.2.1",
+    "react-touch-events": "^2.1.0",
+    "slugify": "^1.4.4",
+    "underscore": "*",
+    "uuid": "^3.4.0",
+    "victory": "^32.3.0"
+  },
+  "repository": {
+    "url": "git+https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit.git",
+    "type": "git"
+  },
+  "keywords": [
+    "React",
+    "Reactium",
+    "UI",
+    "Components"
+  ],
+  "reactium": {
+    "version": "4.1.4"
+  },
+  "actinium": {
+    "version": "3.6.6"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/issues"
+  },
+  "homepage": "https://github.com/Atomic-Reactor/Reactium-UI-and-Toolkit/#readme",
+  "description": "UI Toolkit for creating web apps"
+}

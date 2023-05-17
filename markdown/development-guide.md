@@ -26,9 +26,9 @@ $ npm run local
 
 There are 3 types of components you can create:
 
--   [Functional Components](#functional-components)
--   [Class Components](#class-components)
--   [Redux Class Components](#redux-class-components)
+- [Functional Components](#functional-components)
+- [Class Components](#class-components)
+- [Redux Class Components](#redux-class-components)
 
 ### Functional Components
 
@@ -85,18 +85,18 @@ Redux Class Components work just like Class Components accept you will need to m
 index.js (redux wrapper):
 
 ```javascript
-import Test from './Test';
-import { connect } from 'react-redux';
-import deps from 'dependencies';
+import Test from "./Test";
+import { connect } from "react-redux";
+import deps from "dependencies";
 
 // Map state to properties
 const mapStateToProps = (state, props) => Object.assign({}, state.Test, props);
 
 // Map dispatchers to actions
 const mapDispatchToProps = (dispatch, props) => ({
-    test: {
-        click: () => dispatch(deps().actions.Test.click()),
-    },
+  test: {
+    click: () => dispatch(deps().actions.Test.click())
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test);
@@ -105,52 +105,52 @@ export default connect(mapStateToProps, mapDispatchToProps)(Test);
 Test.js:
 
 ```javascript
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class Test extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            msg: this.props.message,
-            count: this.props.count,
-        };
+    this.state = {
+      msg: this.props.message,
+      count: this.props.count
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    const newState = {};
+    const { count: prevCount, msg: prevMsg } = prevProps;
+    const { count: currCount, msg: currMsg } = this.props;
+
+    if (prevCount !== currCount) {
+      newState.count = currCount;
     }
 
-    componentDidUpdate(prevProps) {
-        const newState = {};
-        const { count: prevCount, msg: prevMsg } = prevProps;
-        const { count: currCount, msg: currMsg } = this.props;
-
-        if (prevCount !== currCount) {
-            newState.count = currCount;
-        }
-
-        if (prevMsg !== currMsg) {
-            newState.msg = currMsg;
-        }
-
-        if (Object.keys(newState).length > 0) {
-            this.setState(newState);
-        }
+    if (prevMsg !== currMsg) {
+      newState.msg = currMsg;
     }
 
-    // Use the above mapped click dispatcher on button click
-    onClick() {
-        this.props.test.click();
+    if (Object.keys(newState).length > 0) {
+      this.setState(newState);
     }
+  }
 
-    render() {
-        return (
-            <div>
-                <div>{this.state.msg}</div>
-                <button type='button' onClick={this.onClick.bind(this)}>
-                    Click Me
-                </button>
-                <div>{this.state.count || 0}</div>
-            </div>
-        );
-    }
+  // Use the above mapped click dispatcher on button click
+  onClick() {
+    this.props.test.click();
+  }
+
+  render() {
+    return (
+      <div>
+        <div>{this.state.msg}</div>
+        <button type="button" onClick={this.onClick.bind(this)}>
+          Click Me
+        </button>
+        <div>{this.state.count || 0}</div>
+      </div>
+    );
+  }
 }
 ```
 
@@ -186,30 +186,30 @@ Reactium aggregates all `action.js` files into the `actions` property of the `de
 A typical `actions.js` file may look like this:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 
 export default {
-    mount: params => dispatch => {
-        dispatch({ type: deps().actionTypes.TEST_MOUNT, data: params });
-    },
+  mount: params => dispatch => {
+    dispatch({ type: deps().actionTypes.TEST_MOUNT, data: params });
+  },
 
-    click: () => dispatch => {
-        dispatch({ type: deps().actionTypes.TEST_CLICK });
-    },
+  click: () => dispatch => {
+    dispatch({ type: deps().actionTypes.TEST_CLICK });
+  }
 };
 ```
 
 To access the actions simply import the dependencies:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 ```
 
 Then use an action by targeting the component domain that created the action:
 
 ```javascript
 //...
-deps().actions.Test.mount({ some: 'params' });
+deps().actions.Test.mount({ some: "params" });
 ```
 
 ### The actionTypes.js File
@@ -220,15 +220,15 @@ A typical `actionTypes.js` file may look like this:
 
 ```javascript
 export default {
-    TEST_MOUNT: 'TEST_MOUNT',
-    TEST_CLICK: 'TEST_CLICK',
+  TEST_MOUNT: "TEST_MOUNT",
+  TEST_CLICK: "TEST_CLICK"
 };
 ```
 
 To access the actionTypes, import them into your component. Not that unlike other domain dependencies, actionTypes are flattened together in `deps().actionTypes` with no domain.:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 ```
 
 Usage:
@@ -249,26 +249,26 @@ Reactium aggregates all `reducers.js` files into the Redux store using the [reac
 A typical `reducers.js` file may look like this:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 
 export default (state = {}, action) => {
-    let newState;
+  let newState;
 
-    switch (action.type) {
-        case deps().actionTypes.TEST_MOUNT:
-            newState = Object.assign({}, state, { ...action.data });
-            return newState;
-            break;
+  switch (action.type) {
+    case deps().actionTypes.TEST_MOUNT:
+      newState = Object.assign({}, state, { ...action.data });
+      return newState;
+      break;
 
-        case deps().actionTypes.TEST_CLICK:
-            let count = state.count || 0;
-            newState = Object.assign({}, state, { count: count + 1 });
-            return newState;
-            break;
+    case deps().actionTypes.TEST_CLICK:
+      let count = state.count || 0;
+      newState = Object.assign({}, state, { count: count + 1 });
+      return newState;
+      break;
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };
 ```
 
@@ -282,26 +282,26 @@ A typical `route.js` file in `MyComponent` may look like this:
 
 ```javascript
 // Import your component
-import MyComponent from './index';
+import MyComponent from "./index";
 
 // Import the aggregated actions (optional)
-import deps from 'dependencies';
+import deps from "dependencies";
 
 export default {
-    // Make this higher number to have route evaluated later (default 0)
-    order: 0,
+  // Make this higher number to have route evaluated later (default 0)
+  order: 0,
 
-    // Route pattern that should route to
-    path: '/my-component/:paramA/:paramB',
+  // Route pattern that should route to
+  path: "/my-component/:paramA/:paramB",
 
-    // Should the Route be exact?
-    exact: true,
+  // Should the Route be exact?
+  exact: true,
 
-    // the component to load for this route
-    component: MyComponent,
+  // the component to load for this route
+  component: MyComponent,
 
-    // (optional) a Redux thunk action to load data for this component
-    load: params => deps().actions.MyComponent.mount(params),
+  // (optional) a Redux thunk action to load data for this component
+  load: params => deps().actions.MyComponent.mount(params)
 };
 ```
 
@@ -311,41 +311,41 @@ In addition to [`<Route />`](https://reacttraining.com/react-router/web/api/Rout
 
 You can also support multiple routes for a module, in one of two methods:
 
--   provide multiple paths for a single route
+- provide multiple paths for a single route
 
 ```javascript
-import MyComponent from './index';
+import MyComponent from "./index";
 
 export default {
-    // both of these will resolve to this component
-    path: ['/first/path', '/second/path'],
-    exact: true,
-    component: MyComponent,
+  // both of these will resolve to this component
+  path: ["/first/path", "/second/path"],
+  exact: true,
+  component: MyComponent
 };
 ```
 
--   provide multiple route objects
+- provide multiple route objects
 
 ```javascript
-import MyComponent from './index';
-import deps from 'dependencies';
+import MyComponent from "./index";
+import deps from "dependencies";
 
 // export an array of routes
 export default [
-    {
-        order: 1,
-        path: '/base-route',
-        exact: true,
-        component: MyComponent,
-        load: params => deps().actions.MyComponent(params),
-    },
-    {
-        order: 0,
-        path: '/base-route/:param',
-        exact: true,
-        component: MyComponent,
-        load: params => deps().actions.MyComponent(params),
-    },
+  {
+    order: 1,
+    path: "/base-route",
+    exact: true,
+    component: MyComponent,
+    load: params => deps().actions.MyComponent(params)
+  },
+  {
+    order: 0,
+    path: "/base-route/:param",
+    exact: true,
+    component: MyComponent,
+    load: params => deps().actions.MyComponent(params)
+  }
 ];
 ```
 
@@ -356,47 +356,47 @@ Reactium aggregates all `services.js` files into the `services` property of the 
 A typical `services.js` file may look like this:
 
 ```javascript
-import axios from 'axios';
-import { restHeaders } from 'dependencies';
+import axios from "axios";
+import { restHeaders } from "dependencies";
 
-const restAPI = 'http://demo3914762.mockable.io';
+const restAPI = "http://demo3914762.mockable.io";
 
 const fetchHello = () => {
-    let hdr = restHeaders();
-    return axios
-        .get(`${restAPI}/hello`, { headers: hdr })
-        .then(({ data }) => data);
+  let hdr = restHeaders();
+  return axios
+    .get(`${restAPI}/hello`, { headers: hdr })
+    .then(({ data }) => data);
 };
 
 const fetchGoodBye = () => {
-    let hdr = restHeaders();
-    return axios
-        .get(`${restAPI}/goodbye`, { headers: hdr })
-        .then(({ data }) => data);
+  let hdr = restHeaders();
+  return axios
+    .get(`${restAPI}/goodbye`, { headers: hdr })
+    .then(({ data }) => data);
 };
 
 export default {
-    fetchHello,
-    fetchGoodBye,
+  fetchHello,
+  fetchGoodBye
 };
 ```
 
 In your actions.js file you would do something like:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 
 export default {
-    mount: params => dispatch => {
-        deps()
-            .services.Test.fetchHello()
-            .then(data => {
-                dispatch({
-                    type: deps().actionTypes.TEST_MOUNT,
-                    payload: data,
-                });
-            });
-    },
+  mount: params => dispatch => {
+    deps()
+      .services.Test.fetchHello()
+      .then(data => {
+        dispatch({
+          type: deps().actionTypes.TEST_MOUNT,
+          payload: data
+        });
+      });
+  }
 };
 ```
 
@@ -405,7 +405,7 @@ export default {
 To access the services, import them into your component:
 
 ```javascript
-import deps from 'dependencies';
+import deps from "dependencies";
 ```
 
 Usage:
@@ -413,10 +413,10 @@ Usage:
 ```javascript
 ///...
 deps()
-    .services.Test.fetchHello()
-    .then(result => {
-        // Do something with the result
-    });
+  .services.Test.fetchHello()
+  .then(result => {
+    // Do something with the result
+  });
 ```
 
 ### The state.js File
@@ -427,8 +427,8 @@ A typical `state.js` file may look like this:
 
 ```javascript
 export default {
-    some: 'value',
-    another: 1,
+  some: "value",
+  another: 1
 };
 ```
 
@@ -436,12 +436,12 @@ To persist the domain state to local storage for insertion as initial state on h
 
 ```javascript
 export default {
-    some: 'value',
-    another: 1,
+  some: "value",
+  another: 1,
 
-    // See https://www.npmjs.com/package/redux-local-persist for additional
-    // configuration options.
-    persist: true,
+  // See https://www.npmjs.com/package/redux-local-persist for additional
+  // configuration options.
+  persist: true
 };
 ```
 
@@ -494,21 +494,21 @@ Open the `~/src/index.html` file and add the component to the layout using the c
 ```html
 <!DOCTYPE html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Reactium</title>
-        <meta
-            name="description"
-            content="A framework for creating React + Redux apps using the domain driven design (DDD) paradigm."
-        />
-        <link rel="stylesheet" href="/assets/style/style.css" />
-    </head>
-    <body>
-        <Component type="Fubar"></Component>
-        <script src="/assets/js/vendors.js"></script>
-        <script src="/assets/js/main.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Reactium</title>
+    <meta
+      name="description"
+      content="A framework for creating React + Redux apps using the domain driven design (DDD) paradigm."
+    />
+    <link rel="stylesheet" href="/assets/style/style.css" />
+  </head>
+  <body>
+    <Component type="Fubar"></Component>
+    <script src="/assets/js/vendors.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
 </html>
 ```
 
@@ -526,21 +526,21 @@ For Single-Page Applications, simply add `<div id="router"></div>` to your html,
 ```html
 <!DOCTYPE html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Reactium</title>
-        <meta
-            name="description"
-            content="A framework for creating React + Redux apps using the domain driven design (DDD) paradigm."
-        />
-        <link rel="stylesheet" href="/assets/style/style.css" />
-    </head>
-    <body>
-        <div id="router"></div>
-        <script src="/assets/js/vendors.js"></script>
-        <script src="/assets/js/main.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Reactium</title>
+    <meta
+      name="description"
+      content="A framework for creating React + Redux apps using the domain driven design (DDD) paradigm."
+    />
+    <link rel="stylesheet" href="/assets/style/style.css" />
+  </head>
+  <body>
+    <div id="router"></div>
+    <script src="/assets/js/vendors.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
 </html>
 ```
 
@@ -567,19 +567,19 @@ To run the production server in front-end only mode, either deploy the _public_ 
 
 ```html
 <html>
-    <head>
-        <link rel="stylesheet" href="/assets/style/style.css" />
-    </head>
-    <body>
-        <!-- Automatically bind MyComponent -->
-        <Component type="MyComponent"></Component>
+  <head>
+    <link rel="stylesheet" href="/assets/style/style.css" />
+  </head>
+  <body>
+    <!-- Automatically bind MyComponent -->
+    <Component type="MyComponent"></Component>
 
-        <!-- For Single-Page Application, the top-level component binding -->
-        <div id="router"></div>
+    <!-- For Single-Page Application, the top-level component binding -->
+    <div id="router"></div>
 
-        <script src="/assets/js/vendors.js"></script>
-        <script src="/assets/js/main.js"></script>
-    </body>
+    <script src="/assets/js/vendors.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
 </html>
 ```
 
@@ -588,22 +588,6 @@ Deploy the entire project directory if you wish to run the node/express server t
 ## Node Server
 
 By default, running the server with `npm start` will start the server on port 3030 in front-end rendering mode.
-
-## Server-Side Rendering
-
-To bind port 80, and use server-side rendering, start the application like so (for linux/mac):
-
-```
-SSR_MODE=on APP_PORT=80 npm start
-```
-
-For Windows:
-
-```
-set SSR_MODE=on
-set APP_PORT=80
-npm start
-```
 
 ## The Build Process
 

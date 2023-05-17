@@ -55,62 +55,62 @@ A simple logger:
 
 ```js
 module.exports = expressMiddlewares => {
-    const mySimpleRequestLogger = (req, res, next) => {
-        console.log(`SIMPLE LOGGER: REQUEST ${req.path}`);
-        next();
-    };
+  const mySimpleRequestLogger = (req, res, next) => {
+    console.log(`SIMPLE LOGGER: REQUEST ${req.path}`);
+    next();
+  };
 
-    return [
-        {
-            name: 'mySimpleRequestLogger',
-            use: mySimpleRequestLogger,
-        },
-        ...expressMiddlewares,
-    ];
+  return [
+    {
+      name: "mySimpleRequestLogger",
+      use: mySimpleRequestLogger
+    },
+    ...expressMiddlewares
+  ];
 };
 ```
 
 A health check route handler:
 
 ```js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const healthy = router.get('/healthcheck', (req, res) => {
-    res.status(200).send('ok');
+const healthy = router.get("/healthcheck", (req, res) => {
+  res.status(200).send("ok");
 });
 
 module.exports = expressMiddlewares => {
-    return [
-        {
-            name: 'myRouteHandler',
-            use: router,
-        },
-        ...expressMiddlewares,
-    ];
+  return [
+    {
+      name: "myRouteHandler",
+      use: router
+    },
+    ...expressMiddlewares
+  ];
 };
 ```
 
 More secure Cross Origin Request Sharing for production:
 
 ```js
-const cors = require('cors');
+const cors = require("cors");
 
 module.exports = expressMiddlewares => {
-    return expressMiddlewares.map(mw => {
-        // no change
-        if (nw.name !== 'cors' || !('CORS_ORIGIN' in process.env)) {
-            return mw;
-        }
+  return expressMiddlewares.map(mw => {
+    // no change
+    if (nw.name !== "cors" || !("CORS_ORIGIN" in process.env)) {
+      return mw;
+    }
 
-        // enforce origin
-        return {
-            name: 'cors',
-            use: cors({
-                origin: process.env.CORS_ORIGIN,
-            }),
-        };
-    });
+    // enforce origin
+    return {
+      name: "cors",
+      use: cors({
+        origin: process.env.CORS_ORIGIN
+      })
+    };
+  });
 };
 ```
 
@@ -138,7 +138,7 @@ Contrived `src/app/server/defines.js`:
 
 ```js
 module.exports = {
-    foo: 'bar',
+  foo: "bar"
 };
 ```
 
@@ -146,23 +146,22 @@ Isomorphic Define JS somewhere in front-end React code:
 
 ```js
 let fooValue;
-if (typeof window !== 'undefined') {
-    fooValue = foo; // webpack define plugin
+if (typeof window !== "undefined") {
+  fooValue = foo; // webpack define plugin
 } else {
-    fooValue = defines.foo; // node express global
+  fooValue = defines.foo; // node express global
 }
 ```
 
 ### Environment Variables
 
-| Variable (Where) | Values (How)                                                                                                           | Purpose (What)                                                                                                                              | Reason (Why)                                                                                                         |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| SSR_MODE         | Unset (default), OFF, ON                                                                                               | Unset or OFF to serve the React application in front-end only mode. ON to attempt to pre-render the application when serving the React app. | Increase perceptual performance (TTFR), or SEO related paranoia.                                                     |
-| PORT             | Unset (default) or Any TCP port appropriate for HTTP protocol (default to 3030 or port.proxy in ./core/gulp.config.js) | For environments where running application is specified by PORT var.                                                                        | Some environments automatically set this value for HTTP                                                              |
-| APP_PORT         | Unset (default) or Any TCP port appropriate for HTTP protocol (default to 3030 or port.proxy in ./core/gulp.config.js) | For environments where running application is specified by APP_PORT var.                                                                    | Some environments automatically set this value for HTTP (such as IBM Bluemix)                                        |
-| PORT_VAR         | Unset (default) or the string specifying the environment variable where the HTTP port can be found                     | Tells express where to look in environment variable to get the HTTP port setting.                                                           | For environments where neither PORT nor APP_PORT can be set, but other custom variables can be.                      |
-| DEBUG            | Unset (default), OFF, ON. Unset or OFF to suppress logging to STDOUT. ON to enable logging.                            | Enable or Disable logging                                                                                                                   | Logging can be helpful for troubleshooting server-side rendering issues. SSR logging can drive front-end devs batty. |
-| PUBLIC_DIRECTORY | Unset (default) or full-path to public assets directory (default ./public)                                             | Change the directory that express will serve static assets from (static middleware)                                                         | You have changed the build process to output static assets (js/css/images, etc)                                      |
+| Variable (Where) | Values (How)                                                                                                           | Purpose (What)                                                                      | Reason (Why)                                                                                                         |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| PORT             | Unset (default) or Any TCP port appropriate for HTTP protocol (default to 3030 or port.proxy in ./core/gulp.config.js) | For environments where running application is specified by PORT var.                | Some environments automatically set this value for HTTP                                                              |
+| APP_PORT         | Unset (default) or Any TCP port appropriate for HTTP protocol (default to 3030 or port.proxy in ./core/gulp.config.js) | For environments where running application is specified by APP_PORT var.            | Some environments automatically set this value for HTTP (such as IBM Bluemix)                                        |
+| PORT_VAR         | Unset (default) or the string specifying the environment variable where the HTTP port can be found                     | Tells express where to look in environment variable to get the HTTP port setting.   | For environments where neither PORT nor APP_PORT can be set, but other custom variables can be.                      |
+| DEBUG            | Unset (default), OFF, ON. Unset or OFF to suppress logging to STDOUT. ON to enable logging.                            | Enable or Disable logging                                                           | Logging can be helpful for troubleshooting server-side rendering issues. SSR logging can drive front-end devs batty. |
+| PUBLIC_DIRECTORY | Unset (default) or full-path to public assets directory (default ./public)                                             | Change the directory that express will serve static assets from (static middleware) | You have changed the build process to output static assets (js/css/images, etc)                                      |
 
 ## Front-End Redux Middleware / Store Enhancers
 
@@ -183,23 +182,23 @@ See `.core/redux/storeCreator.js` for built-in Redux middleware and store enhanc
  * @return {Array} new list of redux middleware
  */
 export default (middlewares = [], isServer = false) => {
-    return middlewares.concat([
-        {
-            order: 0,
-            name: 'myActionTypeLogger',
-            mw: store => next => action => {
-                console.log(`ACTION TYPE DISPATCHED: ${action.type}`);
-                next(action);
-            },
-        },
-    ]);
+  return middlewares.concat([
+    {
+      order: 0,
+      name: "myActionTypeLogger",
+      mw: store => next => action => {
+        console.log(`ACTION TYPE DISPATCHED: ${action.type}`);
+        next(action);
+      }
+    }
+  ]);
 };
 ```
 
 #### Example Custom Store Enhancer
 
 ```js
-import DevTools from 'reactium-core/components/DevTools';
+import DevTools from "reactium-core/components/DevTools";
 
 /**
  * Exports a function taking current list of redux enhancers, and returns list of redux enhancers to be used for composable stack of storeCreators. Use with extreme caution; you better know what you are doing.
@@ -210,17 +209,17 @@ import DevTools from 'reactium-core/components/DevTools';
  * @return {Array} new list of redux enhancers
  */
 export default (enhancers = [], isServer = false) => {
-    return enhancers.map(enhancer => {
-        if (enhancer.name !== 'devtools') {
-            return enhancer;
-        }
+  return enhancers.map(enhancer => {
+    if (enhancer.name !== "devtools") {
+      return enhancer;
+    }
 
-        // Enable Redux DevTool in production!!! Wee!
-        return {
-            name: 'devtools',
-            order: -1000,
-            enhancer: DevTools.instrument(),
-        };
-    });
+    // Enable Redux DevTool in production!!! Wee!
+    return {
+      name: "devtools",
+      order: -1000,
+      enhancer: DevTools.instrument()
+    };
+  });
 };
 ```

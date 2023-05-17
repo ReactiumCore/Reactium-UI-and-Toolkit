@@ -5,21 +5,20 @@ You can generate a static site by ensuring your project has a `~/public/index-st
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="./assets/style/style.css" />
-    </head>
-    <body>
-        <Component type="DevTools"></Component>
-        <div id="router"></div>
+  <head>
+    <link rel="stylesheet" href="./assets/style/style.css" />
+  </head>
+  <body>
+    <Component type="DevTools"></Component>
+    <div id="router"></div>
 
-        <script>
-            window.ssr = false;
-            window.restAPI = '/api';
-            window.parseAppId = 'Actinium';
-        </script>
-        <script src="./assets/js/vendors.js"></script>
-        <script src="./assets/js/main.js"></script>
-    </body>
+    <script>
+      window.restAPI = "/api";
+      window.parseAppId = "Actinium";
+    </script>
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
 ```
 

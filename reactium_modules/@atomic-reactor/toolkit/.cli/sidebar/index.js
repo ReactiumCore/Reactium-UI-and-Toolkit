@@ -4,333 +4,314 @@
  * -----------------------------------------------------------------------------
  */
 
-const { _, chalk, fs, op, path, prefix, props } = arcli;
+const { _, chalk, fs, op, path, prefix, props, error, message } = arcli;
 const { cwd, inquirer } = arcli.props;
 
-const cc = require('camelcase');
-const GENERATOR = require('./generator');
-
-const mod = path.dirname(require.main.filename);
-const { error, message } = require(`${mod}/lib/messenger`);
+const cc = require("camelcase");
+const GENERATOR = require("./generator");
 
 const {
-    directoryName,
-    excludePath,
-    isEmpty,
-    mergeParams,
-    normalize,
-    resolve,
-    slug,
-    sidebarGroups,
-} = require('../utils');
+  directoryName,
+  excludePath,
+  isEmpty,
+  mergeParams,
+  normalize,
+  resolve,
+  slug,
+  sidebarGroups
+} = require("../utils");
 
-const NAME = 'toolkit <sidebar>';
+const NAME = "tk-sidebar";
 
-const DESC = 'Create a Reactium Toolkit sidebar item';
+const DESC = "Create a Reactium Toolkit sidebar item";
 
 const CANCELED =
-    'Reactium Toolkit sidebar creation ' + chalk.magenta('canceled!');
+  "Reactium Toolkit sidebar creation " + chalk.magenta("canceled!");
 
 const VALIDATE = {};
 const PROMPT = {};
 const FILTER = {};
 
 const HELP = () => {
-    console.log('');
+  console.log("");
 };
 
 const CONFORM = params => {
-    Hook.runSync('toolkit-sidebar-conform', { arcli, params, props });
-
-    return Object.keys(params).reduce((obj, key) => {
-        let val = params[key];
-        switch (key) {
-            case 'id':
-            case 'group':
-                if (val) {
-                    obj[key] = slug(val);
-                }
-                break;
-
-            case 'order':
-                if (val) {
-                    obj[key] = Number(val);
-                }
-                break;
-
-            default:
-                obj[key] = val;
-                break;
+  return Object.keys(params).reduce((obj, key) => {
+    let val = params[key];
+    switch (key) {
+      case "id":
+      case "group":
+        if (val) {
+          obj[key] = slug(val);
         }
-        return obj;
-    }, {});
+        break;
+
+      case "order":
+        if (val) {
+          obj[key] = Number(val);
+        }
+        break;
+
+      default:
+        obj[key] = val;
+        break;
+    }
+    return obj;
+  }, {});
 };
 
 VALIDATE.REQUIRED = (key, val, msg) =>
-    _.chain([val])
-        .flatten()
-        .compact()
-        .isEmpty()
-        .value()
-        ? msg || `${chalk.magenta(key)} is required`
-        : true;
+  _.chain([val])
+    .flatten()
+    .compact()
+    .isEmpty()
+    .value()
+    ? msg || `${chalk.magenta(key)} is required`
+    : true;
 
 FILTER.FORMAT = (key, val) => CONFORM({ [key]: val })[key];
 
 PROMPT.DIR = async params => {
-    const inq = await inquirer.prompt(
-        [
-            {
-                prefix,
-                excludePath,
-                depthLimit: 10,
-                type: 'fuzzypath',
-                name: 'directory',
-                message: 'Directory:',
-                itemType: 'directory',
-                rootPath: normalize(cwd),
-                validate: (val, answers) =>
-                    VALIDATE.REQUIRED('directory', val, answers),
-            },
-        ],
-        params,
-    );
+  const inq = await inquirer.prompt(
+    [
+      {
+        prefix,
+        excludePath,
+        depthLimit: 10,
+        type: "fuzzypath",
+        name: "directory",
+        message: "Directory:",
+        itemType: "directory",
+        rootPath: normalize(cwd),
+        validate: (val, answers) => VALIDATE.REQUIRED("directory", val, answers)
+      }
+    ],
+    params
+  );
 
-    mergeParams(params, CONFORM(inq));
+  mergeParams(params, CONFORM(inq));
 
-    const domainFilePath = normalize(params.directory, 'domain.js');
-    const domain = fs.existsSync(domainFilePath) ? require(domainFilePath) : {};
+  const domainFilePath = normalize(params.directory, "domain.js");
+  const domain = fs.existsSync(domainFilePath) ? require(domainFilePath) : {};
 
-    params.group = op.get(domain, 'reactiumToolkit.group.id');
-    params.directory = normalize(params.directory);
+  params.group = op.get(domain, "reactiumToolkit.group.id");
+  params.directory = normalize(params.directory);
 };
 
 PROMPT.OVERWRITE = async params => {
-    if (!isEmpty(params.directory) && !params.overwrite) {
-        message(chalk.magenta('The selected directory is not empty!'));
+  if (!isEmpty(params.directory) && !params.overwrite) {
+    message(chalk.magenta("The selected directory is not empty!"));
 
-        const { overwrite } = await inquirer.prompt(
-            [
-                {
-                    prefix,
-                    default: false,
-                    type: 'confirm',
-                    name: 'overwrite',
-                    message: 'Overwrite?',
-                },
-            ],
-            params,
-        );
-
-        if (overwrite !== true) {
-            message(CANCELED);
-            process.exit();
+    const { overwrite } = await inquirer.prompt(
+      [
+        {
+          prefix,
+          default: false,
+          type: "confirm",
+          name: "overwrite",
+          message: "Overwrite?"
         }
+      ],
+      params
+    );
+
+    if (overwrite !== true) {
+      message(CANCELED);
+      process.exit();
     }
+  }
 };
 
 PROMPT.SIDEBAR = async params => {
-    const groups = sidebarGroups();
+  const groups = sidebarGroups();
 
-    const inq = await inquirer.prompt(
-        [
-            {
-                prefix,
-                name: 'id',
-                type: 'input',
-                message: 'Sidebar ID:',
-            },
-            {
-                prefix,
-                name: 'label',
-                type: 'input',
-                default: params.name,
-                message: 'Sidebar Label:',
-            },
-            {
-                prefix,
-                name: 'group',
-                type: 'list',
-                message: 'Sidebar Parent:',
-                choices: groups,
-                default: params.group,
-                when: () => _.isArray(groups) && groups.length > 0,
-            },
-            {
-                prefix,
-                default: 100,
-                name: 'order',
-                type: 'number',
-                message: 'Sidebar Order:',
-            },
-        ],
-        params,
-    );
+  const inq = await inquirer.prompt(
+    [
+      {
+        prefix,
+        name: "id",
+        type: "input",
+        message: "Sidebar ID:"
+      },
+      {
+        prefix,
+        name: "label",
+        type: "input",
+        default: params.name,
+        message: "Sidebar Label:"
+      },
+      {
+        prefix,
+        name: "group",
+        type: "list",
+        message: "Sidebar Parent:",
+        choices: groups,
+        default: params.group,
+        when: () => _.isArray(groups) && groups.length > 0
+      },
+      {
+        prefix,
+        default: 100,
+        name: "order",
+        type: "number",
+        message: "Sidebar Order:"
+      }
+    ],
+    params
+  );
 
-    mergeParams(params, CONFORM(inq));
+  mergeParams(params, CONFORM(inq));
 
-    const { url } = await inquirer.prompt(
-        [
-            {
-                prefix,
-                name: 'url',
-                type: 'input',
-                message: 'Sidebar URL:',
-                default: _.compact(['/toolkit', params.group, params.id]).join(
-                    '/',
-                ),
-            },
-        ],
-        params,
-    );
+  const { url } = await inquirer.prompt(
+    [
+      {
+        prefix,
+        name: "url",
+        type: "input",
+        message: "Sidebar URL:",
+        default: _.compact(["/toolkit", params.group, params.id]).join("/")
+      }
+    ],
+    params
+  );
 
-    if (String(url).length > 0) {
-        params.url = url;
-    }
+  if (String(url).length > 0) {
+    params.url = url;
+  }
 
-    params.directory = !params.group
-        ? normalize(params.directory, directoryName(params.id), 'Sidebar')
-        : normalize(params.directory, 'Sidebar');
+  params.directory = !params.group
+    ? normalize(params.directory, directoryName(params.id), "Sidebar")
+    : normalize(params.directory, "Sidebar");
 };
 
 PROMPT.PREFLIGHT = async params => {
-    // Transform the preflight object instead of the params object
-    const preflight = { ...params };
-    delete preflight.debug;
+  // Transform the preflight object instead of the params object
+  const preflight = { ...params };
+  delete preflight.debug;
 
-    const isDebug = op.get(params, 'debug', false);
+  const isDebug = op.get(params, "debug", false);
 
-    // Output messge
+  // Output messge
 
-    if (!isDebug) {
-        message(
-            'A new toolkit sidebar item will be created using the following configuration:',
-        );
-    } else {
-        message(
-            'A new toolkit sidebar item would be created using the following configuration:',
-        );
-    }
+  if (!isDebug) {
+    message(
+      "A new toolkit sidebar item will be created using the following configuration:"
+    );
+  } else {
+    message(
+      "A new toolkit sidebar item would be created using the following configuration:"
+    );
+  }
 
-    console.log(JSON.stringify(preflight, null, 2));
-    console.log('');
+  console.log(JSON.stringify(preflight, null, 2));
+  console.log("");
 
-    let confirm;
+  let confirm;
 
-    if (!isDebug) {
-        const answers = await inquirer.prompt(
-            [
-                {
-                    prefix,
-                    name: 'confirm',
-                    type: 'confirm',
-                    message: 'Proceed?:',
-                    default: false,
-                },
-            ],
-            params,
-        );
-
-        confirm = op.get(answers, 'confirm');
-    }
-
-    if (confirm !== true) {
-        if (!isDebug) {
-            message(CANCELED);
-        } else {
-            message('Debug ' + chalk.cyan('complete!'));
+  if (!isDebug) {
+    const answers = await inquirer.prompt(
+      [
+        {
+          prefix,
+          name: "confirm",
+          type: "confirm",
+          message: "Proceed?:",
+          default: false
         }
-        process.exit();
+      ],
+      params
+    );
+
+    confirm = op.get(answers, "confirm");
+  }
+
+  if (confirm !== true) {
+    if (!isDebug) {
+      message(CANCELED);
+    } else {
+      message("Debug " + chalk.cyan("complete!"));
     }
+    process.exit();
+  }
 };
 
-const ACTION = async (action, initialParams) => {
-    console.log('');
+const ACTION = async ({ props, opt }) => {
+  const initialParams = FLAGS_TO_PARAMS(opt);
+  console.log("");
 
-    props.command = action;
+  // 0.0 - prep params that came from flags
+  let params = CONFORM(initialParams);
 
-    // 0.0 - prep params that came from flags
-    let params = CONFORM(initialParams);
+  // 1.0 - Get Directory
+  await PROMPT.DIR(params);
 
-    // 1.0 - Get Directory
-    await PROMPT.DIR(params);
+  // 2.0 - Get id & group
+  await PROMPT.SIDEBAR(params);
 
-    // 2.0 - Get id & group
-    await PROMPT.SIDEBAR(params);
+  // 3.0 - Check directory
+  await PROMPT.OVERWRITE(params);
 
-    // 3.0 - Check directory
-    await PROMPT.OVERWRITE(params);
+  // 4.0 - Preflight
+  params.id = _.compact([params.group, params.id]).join("-");
 
-    // 4.0 - Preflight
-    params.id = _.compact([params.group, params.id]).join('-');
+  await PROMPT.PREFLIGHT(CONFORM(params));
 
-    await PROMPT.PREFLIGHT(CONFORM(params));
+  // 5.0 - Execute actions
+  if (op.get(params, "debug") !== true) {
+    await GENERATOR({ arcli: global, params, props });
+  }
 
-    // 5.0 - Execute actions
-    if (op.get(params, 'debug') !== true) {
-        await GENERATOR({ arcli: global, params, props });
-    }
-
-    console.log('');
+  console.log("");
 };
 
 const FLAGS_TO_PARAMS = opt =>
-    FLAGS().reduce((obj, key) => {
-        let val = opt[key];
-        val = typeof val === 'function' ? undefined : val;
+  FLAGS().reduce((obj, key) => {
+    let val = opt[key];
+    val = typeof val === "function" ? undefined : val;
 
-        if (val) obj[key] = val;
+    if (val) obj[key] = val;
 
-        return obj;
-    }, {});
+    return obj;
+  }, {});
 
 const FLAGS = () => {
-    let flags = [
-        'name',
-        'directory',
-        'overwrite',
-        'id',
-        'group',
-        'url',
-        'label',
-        'order',
-        'debug',
-        'type',
-    ];
-    Hook.runSync('toolkit-sidebar-flags', flags);
-    return flags;
+  let flags = [
+    "name",
+    "directory",
+    "overwrite",
+    "id",
+    "group",
+    "url",
+    "label",
+    "order",
+    "debug",
+    "type"
+  ];
+  return flags;
 };
 
 const COMMAND = ({ program, ...args }) =>
-    program
-        .command(NAME)
-        .description(DESC)
-        .action((action, opt) => ACTION(action, FLAGS_TO_PARAMS(opt)))
-        .usage('sidebar [options]')
-        .option(
-            '-d, --directory [directory]',
-            'The path to create the sidebar item',
-        )
-        .option('-i, --id [id]', 'The unique id of the sidebar item')
-        .option('-g, --group [group]', 'The sidebar link group')
-        .option('-l, --label [label]', 'The sidebar link label')
-        .option('-u, --url [url]', 'The sidebar link url')
-        .option('-o, --order [order]', 'The sidebar link order')
-        .option('-t, --type [type]', 'The sidebar link type')
-        .option('-D, --debug [debug]', 'Debug mode')
-        .option(
-            '-O, --overwrite [overwrite]',
-            'Overwrite existing sidebar item',
-        )
-        .on('--help', HELP);
+  program
+    .command(NAME)
+    .description(DESC)
+    .action(opt => ACTION({ opt, props, program }))
+    .usage("sidebar [options]")
+    .option(
+      "-d, --directory [directory]",
+      "The path to create the sidebar item"
+    )
+    .option("-i, --id [id]", "The unique id of the sidebar item")
+    .option("-g, --group [group]", "The sidebar link group")
+    .option("-l, --label [label]", "The sidebar link label")
+    .option("-u, --url [url]", "The sidebar link url")
+    .option("-o, --order [order]", "The sidebar link order")
+    .option("-t, --type [type]", "The sidebar link type")
+    .option("-D, --debug [debug]", "Debug mode")
+    .option("-O, --overwrite [overwrite]", "Overwrite existing sidebar item")
+    .on("--help", HELP);
 
 module.exports = {
-    ACTION,
-    CANCELED,
-    COMMAND,
-    CONFORM,
-    ID: NAME,
-    FILTER,
-    VALIDATE,
-    PROMPT,
+  COMMAND,
+  NAME
 };
