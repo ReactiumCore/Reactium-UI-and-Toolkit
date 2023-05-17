@@ -69,10 +69,10 @@ const RTKComponents = {
                 order: Reactium.Enums.priority.lowest,
             });
 
-            // Titlebar update
-            if (typeof window !== 'undefined') {
-                document.title = Reactium.Toolkit.config.titlebar;
-            }
+            // // Titlebar update
+            // if (typeof window !== 'undefined') {
+            //     document.title = Reactium.Toolkit.config.titlebar;
+            // }
 
             // ---------------------------------------------------------------------
             // Toolbar Buttons
