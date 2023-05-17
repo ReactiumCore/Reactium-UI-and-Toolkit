@@ -1,7 +1,28 @@
 import _ from 'underscore';
 import Toolbar from '../Toolbar';
-import React, { useEffect, useState } from 'react';
-import Reactium, { useHandle, useRefs } from 'reactium-core/sdk';
+import React, { useEffect } from 'react';
+import Reactium, { useHandle, useRefs, useRouting } from 'reactium-core/sdk';
+import slugify from 'slugify';
+
+const useLocation = () => {
+    const Routing = useRouting();
+    const location = Routing.get('active.location');
+    const params = Routing.get('active.params');
+    return { location, params };
+};
+
+const useZone = () => {
+    const { location, params } = useLocation();
+
+    const { pathname } = location;
+    const { group, slug, sub } = params;
+
+    if (String(pathname).startsWith('/toolbar/search')) return 'search';
+
+    const zone = !group ? ['overview'] : _.compact([group, slug, sub]);
+
+    return slugify(zone.join('-'), { lower: true });
+};
 
 /**
  * -----------------------------------------------------------------------------
@@ -9,15 +30,14 @@ import Reactium, { useHandle, useRefs } from 'reactium-core/sdk';
  * -----------------------------------------------------------------------------
  */
 const Content = () => {
+    const Routing = useRouting();
+    const route = Routing.get('active.location.pathname');
     const refs = useRefs();
 
-    const { cx, zone, useElements } = Reactium.Toolkit;
+    const { cx, useElements } = Reactium.Toolkit;
+    const zone = useZone();
 
     const Sidebar = useHandle('RTKSidebar');
-
-    const [route, setRoute] = useState(
-        Reactium.Routing.currentRoute.location.pathname,
-    );
 
     const [elements] = useElements({ zone });
 
@@ -26,16 +46,7 @@ const Content = () => {
         if (elm) elm.scroll(0, 0);
     };
 
-    const onRouteChange = () => {
-        const newRoute = Reactium.Routing.currentRoute.location.pathname;
-        if (newRoute === route) return;
-
-        setRoute(newRoute);
-    };
-
     const expand = () => Sidebar.expand();
-
-    useEffect(onRouteChange, [Reactium.Routing.currentRoute.location.pathname]);
 
     useEffect(scrollTop, [route]);
 
@@ -46,9 +57,9 @@ const Content = () => {
                 data-zone={zone}
                 ref={elm => refs.set('zone', elm)}
                 className={cx('content-zone', `content-zone-${zone}`)}>
-                {elements.map(({ component: Component, id }) => (
-                    <Component key={`${zone}-element-${id}`} />
-                ))}
+                {elements.map(({ component: Component, id }) => {
+                    return <Component key={`${zone}-element-${id}`} />;
+                })}
             </div>
             <div
                 onMouseEnter={expand}

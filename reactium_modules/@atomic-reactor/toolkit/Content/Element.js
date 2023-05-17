@@ -82,10 +82,12 @@ let Element = (
     }, []);
 
     useEffect(() => {
-        Reactium.Toolkit.setFullscreen(fullscreen);
+        if (Reactium.Toolkit.fullscreen) {
+            Reactium.Toolkit.setFullscreen(fullscreen);
+        }
     }, [fullscreen]);
 
-    return _.isUndefined(Reactium.Toolkit.fullscreen) ? null : (
+    return (
         <div {...props} className={cname} ref={ref}>
             <div className={cx('element-content')}>{children}</div>
         </div>

@@ -38,7 +38,6 @@ const RTKComponents = {
 };
 
 (async () => {
-    Reactium.Plugin.register('ReactiumToolkit');
     Reactium.Component.register('RTK', RTKComponents);
 
     Object.entries(RTKComponents).forEach(([name, component]) => {
@@ -68,11 +67,6 @@ const RTKComponents = {
                 zone: ['code-editor-actions'],
                 order: Reactium.Enums.priority.lowest,
             });
-
-            // // Titlebar update
-            // if (typeof window !== 'undefined') {
-            //     document.title = Reactium.Toolkit.config.titlebar;
-            // }
 
             // ---------------------------------------------------------------------
             // Toolbar Buttons
