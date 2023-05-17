@@ -86,5 +86,5 @@ src/manifest.js
 # Translation .mo
 *.mo
 
-# reactium_modules/*
-# !reactium_modules/@atomic-reactor/toolkit
+reactium_modules/*
+!reactium_modules/@atomic-reactor/toolkit
