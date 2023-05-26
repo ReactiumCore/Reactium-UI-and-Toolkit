@@ -1,5 +1,5 @@
 import { Hook } from '@atomic-reactor/reactium-core/sdk';
-import defaultColors from './colors-rui-default.json';
+import defaultColors from './colors-RUI-default.json';
 const {
     primary,
     secondary,

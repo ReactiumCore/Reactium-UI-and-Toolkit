@@ -1,4 +1,4 @@
-$ar-icon-color: black;
+$ar-icon-color: $primary !default;
 
 .ar-icon {
     svg {
@@ -12,10 +12,4 @@ $ar-icon-color: black;
             }
         }
     }
-
-    // &.default {
-    //     svg {
-    //         fill: $ar-icon-color;
-    //     }    
-    // }
 }
