@@ -8,8 +8,7 @@
     "local": "gulp local",
     "clean": "gulp clean",
     "start": "node src/index.mjs",
-    "build": "cross-env NODE_ENV=production gulp",
-    "precommit": "lint-staged"
+    "build": "cross-env NODE_ENV=production gulp"
   },
   "keywords": [
     "react",
@@ -66,5 +65,9 @@
   "devDependencies": {
     "prettier": "^2.8.8"
   },
-  "husky": {}
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
