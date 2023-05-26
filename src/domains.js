@@ -4,87 +4,107 @@
  */
 
 module.exports = {
-  domains: {
-    API: { name: "API", implied: "api", original: "src/app/api/domain.js" },
-    LoadingSpinner: {
-      name: "LoadingSpinner",
-      implied: "Loading",
-      original:
-        "reactium_modules/@atomic-reactor/reactium-core/components/Loading/domain.js"
+    domains: {
+        API: { name: 'API', implied: 'api', original: 'src/app/api/domain.js' },
+        LoadingSpinner: {
+            name: 'LoadingSpinner',
+            implied: 'Loading',
+            original:
+                'reactium_modules/@atomic-reactor/reactium-core/components/Loading/reactium-domain-Loading.js',
+        },
+        RUIForm: {
+            name: 'RUIForm',
+            implied: 'Form',
+            original:
+                'reactium_modules/@atomic-reactor/reactium-ui/Form/domain.js',
+        },
+        ReactiumUI: {
+            name: 'ReactiumUI',
+            implied: 'reactium-ui',
+            original: 'reactium_modules/@atomic-reactor/reactium-ui/domain.js',
+        },
+        RTKCode: {
+            name: 'RTKCode',
+            implied: 'Code',
+            original: 'reactium_modules/@atomic-reactor/toolkit/Code/domain.js',
+        },
+        RTKColorSelect: {
+            name: 'RTKColorSelect',
+            implied: 'ColorSelect',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/ColorSelect/domain.js',
+        },
+        RTKComponentDemo: {
+            name: 'RTKComponentDemo',
+            implied: 'ComponentDemo',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/ComponentDemo/domain.js',
+        },
+        RTKContent: {
+            name: 'RTKContent',
+            implied: 'Content',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/Content/domain.js',
+        },
+        RTKIconFeather: {
+            name: 'RTKIconFeather',
+            implied: 'Feather',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/Icon/Feather/domain.js',
+        },
+        RTKIcon: {
+            name: 'RTKIcon',
+            implied: 'Icon',
+            original: 'reactium_modules/@atomic-reactor/toolkit/Icon/domain.js',
+        },
+        RTKLogo: {
+            name: 'RTKLogo',
+            implied: 'Logo',
+            original: 'reactium_modules/@atomic-reactor/toolkit/Logo/domain.js',
+        },
+        RTKMarkdown: {
+            name: 'RTKMarkdown',
+            implied: 'Markdown',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/Markdown/domain.js',
+        },
+        RTKSidebar: {
+            name: 'RTKSidebar',
+            implied: 'Sidebar',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/Sidebar/domain.js',
+        },
+        RTKToolbar: {
+            name: 'RTKToolbar',
+            implied: 'Toolbar',
+            original:
+                'reactium_modules/@atomic-reactor/toolkit/Toolbar/domain.js',
+        },
+        RTK: {
+            name: 'RTK',
+            implied: 'toolkit',
+            original: 'reactium_modules/@atomic-reactor/toolkit/domain.js',
+        },
     },
-    RTKCode: {
-      name: "RTKCode",
-      implied: "Code",
-      original: "reactium_modules/@atomic-reactor/toolkit/Code/domain.js"
+    relative: {
+        'src/app/api': 'API',
+        'reactium_modules/@atomic-reactor/reactium-core/components/Loading':
+            'LoadingSpinner',
+        'reactium_modules/@atomic-reactor/reactium-ui/Form': 'RUIForm',
+        'reactium_modules/@atomic-reactor/reactium-ui': 'ReactiumUI',
+        'reactium_modules/@atomic-reactor/toolkit/Code': 'RTKCode',
+        'reactium_modules/@atomic-reactor/toolkit/ColorSelect':
+            'RTKColorSelect',
+        'reactium_modules/@atomic-reactor/toolkit/ComponentDemo':
+            'RTKComponentDemo',
+        'reactium_modules/@atomic-reactor/toolkit/Content': 'RTKContent',
+        'reactium_modules/@atomic-reactor/toolkit/Icon/Feather':
+            'RTKIconFeather',
+        'reactium_modules/@atomic-reactor/toolkit/Icon': 'RTKIcon',
+        'reactium_modules/@atomic-reactor/toolkit/Logo': 'RTKLogo',
+        'reactium_modules/@atomic-reactor/toolkit/Markdown': 'RTKMarkdown',
+        'reactium_modules/@atomic-reactor/toolkit/Sidebar': 'RTKSidebar',
+        'reactium_modules/@atomic-reactor/toolkit/Toolbar': 'RTKToolbar',
+        'reactium_modules/@atomic-reactor/toolkit': 'RTK',
     },
-    RTKColorSelect: {
-      name: "RTKColorSelect",
-      implied: "ColorSelect",
-      original: "reactium_modules/@atomic-reactor/toolkit/ColorSelect/domain.js"
-    },
-    RTKComponentDemo: {
-      name: "RTKComponentDemo",
-      implied: "ComponentDemo",
-      original:
-        "reactium_modules/@atomic-reactor/toolkit/ComponentDemo/domain.js"
-    },
-    RTKContent: {
-      name: "RTKContent",
-      implied: "Content",
-      original: "reactium_modules/@atomic-reactor/toolkit/Content/domain.js"
-    },
-    RTKIconFeather: {
-      name: "RTKIconFeather",
-      implied: "Feather",
-      original:
-        "reactium_modules/@atomic-reactor/toolkit/Icon/Feather/domain.js"
-    },
-    RTKIcon: {
-      name: "RTKIcon",
-      implied: "Icon",
-      original: "reactium_modules/@atomic-reactor/toolkit/Icon/domain.js"
-    },
-    RTKLogo: {
-      name: "RTKLogo",
-      implied: "Logo",
-      original: "reactium_modules/@atomic-reactor/toolkit/Logo/domain.js"
-    },
-    RTKMarkdown: {
-      name: "RTKMarkdown",
-      implied: "Markdown",
-      original: "reactium_modules/@atomic-reactor/toolkit/Markdown/domain.js"
-    },
-    RTKSidebar: {
-      name: "RTKSidebar",
-      implied: "Sidebar",
-      original: "reactium_modules/@atomic-reactor/toolkit/Sidebar/domain.js"
-    },
-    RTKToolbar: {
-      name: "RTKToolbar",
-      implied: "Toolbar",
-      original: "reactium_modules/@atomic-reactor/toolkit/Toolbar/domain.js"
-    },
-    RTK: {
-      name: "RTK",
-      implied: "toolkit",
-      original: "reactium_modules/@atomic-reactor/toolkit/domain.js"
-    }
-  },
-  relative: {
-    "src/app/api": "API",
-    "reactium_modules/@atomic-reactor/reactium-core/components/Loading":
-      "LoadingSpinner",
-    "reactium_modules/@atomic-reactor/toolkit/Code": "RTKCode",
-    "reactium_modules/@atomic-reactor/toolkit/ColorSelect": "RTKColorSelect",
-    "reactium_modules/@atomic-reactor/toolkit/ComponentDemo":
-      "RTKComponentDemo",
-    "reactium_modules/@atomic-reactor/toolkit/Content": "RTKContent",
-    "reactium_modules/@atomic-reactor/toolkit/Icon/Feather": "RTKIconFeather",
-    "reactium_modules/@atomic-reactor/toolkit/Icon": "RTKIcon",
-    "reactium_modules/@atomic-reactor/toolkit/Logo": "RTKLogo",
-    "reactium_modules/@atomic-reactor/toolkit/Markdown": "RTKMarkdown",
-    "reactium_modules/@atomic-reactor/toolkit/Sidebar": "RTKSidebar",
-    "reactium_modules/@atomic-reactor/toolkit/Toolbar": "RTKToolbar",
-    "reactium_modules/@atomic-reactor/toolkit": "RTK"
-  }
 };
