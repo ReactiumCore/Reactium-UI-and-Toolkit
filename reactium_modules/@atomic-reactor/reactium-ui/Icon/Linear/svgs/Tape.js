@@ -1,9 +1,9 @@
 // Icon: Linear.Tape
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M409.6 358.4c-51.254 0-99.837-8.723-136.798-24.565-59.168-25.357-68.002-59.65-68.002-77.835s8.834-52.478 68.002-77.835c36.962-15.842 85.544-24.565 136.798-24.565s99.837 8.723 136.798 24.565c59.168 25.357 68.002 59.65 68.002 77.835s-8.834 52.478-68.002 77.835c-36.962 15.842-85.544 24.565-136.798 24.565zM409.6 204.8c-95.283 0-153.6 33.149-153.6 51.2s58.317 51.2 153.6 51.2 153.6-33.149 153.6-51.2-58.317-51.2-153.6-51.2z' />

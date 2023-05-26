@@ -1,9 +1,9 @@
 // Icon: Linear.SpellCheck
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M230.4 716.8c-14.138 0-25.6 11.461-25.6 25.6v0.070c-21.408-16.107-48.006-25.67-76.8-25.67-70.579 0-128 57.421-128 128s57.421 128 128 128c28.794 0 55.392-9.563 76.8-25.67v0.070c0 14.139 11.462 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-204.8c0-14.139-11.462-25.6-25.6-25.6zM128 921.6c-42.347 0-76.8-34.453-76.8-76.8s34.453-76.8 76.8-76.8 76.8 34.453 76.8 76.8-34.453 76.8-76.8 76.8z' />

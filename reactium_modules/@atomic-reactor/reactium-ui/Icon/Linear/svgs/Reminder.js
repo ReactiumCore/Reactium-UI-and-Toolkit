@@ -1,9 +1,9 @@
 // Icon: Linear.Reminder
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M482.029 102.402c-10.546 0-20.421-6.566-24.136-17.074-7.218-20.413-26.624-34.128-48.293-34.128-21.667 0-41.075 13.715-48.293 34.128-4.712 13.33-19.341 20.315-32.669 15.603-13.331-4.712-20.315-19.339-15.603-32.669 14.435-40.83 53.242-68.262 96.565-68.262 43.325 0 82.131 27.432 96.565 68.262 4.712 13.331-2.274 27.957-15.603 32.669-2.822 0.997-5.702 1.47-8.533 1.47z' />

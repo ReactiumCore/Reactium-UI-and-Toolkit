@@ -1,9 +1,9 @@
 // Icon: Linear.Mic
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M486.4 716.8c-98.811 0-179.2-80.389-179.2-179.2v-307.2c0-98.811 80.389-179.2 179.2-179.2s179.2 80.389 179.2 179.2v307.2c0 98.811-80.389 179.2-179.2 179.2zM486.4 102.4c-70.579 0-128 57.421-128 128v307.2c0 70.579 57.421 128 128 128s128-57.421 128-128v-307.2c0-70.579-57.421-128-128-128z' />

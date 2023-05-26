@@ -83,11 +83,11 @@ const Toolbar = Reactium.Utils.registryFactory(
     Reactium.Utils.Registry.MODES.CLEAN,
 );
 
-Elements.sort = key => sorter(Elements.list, Elements.__name, key);
-Hotkeys.sort = key => sorter(Hotkeys.list, Hotkeys.__name, key);
-Pubsub.sort = key => sorter(Pubsub.list, Pubsub.__name, key);
-Sidebar.sort = key => sorter(Sidebar.list, Sidebar.__name, key);
-Toolbar.sort = key => sorter(Toolbar.list, Toolbar.__name, key);
+Elements.sort = (key) => sorter(Elements.list, Elements.__name, key);
+Hotkeys.sort = (key) => sorter(Hotkeys.list, Hotkeys.__name, key);
+Pubsub.sort = (key) => sorter(Pubsub.list, Pubsub.__name, key);
+Sidebar.sort = (key) => sorter(Sidebar.list, Sidebar.__name, key);
+Toolbar.sort = (key) => sorter(Toolbar.list, Toolbar.__name, key);
 
 Sidebar.position = {
     left: 'left',
@@ -100,7 +100,7 @@ Toolbar.align = {
     center: 'center',
 };
 
-Hotkeys.search = async e => {
+Hotkeys.search = async (e) => {
     const type = e.type;
     const list = Hotkeys.sort();
 
@@ -123,7 +123,7 @@ Hotkeys.search = async e => {
 
         if (!callback || !_.isFunction(callback)) continue;
 
-        const match = hotkeys.filter(hotkey => isHotkey(hotkey, e));
+        const match = hotkeys.filter((hotkey) => isHotkey(hotkey, e));
 
         if (match.length > 0) {
             const doNext = await callback(e, done);
@@ -242,7 +242,7 @@ class SDK {
     }
 
     get setDebug() {
-        return value => {
+        return (value) => {
             this.__debug = value;
             this.notify('debug', { value });
         };
@@ -253,7 +253,7 @@ class SDK {
     }
 
     get setFullscreen() {
-        return value => {
+        return (value) => {
             this.__fs = value;
 
             if (typeof window !== 'undefined') {
@@ -327,7 +327,7 @@ class SDK {
             .pluck('callback')
             .value();
 
-        _cbs.forEach(callback => {
+        _cbs.forEach((callback) => {
             try {
                 callback(evt);
             } catch (err) {
@@ -340,18 +340,19 @@ class SDK {
     }
 
     get useLinks() {
-        return props => {
+        return (props) => {
             const group = op.get(props, 'group', false);
             const order = op.get(props, 'order', 'order');
 
             const fetch = () => {
-                const filter = item => group !== !op.get(item, 'group', false);
+                const filter = (item) =>
+                    group !== !op.get(item, 'group', false);
                 return Sidebar.sort(order).filter(filter);
             };
 
             const [state, setState] = useDerivedState({ data: [] });
 
-            const isEqual = newData => _.isEqual(state.data, newData);
+            const isEqual = (newData) => _.isEqual(state.data, newData);
 
             const setData = (newData, caller) => {
                 if (isEqual(newData, caller)) return;
@@ -374,12 +375,12 @@ class SDK {
     }
 
     get useElements() {
-        return props => {
+        return (props) => {
             const zone = op.get(props, 'zone', null);
             const order = op.get(props, 'order', 'order');
 
             const fetch = () => {
-                const filter = item => {
+                const filter = (item) => {
                     if (!op.get(item, 'component') || !zone) return false;
 
                     return _.chain([op.get(item, 'zone', null)])
@@ -394,7 +395,7 @@ class SDK {
             };
 
             const state = useSyncState({ data: fetch() });
-            state.extend('setData', data => state.set('data', data));
+            state.extend('setData', (data) => state.set('data', data));
 
             useEffect(() => {
                 state.setData(fetch());
@@ -412,20 +413,20 @@ class SDK {
     }
 
     get useToolbarElements() {
-        return props => {
+        return (props) => {
             const order = op.get(props, 'order', 'order');
 
             const fetch = () => {
-                const filter = item => !!op.get(item, 'component');
+                const filter = (item) => !!op.get(item, 'component');
 
                 return Toolbar.sort(order).filter(filter);
             };
 
             const [state, setState] = useDerivedState({ data: [] });
 
-            const isEqual = newData => _.isEqual(state.data, newData);
+            const isEqual = (newData) => _.isEqual(state.data, newData);
 
-            const setData = newData => {
+            const setData = (newData) => {
                 if (isEqual(newData)) return;
                 setState({ data: newData });
             };

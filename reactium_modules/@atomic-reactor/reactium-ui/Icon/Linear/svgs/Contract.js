@@ -1,9 +1,9 @@
 // Icon: Linear.Contract
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M384 153.6c-14.138 0-25.6 11.462-25.6 25.6v142.995l-314.698-314.698c-9.998-9.997-26.206-9.997-36.205 0-9.997 9.998-9.997 26.206 0 36.205l314.698 314.698h-142.995c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h204.8c14.138 0 25.6-11.462 25.6-25.6v-204.8c0-14.138-11.462-25.6-25.6-25.6z' />

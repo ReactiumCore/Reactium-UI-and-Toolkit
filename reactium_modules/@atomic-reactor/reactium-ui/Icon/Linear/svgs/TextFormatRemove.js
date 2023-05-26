@@ -1,9 +1,9 @@
 // Icon: Linear.TextFormatRemove
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M691.2 51.2h-614.4c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h276.981l-97.432 584.592c-2.325 13.946 7.098 27.134 21.043 29.459 1.426 0.237 2.842 0.354 4.24 0.354 12.288 0 23.133-8.875 25.221-21.397l98.834-593.008h285.514c14.139 0 25.6-11.462 25.6-25.6s-11.461-25.6-25.6-25.6z' />

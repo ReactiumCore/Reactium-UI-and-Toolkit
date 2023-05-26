@@ -1,9 +1,9 @@
 // Icon: Linear.CameraPlay
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M979.494 873.131c-0.002 0-0.003 0-0.006 0-12.378-0.002-24.848-4.955-37.061-14.723l-176.037-140.834c-28.272-22.613-49.59-66.97-49.59-103.174v-153.6c0-36.206 21.32-80.562 49.592-103.176l176.034-140.83c12.216-9.773 24.686-14.726 37.066-14.726 22.155 0 44.509 16.677 44.509 53.933v563.2c0 14.234-3.275 26.197-9.733 35.558-8.056 11.675-20.73 18.373-34.773 18.373zM972.8 258.064l-174.426 139.542c-15.898 12.715-30.374 42.835-30.374 63.194v153.6c0 20.358 14.477 50.478 30.371 63.194l174.429 139.544v-559.074z' />

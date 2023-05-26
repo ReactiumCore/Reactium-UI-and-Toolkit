@@ -1,9 +1,9 @@
 // Icon: Feather.CloudOff
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M409.6 213.333c128 12.8 230.4 102.4 264.533 221.867 4.267 17.067 21.333 34.133 42.667 34.133h51.2c0 0 0 0 0 0 21.333 0 46.933 4.267 68.267 12.8 85.333 38.4 128 136.533 89.6 221.867-8.533 21.333 0 46.933 21.333 55.467 4.267 4.267 12.8 4.267 17.067 4.267 17.067 0 34.133-8.533 38.4-25.6 55.467-128-4.267-281.6-136.533-337.067-29.867-8.533-64-17.067-98.133-17.067h-21.333c-51.2-140.8-179.2-243.2-328.533-256-25.6 0-42.667 17.067-46.933 38.4-4.267 25.6 17.067 42.667 38.4 46.933z' />

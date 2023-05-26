@@ -1,9 +1,9 @@
 // Icon: Linear.SortAlphaDesc
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M453.301 749.899c-9.997-9.997-26.206-9.997-36.203 0l-161.098 161.098v-885.397c0-14.138-11.462-25.6-25.6-25.6s-25.6 11.462-25.6 25.6v885.397l-161.099-161.098c-9.997-9.997-26.206-9.997-36.203 0-9.998 9.997-9.998 26.206 0 36.203l204.8 204.8c5 4.998 11.55 7.498 18.102 7.498s13.102-2.499 18.101-7.499l204.8-204.8c9.998-9.997 9.998-26.205 0-36.202z' />

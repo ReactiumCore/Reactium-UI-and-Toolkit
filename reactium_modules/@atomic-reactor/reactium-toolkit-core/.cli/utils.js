@@ -36,10 +36,10 @@ SDK.codeFormat = (str, options = {}) => {
     return code;
 };
 
-SDK.directoryName = str =>
+SDK.directoryName = (str) =>
     str ? camelcase(SDK.slug(str), { pascalCase: true }) : str;
 
-SDK.excludePath = p => {
+SDK.excludePath = (p) => {
     if (p.startsWith(SDK.resolve(cwd, 'src'))) {
         return false;
     }
@@ -76,28 +76,22 @@ SDK.hasLiveEditor = () =>
         ),
     );
 
-SDK.isEmpty = dir => {
+SDK.isEmpty = (dir) => {
     let files = [];
 
     try {
-        files = fs.readdirSync(dir).filter(
-            file =>
-                !String(file)
-                    .toLowerCase()
-                    .endsWith('.ds_store'),
-        );
+        files = fs
+            .readdirSync(dir)
+            .filter(
+                (file) => !String(file).toLowerCase().endsWith('.ds_store'),
+            );
     } catch (err) {}
     return files.length < 1;
 };
 
 SDK.mergeParams = (params = {}, merge = {}) => {
     Object.entries(merge).forEach(([key, val]) => {
-        val = _.chain([val])
-            .compact()
-            .isEmpty()
-            .value()
-            ? undefined
-            : val;
+        val = _.chain([val]).compact().isEmpty().value() ? undefined : val;
         params[key] = val;
     });
 
@@ -108,9 +102,9 @@ SDK.normalize = (...args) => path.normalize(path.join(...args));
 
 SDK.resolve = (...args) => path.resolve(SDK.normalize(...args));
 
-SDK.slug = str => slugify(str, { lower: true });
+SDK.slug = (str) => slugify(str, { lower: true });
 
-const reqF = modulePath => {
+const reqF = (modulePath) => {
     try {
         return require(modulePath);
     } catch (e) {
@@ -127,7 +121,7 @@ SDK.sidebarGroups = () => {
 
     // get domain.js files
     const glob = [normalize(cwd, '**', 'domain.js')];
-    globby(glob).forEach(filePath => {
+    globby(glob).forEach((filePath) => {
         const domain = reqF(filePath);
         if (!!op.get(domain, 'reactiumToolkit.group')) {
             const value = op.get(domain, 'reactiumToolkit.group.id');

@@ -1,9 +1,9 @@
 // Icon: Linear.Paste
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M435.2 153.6c-6.736 0-13.328-2.736-18.096-7.504s-7.504-11.36-7.504-18.096 2.736-13.328 7.504-18.096c4.752-4.768 11.36-7.504 18.096-7.504s13.344 2.736 18.096 7.504c4.768 4.752 7.504 11.36 7.504 18.096s-2.736 13.344-7.504 18.096c-4.768 4.768-11.36 7.504-18.096 7.504z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.TombstoneHipster
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M358.4 358.4v-51.2c0-28.232-22.968-51.2-51.2-51.2h-51.2c-28.232 0-51.2 22.968-51.2 51.2v179.2c0 14.138 11.462 25.6 25.6 25.6s25.6-11.462 25.6-25.6v-76.8h9.778l44.125 88.248c4.486 8.971 13.526 14.157 22.917 14.157 3.846 0 7.755-0.87 11.429-2.707 12.646-6.323 17.771-21.701 11.45-34.346l-33.762-67.523c21.070-6.344 36.464-25.918 36.464-49.029zM256 307.2h51.2v51.2h-51.2v-51.2z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.Golf
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M384 819.2c-127.043 0-230.4-103.357-230.4-230.4s103.357-230.4 230.4-230.4 230.4 103.357 230.4 230.4c0 127.043-103.357 230.4-230.4 230.4zM384 409.6c-98.811 0-179.2 80.389-179.2 179.2s80.389 179.2 179.2 179.2 179.2-80.389 179.2-179.2-80.389-179.2-179.2-179.2z' />

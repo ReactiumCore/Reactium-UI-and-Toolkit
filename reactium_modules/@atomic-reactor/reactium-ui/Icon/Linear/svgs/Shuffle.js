@@ -1,9 +1,9 @@
 // Icon: Linear.Shuffle
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M793.597 870.406c-10.72 0.002-20.707-6.782-24.283-17.51-4.472-13.413 2.778-27.91 16.19-32.381l43.346-14.448c-167.034-39.242-265.997-160.195-362.264-277.854-114.534-139.989-222.717-272.213-440.986-272.213-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6c242.531 0 363.565 147.93 480.613 290.989 114.536 139.987 222.718 272.211 440.987 272.211 12.557 0 23.258 9.106 25.269 21.501 2.013 12.392-5.262 24.416-17.173 28.386l-153.6 51.2c-2.685 0.894-5.416 1.32-8.099 1.32z' />

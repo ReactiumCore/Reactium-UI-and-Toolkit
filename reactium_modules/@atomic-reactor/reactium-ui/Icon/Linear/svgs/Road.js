@@ -1,9 +1,9 @@
 // Icon: Linear.Road
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M25.626 1024.005c-1.747 0-3.522-0.179-5.299-0.554-13.835-2.914-22.69-16.491-19.778-30.325l204.8-972.8c2.912-13.834 16.49-22.686 30.325-19.778 13.835 2.912 22.69 16.49 19.778 30.325l-204.8 972.8c-2.539 12.058-13.176 20.331-25.026 20.331z' />

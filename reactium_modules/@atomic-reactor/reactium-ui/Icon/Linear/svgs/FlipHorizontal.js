@@ -1,9 +1,9 @@
 // Icon: Linear.FlipHorizontal
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M435.2 1024h-409.6c-8.576 0-16.582-4.296-21.326-11.438-4.744-7.146-5.595-16.19-2.267-24.096l409.6-972.8c4.728-11.23 16.714-17.573 28.661-15.16 11.944 2.413 20.533 12.909 20.533 25.094v972.8c0 14.139-11.462 25.6-25.6 25.6zM64.155 972.8h345.445v-820.43l-345.445 820.43z' />

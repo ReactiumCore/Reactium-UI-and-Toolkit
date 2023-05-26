@@ -1,9 +1,9 @@
 // Icon: Linear.DatabaseRefresh
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M897.050 930.267c-9.357-10.598-25.533-11.61-36.133-2.254-32.726 28.882-74.818 44.787-118.517 44.787-95.134 0-173.178-74.522-178.856-168.253l7.155 7.155c4.998 4.998 11.549 7.498 18.101 7.498s13.102-2.499 18.101-7.499c9.998-9.997 9.998-26.206 0-36.203l-51.2-51.2c-9.997-9.997-26.206-9.997-36.203 0l-51.2 51.2c-9.998 9.997-9.998 26.206 0 36.203 9.997 9.997 26.206 9.997 36.203 0l7.742-7.742c5.438 122.254 106.587 220.042 230.157 220.042 56.186 0 110.307-20.456 152.395-57.6 10.602-9.355 11.611-25.533 2.254-36.133z' />

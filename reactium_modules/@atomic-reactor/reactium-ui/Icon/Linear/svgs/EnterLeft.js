@@ -1,9 +1,9 @@
 // Icon: Linear.EnterLeft
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M427.701 709.301c9.997-9.997 9.997-26.206 0-36.203l-109.898-109.898h629.397c14.138 0 25.6-11.462 25.6-25.6s-11.462-25.6-25.6-25.6h-629.397l109.899-109.899c9.997-9.997 9.997-26.206 0-36.203s-26.206-9.998-36.203 0l-153.6 153.6c-5 5-7.499 11.55-7.499 18.102s2.499 13.102 7.499 18.101l153.6 153.6c9.997 9.998 26.205 9.998 36.202 0z' />

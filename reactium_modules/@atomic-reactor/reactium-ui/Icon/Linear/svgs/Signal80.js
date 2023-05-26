@@ -1,9 +1,9 @@
 // Icon: Linear.Signal80
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M128 972.8h-102.4c-14.138 0-25.6-11.461-25.6-25.6v-153.6c0-14.139 11.462-25.6 25.6-25.6h102.4c14.138 0 25.6 11.461 25.6 25.6v153.6c0 14.139-11.462 25.6-25.6 25.6zM51.2 921.6h51.2v-102.4h-51.2v102.4z' />

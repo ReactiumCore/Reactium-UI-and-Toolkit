@@ -1,9 +1,9 @@
 // Icon: Linear.ToggleOn
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M358.4 870.4h307.2c95.733 0 185.734-37.28 253.427-104.973s104.973-157.696 104.973-253.427c0-95.733-37.28-185.734-104.973-253.427s-157.694-104.973-253.427-104.973h-307.2c-95.731 0-185.734 37.28-253.427 104.973s-104.973 157.694-104.973 253.427c0 95.731 37.28 185.734 104.973 253.427s157.696 104.973 253.427 104.973zM665.6 204.8c169.39 0 307.2 137.81 307.2 307.2s-137.81 307.2-307.2 307.2h-307.2c-169.39 0-307.2-137.81-307.2-307.2s137.81-307.2 307.2-307.2h307.2z' />

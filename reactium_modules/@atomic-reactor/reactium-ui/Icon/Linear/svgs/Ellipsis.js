@@ -1,9 +1,9 @@
 // Icon: Linear.Ellipsis
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M128 665.6c-70.579 0-128-57.421-128-128s57.421-128 128-128 128 57.421 128 128-57.421 128-128 128zM128 460.8c-42.347 0-76.8 34.453-76.8 76.8s34.453 76.8 76.8 76.8 76.8-34.453 76.8-76.8c0-42.347-34.453-76.8-76.8-76.8z' />

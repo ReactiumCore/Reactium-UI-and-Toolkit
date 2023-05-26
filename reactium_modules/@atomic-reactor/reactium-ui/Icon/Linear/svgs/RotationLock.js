@@ -1,9 +1,9 @@
 // Icon: Linear.RotationLock
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M665.6 465.203v-30.003c0-70.579-57.421-128-128-128s-128 57.421-128 128v30.003c-29.797 10.568-51.2 39.024-51.2 72.397v153.6c0 42.349 34.453 76.8 76.8 76.8h204.8c42.349 0 76.8-34.451 76.8-76.8v-153.6c0-33.373-21.403-61.829-51.2-72.397zM537.6 358.4c42.347 0 76.8 34.453 76.8 76.8v25.6h-153.6v-25.6c0-42.347 34.453-76.8 76.8-76.8zM665.6 691.2c0 14.115-11.485 25.6-25.6 25.6h-204.8c-14.115 0-25.6-11.485-25.6-25.6v-153.6c0-14.115 11.485-25.6 25.6-25.6h204.8c14.115 0 25.6 11.485 25.6 25.6v153.6z' />

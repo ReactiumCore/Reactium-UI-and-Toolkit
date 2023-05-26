@@ -1,9 +1,9 @@
 // Icon: Linear.Weight
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M512 158.003v-81.203c0-14.138-11.462-25.6-25.6-25.6s-25.6 11.462-25.6 25.6v81.203c-29.797 10.568-51.2 39.024-51.2 72.397 0 42.347 34.453 76.8 76.8 76.8 42.349 0 76.8-34.453 76.8-76.8 0-33.373-21.403-61.829-51.2-72.397zM486.4 256c-14.115 0-25.6-11.485-25.6-25.6s11.485-25.6 25.6-25.6 25.6 11.485 25.6 25.6-11.485 25.6-25.6 25.6z' />

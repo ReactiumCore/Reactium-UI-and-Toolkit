@@ -1,9 +1,9 @@
 // Icon: Linear.EnterDown
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M658.101 596.299c-9.997-9.997-26.206-9.997-36.203 0l-109.898 109.898v-629.397c0-14.138-11.462-25.6-25.6-25.6s-25.6 11.462-25.6 25.6v629.397l-109.899-109.899c-9.997-9.997-26.206-9.997-36.203 0-9.998 9.997-9.998 26.206 0 36.203l153.6 153.6c5 5 11.55 7.499 18.102 7.499s13.102-2.499 18.101-7.499l153.6-153.6c9.998-9.997 9.998-26.205 0-36.202z' />

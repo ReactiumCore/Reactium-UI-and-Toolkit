@@ -1,9 +1,9 @@
 // Icon: Linear.Headset
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 667.016c-14.139 0-25.6-11.461-25.6-25.6v-180.616c0-260.306-149.294-409.6-409.6-409.6s-409.6 149.294-409.6 409.6v180.616c0 14.139-11.462 25.6-25.6 25.6s-25.6-11.461-25.6-25.6v-180.616c0-77.499 12.12-147.173 36.022-207.086 22.805-57.163 56.445-105.88 99.982-144.8 79.709-71.251 192.022-108.914 324.795-108.914s245.085 37.662 324.794 108.914c43.539 38.92 77.178 87.637 99.984 144.8 23.902 59.914 36.022 129.587 36.022 207.086v180.616c0 14.139-11.461 25.6-25.6 25.6z' />

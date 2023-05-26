@@ -1,9 +1,9 @@
 // Icon: Linear.FingersScrollRight2
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M716.8 896c0 14.138-11.462 25.6-25.6 25.6s-25.6-11.462-25.6-25.6c0-14.138 11.462-25.6 25.6-25.6s25.6 11.462 25.6 25.6z' />

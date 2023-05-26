@@ -1,9 +1,9 @@
 // Icon: Feather.PhoneIncoming
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M1011.2 12.8c-17.067-17.067-42.667-17.067-59.733 0l-226.133 226.133v-153.6c0-25.6-17.067-42.667-42.667-42.667s-42.667 17.067-42.667 42.667v256c0 4.267 0 12.8 4.267 17.067 4.267 8.533 12.8 17.067 21.333 21.333 4.267 4.267 12.8 4.267 17.067 4.267h256c25.6 0 42.667-17.067 42.667-42.667s-17.067-42.667-42.667-42.667h-153.6l226.133-226.133c17.067-17.067 17.067-42.667 0-59.733z' />

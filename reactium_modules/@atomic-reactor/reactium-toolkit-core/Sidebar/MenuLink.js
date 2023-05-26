@@ -23,7 +23,7 @@ const defaultProps = {
 
 const noop = () => {};
 
-const MenuLink = initialProps => {
+const MenuLink = (initialProps) => {
     const {
         children,
         exact,
@@ -67,7 +67,7 @@ const MenuLink = initialProps => {
         return urls.includes(url);
     };
 
-    const onToggle = e => {
+    const onToggle = (e) => {
         if (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -108,7 +108,8 @@ const MenuLink = initialProps => {
                             expanded: expanded && related.length > 0,
                             [cx('sidebar-menu-item-heading')]: !group,
                             [cx('sidebar-menu-item-link')]: !!group,
-                        })}>
+                        })}
+                    >
                         <span>{children}</span>
                         <Toggle />
                     </NavLink>
@@ -120,7 +121,8 @@ const MenuLink = initialProps => {
                             expanded: expanded && related.length > 0,
                             [cx('sidebar-menu-item-heading')]: !group,
                             [cx('sidebar-menu-item-link')]: !!group,
-                        })}>
+                        })}
+                    >
                         <span>{children}</span>
                         <Toggle />
                     </a>
@@ -135,7 +137,8 @@ const MenuLink = initialProps => {
                         toggle: related.length > 0,
                         [cx('sidebar-menu-item-heading')]: !group,
                         [cx('sidebar-menu-item-link')]: !!group,
-                    })}>
+                    })}
+                >
                     <span>{children}</span>
                     <Toggle />
                 </div>
@@ -145,7 +148,8 @@ const MenuLink = initialProps => {
                     className={cx(
                         'sidebar-menu-sub',
                         `sidebar-menu-sub-${depth}`,
-                    )}>
+                    )}
+                >
                     {related.map(
                         ({ component: Component = MenuLink, ...item }) => (
                             <Component

@@ -69,15 +69,15 @@ precacheAndRoute(self.__WB_MANIFEST);
 //     );
 // });
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
     skipWaiting();
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
     clientsClaim();
 });
 
-self.addEventListener('message', event => {
+self.addEventListener('message', (event) => {
     if (event.data.type === messageTypes.GET_VERSION) {
         event.ports[0].postMessage(SW_VERSION);
     }

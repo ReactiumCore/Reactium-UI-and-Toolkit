@@ -128,7 +128,8 @@ let Code = (
     return (
         <div
             className={cn(namespace, className)}
-            ref={elm => refs.set('container', elm)}>
+            ref={(elm) => refs.set('container', elm)}
+        >
             <CodeMirror
                 {...events}
                 options={props}
@@ -206,7 +207,7 @@ Code.defaultProps = {
 const CodeCopy = ({ value }) => {
     const { Icon } = useHookComponent('RTK');
 
-    const copyParse = str =>
+    const copyParse = (str) =>
         String(str)
             .replace(/\=\'true\'/gi, '')
             .replace(/\'false\'/gi, '{ false }');
@@ -215,7 +216,8 @@ const CodeCopy = ({ value }) => {
         <button
             className='rtk-btn-clear-xs'
             onClick={() => copy(copyParse(value))}
-            style={{ padding: 0, width: 40, height: 32 }}>
+            style={{ padding: 0, width: 40, height: 32 }}
+        >
             <Icon value='Feather.Copy' size={14} />
         </button>
     );

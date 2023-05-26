@@ -1,9 +1,9 @@
 // Icon: Linear.SpeedMedium
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M486.4 768c-42.347 0-76.8-34.453-76.8-76.8 0-29.131 43-264.862 51.621-311.822 2.23-12.152 12.824-20.978 25.179-20.978s22.949 8.826 25.179 20.978c8.621 46.96 51.621 282.691 51.621 311.822 0 42.347-34.453 76.8-76.8 76.8zM486.4 529.080c-14.472 82.878-25.534 150.821-25.6 162.126 0 14.109 11.485 25.594 25.6 25.594s25.6-11.485 25.6-25.6c-0.066-11.302-11.128-79.243-25.6-162.12z' />

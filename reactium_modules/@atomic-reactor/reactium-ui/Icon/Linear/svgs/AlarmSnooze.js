@@ -1,9 +1,9 @@
 // Icon: Linear.AlarmSnooze
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M998.4 256h-153.6c-9.698 0-18.562-5.478-22.898-14.152-4.338-8.672-3.402-19.051 2.418-26.808l122.88-163.84h-102.4c-14.139 0-25.6-11.462-25.6-25.6s11.461-25.6 25.6-25.6h153.6c9.698 0 18.562 5.478 22.898 14.152 4.338 8.672 3.402 19.051-2.418 26.808l-122.88 163.84h102.4c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z' />

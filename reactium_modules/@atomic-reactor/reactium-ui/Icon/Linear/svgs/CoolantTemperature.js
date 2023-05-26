@@ -1,9 +1,9 @@
 // Icon: Linear.CoolantTemperature
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M281.6 819.2c-31.643 0-60.419-14.387-88.248-28.302-23.552-11.776-45.795-22.898-65.352-22.898-33.026 0-72.074 31.571-84.333 43.736-10.021 9.944-26.221 9.917-36.186-0.086s-9.966-26.168 0.018-36.152c6.006-6.006 60.432-58.698 120.501-58.698 31.643 0 60.419 14.387 88.248 28.302 23.552 11.776 45.795 22.898 65.352 22.898 14.138 0 25.6 11.461 25.6 25.6s-11.462 25.6-25.6 25.6z' />

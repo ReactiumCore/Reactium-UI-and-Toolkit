@@ -1,9 +1,9 @@
 // Icon: Linear.3DGlasses
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 768h-281.6c-38.040 0-79.939-27.23-95.387-61.99l-58.213-130.976-58.211 130.976c-15.45 34.76-57.35 61.99-95.389 61.99h-281.6c-42.347 0-76.8-34.451-76.8-76.8v-307.2c0-42.347 34.453-76.8 76.8-76.8h870.4c42.349 0 76.8 34.453 76.8 76.8v307.2c0 42.349-34.451 76.8-76.8 76.8zM512 513.888c8.675 0 30.349 3.363 44.187 34.502l60.813 136.826c7.347 16.53 30.51 31.584 48.6 31.584h281.6c14.115 0 25.6-11.485 25.6-25.6v-307.2c0-14.115-11.485-25.6-25.6-25.6h-870.4c-14.115 0-25.6 11.485-25.6 25.6v307.2c0 14.115 11.485 25.6 25.6 25.6h281.6c18.090 0 41.254-15.054 48.6-31.584l60.811-136.826c13.842-31.141 35.514-34.502 44.189-34.502z' />

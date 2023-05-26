@@ -1,9 +1,9 @@
 // Icon: Linear.Cable2
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M332.8 716.8h-153.6c-14.115 0-25.6-11.485-25.6-25.6v-79.374c58.355-11.894 102.4-63.611 102.4-125.426v-358.4c0-14.138-11.462-25.6-25.6-25.6h-76.8v-76.8c0-14.138-11.462-25.6-25.6-25.6s-25.6 11.462-25.6 25.6v76.8h-76.8c-14.138 0-25.6 11.462-25.6 25.6v358.4c0 61.814 44.045 113.531 102.4 125.426v79.374c0 42.349 34.453 76.8 76.8 76.8h153.6c14.115 0 25.6 11.485 25.6 25.6v204.8c0 14.139 11.462 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-204.8c0-42.349-34.453-76.8-76.8-76.8zM204.8 153.6v51.2h-153.6v-51.2h153.6zM51.2 486.4v-230.4h153.6v230.4c0 42.349-34.453 76.8-76.8 76.8s-76.8-34.451-76.8-76.8z' />

@@ -1,4 +1,4 @@
-module.exports = webpackConfig => {
+module.exports = (webpackConfig) => {
     const newWebpackConfig = Object.assign({}, webpackConfig);
 
     newWebpackConfig.module.rules.push({

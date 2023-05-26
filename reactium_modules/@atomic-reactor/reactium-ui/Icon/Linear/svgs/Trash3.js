@@ -1,9 +1,9 @@
 // Icon: Linear.Trash3
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M588.8 153.6c-14.139 0-25.6-11.462-25.6-25.6v-51.2c0-14.115-11.485-25.6-25.6-25.6h-102.4c-14.115 0-25.6 11.485-25.6 25.6v51.2c0 14.138-11.462 25.6-25.6 25.6s-25.6-11.462-25.6-25.6v-51.2c0-42.347 34.453-76.8 76.8-76.8h102.4c42.347 0 76.8 34.453 76.8 76.8v51.2c0 14.138-11.461 25.6-25.6 25.6z' />

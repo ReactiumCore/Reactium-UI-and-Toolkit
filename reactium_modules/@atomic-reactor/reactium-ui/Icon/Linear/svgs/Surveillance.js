@@ -1,9 +1,9 @@
 // Icon: Linear.Surveillance
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M665.923 281.6c0 14.138-11.534 25.6-25.762 25.6s-25.762-11.462-25.762-25.6c0-14.138 11.534-25.6 25.762-25.6s25.762 11.462 25.762 25.6z' />

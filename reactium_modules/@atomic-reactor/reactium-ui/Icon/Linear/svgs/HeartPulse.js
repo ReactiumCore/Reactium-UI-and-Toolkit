@@ -1,9 +1,9 @@
 // Icon: Linear.HeartPulse
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M486.4 972.8c-4.283 0-8.566-1.074-12.432-3.222-5.954-3.307-147.285-82.464-274.914-208.987-10.040-9.954-10.11-26.163-0.157-36.203s26.163-10.11 36.203-0.157c101.349 100.472 214.307 171.323 251.293 193.35 37-22.054 150.123-93.045 251.304-193.352 10.042-9.952 26.248-9.882 36.205 0.158 9.954 10.040 9.883 26.25-0.158 36.205-127.629 126.52-268.958 205.678-274.912 208.986-3.866 2.149-8.149 3.222-12.432 3.222z' />

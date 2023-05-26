@@ -1,9 +1,9 @@
 // Icon: Feather.Repeat
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M128 512c25.6 0 42.667-17.067 42.667-42.667v-85.333c0-72.533 55.467-128 128-128h494.933l-98.133 98.133c-17.067 17.067-17.067 42.667 0 59.733 8.533 8.533 17.067 12.8 29.867 12.8s21.333-4.267 29.867-12.8l170.667-170.667c4.267-4.267 8.533-8.533 8.533-12.8 4.267-8.533 4.267-21.333 0-34.133-4.267-4.267-4.267-8.533-8.533-12.8l-170.667-170.667c-17.067-17.067-42.667-17.067-59.733 0s-17.067 42.667 0 59.733l98.133 98.133h-494.933c-119.467 0-213.333 93.867-213.333 213.333v85.333c0 25.6 17.067 42.667 42.667 42.667z' />

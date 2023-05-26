@@ -1,9 +1,9 @@
 // Icon: Linear.PieChart
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M435.2 1024c-116.246 0-225.534-45.269-307.733-127.467s-127.467-191.488-127.467-307.733c0-116.246 45.269-225.534 127.467-307.733s191.486-127.467 307.733-127.467c14.138 0 25.6 11.462 25.6 25.6v384h384c14.139 0 25.6 11.461 25.6 25.6 0 116.245-45.269 225.534-127.467 307.733s-191.488 127.467-307.733 127.467zM409.6 205.643c-199.842 13.226-358.4 180.026-358.4 383.157 0 211.739 172.262 384 384 384 203.131 0 369.931-158.558 383.157-358.4h-383.157c-14.138 0-25.6-11.461-25.6-25.6v-383.157z' />

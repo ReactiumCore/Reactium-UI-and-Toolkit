@@ -1,9 +1,9 @@
 // Icon: Linear.Flare
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M384.378 435.576c-6.552 0-13.102-2.499-18.101-7.498l-108.613-108.611c-9.998-9.998-9.998-26.206 0-36.203 9.998-9.998 26.206-9.998 36.203 0l108.613 108.611c9.998 9.998 9.998 26.206 0 36.203-5 4.998-11.55 7.498-18.102 7.498z' />

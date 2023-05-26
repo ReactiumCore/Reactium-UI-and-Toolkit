@@ -1,9 +1,9 @@
 // Icon: Linear.CloudUpload
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M658.099 596.301l-102.4-102.4c-9.995-9.997-26.206-9.997-36.203 0l-102.4 102.4c-9.997 9.995-9.997 26.206 0 36.203s26.206 9.997 36.205 0l58.699-58.699v219.795c0 14.139 11.461 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-219.795l58.701 58.699c4.997 4.997 11.547 7.496 18.099 7.496s13.102-2.499 18.099-7.501c10-9.995 10-26.203 0-36.198z' />

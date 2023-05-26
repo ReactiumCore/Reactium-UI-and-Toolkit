@@ -1,9 +1,9 @@
 // Icon: Linear.WifiAlertLow
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M537.597 819.203c-42.349 0-76.803-34.453-76.803-76.803s34.454-76.803 76.803-76.803c42.35 0 76.803 34.453 76.803 76.803s-34.453 76.803-76.803 76.803zM537.597 716.797c-14.117 0-25.603 11.486-25.603 25.603s11.486 25.603 25.603 25.603 25.603-11.486 25.603-25.603-11.486-25.603-25.603-25.603z' />

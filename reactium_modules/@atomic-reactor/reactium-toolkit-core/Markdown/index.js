@@ -12,7 +12,7 @@ const components = () =>
         return obj;
     }, {});
 
-const parser = value => {
+const parser = (value) => {
     let str = String(value);
     const originalStr = String(value);
 

@@ -1,9 +1,9 @@
 // Icon: Feather.VideoOff
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M1002.667 260.267c-12.8-8.533-29.867-4.267-42.667 4.267l-230.4 162.133-4.267-4.267v-123.733c0-72.533-55.467-128-128-128h-140.8c-25.6 0-42.667 17.067-42.667 42.667s17.067 42.667 42.667 42.667h140.8c25.6 0 42.667 17.067 42.667 42.667v140.8c0 12.8 4.267 21.333 12.8 29.867l42.667 42.667c12.8 12.8 38.4 17.067 55.467 4.267l187.733-132.267v341.333c0 25.6 17.067 42.667 42.667 42.667s42.667-17.067 42.667-42.667v-426.667c0-17.067-8.533-29.867-21.333-38.4z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.FlashMemory
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M844.8 1024h-665.6c-42.347 0-76.8-34.451-76.8-76.8v-640c0-35.235 18.787-80.594 43.701-105.506l157.992-157.992c24.917-24.915 70.275-43.702 105.507-43.702h435.2c42.349 0 76.8 34.453 76.8 76.8v870.4c0 42.349-34.451 76.8-76.8 76.8zM409.6 51.2c-21.245 0-54.278 13.683-69.302 28.707l-157.992 157.992c-15.024 15.022-28.706 48.053-28.706 69.301v640c0 14.115 11.485 25.6 25.6 25.6h665.6c14.115 0 25.6-11.485 25.6-25.6v-870.4c0-14.115-11.485-25.6-25.6-25.6h-435.2z' />

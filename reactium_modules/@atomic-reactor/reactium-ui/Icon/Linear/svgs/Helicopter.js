@@ -1,9 +1,9 @@
 // Icon: Linear.Helicopter
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M1024 486.4c0-33.373-21.403-61.829-51.2-72.397v-81.203c0-14.138-11.461-25.6-25.6-25.6s-25.6 11.462-25.6 25.6v81.203c-29.797 10.568-51.2 39.024-51.2 72.397s21.403 61.83 51.2 72.397v81.203c0 14.139 11.461 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-81.203c29.797-10.566 51.2-39.024 51.2-72.397zM947.2 512c-14.115 0-25.6-11.485-25.6-25.6s11.485-25.6 25.6-25.6 25.6 11.485 25.6 25.6-11.485 25.6-25.6 25.6z' />

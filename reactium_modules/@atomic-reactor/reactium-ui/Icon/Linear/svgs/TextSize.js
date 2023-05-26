@@ -1,9 +1,9 @@
 // Icon: Linear.TextSize
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M356.331 834.715l-65.734-153.381c-0.030-0.072-0.061-0.144-0.093-0.216l-87.773-204.803c-4.035-9.413-13.291-15.515-23.531-15.515s-19.496 6.102-23.531 15.515l-87.771 204.803c-0.032 0.072-0.062 0.144-0.093 0.216l-65.736 153.381c-5.568 12.995 0.451 28.045 13.446 33.614 12.997 5.57 28.046-0.451 33.614-13.445l59.179-138.085h141.781l59.179 138.085c4.162 9.707 13.61 15.523 23.542 15.522 3.363 0 6.784-0.667 10.072-2.077 12.997-5.568 19.016-20.619 13.448-33.614zM130.251 665.6l48.949-114.213 48.949 114.213h-97.898z' />

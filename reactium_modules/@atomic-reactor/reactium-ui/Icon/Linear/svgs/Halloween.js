@@ -1,9 +1,9 @@
 // Icon: Linear.Halloween
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M384.032 614.4c-0.010 0.002-0.019 0.002-0.032 0h-153.6c-7.883 0-15.326-3.632-20.178-9.843-4.851-6.214-6.57-14.315-4.658-21.966 0.29-1.157 7.242-28.645 21.138-56.437 27.006-54.016 58.682-65.354 80.498-65.354s53.491 11.338 80.498 65.354c12.168 24.334 19.011 48.437 20.72 54.834 0.789 2.464 1.214 5.090 1.214 7.814 0 14.138-11.462 25.598-25.6 25.598zM266.010 563.2h82.381c-11.11-26.483-27.024-51.2-41.19-51.2s-30.080 24.717-41.19 51.2z' />

@@ -1,0 +1,31 @@
+@mixin inputStyleFocus($clr: $input-color-focus) {
+  box-shadow: 0 0 0 2px rgba(lighten($clr, 5%), 0.25);
+  border: 1px solid $clr;
+  transition: box-shadow 0.125s;
+}
+
+@mixin inputStyle(
+  $clr: $input-color-focus,
+  $clr-border: $input-color-border,
+  $radius: $input-radius
+) {
+  flex-grow: 1;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 200;
+  outline: none;
+  border: 1px solid $clr-border;
+  border-radius: $radius;
+  line-height: 1;
+  margin-top: 0;
+  padding: 10px;
+
+  &:focus,
+  &.focus {
+      @include inputStyleFocus($clr);
+  }
+
+  &:disabled {
+      opacity: 0.8;
+  }
+}

@@ -1,9 +1,9 @@
 // Icon: Linear.Bicycle2
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M281.6 460.902c-42.405 0-76.902-34.499-76.902-76.902s34.499-76.902 76.902-76.902 76.902 34.499 76.902 76.902-34.498 76.902-76.902 76.902zM281.6 358.298c-14.173 0-25.702 11.531-25.702 25.702s11.531 25.702 25.702 25.702 25.702-11.531 25.702-25.702-11.53-25.702-25.702-25.702z' />

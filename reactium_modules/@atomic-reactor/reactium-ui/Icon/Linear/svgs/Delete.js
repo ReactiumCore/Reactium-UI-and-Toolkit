@@ -1,9 +1,9 @@
 // Icon: Linear.Delete
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M701.803 537.6l135.499-135.499c9.998-9.997 9.998-26.206 0-36.203-9.997-9.997-26.206-9.997-36.203 0l-135.499 135.499-135.499-135.499c-9.997-9.997-26.206-9.997-36.203 0-9.998 9.997-9.998 26.206 0 36.203l135.499 135.499-135.499 135.499c-9.998 9.997-9.998 26.206 0 36.203 5 4.998 11.55 7.498 18.102 7.498s13.102-2.499 18.101-7.499l135.499-135.498 135.499 135.499c4.998 4.998 11.549 7.498 18.101 7.498s13.102-2.499 18.101-7.499c9.998-9.997 9.998-26.206 0-36.203l-135.498-135.498z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.3DRotate
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M486.4 921.6c-127.362 0-247.494-27.773-338.267-78.203-40.118-22.288-72.672-47.962-96.933-76.026v26.229c0 14.139-11.462 25.6-25.6 25.6s-25.6-11.461-25.6-25.6v-153.6c0-14.139 11.462-25.6 25.6-25.6s25.6 11.461 25.6 25.6c0 58.666 43.256 115.006 121.798 158.64 83.294 46.275 194.595 71.76 313.402 71.76 89.301 0 175.28-14.555 248.642-42.090 69.854-26.219 123.653-62.24 155.578-104.173 8.566-11.25 24.63-13.424 35.877-4.861 11.248 8.566 13.426 24.627 4.861 35.877-76.982 101.112-251.638 166.446-444.957 166.446z' />

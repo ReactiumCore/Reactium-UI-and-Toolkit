@@ -1,9 +1,9 @@
 // Icon: Linear.Bag
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M435.187 870.406c-11.141 0-21.39-7.328-24.602-18.573-3.885-13.594 3.987-27.765 17.582-31.648l358.4-102.4c13.597-3.88 27.763 3.987 31.648 17.582 3.883 13.594-3.989 27.765-17.582 31.648l-358.4 102.4c-2.35 0.67-4.718 0.99-7.046 0.99z' />

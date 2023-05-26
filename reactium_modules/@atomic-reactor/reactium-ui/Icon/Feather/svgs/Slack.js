@@ -1,9 +1,9 @@
 // Icon: Feather.Slack
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M981.333 371.2c-55.467-179.2-119.467-281.6-217.6-332.8-89.6-51.2-213.333-51.2-392.533 4.267-345.6 102.4-435.2 268.8-328.533 610.133 76.8 256 187.733 371.2 379.733 371.2 68.267 0 140.8-12.8 230.4-38.4 341.333-106.667 435.2-273.067 328.533-614.4zM627.2 900.267c-298.667 89.6-413.867 25.6-503.467-273.067-89.6-294.4-25.6-413.867 273.067-503.467 85.333-25.6 153.6-38.4 209.067-38.4 46.933 0 89.6 8.533 123.733 25.6 72.533 38.4 128 128 174.933 281.6 0 0 0 0 0 0 85.333 298.667 21.333 418.133-277.333 507.733z' />

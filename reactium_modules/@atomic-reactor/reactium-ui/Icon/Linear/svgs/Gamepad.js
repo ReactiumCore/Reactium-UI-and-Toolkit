@@ -1,9 +1,9 @@
 // Icon: Linear.Gamepad
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M768 768c-55.33 0-109.509-18.115-153.603-51.189l-204.797 0.002c-44.094 33.072-98.274 51.187-153.6 51.187-141.158 0-256-114.84-256-256s114.842-256 256-256h512c141.16 0 256 114.84 256 256s-114.84 256-256 256zM623.184 665.611c5.861 0 11.546 2.011 16.101 5.699 36.786 29.76 81.293 45.49 128.715 45.49 112.926 0 204.8-91.874 204.8-204.8s-91.874-204.8-204.8-204.8h-512c-112.928 0-204.8 91.874-204.8 204.8s91.872 204.8 204.8 204.8c47.419 0 91.926-15.73 128.709-45.49 4.557-3.688 10.24-5.699 16.101-5.699h222.374z' />

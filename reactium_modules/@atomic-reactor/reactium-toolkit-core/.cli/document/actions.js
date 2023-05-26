@@ -7,7 +7,7 @@ const { codeFormat } = require('../utils');
 const handlebars = require('handlebars').compile;
 
 module.exports = ({ Spinner }) => {
-    const message = text => {
+    const message = (text) => {
         if (Spinner) {
             Spinner.text = text;
         }

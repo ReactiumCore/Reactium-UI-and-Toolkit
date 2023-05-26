@@ -1,9 +1,9 @@
 // Icon: Feather.Pocket
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M853.333 85.333h-682.667c-72.533 0-128 55.467-128 128v256c0 260.267 209.067 469.333 469.333 469.333s469.333-209.067 469.333-469.333v-256c0-72.533-55.467-128-128-128zM896 469.333c0 213.333-170.667 384-384 384s-384-170.667-384-384v-256c0-25.6 17.067-42.667 42.667-42.667h682.667c25.6 0 42.667 17.067 42.667 42.667v256z' />

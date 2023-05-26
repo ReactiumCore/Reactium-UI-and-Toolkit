@@ -1,9 +1,9 @@
 // Icon: Linear.ChartSettings
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M128 768h-102.4c-14.138 0-25.6-11.461-25.6-25.6v-460.8c0-14.138 11.462-25.6 25.6-25.6h102.4c14.138 0 25.6 11.462 25.6 25.6v460.8c0 14.139-11.462 25.6-25.6 25.6zM51.2 716.8h51.2v-409.6h-51.2v409.6z' />

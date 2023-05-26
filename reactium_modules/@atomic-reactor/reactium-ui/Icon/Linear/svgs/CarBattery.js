@@ -1,9 +1,9 @@
 // Icon: Linear.CarBattery
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M998.4 256h-76.8v-76.8c0-14.138-11.461-25.6-25.6-25.6h-153.6c-14.139 0-25.6 11.462-25.6 25.6v76.8h-409.6v-76.8c0-14.138-11.462-25.6-25.6-25.6h-153.6c-14.138 0-25.6 11.462-25.6 25.6v76.8h-76.8c-14.138 0-25.6 11.462-25.6 25.6v563.2c0 14.139 11.462 25.6 25.6 25.6h972.8c14.139 0 25.6-11.461 25.6-25.6v-563.2c0-14.138-11.461-25.6-25.6-25.6zM768 204.8h102.4v51.2h-102.4v-51.2zM153.6 204.8h102.4v51.2h-102.4v-51.2zM972.8 819.2h-921.6v-512h921.6v512z' />

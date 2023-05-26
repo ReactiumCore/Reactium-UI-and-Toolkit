@@ -55,8 +55,9 @@ const Content = () => {
             <Toolbar />
             <div
                 data-zone={zone}
-                ref={elm => refs.set('zone', elm)}
-                className={cx('content-zone', `content-zone-${zone}`)}>
+                ref={(elm) => refs.set('zone', elm)}
+                className={cx('content-zone', `content-zone-${zone}`)}
+            >
                 {elements.map(({ component: Component, id }) => {
                     return <Component key={`${zone}-element-${id}`} />;
                 })}

@@ -1,9 +1,9 @@
 // Icon: Linear.QuoteClose
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M230.4 665.6c47.301 0 91.314-14.336 127.936-38.88-66.426 114.957-190.696 192.48-332.736 192.48-14.139 0-25.6 11.462-25.6 25.6s11.461 25.6 25.6 25.6c116.245 0 225.534-45.269 307.733-127.467s127.467-191.488 127.467-307.733c0-127.043-103.357-230.4-230.4-230.4s-230.4 103.357-230.4 230.4 103.357 230.4 230.4 230.4zM230.4 256c98.811 0 179.2 80.389 179.2 179.2 0 1.546-0.040 3.080-0.059 4.621-2.459 96.683-81.875 174.579-179.141 174.579-98.811 0-179.2-80.389-179.2-179.2s80.389-179.2 179.2-179.2z' />

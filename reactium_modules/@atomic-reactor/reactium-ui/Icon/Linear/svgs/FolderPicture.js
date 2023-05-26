@@ -1,9 +1,9 @@
 // Icon: Linear.FolderPicture
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 921.6h-870.4c-42.347 0-76.8-34.451-76.8-76.8v-537.6c0-18.040 6.083-43.811 14.15-59.946l28.304-56.605c10.56-21.122 36.331-37.050 59.946-37.050h358.4c23.614 0 49.386 15.928 59.946 37.050l28.302 56.603c1.963 3.925 9.766 8.747 14.152 8.747h384c42.349 0 76.8 34.453 76.8 76.8v512c0 42.349-34.451 76.8-76.8 76.8zM102.4 204.8c-4.387 0-12.189 4.822-14.15 8.746l-28.304 56.605c-4.496 8.992-8.746 26.997-8.746 37.050v537.6c0 14.115 11.485 25.6 25.6 25.6h870.4c14.115 0 25.6-11.485 25.6-25.6v-512c0-14.115-11.485-25.6-25.6-25.6h-384c-23.614 0-49.384-15.928-59.946-37.050l-28.302-56.603c-1.963-3.925-9.765-8.747-14.152-8.747h-358.4z' />

@@ -1,15 +1,15 @@
 // Grid
-@use "sass:math";
+@use 'sass:math';
 
 $rtk-grid-columns: 12 !default; // Set number of columns in the grid
 
 // smallest to largest
 $rtk-breakpoints-max: (
-'xs': 640,
-'sm': 990,
-'md': 1280,
-'lg': 1440,
-'xl': 1920,
+    'xs': 640,
+    'sm': 990,
+    'md': 1280,
+    'lg': 1440,
+    'xl': 1920,
 ) !default;
 
 $rtk-xs-max: '#{map-get($rtk-breakpoints-max, 'xs')}px' !default; // Set xs breakpoint's max width
@@ -43,47 +43,47 @@ $rtk-breakpoint-md-down: 'only screen and (max-width: #{$rtk-md-max})' !default;
 $rtk-breakpoint-lg-down: 'only screen and (max-width: #{$rtk-lg-max})' !default; // lg -> down
 
 $rtk-breakpoints-all: (
-$rtk-breakpoint-xs-only,
-$rtk-breakpoint-sm-up,
-$rtk-breakpoint-sm-only,
-$rtk-breakpoint-md-up,
-$rtk-breakpoint-md-only,
-$rtk-breakpoint-lg-up,
-$rtk-breakpoint-lg-only,
-$rtk-breakpoint-xl-up
+    $rtk-breakpoint-xs-only,
+    $rtk-breakpoint-sm-up,
+    $rtk-breakpoint-sm-only,
+    $rtk-breakpoint-md-up,
+    $rtk-breakpoint-md-only,
+    $rtk-breakpoint-lg-up,
+    $rtk-breakpoint-lg-only,
+    $rtk-breakpoint-xl-up
 ) !default;
 $rtk-breakpoint-ups: (
-$rtk-breakpoint-sm-up,
-$rtk-breakpoint-md-up,
-$rtk-breakpoint-lg-up,
-$rtk-breakpoint-xl-up
+    $rtk-breakpoint-sm-up,
+    $rtk-breakpoint-md-up,
+    $rtk-breakpoint-lg-up,
+    $rtk-breakpoint-xl-up
 ) !default;
 $rtk-breakpoint-all-prefixes: (
-'xs',
-'xs-only',
-'sm',
-'sm-only',
-'md',
-'md-only',
-'lg',
-'lg-only',
-'xl'
+    'xs',
+    'xs-only',
+    'sm',
+    'sm-only',
+    'md',
+    'md-only',
+    'lg',
+    'lg-only',
+    'xl'
 ) !default;
 $rtk-breakpoint-up-prefixes: ('xs', 'sm', 'md', 'lg', 'xl') !default;
 
 $rtk-breakpoints: (
-'xs': $rtk-breakpoint-xs-up,
-'xs-only': $rtk-breakpoint-xs-only,
-'sm': $rtk-breakpoint-sm-up,
-'sm-only': $rtk-breakpoint-sm-only,
-'sm-down': $rtk-breakpoint-sm-down,
-'md': $rtk-breakpoint-md-up,
-'md-only': $rtk-breakpoint-md-only,
-'md-down': $rtk-breakpoint-md-down,
-'lg': $rtk-breakpoint-lg-up,
-'lg-only': $rtk-breakpoint-lg-only,
-'lg-down': $rtk-breakpoint-lg-down,
-'xl': $rtk-breakpoint-xl-up,
+    'xs': $rtk-breakpoint-xs-up,
+    'xs-only': $rtk-breakpoint-xs-only,
+    'sm': $rtk-breakpoint-sm-up,
+    'sm-only': $rtk-breakpoint-sm-only,
+    'sm-down': $rtk-breakpoint-sm-down,
+    'md': $rtk-breakpoint-md-up,
+    'md-only': $rtk-breakpoint-md-only,
+    'md-down': $rtk-breakpoint-md-down,
+    'lg': $rtk-breakpoint-lg-up,
+    'lg-only': $rtk-breakpoint-lg-only,
+    'lg-down': $rtk-breakpoint-lg-down,
+    'xl': $rtk-breakpoint-xl-up,
 ) !default;
 
 @mixin rtk-breakpoint($rtk-thisPrefix) {

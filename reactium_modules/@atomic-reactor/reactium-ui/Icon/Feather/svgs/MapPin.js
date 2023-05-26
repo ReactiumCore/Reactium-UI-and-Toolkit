@@ -1,9 +1,9 @@
 // Icon: Feather.MapPin
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M512 0c-234.667 0-426.667 192-426.667 426.667 0 315.733 388.267 580.267 401.067 588.8 8.533 4.267 17.067 8.533 25.6 8.533s17.067-4.267 25.6-8.533c12.8-8.533 401.067-273.067 401.067-588.8 0-234.667-192-426.667-426.667-426.667zM512 930.133c-81.067-59.733-341.333-273.067-341.333-503.467 0-187.733 153.6-341.333 341.333-341.333s341.333 153.6 341.333 341.333c0 230.4-260.267 443.733-341.333 503.467z' />

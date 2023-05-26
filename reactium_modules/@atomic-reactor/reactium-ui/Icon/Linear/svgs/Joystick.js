@@ -1,9 +1,9 @@
 // Icon: Linear.Joystick
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M665.6 179.2c0-98.811-80.389-179.2-179.2-179.2s-179.2 80.389-179.2 179.2c0 90.12 66.874 164.902 153.6 177.363v232.237c0 14.139 11.462 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-232.237c86.726-12.461 153.6-87.243 153.6-177.363zM486.4 307.2c-70.579 0-128-57.421-128-128s57.421-128 128-128 128 57.421 128 128-57.421 128-128 128z' />

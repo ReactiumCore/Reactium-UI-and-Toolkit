@@ -1,0 +1,12 @@
+@each $clr-name, $clr-code in $color {
+    .#{$clr-name} {
+        color: $clr-code;
+        fill: $clr-code;
+    }
+}
+
+@each $clr-name, $clr-code in $color {
+    .bg-#{$clr-name} {
+        background-color: $clr-code;
+    }
+}

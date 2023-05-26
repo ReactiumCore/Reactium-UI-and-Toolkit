@@ -12,7 +12,7 @@ export default {
      * @param  {Object} plugin
      * @return {Boolean} true to keep plugin, false to remove it
      */
-    filter: plugin => true,
+    filter: (plugin) => true,
 
     /**
      * Default plugin mapper. Useful for adding additional global context to
@@ -23,7 +23,7 @@ export default {
      * @param  {Object} plugin
      * @return {Object} the modified plugin
      */
-    mapper: plugin => plugin,
+    mapper: (plugin) => plugin,
 
     /**
      * Default plugin underscore _.sortBy

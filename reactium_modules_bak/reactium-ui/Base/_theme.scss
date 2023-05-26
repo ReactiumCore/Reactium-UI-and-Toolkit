@@ -7,11 +7,11 @@ $table-caption-color: inherit !default;
 $table-cell-padding: 10px !default;
 
 $fonts: (
-'opensans': 'Helvetica, Arial, sans-serif',
-'sans-serif': 'Helvetica, Arial, sans-serif',
-'cardo': "'Times New Roman', Gotham, serif",
-'serif': "'Times New Roman', Gotham, serif",
-'mono': "'Courier New', Courier, monospace",
+    'opensans': 'Helvetica, Arial, sans-serif',
+    'sans-serif': 'Helvetica, Arial, sans-serif',
+    'cardo': "'Times New Roman', Gotham, serif",
+    'serif': "'Times New Roman', Gotham, serif",
+    'mono': "'Courier New', Courier, monospace",
 ) !default;
 
 // Grid
@@ -19,11 +19,11 @@ $grid-columns: 12 !default; // Set number of columns in the grid
 
 // smallest to largest
 $breakpoints-max: (
-'xs': 640,
-'sm': 990,
-'md': 1280,
-'lg': 1440,
-'xl': 1920,
+    'xs': 640,
+    'sm': 990,
+    'md': 1280,
+    'lg': 1440,
+    'xl': 1920,
 ) !default;
 
 $xs-max: '#{map-get($breakpoints-max, 'xs')}px' !default; // Set xs breakpoint's max width
@@ -57,80 +57,80 @@ $breakpoint-md-down: 'only screen and (max-width: #{$md-max})' !default; // md -
 $breakpoint-lg-down: 'only screen and (max-width: #{$lg-max})' !default; // lg -> down
 
 $breakpoints-all: (
-$breakpoint-xs-only,
-$breakpoint-sm-up,
-$breakpoint-sm-only,
-$breakpoint-md-up,
-$breakpoint-md-only,
-$breakpoint-lg-up,
-$breakpoint-lg-only,
-$breakpoint-xl-up
+    $breakpoint-xs-only,
+    $breakpoint-sm-up,
+    $breakpoint-sm-only,
+    $breakpoint-md-up,
+    $breakpoint-md-only,
+    $breakpoint-lg-up,
+    $breakpoint-lg-only,
+    $breakpoint-xl-up
 ) !default;
 $breakpoint-ups: (
-$breakpoint-sm-up,
-$breakpoint-md-up,
-$breakpoint-lg-up,
-$breakpoint-xl-up
+    $breakpoint-sm-up,
+    $breakpoint-md-up,
+    $breakpoint-lg-up,
+    $breakpoint-xl-up
 ) !default;
 $breakpoint-all-prefixes: (
-'xs',
-'xs-only',
-'sm',
-'sm-only',
-'md',
-'md-only',
-'lg',
-'lg-only',
-'xl'
+    'xs',
+    'xs-only',
+    'sm',
+    'sm-only',
+    'md',
+    'md-only',
+    'lg',
+    'lg-only',
+    'xl'
 ) !default;
 $breakpoint-up-prefixes: ('xs', 'sm', 'md', 'lg', 'xl') !default;
 
 $breakpoints: (
-'xs': $breakpoint-xs-up,
-'xs-only': $breakpoint-xs-only,
-'sm': $breakpoint-sm-up,
-'sm-only': $breakpoint-sm-only,
-'sm-down': $breakpoint-sm-down,
-'md': $breakpoint-md-up,
-'md-only': $breakpoint-md-only,
-'md-down': $breakpoint-md-down,
-'lg': $breakpoint-lg-up,
-'lg-only': $breakpoint-lg-only,
-'lg-down': $breakpoint-lg-down,
-'xl': $breakpoint-xl-up,
+    'xs': $breakpoint-xs-up,
+    'xs-only': $breakpoint-xs-only,
+    'sm': $breakpoint-sm-up,
+    'sm-only': $breakpoint-sm-only,
+    'sm-down': $breakpoint-sm-down,
+    'md': $breakpoint-md-up,
+    'md-only': $breakpoint-md-only,
+    'md-down': $breakpoint-md-down,
+    'lg': $breakpoint-lg-up,
+    'lg-only': $breakpoint-lg-only,
+    'lg-down': $breakpoint-lg-down,
+    'xl': $breakpoint-xl-up,
 ) !default;
 
 $headings: (
-'h1': (
-    map-get($fonts, sans-serif),
-    2rem,
-    400,
-),
-'h2': (
-    map-get($fonts, sans-serif),
-    1.5rem,
-    400,
-),
-'h3': (
-    map-get($fonts, sans-serif),
-    1.17rem,
-    400,
-),
-'h4': (
-    map-get($fonts, sans-serif),
-    1rem,
-    400,
-),
-'h5': (
-    map-get($fonts, sans-serif),
-    0.83rem,
-    400,
-),
-'h6': (
-    map-get($fonts, sans-serif),
-    0.67rem,
-    400,
-),
+    'h1': (
+        map-get($fonts, sans-serif),
+        2rem,
+        400,
+    ),
+    'h2': (
+        map-get($fonts, sans-serif),
+        1.5rem,
+        400,
+    ),
+    'h3': (
+        map-get($fonts, sans-serif),
+        1.17rem,
+        400,
+    ),
+    'h4': (
+        map-get($fonts, sans-serif),
+        1rem,
+        400,
+    ),
+    'h5': (
+        map-get($fonts, sans-serif),
+        0.83rem,
+        400,
+    ),
+    'h6': (
+        map-get($fonts, sans-serif),
+        0.67rem,
+        400,
+    ),
 ) !default;
 
 $font-family-base: #{map-get($fonts, sans-serif)} !default;
@@ -166,30 +166,30 @@ $default: $color-gray !default;
 $error: darken($color-red, 20%) !default;
 
 $color: (
-'black': $color-black,
-'gray-dark': $color-gray-dark,
-'gray': $color-gray,
-'grey': $color-grey,
-'grey-light': $color-grey-light,
-'white': $color-white,
-'white-dark': $color-white-dark,
-'yellow': $color-yellow,
-'orange': $color-orange,
-'pink': $color-pink,
-'red': $color-red,
-'purple': $color-purple,
-'blue': $color-blue,
-'green': $color-green,
-'green-light': $color-green-light,
-'primary': $primary,
-'secondary': $secondary,
-'tertiary': $tertiary,
-'danger': $danger,
-'info': $info,
-'success': $success,
-'warning': $warning,
-'default': $default,
-'error': $error,
+    'black': $color-black,
+    'gray-dark': $color-gray-dark,
+    'gray': $color-gray,
+    'grey': $color-grey,
+    'grey-light': $color-grey-light,
+    'white': $color-white,
+    'white-dark': $color-white-dark,
+    'yellow': $color-yellow,
+    'orange': $color-orange,
+    'pink': $color-pink,
+    'red': $color-red,
+    'purple': $color-purple,
+    'blue': $color-blue,
+    'green': $color-green,
+    'green-light': $color-green-light,
+    'primary': $primary,
+    'secondary': $secondary,
+    'tertiary': $tertiary,
+    'danger': $danger,
+    'info': $info,
+    'success': $success,
+    'warning': $warning,
+    'default': $default,
+    'error': $error,
 ) !default;
 
 $button-font-family: Arial, sans-serif !default;
@@ -197,98 +197,98 @@ $button-font-weight: 400 !default;
 
 // color-left, color-right, color, text-shadow
 $buttons: (
-'primary': (
-    lighten($primary, 5%),
-    $primary,
-    $color-white,
-    rgba($color-white, 0),
-),
-'secondary': (
-    lighten($secondary, 5%),
-    $secondary,
-    $color-grey-light,
-    rgba($color-white, 0),
-),
-'tertiary': (
-    $tertiary,
-    $tertiary,
-    $color-white,
-    rgba($color-white, 0),
-),
-'danger': (
-    lighten($danger, 5%),
-    $danger,
-    $color-white,
-    rgba($color-white, 0),
-),
-'clear': (
-    rgba($color-white, 0),
-    rgba($color-white, 0),
-    $color-gray,
-    rgba($color-white, 0),
-),
-'info': (
-    lighten($info, 5%),
-    $info,
-    $color-white,
-    rgba($color-white, 0),
-),
-'success': (
-    lighten($success, 5%),
-    $success,
-    $color-white,
-    rgba($color-white, 0),
-),
-'warning': (
-    lighten($warning, 15%),
-    $warning,
-    $color-white,
-    rgba($color-white, 0),
-),
-'default': (
-    darken($default, 2%),
-    darken($default, 2%),
-    $color-white,
-    rgba($color-white, 0),
-),
-'error': (
-    lighten($error, 5%),
-    $error,
-    $color-white,
-    rgba($color-white, 0),
-),
+    'primary': (
+        lighten($primary, 5%),
+        $primary,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'secondary': (
+        lighten($secondary, 5%),
+        $secondary,
+        $color-grey-light,
+        rgba($color-white, 0),
+    ),
+    'tertiary': (
+        $tertiary,
+        $tertiary,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'danger': (
+        lighten($danger, 5%),
+        $danger,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'clear': (
+        rgba($color-white, 0),
+        rgba($color-white, 0),
+        $color-gray,
+        rgba($color-white, 0),
+    ),
+    'info': (
+        lighten($info, 5%),
+        $info,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'success': (
+        lighten($success, 5%),
+        $success,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'warning': (
+        lighten($warning, 15%),
+        $warning,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'default': (
+        darken($default, 2%),
+        darken($default, 2%),
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'error': (
+        lighten($error, 5%),
+        $error,
+        $color-white,
+        rgba($color-white, 0),
+    ),
 ) !default;
 
 // font-size, paddingTop, paddingRight, paddingBottom, paddingLeft
 $button-sizes: (
-'xs': (
-    10px,
-    5px,
-    16px,
-    4px,
-    16px,
-),
-'sm': (
-    12px,
-    8px,
-    24px,
-    8px,
-    24px,
-),
-'md': (
-    14px,
-    12px,
-    56px,
-    12px,
-    56px,
-),
-'lg': (
-    22px,
-    16px,
-    80px,
-    16px,
-    80px,
-),
+    'xs': (
+        10px,
+        5px,
+        16px,
+        4px,
+        16px,
+    ),
+    'sm': (
+        12px,
+        8px,
+        24px,
+        8px,
+        24px,
+    ),
+    'md': (
+        14px,
+        12px,
+        56px,
+        12px,
+        56px,
+    ),
+    'lg': (
+        22px,
+        16px,
+        80px,
+        16px,
+        80px,
+    ),
 ) !default;
 
 $ar-alert-color: $color-gray-dark !default;

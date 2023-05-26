@@ -1,9 +1,9 @@
 // Icon: Linear.VolumeLow
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M602.19 642.677c-7.438 0-14.814-3.227-19.875-9.446-8.922-10.966-7.264-27.093 3.704-36.014 18.037-14.672 28.381-36.4 28.381-59.616 0-23.218-10.346-44.949-28.382-59.621-10.966-8.922-12.627-25.046-3.704-36.014s25.045-12.626 36.014-3.704c30.040 24.44 47.272 60.645 47.272 99.339 0 38.691-17.23 74.898-47.27 99.334-4.747 3.861-10.462 5.742-16.139 5.742z' />

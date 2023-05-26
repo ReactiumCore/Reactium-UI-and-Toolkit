@@ -1,9 +1,9 @@
 // Icon: Linear.Focus
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 358.4c-14.139 0-25.6-11.462-25.6-25.6v-102.4c0-14.115-11.485-25.6-25.6-25.6h-102.4c-14.139 0-25.6-11.462-25.6-25.6s11.461-25.6 25.6-25.6h102.4c42.349 0 76.8 34.453 76.8 76.8v102.4c0 14.138-11.461 25.6-25.6 25.6z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.SmartphoneEmbed
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M691.2 819.2h-358.4c-14.138 0-25.6-11.461-25.6-25.6v-51.2c0-14.139 11.462-25.6 25.6-25.6s25.6 11.461 25.6 25.6v25.6h307.2v-25.6c0-14.139 11.461-25.6 25.6-25.6s25.6 11.461 25.6 25.6v51.2c0 14.139-11.461 25.6-25.6 25.6z' />

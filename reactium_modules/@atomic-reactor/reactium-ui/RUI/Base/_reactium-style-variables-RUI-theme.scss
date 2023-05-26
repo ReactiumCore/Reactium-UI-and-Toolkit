@@ -1,0 +1,260 @@
+$dt-font-weight: 400 !default;
+$headings-margin-bottom: 0 !default;
+$label-margin-bottom: 0 !default;
+$line-height-base: 1 !default;
+$paragraph-margin-bottom: 15px !default;
+$table-caption-color: inherit !default;
+$table-cell-padding: 10px !default;
+
+$fonts: (
+    'opensans': 'Helvetica, Arial, sans-serif',
+    'sans-serif': 'Helvetica, Arial, sans-serif',
+    'cardo': "'Times New Roman', Gotham, serif",
+    'serif': "'Times New Roman', Gotham, serif",
+    'mono': "'Courier New', Courier, monospace",
+) !default;
+
+// Grid
+$grid-columns: 12 !default; // Set number of columns in the grid
+
+// smallest to largest
+$breakpoints-max: (
+    'xs': 640,
+    'sm': 990,
+    'md': 1280,
+    'lg': 1440,
+    'xl': 1920,
+) !default;
+
+$xs-max: '#{map-get($breakpoints-max, 'xs')}px' !default; // Set xs breakpoint's max width
+$sm-max: '#{map-get($breakpoints-max, 'sm')}px' !default; // Set sm breakpoint's max width
+$md-max: '#{map-get($breakpoints-max, 'md')}px' !default; // Set md breakpoint's max width
+$lg-max: '#{map-get($breakpoints-max, 'xl')}px' !default; // Set lg breakpoint's max width
+
+$gutter: 0 !default;
+
+$sm-start: '#{map-get($breakpoints-max, 'xs') + 1}px' !default; // Set sm breakpoint's min width
+$md-start: '#{map-get($breakpoints-max, 'sm') + 1}px' !default; // Set md breakpoint's min width
+$lg-start: '#{map-get($breakpoints-max, 'md') + 1}px' !default; // Set lg breakpoint's min width
+$xl-start: '#{map-get($breakpoints-max, 'xl') + 1}px' !default; // Set xl breakpoint's min width
+
+$content-well-max-width: 'none' !default; // Set the max-width of the content well
+
+// Breakpoints
+// Create breakpoint range statements to be used in media queries
+$breakpoint-xs-up: 'only screen' !default;
+$breakpoint-xs-only: 'only screen and (max-width: #{$xs-max})' !default; // 0 -> xs-max range
+$breakpoint-sm-up: 'only screen and (min-width: #{$sm-start})' !default; // sm-start -> up range
+$breakpoint-sm-only: 'only screen and (min-width: #{$sm-start}) and (max-width: #{$sm-max})' !default; // sm-start -> sm-max range
+$breakpoint-md-up: 'only screen and (min-width: #{$md-start})' !default; // md-start -> up range
+$breakpoint-md-only: 'only screen and (min-width: #{$md-start}) and (max-width: #{$md-max})' !default; // md-start -> md-max range
+$breakpoint-lg-up: 'only screen and (min-width: #{$lg-start})' !default; // lg-start -> up range
+$breakpoint-lg-only: 'only screen and (min-width: #{$lg-start}) and (max-width: #{$lg-max})' !default; // lg-start -> lg-max range
+$breakpoint-xl-up: 'only screen and (min-width: #{$xl-start})' !default; // xl-start -> up range
+
+$breakpoint-sm-down: 'only screen and (max-width: #{$sm-max})' !default; // sm -> down
+$breakpoint-md-down: 'only screen and (max-width: #{$md-max})' !default; // md -> down
+$breakpoint-lg-down: 'only screen and (max-width: #{$lg-max})' !default; // lg -> down
+
+$breakpoints-all: (
+    $breakpoint-xs-only,
+    $breakpoint-sm-up,
+    $breakpoint-sm-only,
+    $breakpoint-md-up,
+    $breakpoint-md-only,
+    $breakpoint-lg-up,
+    $breakpoint-lg-only,
+    $breakpoint-xl-up
+) !default;
+$breakpoint-ups: (
+    $breakpoint-sm-up,
+    $breakpoint-md-up,
+    $breakpoint-lg-up,
+    $breakpoint-xl-up
+) !default;
+$breakpoint-all-prefixes: (
+    'xs',
+    'xs-only',
+    'sm',
+    'sm-only',
+    'md',
+    'md-only',
+    'lg',
+    'lg-only',
+    'xl'
+) !default;
+$breakpoint-up-prefixes: ('xs', 'sm', 'md', 'lg', 'xl') !default;
+
+$breakpoints: (
+    'xs': $breakpoint-xs-up,
+    'xs-only': $breakpoint-xs-only,
+    'sm': $breakpoint-sm-up,
+    'sm-only': $breakpoint-sm-only,
+    'sm-down': $breakpoint-sm-down,
+    'md': $breakpoint-md-up,
+    'md-only': $breakpoint-md-only,
+    'md-down': $breakpoint-md-down,
+    'lg': $breakpoint-lg-up,
+    'lg-only': $breakpoint-lg-only,
+    'lg-down': $breakpoint-lg-down,
+    'xl': $breakpoint-xl-up,
+) !default;
+
+$headings: (
+    'h1': (
+        map-get($fonts, sans-serif),
+        2rem,
+        400,
+    ),
+    'h2': (
+        map-get($fonts, sans-serif),
+        1.5rem,
+        400,
+    ),
+    'h3': (
+        map-get($fonts, sans-serif),
+        1.17rem,
+        400,
+    ),
+    'h4': (
+        map-get($fonts, sans-serif),
+        1rem,
+        400,
+    ),
+    'h5': (
+        map-get($fonts, sans-serif),
+        0.83rem,
+        400,
+    ),
+    'h6': (
+        map-get($fonts, sans-serif),
+        0.67rem,
+        400,
+    ),
+) !default;
+
+$font-family-base: #{map-get($fonts, sans-serif)} !default;
+$font-size-base: 16px !default;
+$font-weight-base: 400 !default;
+$font-family-monospace: #{map-get($fonts, mono)} !default;
+$text-alignment: ('left', 'right', 'center', 'justify') !default;
+$button-font-family: Arial, sans-serif !default;
+$button-font-weight: 400 !default;
+
+// color-left, color-right, color, text-shadow
+$buttons: (
+    'primary': (
+        lighten($primary, 5%),
+        $primary,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'secondary': (
+        lighten($secondary, 5%),
+        $secondary,
+        $color-grey-light,
+        rgba($color-white, 0),
+    ),
+    'tertiary': (
+        $tertiary,
+        $tertiary,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'danger': (
+        lighten($danger, 5%),
+        $danger,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'clear': (
+        rgba($color-white, 0),
+        rgba($color-white, 0),
+        $color-gray,
+        rgba($color-white, 0),
+    ),
+    'info': (
+        lighten($info, 5%),
+        $info,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'success': (
+        lighten($success, 5%),
+        $success,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'warning': (
+        lighten($warning, 15%),
+        $warning,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'default': (
+        darken($default, 2%),
+        darken($default, 2%),
+        $color-white,
+        rgba($color-white, 0),
+    ),
+    'error': (
+        lighten($error, 5%),
+        $error,
+        $color-white,
+        rgba($color-white, 0),
+    ),
+) !default;
+
+// font-size, paddingTop, paddingRight, paddingBottom, paddingLeft
+$button-sizes: (
+    'xs': (
+        10px,
+        5px,
+        16px,
+        4px,
+        16px,
+    ),
+    'sm': (
+        12px,
+        8px,
+        24px,
+        8px,
+        24px,
+    ),
+    'md': (
+        14px,
+        12px,
+        56px,
+        12px,
+        56px,
+    ),
+    'lg': (
+        22px,
+        16px,
+        80px,
+        16px,
+        80px,
+    ),
+) !default;
+
+$ar-alert-color: $color-gray-dark !default;
+$ar-alert-color-background: $color-white !default;
+$ar-alert-color-border: $color-gray !default;
+$ar-alert-color-dismiss: $color-gray !default;
+$ar-alert-color-icon: $color-gray !default;
+$ar-alert-shadow: 0 0 3px 1px rgba($color-black, 0.05) !default;
+$ar-alert-shadow-focus: 0 0 0 4px rgba(lighten(nth($color-gray, 1), 25%), 0.25) !default;
+$ar-alert-size-border: 4px !default;
+
+$ar-toggle-bg-color: $color-grey !default;
+$ar-toggle-bg-active-color: $primary !default;
+$ar-toggle-handle-color: $color-white !default;
+
+$ar-icon-color: currentColor !default;
+
+$input-color-focus: $primary !default;
+$input-color-border: $color-grey !default;
+$input-color-error: $error !default;
+$input-radius: 2px !default;
+$select-arrow: url('data:image/svg+xml !default;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPgo8cGF0aCBmaWxsPSIjNjY2NjY1IiBkPSJNNS4yOTMgOS43MDdsNiA2YzAuMzkxIDAuMzkxIDEuMDI0IDAuMzkxIDEuNDE0IDBsNi02YzAuMzkxLTAuMzkxIDAuMzkxLTEuMDI0IDAtMS40MTRzLTEuMDI0LTAuMzkxLTEuNDE0IDBsLTUuMjkzIDUuMjkzLTUuMjkzLTUuMjkzYy0wLjM5MS0wLjM5MS0xLjAyNC0wLjM5MS0xLjQxNCAwcy0wLjM5MSAxLjAyNCAwIDEuNDE0eiI+PC9wYXRoPgo8L3N2Zz4K') !default;
+$select-color-bg: $color-white !default;

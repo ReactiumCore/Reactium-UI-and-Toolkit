@@ -1,9 +1,9 @@
 // Icon: Linear.Menu3
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M742.4 281.6c-6.552 0-13.102-2.499-18.101-7.498l-102.4-102.4c-9.998-9.998-9.998-26.206 0-36.205 9.997-9.997 26.206-9.997 36.203 0l84.298 84.299 84.299-84.299c9.997-9.997 26.206-9.997 36.203 0 9.998 9.998 9.998 26.206 0 36.205l-102.4 102.4c-5 4.998-11.55 7.498-18.102 7.498z' />

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const op = require('object-path');
 
-require.extensions['.md'] = function(module, filename) {
+require.extensions['.md'] = function (module, filename) {
     try {
         module.exports = fs.readFileSync(filename, 'utf8');
     } catch (error) {
@@ -11,6 +11,6 @@ require.extensions['.md'] = function(module, filename) {
 
 ReactiumBoot.Prefs = {
     clear: () => {},
-    get: params => op.get({}, ...params),
+    get: (params) => op.get({}, ...params),
     set: () => {},
 };

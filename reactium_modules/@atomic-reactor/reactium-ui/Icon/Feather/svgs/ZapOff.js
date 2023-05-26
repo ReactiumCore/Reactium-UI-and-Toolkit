@@ -1,9 +1,9 @@
 // Icon: Feather.ZapOff
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M482.133 238.933l8.533-12.8-8.533 59.733c-4.267 21.333 12.8 42.667 38.4 46.933 0 0 4.267 0 4.267 0 21.333 0 38.4-17.067 42.667-38.4l29.867-204.8c4.267-17.067-8.533-38.4-25.6-42.667-17.067-8.533-38.4-4.267-51.2 12.8l-102.4 123.733c-17.067 17.067-12.8 42.667 4.267 59.733 21.333 12.8 46.933 12.8 59.733-4.267z' />

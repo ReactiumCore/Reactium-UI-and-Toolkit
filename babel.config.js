@@ -1,4 +1,4 @@
-const config = require("@atomic-reactor/reactium-core/babel.config");
+const config = require('@atomic-reactor/reactium-core/babel.config');
 
 // @example
 //

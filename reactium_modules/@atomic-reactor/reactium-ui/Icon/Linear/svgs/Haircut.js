@@ -1,9 +1,9 @@
 // Icon: Linear.Haircut
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M256.874 743.157c1.862-13.416 6.757-25.47 15.034-37.194 8.154-11.55 5.402-27.523-6.149-35.677-11.552-8.158-27.523-5.403-35.678 6.149-9.818 13.904-16.706 28.47-20.79 43.971-9.656-2.336-19.725-3.606-30.090-3.606-70.579 0-128 57.421-128 128s57.421 128 128 128 128-57.421 128-128c0-41.387-19.762-78.23-50.326-101.643zM179.2 921.6c-42.347 0-76.8-34.453-76.8-76.8s34.453-76.8 76.8-76.8 76.8 34.453 76.8 76.8-34.453 76.8-76.8 76.8z' />

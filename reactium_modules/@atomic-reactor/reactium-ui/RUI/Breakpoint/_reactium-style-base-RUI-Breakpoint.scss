@@ -1,0 +1,17 @@
+body {
+    &::before {
+        @each $prefix in $breakpoint-up-prefixes {
+            @include breakpoint($prefix) {
+                content: '#{$prefix}';
+            }
+        }
+    }
+
+    &::after {
+        @each $prefix in $breakpoint-up-prefixes {
+            @include breakpoint($prefix) {
+                content: '#{$prefix}';
+            }
+        }
+    }
+}

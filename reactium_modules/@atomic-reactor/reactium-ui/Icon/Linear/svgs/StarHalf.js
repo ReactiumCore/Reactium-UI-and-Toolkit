@@ -1,9 +1,9 @@
 // Icon: Linear.StarHalf
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M793.598 972.8c-4.205 0-8.422-1.034-12.256-3.126l-153.595-83.778c-12.413-6.768-16.986-22.32-10.218-34.731 6.77-12.414 22.322-16.992 34.733-10.216l107.442 58.603-8.424-50.542c-2.325-13.947 7.098-27.136 21.042-29.461 13.941-2.33 27.136 7.096 29.461 21.042l17.067 102.4c1.611 9.661-2.434 19.394-10.413 25.070-4.418 3.144-9.619 4.739-14.838 4.739z' />

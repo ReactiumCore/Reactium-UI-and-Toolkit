@@ -1,9 +1,9 @@
 // Icon: Linear.Library
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M537.6 0h-102.4c-42.347 0-76.8 34.453-76.8 76.8v30.003c-8.013-2.842-16.626-4.403-25.6-4.403h-256c-42.347 0-76.8 34.453-76.8 76.8v768c0 42.349 34.453 76.8 76.8 76.8h256c19.654 0 37.602-7.43 51.2-19.619 13.598 12.187 31.546 19.619 51.2 19.619h102.4c42.349 0 76.8-34.451 76.8-76.8v-870.4c0-42.347-34.451-76.8-76.8-76.8zM332.8 972.8h-256c-14.115 0-25.6-11.485-25.6-25.6v-768c0-14.115 11.485-25.6 25.6-25.6h256c14.115 0 25.6 11.485 25.6 25.6v768c0 14.115-11.485 25.6-25.6 25.6zM563.2 947.2c0 14.115-11.485 25.6-25.6 25.6h-102.4c-14.115 0-25.6-11.485-25.6-25.6v-870.4c0-14.115 11.485-25.6 25.6-25.6h102.4c14.115 0 25.6 11.485 25.6 25.6v870.4z' />

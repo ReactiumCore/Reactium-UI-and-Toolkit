@@ -54,12 +54,12 @@ const Toolkit = ({ state: initialState, ...props }) => {
     // -------------------------------------------------------------------------
     // Status
     // -------------------------------------------------------------------------
-    handle.extend('setStatus', status => {
+    handle.extend('setStatus', (status) => {
         handle.set('status', status);
         handle.dispatch('status', { status: handle.get('status') });
     });
 
-    handle.extend('isStatus', status => {
+    handle.extend('isStatus', (status) => {
         const current = handle.get('status');
         const statuses = _.flatten([status]);
         return statuses.includes(current);
@@ -79,7 +79,7 @@ const Toolkit = ({ state: initialState, ...props }) => {
     useEffect(handle.initialize, [handle.get('status')]);
 
     return (
-        <main ref={elm => refs.set('container', elm)} className={handle.cx()}>
+        <main ref={(elm) => refs.set('container', elm)} className={handle.cx()}>
             <div className={handle.cx('left-column')}>
                 <Sidebar />
             </div>

@@ -1,9 +1,9 @@
 // Icon: Feather.Instagram
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M725.333 42.667h-426.667c-140.8 0-256 115.2-256 256v426.667c0 140.8 115.2 256 256 256h426.667c140.8 0 256-115.2 256-256v-426.667c0-140.8-115.2-256-256-256zM896 725.333c0 93.867-76.8 170.667-170.667 170.667h-426.667c-93.867 0-170.667-76.8-170.667-170.667v-426.667c0-93.867 76.8-170.667 170.667-170.667h426.667c93.867 0 170.667 76.8 170.667 170.667v426.667z' />

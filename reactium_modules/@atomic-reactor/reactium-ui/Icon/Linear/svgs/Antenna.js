@@ -1,9 +1,9 @@
 // Icon: Linear.Antenna
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M631.216 503.216c-6.552 0-13.102-2.499-18.101-7.498-9.997-9.997-9.998-26.206 0-36.203 33.845-33.848 52.485-78.85 52.485-126.715 0-47.867-18.64-92.869-52.49-126.717-9.997-9.997-9.998-26.206-0.002-36.203 10-9.997 26.208-9.998 36.205 0 43.52 43.517 67.486 101.376 67.486 162.92 0 61.541-23.966 119.4-67.483 162.917-4.998 4.998-11.55 7.499-18.101 7.499z' />

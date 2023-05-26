@@ -1,9 +1,9 @@
 // Icon: Linear.Toggle
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M742.398 1024c-3.912 0-7.834-0.896-11.446-2.702l-199.395-99.698h-505.957c-14.138 0-25.6-11.461-25.6-25.6v-716.8c0-14.138 11.462-25.6 25.6-25.6h505.957l199.395-99.698c7.936-3.966 17.358-3.542 24.907 1.122 7.547 4.664 12.141 12.904 12.141 21.776v921.6c0 8.872-4.594 17.112-12.141 21.776-4.11 2.541-8.779 3.824-13.461 3.824zM51.2 870.4h486.4c3.974 0 7.894 0.925 11.448 2.702l167.752 83.875v-838.755l-167.752 83.875c-3.554 1.778-7.474 2.702-11.448 2.702h-486.4v665.6z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.SmartphoneWaves
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M640 819.2h-256c-42.347 0-76.8-34.453-76.8-76.8v-460.8c0-42.347 34.453-76.8 76.8-76.8h256c42.347 0 76.8 34.453 76.8 76.8v460.8c0 42.347-34.453 76.8-76.8 76.8zM384 256c-14.115 0-25.6 11.485-25.6 25.6v460.8c0 14.115 11.485 25.6 25.6 25.6h256c14.115 0 25.6-11.485 25.6-25.6v-460.8c0-14.115-11.485-25.6-25.6-25.6h-256z' />

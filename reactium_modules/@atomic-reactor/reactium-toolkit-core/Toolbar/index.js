@@ -12,7 +12,7 @@ import Reactium, { useDerivedState } from 'reactium-core/sdk';
  */
 
 const alignment = ['left', 'center', 'right'];
-const Toolbar = props => {
+const Toolbar = (props) => {
     const { useToolbarElements, fullscreen } = Reactium.Toolkit;
 
     const [state, setState] = useDerivedState({
@@ -27,10 +27,11 @@ const Toolbar = props => {
 
     return state.fullscreen === true || _.isUndefined(fullscreen) ? null : (
         <header className={Reactium.Toolkit.cx('toolbar')} {...props}>
-            {alignment.map(align => (
+            {alignment.map((align) => (
                 <div
                     key={`toolbar-${align}`}
-                    className={Reactium.Toolkit.cx(`toolbar-${align}`)}>
+                    className={Reactium.Toolkit.cx(`toolbar-${align}`)}
+                >
                     {_.where(list, { align }).map(
                         ({
                             align,

@@ -17,7 +17,7 @@ const min = () => 390;
 const max = () => (_.isUndefined(window) ? 960 : window.innerWidth - 100);
 const width = () => (_.isUndefined(window) ? min() : window.innerWidth * 0.4);
 
-const ComponentDemo = initialProps => {
+const ComponentDemo = (initialProps) => {
     const {
         Demo,
         Editor,
@@ -67,7 +67,7 @@ const ComponentDemo = initialProps => {
         Reactium.Prefs.set(`inspector.${id}`, state.get());
     };
 
-    const setWidth = value => {
+    const setWidth = (value) => {
         if (unMounted()) return;
         const w = state.get('size.width', width()) + value;
         setState('size.width', w);
@@ -96,13 +96,15 @@ const ComponentDemo = initialProps => {
 
     return !Demo || !Editor || !Inspector ? null : (
         <div
-            ref={elm => refs.set('container', elm)}
-            className={cn(className, cx('component'))}>
+            ref={(elm) => refs.set('container', elm)}
+            className={cn(className, cx('component'))}
+        >
             <ResizeWrap
                 handle={handle}
                 setWidth={setWidth}
                 size={state.get('size')}
-                className={cx('component-inspector')}>
+                className={cx('component-inspector')}
+            >
                 <div className={cx('component-demo-wrap')}>
                     <Demo handle={handle} />
                 </div>

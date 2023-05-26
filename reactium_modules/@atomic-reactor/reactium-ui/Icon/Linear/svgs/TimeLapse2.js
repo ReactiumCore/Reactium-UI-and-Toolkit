@@ -1,9 +1,9 @@
 // Icon: Linear.TimeLapse2
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 921.6h-460.8c-42.347 0-76.8-34.453-76.8-76.8v-153.6c0-14.139 11.462-25.6 25.6-25.6s25.6 11.461 25.6 25.6v153.6c0 14.115 11.485 25.6 25.6 25.6h460.8c14.115 0 25.6-11.485 25.6-25.6v-307.2c0-14.115-11.485-25.6-25.6-25.6h-51.2c-6.789 0-13.301-2.698-18.101-7.499l-43.704-43.701h-194.195c-14.139 0-25.6-11.461-25.6-25.6s11.461-25.6 25.6-25.6h204.8c6.789 0 13.301 2.698 18.101 7.499l43.704 43.701h40.595c42.347 0 76.8 34.453 76.8 76.8v307.2c0 42.347-34.453 76.8-76.8 76.8z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.Ambulance
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M435.2 614.4h-76.8v-76.8c0-14.139-11.462-25.6-25.6-25.6s-25.6 11.461-25.6 25.6v76.8h-76.8c-14.138 0-25.6 11.461-25.6 25.6s11.462 25.6 25.6 25.6h76.8v76.8c0 14.139 11.462 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-76.8h76.8c14.138 0 25.6-11.461 25.6-25.6s-11.462-25.6-25.6-25.6z' />

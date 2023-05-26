@@ -10,7 +10,7 @@ const handlebars = require('handlebars').compile;
 module.exports = ({ Spinner }) => {
     Spinner = Spinner || arcli.Spinner;
 
-    const message = text => {
+    const message = (text) => {
         if (Spinner) {
             if (!Spinner.isSpinning) Spinner.start();
             Spinner.text = text;

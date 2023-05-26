@@ -1,9 +1,9 @@
 // Icon: Linear.Theater
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M588.824 409.603c-8.774 0-17.315-4.515-22.083-12.614-0.45-0.741-23.998-38.589-54.741-38.589-30.845 0-54.462 38.114-54.688 38.499-7.122 12.213-22.797 16.341-35.011 9.213-12.213-7.123-16.338-22.8-9.213-35.011 1.522-2.61 37.976-63.901 98.912-63.901s97.39 61.291 98.912 63.901c7.123 12.213 3 27.888-9.213 35.011-4.058 2.366-8.494 3.491-12.875 3.491z' />

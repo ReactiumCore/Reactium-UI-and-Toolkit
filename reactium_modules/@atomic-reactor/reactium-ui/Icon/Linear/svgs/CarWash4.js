@@ -1,9 +1,9 @@
 // Icon: Linear.CarWash4
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M844.379 154.051c-42.472 0-77.029-34.554-77.029-77.026s34.557-77.026 77.029-77.026 77.026 34.554 77.026 77.026-34.554 77.026-77.026 77.026zM844.379 51.2c-14.24 0-25.829 11.586-25.829 25.826s11.586 25.826 25.829 25.826c14.24 0 25.826-11.586 25.826-25.826s-11.584-25.826-25.826-25.826z' />

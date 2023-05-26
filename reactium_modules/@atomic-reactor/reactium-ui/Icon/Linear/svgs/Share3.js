@@ -1,9 +1,9 @@
 // Icon: Linear.Share3
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M486.4 716.8c-98.811 0-179.2-80.389-179.2-179.2s80.389-179.2 179.2-179.2 179.2 80.389 179.2 179.2-80.389 179.2-179.2 179.2zM486.4 409.6c-70.579 0-128 57.421-128 128s57.421 128 128 128 128-57.421 128-128-57.421-128-128-128z' />

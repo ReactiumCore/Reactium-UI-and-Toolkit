@@ -1,9 +1,9 @@
 // Icon: Linear.CameraCrossed
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M979.496 873.131c-0.003 0-0.005 0-0.008 0-12.378-0.002-24.846-4.957-37.059-14.725l-176.038-140.832c-28.272-22.613-49.59-66.97-49.59-103.174v-153.6c0-36.203 21.318-80.56 49.589-103.174l176.037-140.83c12.216-9.773 24.686-14.726 37.066-14.726 22.155-0.002 44.509 16.675 44.509 53.931v563.2c0 14.234-3.275 26.197-9.733 35.558-8.056 11.675-20.73 18.373-34.771 18.373zM972.8 258.064l-174.427 139.542c-15.896 12.717-30.373 42.837-30.373 63.194v153.6c0 20.358 14.477 50.478 30.371 63.194l174.429 139.542v-559.072z' />

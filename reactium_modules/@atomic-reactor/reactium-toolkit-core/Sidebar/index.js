@@ -34,7 +34,7 @@ let Sidebar = (props, ref) => {
         collapsed: op.get(config, 'sidebar.collapsed', false),
     });
 
-    const setState = newState => {
+    const setState = (newState) => {
         if (unMounted()) return;
         state.set(newState);
     };
@@ -55,7 +55,7 @@ let Sidebar = (props, ref) => {
     const collapse = () => {
         const tween =
             state.get('tween') ||
-            new Promise(resolve => {
+            new Promise((resolve) => {
                 dispatch('collapse');
 
                 const elms = [refs.get('container'), refs.get('placeholder')];
@@ -91,7 +91,7 @@ let Sidebar = (props, ref) => {
     const expand = () => {
         const tween =
             state.get('tween') ||
-            new Promise(resolve => {
+            new Promise((resolve) => {
                 dispatch('expand');
                 document.body.setAttribute('data-expand', true);
 
@@ -212,7 +212,7 @@ let Sidebar = (props, ref) => {
     // -------------------------------------------------------------------------
     state.extend('collapse', collapse);
     state.extend('expand', expand);
-    state.extend('setWidth', width => setState({ width }));
+    state.extend('setWidth', (width) => setState({ width }));
     state.extend('toggle', toggle);
     state.collapsed = state.get('collapsed');
     state.expanded = state.get('expanded');
@@ -225,15 +225,17 @@ let Sidebar = (props, ref) => {
             <nav
                 style={style}
                 onMouseLeave={collapse}
-                ref={elm => refs.set('container', elm)}
+                ref={(elm) => refs.set('container', elm)}
                 className={cn({
                     collapsed: state.get('collapsed'),
                     [cx(state.get('position'))]: true,
                     [cx('sidebar')]: true,
-                })}>
+                })}
+            >
                 <div
                     className={cx('sidebar-wrapper')}
-                    style={{ maxWidth: state.get('width') }}>
+                    style={{ maxWidth: state.get('width') }}
+                >
                     <div className={cx('sidebar-brand')}>
                         <Zone zone='sidebar-brand' />
                     </div>
@@ -242,7 +244,7 @@ let Sidebar = (props, ref) => {
             </nav>
             <div
                 style={style}
-                ref={elm => refs.set('placeholder', elm)}
+                ref={(elm) => refs.set('placeholder', elm)}
                 className={cn({
                     collapsed: state.get('collapsed'),
                     [cx(state.get('position'))]: true,

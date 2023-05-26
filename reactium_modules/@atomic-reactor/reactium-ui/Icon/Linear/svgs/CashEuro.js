@@ -1,9 +1,9 @@
 // Icon: Linear.CashEuro
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 921.6h-921.6c-14.138 0-25.6-11.461-25.6-25.6v-512c0-14.138 11.462-25.6 25.6-25.6h921.6c14.139 0 25.6 11.462 25.6 25.6v512c0 14.139-11.461 25.6-25.6 25.6zM51.2 870.4h870.4v-460.8h-870.4v460.8z' />

@@ -1,9 +1,9 @@
 // Icon: Feather.Cpu
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M640 341.333h-256c-25.6 0-42.667 17.067-42.667 42.667v256c0 25.6 17.067 42.667 42.667 42.667h256c25.6 0 42.667-17.067 42.667-42.667v-256c0-25.6-17.067-42.667-42.667-42.667zM597.333 597.333h-170.667v-170.667h170.667v170.667z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.DatabaseDownload
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M606.901 801.099c-9.997-9.997-26.206-9.997-36.203 0l-58.698 58.696v-219.795c0-14.139-11.462-25.6-25.6-25.6s-25.6 11.461-25.6 25.6v219.795l-58.698-58.698c-9.998-9.997-26.206-9.997-36.205 0-9.997 9.997-9.997 26.206 0 36.203l102.4 102.4c5 5 11.55 7.499 18.102 7.499s13.102-2.499 18.102-7.499l102.4-102.4c9.997-9.997 9.997-26.205-0.002-36.202z' />

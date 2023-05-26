@@ -1,9 +1,9 @@
 // Icon: Linear.DirectionLtr
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M786.101 877.899l-102.4-102.4c-9.997-9.997-26.206-9.997-36.203 0-9.998 9.997-9.998 26.206 0 36.203l58.698 58.698h-475.795c-14.138 0-25.6 11.461-25.6 25.6s11.462 25.6 25.6 25.6h475.795l-58.698 58.699c-9.998 9.997-9.998 26.206 0 36.203 5 4.998 11.55 7.498 18.102 7.498s13.102-2.499 18.101-7.499l102.4-102.4c9.998-9.997 9.998-26.205 0-36.202z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.Percent
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M51.2 1024c-6.552 0-13.102-2.499-18.101-7.499-9.998-9.997-9.998-26.206 0-36.203l921.6-921.6c9.997-9.998 26.206-9.998 36.203 0 9.998 9.997 9.998 26.206 0 36.203l-921.6 921.6c-5 5-11.55 7.499-18.102 7.499z' />

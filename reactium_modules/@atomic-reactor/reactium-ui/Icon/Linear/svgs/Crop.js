@@ -1,9 +1,9 @@
 // Icon: Linear.Crop
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M998.4 768h-153.6c-14.139 0-25.6-11.461-25.6-25.6s11.461-25.6 25.6-25.6h153.6c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z' />

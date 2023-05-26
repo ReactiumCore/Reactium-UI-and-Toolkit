@@ -1,9 +1,9 @@
 // Icon: Linear.ToiletPaper
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M281.6 512c-14.394 0-41.325-6.962-59.973-53.582-10.851-27.128-16.827-62.648-16.827-100.018s5.976-72.89 16.827-100.018c18.648-46.621 45.579-53.582 59.973-53.582s41.325 6.962 59.973 53.582c10.851 27.128 16.827 62.648 16.827 100.018s-5.976 72.89-16.827 100.018c-18.648 46.621-45.579 53.582-59.973 53.582zM281.6 256.638c-8.378 6.597-25.6 41.672-25.6 101.762s17.222 95.165 25.6 101.762c8.378-6.597 25.6-41.672 25.6-101.762s-17.222-95.165-25.6-101.762z' />

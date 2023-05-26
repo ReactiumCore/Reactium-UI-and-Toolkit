@@ -48,11 +48,12 @@ const CodeEditor = ({ setState, tagName, value }) => {
                 id: 'refresh',
                 zone: ['code-editor-actions'],
                 order: Reactium.Enums.priority.highest,
-                component: props => (
+                component: (props) => (
                     <Button
                         color='clear'
                         onClick={() => apply(props)}
-                        style={{ padding: 0, width: 40, height: 32 }}>
+                        style={{ padding: 0, width: 40, height: 32 }}
+                    >
                         <Icon
                             value='Feather.RefreshCw'
                             size={14}
@@ -68,7 +69,7 @@ const CodeEditor = ({ setState, tagName, value }) => {
         }
     }, []);
 
-    return <Code value={value} ref={elm => refs.set('code', elm)} />;
+    return <Code value={value} ref={(elm) => refs.set('code', elm)} />;
 };
 
 export { CodeEditor, CodeEditor as default };

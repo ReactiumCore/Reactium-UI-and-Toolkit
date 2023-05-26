@@ -1,9 +1,9 @@
 // Icon: Linear.Satellite2
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M332.781 1024.006c-3.848 0-7.754-0.872-11.429-2.709-12.646-6.322-17.771-21.699-11.45-34.346l102.4-204.8c6.322-12.646 21.699-17.77 34.346-11.448s17.771 21.699 11.45 34.346l-102.4 204.8c-4.485 8.97-13.528 14.157-22.917 14.157z' />

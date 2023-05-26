@@ -1,9 +1,9 @@
 // Icon: Linear.MagicWand
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M588.8 358.4c-14.139 0-25.6-11.462-25.6-25.6 0-70.579-57.421-128-128-128-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6c70.579 0 128-57.421 128-128 0-14.138 11.461-25.6 25.6-25.6s25.6 11.462 25.6 25.6c0 70.579 57.421 128 128 128 14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6c-70.579 0-128 57.421-128 128 0 14.138-11.461 25.6-25.6 25.6zM527.426 179.2c25.11 15.136 46.238 36.264 61.374 61.376 15.136-25.112 36.264-46.24 61.376-61.376-25.112-15.136-46.24-36.264-61.376-61.376-15.136 25.112-36.264 46.24-61.374 61.376z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.LoupeZoomIn
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M896 1024h-409.6c-129.922 0-252.067-50.594-343.936-142.464-91.869-91.869-142.464-214.014-142.464-343.936 0-129.923 50.595-252.067 142.464-343.936s214.013-142.464 343.936-142.464c129.922 0 252.067 50.595 343.936 142.464 91.87 91.869 142.464 214.014 142.464 343.936v409.6c0 42.349-34.451 76.8-76.8 76.8zM486.4 102.4c-239.97 0-435.2 195.23-435.2 435.2s195.23 435.2 435.2 435.2h409.6c14.115 0 25.6-11.485 25.6-25.6v-409.6c0-239.97-195.23-435.2-435.2-435.2z' />

@@ -38,7 +38,10 @@
                 flex-shrink: 0;
             }
 
-            @include rtk-h-gradient(nth($rtk-clr-codes, 1), nth($rtk-clr-codes, 2));
+            @include rtk-h-gradient(
+                nth($rtk-clr-codes, 1),
+                nth($rtk-clr-codes, 2)
+            );
 
             &:focus,
             &.focus {
@@ -66,7 +69,10 @@
             &.disabled {
                 opacity: 0.5;
                 cursor: default;
-                @include rtk-h-gradient(nth($rtk-clr-codes, 1), nth($rtk-clr-codes, 2));
+                @include rtk-h-gradient(
+                    nth($rtk-clr-codes, 1),
+                    nth($rtk-clr-codes, 2)
+                );
                 pointer-events: none;
             }
 
@@ -199,7 +205,8 @@
     }
 }
 
-a, button {
+a,
+button {
     &:hover {
         cursor: pointer;
     }
@@ -258,7 +265,8 @@ a, button {
 
         display: flex;
 
-        input, select {
+        input,
+        select {
             border-radius: 0;
             &:focus {
                 z-index: 10000;

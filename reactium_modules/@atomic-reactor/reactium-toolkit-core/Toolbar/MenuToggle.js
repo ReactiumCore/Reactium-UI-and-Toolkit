@@ -66,7 +66,8 @@ const MenuToggle = ({ align, ...props }) => {
             aria-label={label}
             style={{ padding: 10 }}
             className={cx('btn-clear-xs')}
-            onClick={() => Sidebar.toggle()}>
+            onClick={() => Sidebar.toggle()}
+        >
             <Icon value={collapsed ? 'Feather.Menu' : arrow} />
         </button>
     );

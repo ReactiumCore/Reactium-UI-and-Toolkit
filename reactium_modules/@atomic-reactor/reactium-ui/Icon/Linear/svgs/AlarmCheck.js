@@ -1,9 +1,9 @@
 // Icon: Linear.AlarmCheck
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M944.25 235.053c-1.662 0-3.35-0.163-5.042-0.501-13.864-2.768-22.859-16.253-20.091-30.117 1.648-8.248 2.483-16.738 2.483-25.235 0-70.579-57.421-128-128-128-15.171 0-30.006 2.621-44.091 7.789-13.274 4.874-27.981-1.941-32.851-15.214-4.87-13.272 1.941-27.981 15.214-32.851 19.752-7.248 40.518-10.923 61.728-10.923 98.811 0 179.2 80.389 179.2 179.2 0 11.856-1.168 23.72-3.474 35.262-2.43 12.171-13.122 20.59-25.077 20.59z' />

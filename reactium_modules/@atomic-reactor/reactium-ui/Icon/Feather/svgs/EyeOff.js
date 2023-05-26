@@ -1,9 +1,9 @@
 // Icon: Feather.EyeOff
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M430.933 221.867c25.6-4.267 55.467-8.533 81.067-8.533 230.4 0 379.733 230.4 422.4 298.667-21.333 38.4-46.933 76.8-76.8 106.667-17.067 17.067-12.8 46.933 4.267 59.733 8.533 8.533 17.067 8.533 25.6 8.533 12.8 0 25.6-4.267 34.133-17.067 38.4-42.667 68.267-93.867 98.133-145.067 8.533-12.8 8.533-25.6 0-38.4-8.533-8.533-187.733-358.4-507.733-358.4-34.133 0-68.267 4.267-98.133 12.8-25.6 4.267-38.4 25.6-34.133 51.2 8.533 21.333 29.867 34.133 51.2 29.867z' />

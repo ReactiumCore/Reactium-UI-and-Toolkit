@@ -1,9 +1,9 @@
 // Icon: Linear.PercentCircle
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M256.010 768c-7.059 0-14.085-2.901-19.142-8.592-9.394-10.566-8.442-26.749 2.126-36.142l460.8-409.6c10.566-9.395 26.749-8.442 36.142 2.126 9.392 10.566 8.44 26.749-2.126 36.141l-460.8 409.6c-4.878 4.336-10.952 6.467-17 6.467z' />

@@ -1,9 +1,9 @@
 // Icon: Linear.Podium
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 409.6h-281.6v-230.4c0-14.138-11.461-25.6-25.6-25.6h-307.2c-14.138 0-25.6 11.462-25.6 25.6v128h-281.6c-14.138 0-25.6 11.462-25.6 25.6v512c0 14.139 11.462 25.6 25.6 25.6h921.6c14.139 0 25.6-11.461 25.6-25.6v-409.6c0-14.139-11.461-25.6-25.6-25.6zM358.4 204.8h256v614.4h-256v-614.4zM51.2 358.4h256v460.8h-256v-460.8zM921.6 819.2h-256v-358.4h256v358.4z' />

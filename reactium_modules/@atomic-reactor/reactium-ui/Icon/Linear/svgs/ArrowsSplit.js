@@ -1,9 +1,9 @@
 // Icon: Linear.ArrowsSplit
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M947.2 51.2h-256c-14.139 0-25.6 11.462-25.6 25.6s11.461 25.6 25.6 25.6h194.197l-417.098 417.099c-4.802 4.8-7.499 11.312-7.499 18.101v460.8c0 14.139 11.462 25.6 25.6 25.6s25.6-11.461 25.6-25.6v-450.197l409.6-409.6v194.197c0 14.138 11.461 25.6 25.6 25.6s25.6-11.462 25.6-25.6v-256c0-14.138-11.461-25.6-25.6-25.6z' />

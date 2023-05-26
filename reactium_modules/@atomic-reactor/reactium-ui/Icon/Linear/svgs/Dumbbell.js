@@ -1,9 +1,9 @@
 // Icon: Linear.Dumbbell
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M25.6 614.4c-14.138 0-25.6-11.461-25.6-25.6v-102.4c0-14.139 11.462-25.6 25.6-25.6s25.6 11.461 25.6 25.6v102.4c0 14.139-11.462 25.6-25.6 25.6z' />

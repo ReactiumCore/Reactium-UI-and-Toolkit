@@ -1,9 +1,9 @@
 // Icon: Linear.BorderOuter
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M153.6 512h51.2v51.2h-51.2v-51.2z' />

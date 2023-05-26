@@ -1,9 +1,9 @@
 // Icon: Linear.Slingshot
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M537.6 1024h-51.2c-42.347 0-76.8-34.451-76.8-76.8v-76.8c0-14.138 11.461-25.6 25.6-25.6 14.138 0 25.6 11.461 25.6 25.6v76.8c0 14.115 11.485 25.6 25.6 25.6h51.2c14.115 0 25.6-11.485 25.6-25.6v-76.8c0-14.139 11.461-25.6 25.6-25.6s25.6 11.461 25.6 25.6v76.8c0 42.349-34.451 76.8-76.8 76.8z' />

@@ -1,9 +1,9 @@
 // Icon: Feather.Wifi
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M187.733 503.467c-17.067 17.067-21.333 42.667-4.267 59.733 8.533 8.533 21.333 17.067 34.133 17.067 8.533 0 21.333-4.267 25.6-8.533 157.867-132.267 388.267-132.267 546.133 0 17.067 17.067 46.933 12.8 59.733-4.267 17.067-17.067 12.8-46.933-4.267-59.733-192-162.133-469.333-162.133-657.067-4.267z' />

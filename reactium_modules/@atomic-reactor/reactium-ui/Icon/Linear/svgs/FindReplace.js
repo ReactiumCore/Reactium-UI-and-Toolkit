@@ -1,9 +1,9 @@
 // Icon: Linear.FindReplace
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M895.994 588.8c6.662 0 13.21-2.6 18.106-7.501l102.4-102.4c10-9.997 10-26.206 0-36.203-9.995-9.997-26.205-9.997-36.205 0l-58.829 58.829c-2.63-105.485-44.95-204.269-119.837-279.158-77.36-77.36-180.219-119.966-289.629-119.966-150.326 0-288.328 82.131-360.15 214.341-6.749 12.424-2.149 27.966 10.275 34.715 12.424 6.747 27.966 2.149 34.715-10.275 62.856-115.704 183.618-187.581 315.16-187.581 197.622 0 358.4 160.778 358.4 358.4v51.2c0 10.357 6.237 19.691 15.803 23.651 3.166 1.312 6.494 1.949 9.79 1.949z' />

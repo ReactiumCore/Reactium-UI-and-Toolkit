@@ -1,9 +1,9 @@
 // Icon: Linear.Evil
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M402.091 350.901c1.901-1.899 3.539-4.118 4.806-6.653 6.323-12.645 1.197-28.022-11.45-34.346l-102.4-51.2c-12.643-6.323-28.022-1.197-34.346 11.45-6.323 12.645-1.197 28.022 11.45 34.346l25.094 12.547c-23.398 13.176-39.246 38.243-39.246 66.955 0 42.347 34.453 76.8 76.8 76.8s76.8-34.453 76.8-76.8c0-11.845-2.699-23.070-7.509-33.099zM332.8 409.6c-14.115 0-25.6-11.485-25.6-25.6s11.485-25.6 25.6-25.6 25.6 11.485 25.6 25.6-11.485 25.6-25.6 25.6z' />

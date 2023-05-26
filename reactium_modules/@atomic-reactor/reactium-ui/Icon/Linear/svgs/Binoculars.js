@@ -1,9 +1,9 @@
 // Icon: Linear.Binoculars
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M230.4 870.4c-32.349 0-63.378-9.91-87.374-27.909-25.819-19.363-40.626-46.515-40.626-74.491 0-14.139 11.462-25.6 25.6-25.6s25.6 11.461 25.6 25.6c0 24.168 32.845 51.2 76.8 51.2 14.138 0 25.6 11.461 25.6 25.6s-11.462 25.6-25.6 25.6z' />

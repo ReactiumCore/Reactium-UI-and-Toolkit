@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import op from 'object-path';
+import _ from 'underscore';
 import { Scrollbars } from 'react-custom-scrollbars';
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 
@@ -29,19 +30,22 @@ let ColorSelect = (
     const { cx } = Reactium.Toolkit;
 
     const refs = useRefs();
-    const { ColorNames, Button } = useHookComponent('ReactiumUI');
+
+    // TODO: Does this belong in toolkit core? RUI might not be in use.
+    const { ColorNames, Button } = useHookComponent('RUI');
 
     const isContainer = useIsContainer();
 
     const [state, update] = useDerivedState({
-        colors: initialColors || Object.keys(ColorNames()),
+        colors:
+            initialColors || (ColorNames && Object.keys(ColorNames())) || [],
         collapsed: true,
         buttonProps: buttonProps || defaultButtonProps(),
         expanded: false,
         value: props.value,
     });
 
-    const setState = newState => {
+    const setState = (newState) => {
         if (unMounted()) return;
         update(newState);
     };
@@ -51,7 +55,7 @@ let ColorSelect = (
         setState({ collapsed: true, expanded: false });
     };
 
-    const dismiss = e => {
+    const dismiss = (e) => {
         dispatch('dismiss');
         if (!e) return collapse();
         if (state.collapsed === true) return;
@@ -80,13 +84,13 @@ let ColorSelect = (
         }
     };
 
-    const select = value => {
+    const select = (value) => {
         collapse();
         setState({ value });
         onChange({ target: { value } });
     };
 
-    const esc = e => {
+    const esc = (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -98,11 +102,11 @@ let ColorSelect = (
 
     const unMounted = () => !refs.get('container');
 
-    const _onBlur = e => {
+    const _onBlur = (e) => {
         e.event.target.style.opacity = 1;
     };
 
-    const _onFocus = e => {
+    const _onFocus = (e) => {
         e.event.target.style.opacity = 0.8;
     };
 
@@ -126,7 +130,7 @@ let ColorSelect = (
         if (keyCode === 38 || keyCode === 40) {
             e.event.preventDefault();
             e.event.stopPropagation();
-            
+
             let inc = keyCode === 38 ? i - 1 : i + 1;
             inc = inc < 0 ? state.colors.length - 1 : inc;
             inc = inc >= state.colors.length ? 0 : inc;
@@ -140,7 +144,7 @@ let ColorSelect = (
         if (keyCode === 27) esc(event);
     };
 
-    const _onKeyDown = e => {
+    const _onKeyDown = (e) => {
         if (e.keyCode === 27) esc(e);
 
         if (e.keyCode === 13 || e.keyCode === 40) {
@@ -216,10 +220,11 @@ let ColorSelect = (
             onClick={toggle}
             title={state.value}
             onKeyDown={_onKeyDown}
-            ref={elm => refs.set('container', elm)}
+            ref={(elm) => refs.set('container', elm)}
             className={cn(cx('btn-color-select'), className, {
                 expanded: state.expanded,
-            })}>
+            })}
+        >
             <div className={cx('btn-color-select-selected')} tabIndex={-1}>
                 <Button readOnly color={state.value} tabIndex={-1} controlled />
                 <span className={cx('btn-color-select-label')}>
@@ -229,7 +234,8 @@ let ColorSelect = (
             <div
                 tabIndex={-1}
                 className={cx('btn-color-select-picker')}
-                style={{ display: state.collapsed ? 'none' : null }}>
+                style={{ display: state.collapsed ? 'none' : null }}
+            >
                 <Scrollbars>
                     <div className={cx('btn-color-select-picker-list')}>
                         {state.colors.map((c, i) => (
@@ -241,9 +247,10 @@ let ColorSelect = (
                                 {...state.buttonProps}
                                 onBlur={_onBlur}
                                 onFocus={_onFocus}
-                                onClick={e => _onChange(e, c)}
-                                onKeyDown={e => _onButtonKeyDown(e, c, i)}
-                                ref={elm => refs.set(`colorBtn${i}`, elm)}>
+                                onClick={(e) => _onChange(e, c)}
+                                onKeyDown={(e) => _onButtonKeyDown(e, c, i)}
+                                ref={(elm) => refs.set(`colorBtn${i}`, elm)}
+                            >
                                 <span className={cx('btn-color-select-label')}>
                                     {c}
                                 </span>

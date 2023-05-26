@@ -1,9 +1,9 @@
 // Icon: Linear.MailboxFull
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M537.6 0h-204.8c-14.138 0-25.6 11.462-25.6 25.6v286.003c-29.797 10.568-51.2 39.024-51.2 72.397 0 42.347 34.453 76.8 76.8 76.8s76.8-34.453 76.8-76.8c0-33.373-21.403-61.829-51.2-72.397v-158.003h179.2c14.139 0 25.6-11.462 25.6-25.6v-102.4c0-14.138-11.461-25.6-25.6-25.6zM332.8 409.6c-14.115 0-25.6-11.485-25.6-25.6s11.485-25.6 25.6-25.6 25.6 11.485 25.6 25.6-11.485 25.6-25.6 25.6zM512 102.4h-153.6v-51.2h153.6v51.2z' />

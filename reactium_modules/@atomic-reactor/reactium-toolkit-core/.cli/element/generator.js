@@ -11,7 +11,7 @@ module.exports = ({ arcli, params, props }) => {
     const actions = require('./actions')(arcli);
     const options = { arcli, params, props };
 
-    const onError = error => {
+    const onError = (error) => {
         if (_.isError(error)) {
             Spinner.fail(error.message);
         } else {
@@ -22,7 +22,7 @@ module.exports = ({ arcli, params, props }) => {
     };
 
     return ActionSequence({ actions, options })
-        .then(success => {
+        .then((success) => {
             const message = 'complete!';
             Spinner.succeed(message);
             return success;

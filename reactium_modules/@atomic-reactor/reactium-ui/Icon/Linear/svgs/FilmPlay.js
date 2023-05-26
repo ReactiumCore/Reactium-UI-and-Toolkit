@@ -1,9 +1,9 @@
 // Icon: Linear.FilmPlay
 
 import React from 'react';
-import defaultProps from '@atomic-reactor/reactium-ui/Icon/defaultProps';
+import defaultProps from 'reactium_modules/@atomic-reactor/reactium-ui/Icon/defaultProps';
 
-export default props => (
+export default (props) => (
     <svg {...defaultProps} {...props}>
         <g>
             <path d='M383.997 768c-3.902 0-7.822-0.891-11.445-2.702-8.674-4.336-14.152-13.2-14.152-22.898v-460.8c0-9.698 5.478-18.562 14.152-22.898 8.67-4.334 19.051-3.4 26.808 2.418l307.2 230.4c6.446 4.834 10.24 12.422 10.24 20.48s-3.794 15.645-10.24 20.48l-307.2 230.4c-4.517 3.387-9.923 5.12-15.363 5.12zM409.6 332.8v358.4l238.933-179.2-238.933-179.2z' />
