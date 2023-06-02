@@ -2,7 +2,7 @@ import React from 'react';
 import Demo from './Demo';
 import Editor from './Editor';
 import Inspector from './Inspector';
-import { __, useHookComponent } from 'reactium-core/sdk';
+import { __, useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const defaultValue = {
     children: 'Button',

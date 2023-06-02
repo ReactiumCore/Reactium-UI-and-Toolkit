@@ -4,7 +4,7 @@ import Block from './Block';
 import Colors from './Colors';
 import States from './States';
 import Sizing from './Sizing';
-import Reactium, { __ } from 'reactium-core/sdk';
+import Reactium, { __ } from '@atomic-reactor/reactium-core/sdk';
 
 Reactium.Plugin.register('ToolkitDemoButtons').then(() => {
     if (!Reactium.Toolkit) return;

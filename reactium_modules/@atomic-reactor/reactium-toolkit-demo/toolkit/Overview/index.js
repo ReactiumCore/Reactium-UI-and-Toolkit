@@ -1,5 +1,9 @@
 import React from 'react';
-import Reactium, { __, useHandle, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useHandle,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 export default () => {
     const { cx } = Reactium.Toolkit;

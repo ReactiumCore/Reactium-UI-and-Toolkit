@@ -13,7 +13,7 @@
 
 ```
 import React, { useEffect, useRef } from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const EventExample = () => {
     const alertRef = useRef();
@@ -29,7 +29,9 @@ const EventExample = () => {
         alertRef.current.addEventListener('toggle', onToggle);
 
         return () => {
-            alertRef.current.removeEventListener('toggle', onToggle);
+            if (alertRef.current) {
+                alertRef.current.removeEventListener('toggle', onToggle);
+            }
         };
     }, [alertRef.current]);
 

@@ -6,7 +6,7 @@
 
 ```
 import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const BasicEventExample = () => {
     const { Button } = useHookComponent('RUI');
@@ -26,7 +26,7 @@ const BasicEventExample = () => {
 
 ```
 import React, { useRef } from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const ListenerEventExample = () => {
     const btnRef = useRef();

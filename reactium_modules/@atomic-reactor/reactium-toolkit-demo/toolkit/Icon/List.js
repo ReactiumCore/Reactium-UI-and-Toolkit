@@ -9,7 +9,7 @@ import {
     useRefs,
     useStatus,
     useSyncState,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 export const List = () => {
     const chunkSize = 50;

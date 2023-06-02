@@ -1,4 +1,10 @@
 {
+  "actinium": {
+    "version": "3.6.6"
+  },
+  "reactium": {
+    "version": "4.1.4"
+  },
   "name": "@atomic-reactor/reactium-toolkit-demo",
   "version": "5.0.0",
   "description": "Reactium Toolkit demo",
@@ -18,11 +24,5 @@
   "bugs": {
     "url": "https://github.com/Atomic-Reactor/Reactium-Toolkit-Plugin/issues"
   },
-  "homepage": "https://github.com/Atomic-Reactor/Reactium-Toolkit-Plugin/#readme",
-  "reactium": {
-    "version": "4.1.4"
-  },
-  "actinium": {
-    "version": "3.6.6"
-  }
+  "homepage": "https://github.com/Atomic-Reactor/Reactium-Toolkit-Plugin/#readme"
 }

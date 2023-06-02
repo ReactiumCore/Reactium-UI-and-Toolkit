@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 const buttonColors = (exclude) => {
     const { Button } = Reactium.Component.get('RUI');

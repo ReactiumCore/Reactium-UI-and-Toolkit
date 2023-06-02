@@ -1,4 +1,8 @@
-import { __, useHookComponent } from 'reactium-core/sdk';
+import {
+    __,
+    useHookComponent,
+    useEventEffect,
+} from '@atomic-reactor/reactium-core/sdk';
 import { events, methods, props, readme } from './readme';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -53,17 +57,18 @@ const EventExample = () => {
     }, []);
 
     // Icon value change handler
-    const onChange = useCallback((e) => setIcon(e.target.value), []);
+    const change = useCallback((e) => setIcon(e.target.value), []);
 
     // Icon value change listener
-    useEffect(() => {
-        if (!iconRef.current) return;
+    useEventEffect(iconRef.current, { change }, [iconRef.current]);
+    // useEffect(() => {
+    //     if (!iconRef.current) return;
 
-        iconRef.current.addEventListener('change', onChange);
-        return () => {
-            iconRef.current.removeEventListener('change', onChange);
-        };
-    }, [iconRef.current]);
+    //     iconRef.current.addEventListener('change', onChange);
+    //     return () => {
+    //         iconRef.current.removeEventListener('change', onChange);
+    //     };
+    // }, [iconRef.current]);
 
     // Renderer
     return (

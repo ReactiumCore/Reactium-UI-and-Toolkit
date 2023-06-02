@@ -8,7 +8,7 @@
 
 ```
 import React, { useEffect, useRef, useState } from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const MyComponent = () => {
     const bpRef = useRef();

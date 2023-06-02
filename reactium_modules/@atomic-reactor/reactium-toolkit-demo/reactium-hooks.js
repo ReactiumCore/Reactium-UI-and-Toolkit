@@ -1,4 +1,4 @@
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 Reactium.Plugin.register('ToolkitDemo').then(() => {
     if (!Reactium.Toolkit) return;

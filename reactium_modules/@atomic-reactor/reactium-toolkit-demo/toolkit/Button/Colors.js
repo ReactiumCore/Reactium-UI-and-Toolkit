@@ -1,7 +1,10 @@
 import React from 'react';
 import camelcase from 'camelcase';
 import { buttonColors, buttonProps } from './utils';
-import Reactium, { __, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const cc = (str) => camelcase(str, { pascalCase: true });
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const jsx = (attr, children) => `
 import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 export const Component = () => {
     const { Button } = useHookComponent('RUI');

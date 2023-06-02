@@ -1,6 +1,6 @@
 import { buttonColors } from './utils';
 import { events, methods, props, readme, usage } from './readme';
-import { __, useHookComponent } from 'reactium-core/sdk';
+import { __, useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 import React, { useEffect, useRef, useState } from 'react';
 
 export default () => {
@@ -84,6 +84,7 @@ const EventExampleAlt = () => {
         if (!btnRef.current) return;
         btnRef.current.addEventListener('click', onClick);
         return () => {
+            if (!btnRef.current) return;
             btnRef.current.removeEventListener('click', onClick);
         };
     }, [btnRef.current]);

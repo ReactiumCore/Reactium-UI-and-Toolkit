@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { events, methods, props, readme, usage } from './readme';
-import { __, useHookComponent } from 'reactium-core/sdk';
+import { __, useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 export default () => {
     const { Element, Markdown } = useHookComponent('RTK');

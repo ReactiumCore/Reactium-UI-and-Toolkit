@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
+import Reactium, { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const Demo = ({ handle }) => {
     const { attributes } = handle;

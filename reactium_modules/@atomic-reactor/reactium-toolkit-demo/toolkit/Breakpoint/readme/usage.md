@@ -2,7 +2,7 @@
 
 ```
 import React from 'react';
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const MyComponent = () => {
     const { Breakpoint } = useHookComponent('RUI');

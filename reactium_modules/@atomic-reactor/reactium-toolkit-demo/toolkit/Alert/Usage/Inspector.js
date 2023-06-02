@@ -1,7 +1,10 @@
 import cn from 'classnames';
 import React, { useCallback } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import Reactium, { __, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const Inspector = ({ handle }) => {
     const { attributes, setAttributes } = handle;

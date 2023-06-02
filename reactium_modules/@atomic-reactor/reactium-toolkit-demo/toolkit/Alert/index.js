@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { __, useHookComponent } from 'reactium-core/sdk';
+import { __, useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 import { events, methods, props, readme, usage } from './readme';
 
 const EventExample = () => {
@@ -16,7 +16,9 @@ const EventExample = () => {
         alertRef.current.addEventListener('toggle', onToggle);
 
         return () => {
-            alertRef.current.removeEventListener('toggle', onToggle);
+            if (alertRef.current) {
+                alertRef.current.removeEventListener('toggle', onToggle);
+            }
         };
     }, [alertRef.current]);
 

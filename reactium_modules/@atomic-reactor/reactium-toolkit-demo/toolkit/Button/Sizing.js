@@ -1,7 +1,10 @@
 import _ from 'underscore';
 import { buttonProps } from './utils';
 import React, { useEffect, useState } from 'react';
-import Reactium, { __, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 export default () => {
     const pref = 'rtk.button.color';

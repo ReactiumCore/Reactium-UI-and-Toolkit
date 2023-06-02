@@ -1,6 +1,6 @@
 import Element from '.';
 import Usage from './Usage';
-import Reactium, { __ } from 'reactium-core/sdk';
+import Reactium, { __ } from '@atomic-reactor/reactium-core/sdk';
 
 Reactium.Hook.register('plugin-ready', () => {
     if (!Reactium.Toolkit) return;

@@ -7,7 +7,7 @@
 #### Event Example
 
 ```
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const EventExample = () => {
