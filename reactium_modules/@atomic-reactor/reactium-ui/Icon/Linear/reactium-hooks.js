@@ -1,5 +1,5 @@
 import icons from '.';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 Reactium.Hook.register('plugin-ready', () => {
     const { Icon } = Reactium.Component.get('RUI');

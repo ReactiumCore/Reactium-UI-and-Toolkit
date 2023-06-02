@@ -8,7 +8,7 @@ import Reactium, {
     ComponentEvent,
     useHookComponent,
     useSyncState,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 import React, {
     forwardRef,
     useCallback,

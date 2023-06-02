@@ -1,4 +1,10 @@
 {
+  "actinium": {
+    "version": "5.0.0"
+  },
+  "reactium": {
+    "version": "5.0.0"
+  },
   "name": "@atomic-reactor/reactium-ui",
   "version": "5.0.0",
   "description": "Reactium UI Component Library",
@@ -31,11 +37,5 @@
     "react-toastify": "^9.1.3",
     "react-touch-events": "^3.0.0",
     "victory": "^36.6.10"
-  },
-  "actinium": {
-    "version": "5.0.0"
-  },
-  "reactium": {
-    "version": "5.0.0"
   }
 }
