@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'underscore';
 import op from 'object-path';
-import Reactium, { useHandle, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    useHandle,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const Brand = () => {
     const Sidebar = useHandle('RTKSidebar');

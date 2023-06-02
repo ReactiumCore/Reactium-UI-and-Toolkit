@@ -1,7 +1,7 @@
 {{#unless editor}}
 import React from 'react';
 {{#if doc}}import readme from './readme.md';{{/if}}
-import { useHookComponent } from 'reactium-core/sdk';
+import { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const crumbs = [
     { children: 'Parent', url: '/'},
@@ -30,7 +30,7 @@ import Reactium, {
     useDerivedState,
     useHookComponent,
     useRefs,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 
 const jsx = `

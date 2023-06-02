@@ -10,7 +10,7 @@ import Reactium, {
     useHookComponent,
     useRefs,
     useSyncState,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 const noop = () => {};
 const min = () => 390;

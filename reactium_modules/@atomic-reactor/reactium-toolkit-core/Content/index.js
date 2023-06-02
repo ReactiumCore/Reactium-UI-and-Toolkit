@@ -1,7 +1,11 @@
 import _ from 'underscore';
 import Toolbar from '../Toolbar';
 import React, { useEffect } from 'react';
-import Reactium, { useHandle, useRefs, useRouting } from 'reactium-core/sdk';
+import Reactium, {
+    useHandle,
+    useRefs,
+    useRouting,
+} from '@atomic-reactor/reactium-core/sdk';
 import slugify from 'slugify';
 
 const useLocation = () => {

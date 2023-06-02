@@ -13,7 +13,7 @@ import Markdown from './Markdown';
 import Brand from './Sidebar/Brand';
 import Element from './Content/Element';
 import ColorSelect from './ColorSelect';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 import MenuLink from './Sidebar/MenuLink';
 import ComponentDemo from './ComponentDemo';
 import { Code, CodeCopy, CodeEditor } from './Code';

@@ -4,7 +4,7 @@ import op from 'object-path';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
+import Reactium, { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const propTypes = {
     children: PropTypes.node.isRequired,

@@ -3,7 +3,7 @@ export * from './MenuToggle';
 
 import _ from 'underscore';
 import React, { useEffect } from 'react';
-import Reactium, { useDerivedState } from 'reactium-core/sdk';
+import Reactium, { useDerivedState } from '@atomic-reactor/reactium-core/sdk';
 
 /**
  * -----------------------------------------------------------------------------

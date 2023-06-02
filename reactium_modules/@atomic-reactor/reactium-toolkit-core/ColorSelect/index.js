@@ -11,7 +11,7 @@ import Reactium, {
     useHookComponent,
     useIsContainer,
     useRefs,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 const defaultButtonProps = () => ({ block: true, size: 'sm' });
 

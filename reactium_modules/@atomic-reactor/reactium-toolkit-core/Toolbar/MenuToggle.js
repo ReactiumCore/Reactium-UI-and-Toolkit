@@ -1,7 +1,11 @@
 import _ from 'underscore';
 import cc from 'camelcase';
 import React, { useEffect, useState } from 'react';
-import Reactium, { __, useHandle, useHookComponent } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useHandle,
+    useHookComponent,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const MenuToggle = ({ align, ...props }) => {
     const cx = Reactium.Toolkit.cx;

@@ -1,6 +1,9 @@
 import _ from 'underscore';
 import React, { useEffect } from 'react';
-import Reactium, { useHookComponent, useRefs } from 'reactium-core/sdk';
+import Reactium, {
+    useHookComponent,
+    useRefs,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const CodeEditor = ({ setState, tagName, value }) => {
     const refs = useRefs();

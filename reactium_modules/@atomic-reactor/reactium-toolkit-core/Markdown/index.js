@@ -3,7 +3,7 @@ import marked from 'marked';
 import op from 'object-path';
 import PropTypes from 'prop-types';
 import JsxParser from 'react-jsx-parser';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 const components = () =>
     Reactium.Component.list.reduce((obj, item) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 const ToolbarTitle = ({ className, ...props }) => {
     const { cx } = Reactium.Toolkit;

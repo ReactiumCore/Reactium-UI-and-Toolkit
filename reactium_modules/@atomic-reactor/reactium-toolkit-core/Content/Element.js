@@ -2,7 +2,7 @@ import _ from 'underscore';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useEffect } from 'react';
-import Reactium, { useHookComponent } from 'reactium-core/sdk';
+import Reactium, { useHookComponent } from '@atomic-reactor/reactium-core/sdk';
 
 const propTypes = {
     children: PropTypes.node.isRequired,

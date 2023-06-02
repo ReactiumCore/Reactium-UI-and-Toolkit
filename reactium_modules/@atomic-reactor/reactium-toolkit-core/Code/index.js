@@ -25,7 +25,7 @@ import Reactium, {
     useHookComponent,
     useRefs,
     Zone,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 let Code = (
     {

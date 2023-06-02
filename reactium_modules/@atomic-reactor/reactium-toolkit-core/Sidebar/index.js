@@ -9,7 +9,7 @@ import Reactium, {
     Zone,
     useRegisterSyncHandle,
     useRefs,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 /**
  * -----------------------------------------------------------------------------

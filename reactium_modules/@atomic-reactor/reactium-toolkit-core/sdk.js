@@ -10,7 +10,11 @@ import copy from 'copy-to-clipboard';
 import prettier from 'prettier/standalone';
 import parserHtml from 'prettier/parser-html';
 import parserbabel from 'prettier/parser-babylon';
-import Reactium, { __, useDerivedState, useSyncState } from 'reactium-core/sdk';
+import Reactium, {
+    __,
+    useDerivedState,
+    useSyncState,
+} from '@atomic-reactor/reactium-core/sdk';
 
 const pkgConfig = op.get(pkg, 'reactium.toolkit', {});
 const defaultConfig = {

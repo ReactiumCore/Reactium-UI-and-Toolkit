@@ -6,7 +6,7 @@ import Reactium, {
     ComponentEvent,
     useRegisterSyncHandle,
     useRefs,
-} from 'reactium-core/sdk';
+} from '@atomic-reactor/reactium-core/sdk';
 
 import Sidebar from './Sidebar';
 import Content from './Content';

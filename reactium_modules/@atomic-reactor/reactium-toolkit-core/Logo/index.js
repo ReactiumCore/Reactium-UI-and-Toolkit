@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'underscore';
 import route from '../route';
 import { Link } from 'react-router-dom';
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 
 const defaultProps = {
     viewBox: '0 0 70 70',
