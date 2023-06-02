@@ -125,7 +125,7 @@ Let's start by defining plugin zones with the SDK's `<Zone />` component.
 
 ```js
 import React from 'react';
-import { Zone } from 'reactium-core/sdk';
+import { Zone } from '@atomic-reactor/reactium-core/sdk';
 
 export default class Template extends React {
     render() {

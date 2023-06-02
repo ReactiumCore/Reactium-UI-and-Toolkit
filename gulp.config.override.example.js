@@ -2,8 +2,7 @@
  * Rename this file to gulp.config.override.js to use it.
  */
 
-module.exports = config => {
-
+module.exports = (config) => {
     // Electron configuration
     config.dest.electron = 'build-electron';
     config.dest.static = 'build-electron/app/public';

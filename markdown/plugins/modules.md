@@ -43,7 +43,7 @@ src/app/components/plugin-src/customer
 When in development, uncomment the contents of your `reactium-hooks.js` like so:
 
 ```js
-import Reactium from 'reactium-core/sdk';
+import Reactium from '@atomic-reactor/reactium-core/sdk';
 Reactium.Hook.register(
     'plugin-dependencies',
     async () => {

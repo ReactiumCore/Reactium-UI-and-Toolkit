@@ -1,0 +1,15 @@
+$ar-icon-color: $primary !default;
+
+.ar-icon {
+    svg {
+        fill: $ar-icon-color;
+    }
+
+    @each $clr-name, $clr-codes in $buttons {
+        &.#{$clr-name} {
+            svg {
+                fill: nth($clr-codes, 1);
+            }
+        }
+    }
+}

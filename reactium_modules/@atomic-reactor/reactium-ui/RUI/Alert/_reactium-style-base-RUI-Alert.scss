@@ -1,0 +1,91 @@
+.ar-alert {
+    color: $ar-alert-color;
+    border-left: $ar-alert-size-border solid $ar-alert-color-border;
+    padding: 20px;
+    background: $ar-alert-color-background;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: $ar-alert-shadow;
+    display: flex;
+    min-height: 62px;
+
+    > * {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    &-content {
+        padding: 0;
+        flex-shrink: 1;
+        flex-grow: 1;
+        font-size: 14px;
+        line-height: 1.3;
+        min-height: 22px;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &-icon {
+        margin-top: -2px;
+        padding-right: 8px;
+
+        svg {
+            fill: $ar-alert-color-icon;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &-dismiss {
+        border: none;
+        padding-left: 8px;
+        margin: -1px -10px -1px 0;
+        background-color: transparent;
+        color: $ar-alert-color-dismiss;
+
+        button {
+            cursor: pointer;
+            user-select: none;
+            border: none;
+            padding: 0;
+            width: 24px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+
+            &:hover {
+                svg {
+                    opacity: 0.5;
+                }
+            }
+
+            &:focus {
+                box-shadow: $ar-alert-shadow-focus;
+            }
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: $ar-alert-color-dismiss;
+        }
+    }
+
+    @each $clr-name, $clr-codes in $buttons {
+        &.ar-alert-#{$clr-name} {
+            border-left: $ar-alert-size-border solid nth($clr-codes, 2);
+
+            .ar-alert-icon {
+                margin-right: 8px;
+
+                svg {
+                    fill: nth($clr-codes, 1);
+                }
+            }
+        }
+    }
+}

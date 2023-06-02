@@ -1,7 +1,8 @@
 @import './variables';
 @import './mixin';
 
-a, button {
+a,
+button {
     &:hover {
         cursor: pointer;
     }
@@ -64,7 +65,8 @@ a, button {
 
         display: flex;
 
-        input, select {
+        input,
+        select {
             border-radius: 0;
             &:focus {
                 z-index: 10000;

@@ -1,0 +1,9 @@
+import Reactium, { __ } from '@atomic-reactor/reactium-core/sdk'; (async () => {
+Reactium.Hook.register('plugin-ready', () => { if (!Reactium.Toolkit) return;
+const MenuLink = Reactium.Component.get('RTKMENULINK'); // Sidebar Item:
+{{label}}
+Reactium.Toolkit.Sidebar.register('{{id}}', { order:
+{{order}}, component: MenuLink, children: __('{{label}}'), 'aria-label': __('{{label}}'),
+{{#if url}}url: '{{url}}',{{~/if}}
+{{#if group}}group: '{{group}}',{{~/if}}
+}); }); })();

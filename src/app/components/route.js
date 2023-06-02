@@ -1,4 +1,4 @@
-import Toolkit from 'reactium_modules/@atomic-reactor/toolkit';
+import Toolkit from 'reactium_modules/@atomic-reactor/reactium-toolkit-core';
 
 export default {
     component: Toolkit,

@@ -1,0 +1,154 @@
+.rtk-btn-color-select {
+    padding: 4px;
+    position: relative;
+    background-color: $rtk-toolbar-bg-color;
+    border: 1px solid $rtk-toolbar-border-color;
+    user-select: none;
+    outline: none;
+    display: flex;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus,
+    &:active,
+    .active,
+    &.expanded {
+        box-shadow: 0 0 0 2px rgba($rtk-accent-color, 0.25);
+        border: 1px solid $rtk-accent-color;
+    }
+
+    @include rtk-breakpoint(md) {
+        padding: 8px;
+    }
+
+    &-selected {
+        padding: 0;
+        border: none;
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        color: $rtk-color-black;
+
+        [class^='btn'] {
+            padding: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            flex-shrink: 0;
+
+            @include rtk-breakpoint(md) {
+                border-radius: 0;
+            }
+        }
+
+        .rtk-btn-color-select-label {
+            font-size: 16px !important;
+            font-weight: 100;
+            font-family: 'Helvetica', Arial, sans-serif;
+        }
+    }
+
+    &-label {
+        margin-left: 8px;
+        font-size: 12px;
+        min-width: 100px;
+        flex-grow: 1;
+        text-align: left;
+        display: none;
+        font-family: Helvetica, Arial, sans-serif;
+
+        @include rtk-breakpoint(md) {
+            display: inline;
+        }
+    }
+
+    &-picker {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 24px;
+        height: 33vh;
+        max-height: 152px;
+        background-color: $rtk-toolbar-bg-color;
+        text-align: center;
+        overflow: visible;
+        border: 1px solid darken($rtk-toolbar-border-color, 2%);
+        margin: 0 -1px;
+        z-index: 100;
+
+        .arrow-up {
+            overflow: hidden;
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            left: 50%;
+            top: 0;
+            display: none;
+            transform: translate(-50%, -100%);
+
+            &:after {
+                position: absolute;
+                top: 4px;
+                left: 50%;
+                content: '';
+                width: 20px;
+                height: 20px;
+                display: block;
+                background-color: $rtk-toolbar-bg-color;
+                border: 1px solid darken($rtk-toolbar-border-color, 2%);
+                transform-origin: center;
+                transform: translate(-50%, 0) rotate(45deg);
+                border-radius: 0;
+            }
+        }
+
+        @include rtk-breakpoint(md) {
+            top: calc(100% + 14px);
+            width: calc(100% + 2px);
+            height: calc(33vh + 4px);
+            max-height: 202px;
+            box-shadow: 0 0 0 2px rgba($rtk-toolbar-border-color, 0.5);
+
+            .arrow-up {
+                display: block;
+            }
+        }
+
+        &-list {
+            padding: 4px 2px;
+
+            @include rtk-breakpoint(md) {
+                padding: 8px;
+            }
+        }
+
+        button {
+            padding: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            text-transform: none;
+
+            span {
+                margin-left: 0;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 4px;
+            }
+
+            @include rtk-breakpoint(md) {
+                padding: 0 6px;
+                width: 100%;
+                height: 24px;
+                border-radius: 0;
+
+                &:not(:last-child) {
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+}

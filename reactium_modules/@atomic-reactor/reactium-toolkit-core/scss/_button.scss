@@ -1,0 +1,317 @@
+@mixin rtk-default-button($rtk-size, $rtk-pt, $rtk-pr, $rtk-pb, $rtk-pl) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: $rtk-pt $rtk-pr $rtk-pb $rtk-pl;
+    font-family: $rtk-button-font-family;
+    font-size: $rtk-size;
+    font-weight: $rtk-button-font-weight;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    border: 2px solid transparent;
+    line-height: 1;
+    text-decoration: none;
+}
+
+@mixin rtk-pill-button($rtk-size) {
+    border-radius: $rtk-size;
+}
+
+@mixin rtk-h-gradient($rtk-clr-l, $rtk-clr-r) {
+    background: $rtk-clr-r;
+}
+
+@mixin rtk-button() {
+    @each $rtk-clr-name, $rtk-clr-codes in $rtk-buttons {
+        $rtk-shadow: nth($rtk-clr-codes, 4);
+
+        &-#{$rtk-clr-name} {
+            @extend .rtk-btn;
+            color: nth($rtk-clr-codes, 3);
+            text-shadow: 0 0 1px $rtk-shadow;
+            line-height: 1;
+
+            svg {
+                fill: nth($rtk-clr-codes, 3);
+                fill: currentColor;
+                stroke: nth($rtk-clr-codes, 3);
+                flex-shrink: 0;
+            }
+
+            @include rtk-h-gradient(
+                nth($rtk-clr-codes, 1),
+                nth($rtk-clr-codes, 2)
+            );
+
+            &:focus,
+            &.focus {
+                box-shadow: 0 0 1px 2px rgba(nth($rtk-clr-codes, 1), 0.25);
+                z-index: 10000;
+            }
+
+            &:hover,
+            &.hover,
+            &.active {
+                color: nth($rtk-clr-codes, 3);
+                text-decoration: none;
+                @include rtk-h-gradient(
+                    lighten(nth($rtk-clr-codes, 1), 7%),
+                    lighten(nth($rtk-clr-codes, 2), 7%)
+                );
+            }
+
+            &.active {
+                font-weight: bold;
+                opacity: 0.95;
+            }
+
+            &:disabled,
+            &.disabled {
+                opacity: 0.5;
+                cursor: default;
+                @include rtk-h-gradient(
+                    nth($rtk-clr-codes, 1),
+                    nth($rtk-clr-codes, 2)
+                );
+                pointer-events: none;
+            }
+
+            @each $rtk-size-name, $rtk-size-codes in $rtk-button-sizes {
+                &-#{$rtk-size-name} {
+                    @extend .rtk-btn;
+                    @extend .rtk-btn-#{$rtk-clr-name};
+
+                    @include rtk-default-button(
+                        nth($rtk-size-codes, 1),
+                        nth($rtk-size-codes, 2),
+                        nth($rtk-size-codes, 3),
+                        nth($rtk-size-codes, 4),
+                        nth($rtk-size-codes, 5)
+                    );
+                }
+            }
+        }
+
+        &-#{$rtk-clr-name}-outline {
+            @extend .rtk-btn;
+            color: nth($rtk-clr-codes, 2);
+
+            background: transparent;
+            border: 2px solid nth($rtk-clr-codes, 2) !important;
+            position: relative;
+
+            &:hover,
+            &:focus,
+            &.hover,
+            &.active {
+                text-decoration: none;
+                background: nth($rtk-clr-codes, 1);
+                color: nth($rtk-clr-codes, 3);
+            }
+
+            &.active {
+                background: nth($rtk-clr-codes, 1);
+                opacity: 0.95;
+            }
+
+            &:focus,
+            &.focus {
+                box-shadow: 0 0 1px 2px rgba(nth($rtk-clr-codes, 1), 0.25);
+            }
+
+            &:disabled,
+            &.disabled {
+                opacity: 0.5;
+                cursor: default;
+                background: transparent;
+                color: nth($rtk-clr-codes, 2);
+                pointer-events: none;
+            }
+        }
+
+        @each $rtk-size-name, $rtk-size-codes in $rtk-button-sizes {
+            &-#{$rtk-clr-name}-#{$rtk-size-name}-outline {
+                @include rtk-default-button(
+                    nth($rtk-size-codes, 1),
+                    nth($rtk-size-codes, 2),
+                    nth($rtk-size-codes, 3),
+                    nth($rtk-size-codes, 4),
+                    nth($rtk-size-codes, 5)
+                );
+
+                @extend .rtk-btn-#{$rtk-clr-name}-outline;
+            }
+        }
+
+        &-#{$rtk-clr-name}-pill {
+            @extend .rtk-btn;
+            @extend .rtk-btn-#{$rtk-clr-name};
+            @include rtk-pill-button(60px);
+        }
+
+        &-#{$rtk-clr-name}-circle {
+            @extend .rtk-btn;
+            @extend .rtk-btn-#{$rtk-clr-name};
+            @include rtk-pill-button(100%);
+        }
+
+        &-#{$rtk-clr-name}-outline-pill {
+            @extend .rtk-btn;
+            @extend .rtk-btn-#{$rtk-clr-name}-outline;
+            @include rtk-pill-button(60px);
+        }
+
+        &-#{$rtk-clr-name}-outline-circle {
+            @extend .rtk-btn;
+            @extend .rtk-btn-#{$rtk-clr-name}-outline;
+            @include rtk-pill-button(100%);
+        }
+
+        @each $rtk-size-name, $rtk-size-codes in $rtk-button-sizes {
+            &-#{$rtk-clr-name}-#{$rtk-size-name} {
+                @extend .rtk-btn;
+                @extend .rtk-btn-#{$rtk-clr-name};
+                @extend .rtk-btn-#{$rtk-clr-name}-#{$rtk-size-name};
+            }
+
+            &-#{$rtk-clr-name}-#{$rtk-size-name}-pill {
+                @extend .rtk-btn;
+                @extend .rtk-btn-#{$rtk-clr-name};
+                @extend .rtk-btn-#{$rtk-clr-name}-#{$rtk-size-name};
+                @include rtk-pill-button(nth($rtk-size-codes, 1) * 3);
+            }
+
+            &-#{$rtk-clr-name}-#{$rtk-size-name}-circle {
+                @extend .rtk-btn;
+                @extend .rtk-btn-#{$rtk-clr-name};
+                @extend .rtk-btn-#{$rtk-clr-name}-#{$rtk-size-name};
+                @include rtk-pill-button(100%);
+            }
+
+            &-#{$rtk-clr-name}-#{$rtk-size-name}-outline-pill {
+                @extend .rtk-btn;
+                @extend .rtk-btn-#{$rtk-clr-name}-#{$rtk-size-name};
+                @extend .rtk-btn-#{$rtk-clr-name}-outline;
+                @include rtk-pill-button(nth($rtk-size-codes, 1) * 3);
+            }
+
+            &-#{$rtk-clr-name}-#{$rtk-size-name}-outline-circle {
+                @extend .rtk-btn;
+                @extend .rtk-btn-#{$rtk-clr-name}-#{$rtk-size-name};
+                @extend .rtk-btn-#{$rtk-clr-name}-outline;
+                @include rtk-pill-button(100%);
+            }
+        }
+    }
+}
+
+a,
+button {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.rtk-btn {
+    @include rtk-default-button(14px, 8px, 24px, 8px, 24px);
+    outline: none;
+    border-radius: 2px;
+    background: $rtk-color-grey;
+    text-transform: uppercase;
+    color: $rtk-color-white;
+    font-weight: 400;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    transition: box-shadow 0.4s ease-in-out;
+
+    svg {
+        fill: $rtk-color-white;
+        fill: currentColor;
+        stroke: $rtk-color-white;
+    }
+
+    @include rtk-button();
+
+    &-block {
+        width: 100%;
+    }
+
+    &-icon {
+        @extend .rtk-btn-primary;
+        border-radius: 100%;
+        font-size: 22px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 36px !important;
+        width: 36px !important;
+    }
+}
+
+.rtk-btn-group {
+    border-radius: 2px;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    [class*='rtk-btn-'] {
+        border-radius: 0;
+    }
+
+    > .form-group {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        display: flex;
+
+        input,
+        select {
+            border-radius: 0;
+            &:focus {
+                z-index: 10000;
+            }
+        }
+
+        &:not(:first-child) {
+            margin-left: -1px;
+        }
+    }
+
+    > * {
+        flex-grow: 1;
+
+        &:first-child {
+            border-radius: 2px 0 0 2px;
+
+            select,
+            input {
+                border-radius: 0;
+            }
+        }
+
+        &:last-child {
+            border-radius: 0 2px 2px 0;
+
+            select,
+            input {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 2px;
+
+                select,
+                input {
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    > span {
+        &:hover {
+            cursor: default !important;
+        }
+    }
+}
